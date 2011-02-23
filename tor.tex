@@ -1,0 +1,185 @@
+\documentclass[10pt,a4paper,oneside]{book}
+
+%Hello there. Don't know what to do?
+	%Search for the %? and fix/add stuff.
+	%Check zapiski 2007, your notes and your memory and fix/add stuff
+
+\usepackage[slovene]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+
+%%
+%% kao predloge
+\newcommand\fnurl[2]{%
+  \href{#2}{#1}\footnote{\url{#2}}%
+}
+\newcommand\Prim{%
+    \textbf{Primer: }%
+}
+\newcommand\br{%? any better ideas?
+\ \\ \\
+}
+\newenvironment{items}{
+\begin{itemize}
+	\setlength{\itemsep}{2pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+	\setlength{\topsep}{0pt}
+	\setlength{\leftskip}{0.15cm}
+}{\end{itemize}}
+\newcommand\Def[1]{%
+\begin{items}%
+\item[\textbf{Def.:}]{#1}%
+\end{items}%
+}
+%%
+%%
+
+\hypersetup{
+    pdftitle={Teoretične osnove računalništva - Zapiski predavanj 2010/2011},
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\ \\[8cm]
+{\huge Teoretične osnove računalništva}\\[1.5pt]
+{\large Zapiski predavanj 2010/2011}\\[0.7cm]
+{\large \today}
+\vfill
+
+\parbox{7.5cm}{
+\begin{center}
+\includegraphics[width=0.15\textwidth]{./CC}\\[0.4cm]
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+\end{center}
+}
+\end{center}
+\end{titlepage}
+\tableofcontents
+\pagebreak
+\chapter{Turingov Stroj}
+\section{Zgodovina}
+%I've got 23 problems, but a bitch ain't one. -Hilbert, 1900
+%\br
+Eden od Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja postopek, ki pove, če je neka poljubna diofantska enačba rešljiva - torej ali lahko ugotovimo, če ima polinom $P(x_1, x_2, \dots, x_n)=0$ celoštevilsko rešitev.
+\br
+Matematiki so se precej ukvarjali s tem problemom in kmalu ugotovili, da pojem postopka oz. algoritma ni bil dovolj dobro definiran.
+\br
+Osnovna intuitivna definicija se glasi nekako tako:\\
+\Def{Algoritem je zaporedje ukazov,
+s katerimi se v končnem številu korakov opravi neka naloga.}
+\br
+Ostaja pa še kar nekaj odprtih vprašanj, npr.:
+\begin{items}
+\item Kakšni naj bodo ukazi? 
+	\begin{items}
+	\item Osnovni - algoritem ima veliko korakov
+	\item Kompleksni - algoritem nalogo reši v enem koraku
+	\end{items}
+\item Koliko ukazov naj bo?
+	\begin{items}
+	\item Končno - ali je s tako množico res mogoče rešiti vsako nalogo?
+	\item Neskončno - kakšen izvajalec je sposoben uporabljati neskončno ukazov?
+	\end{items}
+\item So ukazi zvezni ali diskretni?
+\item V kakšnem pomnilniku so ukazi shranjeni?
+	\begin{items}%?verjetno ista vprašanja kot pri št. ukazov?
+	\item Končnem
+	\item Neskončnem
+	\end{items}
+\end{items}
+\br
+Nekateri zgodnji poskusi formalizacije pojma algoritma:%? zgodovinsko zaporedje, letnice, imena modelov, moar info
+\begin{items}
+    \item GK (Kurt Gödel, Stephen Kleene) 
+    \item HG (Jacques Herbrand, Kurt Gödel)
+    \item (Andrey Markov), %? sin Markova http://en.wikipedia.org/wiki/Andrey_Markov_(Soviet_mathematician)
+    \item Produkcijski sistem (Emil Post), %? je to http://en.wikipedia.org/wiki/Tag_system?
+    \item Lambda račun (Alonso Church, 1936)
+    \item Turingov stroj (Alan Turing, 1936)
+\end{items}
+
+\section{Definicija Turingovega stroja}
+
+%?slika nadzorne enote, traku in okna
+
+\Def{Turingov stroj je sedmerka $M=(Q, \Sigma, \Gamma, \delta, q_0, B, F)$
+kjer je:
+\begin{items}
+	\item $Q$ končna množica stanj
+	\item $\Sigma$ končna množica vhodnih simbolov, $Q \cap \Sigma = \emptyset$
+	\item $\Gamma$ končna množica tračnih simbolov, $\Sigma \subset \Gamma$
+	\item $\delta$ funkcija prehodov: $Q \times \Gamma \rightarrow Q \times \Gamma \times \{L,D\}$,\\ kjer $L$ in $D$ označujeta premik levo ali desno
+	\item $q_0$ začetno stanje, $q_0 \in Q$
+	\item $B$ prazen simbol, $B \in \Gamma$
+	\item $F$ množica končnih stanj, $F \subseteq Q$ 
+\end{items}}
+\subsection{Trenutni opis}
+\Def{$TO = \Gamma^* \times Q \times \Gamma^*$ je množica vseh trenutnih opisov.\\
+Nek trenutni opis $(\alpha_1, q, \alpha_2 )$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
+%?slika TS z označenim \alpha_1, \alpha_2
+\br
+Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
+\begin{items}
+	\item če je $\alpha_1 = \varepsilon$, je okno skrajno levo
+	\item če je $\alpha_2 = \varepsilon$, je okno nad B in so naprej sami B-ji
+\end{items}}
+
+\subsection{Relacija $\vdash$}
+\Def{Če sta $u,v$ trenutna opisa, ter $v$ neposredno sledi iz $u$ v enem koraku Turingovega stroja, tedaj pišemo $u \vdash v$.
+\br
+Naj bo $x_1 \dots x_{i-1}\ q\ x_i \dots x_n$ trenutni opis:
+\begin{items}
+\item če je $\delta(q,x_i) = (p,Y,D)$:\\
+$x_1 \dots x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots x_{i-1}\ Y\ p\ x_{i+1} \dots x_n$
+\item če je $\delta(q,x_i) = (p,Y,L)$: 
+	\begin{items}
+	\item če je okno na robu ($i=1$), se Turingov stroj ustavi, ker je trak na levi omejen.
+	\item če okno ni na robu ($i>1$), potem: $x_1 \dots x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots\ p\ x_{i-1}\ Y\ x_{i+1} \dots x_n$
+	\end{items}
+\end{items}}
+\subsection{Tranzitivna ovojnica $\vdash^*$ relacije $\vdash$}%?
+\Def{$u \vdash^* v$, če obstaja tako zaporedje $x_i, (i \in [0, 1, \dots, k], k \geq 0)$, da velja $u=x_0, v=x_k$ in $x_0 \vdash x_1 \wedge x_1 \vdash x_2 \wedge \dots \wedge x_{k-1} \vdash x_k$
+\br
+Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
+\section{Jezik Turingovega stroja}
+\Def{Jezik Turingovega stroja je definiran kot:
+\begin{equation*}
+L(M) = \{ w\ |\ w \in \Sigma^* \wedge q_0w \vdash^* w_1\ q\ w_2 \wedge w_1,w_2 \in \Gamma^* \wedge q \in F \}
+\end{equation*}
+%? slika z vhodno besedo na traku TS
+Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih damo na vhod stroju $M$, povzročijo, da se stroj $M$ v končno mnogo korakih znajde v končnem stanju.}
+\br
+\Def{Jezik $L$ je Turingov jezik, če obstaja Turingov stroj $M$, tak, da je $L = L(M)$.}
+\subsection{Ugotavljanje pripadnosti besed Turingovemu jeziku}%?made one blockoftext from a lot of text. sm kj zgrešil?
+Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
+\begin{items}
+\item Odločljive - obstaja algoritem, s katerim se lahko za poljubno besedo odločimo, ali pripada jeziku.
+\item Neodločljive - v splošnem ni algoritma, ki bi za poljubno vhodno besedo z DA ali NE odgovoril na vprašanje pripadnosti.
+	\begin{items}
+	\item če je odgovor DA, to ugotovimo v nekem končnem številu korakov.
+	\item če je odgovor NE, pa ni nujno, da se bo stroj kdaj ustavil.
+	\end{items}
+\end{items}
+\br
+%? slika venn.. x znotraj L kroga... v kvadratu
+\br
+%?where does this go?
+%Terminologija: re (recursively enumerable, Turing recognizable)%?semi-decidable? 
+%Rekurzivni jezik (decidable)%?where does this go?
+\br
+%? slika venn... odločljivi jeziki so znotraj Turingovih
+\br
+%\Prim
+
+\end{document}
