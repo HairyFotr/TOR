@@ -1,0 +1,250 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{hyperref}
+
+\hypersetup{
+    pdftitle={Teoretične osnove računalništva - zapiski iz vaj 2010/2011},
+    pdfauthor={Miha Zidar},
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+\newcommand\fnurl[2]{%
+  \href{#2}{#1}\footnote{\url{#2}}%
+}
+
+\author{Miha Zidar}
+\title{Teoretične osnove računalništva - zapiski iz vaj 2010/2011}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+
+%\newpage
+%\section{Notacija}
+%\begin{itemize}
+%	\item[Množice:] Označimo z velikimi tiskanimi črkami. Podamo jih lahko na naslednje načine\\
+%	$ A = \lbrace a_1, a_1, a_3, \ldots \rbrace $ - naštevanje elementov\\
+%	$ B = \lbrace n | \ \mbox{pravilo za n} \rbrace \ $ - opis elementov
+%\end{itemize}
+
+\newpage
+\section{Dokazovaje}
+\subsection{Dokaz s konstrukcijo}
+	Kadar nas zanima obstoj nekega objekta, ga včasih lahko preprosto skonstruiramo.\\
+	\subsubsection*{Primer:}
+	\begin{itemize}
+		\item Ali za vsako število elementov, večje od 4, obstaja graf ki ima natanko 3 liste?
+		\item $| \mathbb{R} | = | [0,1) |$
+	\end{itemize}
+	
+\subsection{Dokaz z indukcijo}
+	Velja za množice ki so zapisljive kot induktivni razred\footnote{Glej slovarček na koncu.}\\
+	Induktivni razred $I$ sestavlja:
+	\begin{itemize}
+		\item baza - najbolj osnovna množica elementov (osnovni razred)
+		\item pravila generiranja - pravila kako iz elementov baze gradimo nove elemente (množico)
+		\end{itemize}
+		\subsubsection*{Primer:}
+		\begin{itemize}
+		\item Induktivni razred naravnih števil $(\mathbb{N})$
+			\begin{enumerate}
+			\item Baza: $1 \in \mathbb{N}$ 
+			\item Pravila generiranja: $n \in \mathbb{N} \Longrightarrow n+1 \in \mathbb{N} $
+			\end{enumerate}
+		\item \fnurl{Hilbertove krivulje}{http://en.wikipedia.org/wiki/Hilbert_curve}
+	\end{itemize}
+
+\subsection{Dokaz s protislovjem}
+	Vzamemo trditev in poskušamo najti primer v katerem trditev ne drži.
+	\subsubsection*{Primer:}
+	\begin{itemize}
+		\item Praštevil je končno mnogo
+			\begin{enumerate}		
+				\item Predpostavimo, da poznamo vsa praštevila:\\
+					$P = \{2,3,5,...,p\}$, kjer je $p$ zadnje praštevilo 
+				\item Po definiciji obstajajo le praštevila in sestavljena števila (to so taka, ki jih 				lahko razstavimo na prafaktorje). 
+				\item Če pomnožimo vsa znana praštevila iz $P$ in prištejemo $1$ dobimo število, ki se ga ne da razstaviti na prafaktorje iz množice $P$:\\
+					$q = 2 * 3 * 5 * ... * p + 1$
+				\item Torej je $q$ ali praštevilo (ker ni sestavljeno), ali pa število, sestavljeno iz prafaktorjev, ki jih ni v množici $P$.
+				\item Oboje kaže na to, da v množici $P$ nimamo vseh praštevil in da to velja za vsako končno množico praštevil.
+			\end{enumerate}
+		\item $\sqrt[3]{2}$ je racionalno število 
+			\begin{enumerate}		
+				\item  $\sqrt[3]{2} = \frac{a}{b}$ ker je $\frac{a}{b}$ racionalen ulomek ga lahko okrajšamo in si ga od sedaj predstavljamo okrajšanega $GCD(a,b)=1$
+				\item $ 2 = \left( \frac{a}{b} \right)^3 $
+				\item $2b^3 = a^3$ tukaj vidimo da je a sodo število, torej lahko pišemo $ a = 2k $
+				\item $2b = \left( 2k\right)^3 $
+				\item $2b = 8k $
+				\item $b = 4k $ ker je b tudi sodo število, vidimo da $GCD(a,b)=1$ ne drži, torej smo prišli do pizdarije.
+			\end{enumerate}
+	\end{itemize}
+	
+
+
+\newpage
+\section{Teorija jezikov}
+\subsection*{Oznake}
+	\begin{itemize}
+		\item $\Sigma$ - abeceda - končna neprazna množica simbolov oz. vseh besed dolžine 1
+		\item $w$ - besede ali nizi - poljubno končno zaporedje  simbolov $w_1w_2 \ldots w_n$. Prazen niz $w = \varepsilon$
+		\item $|w|$ - dolžina niza - je $0$ za $w = \varepsilon$
+	\end{itemize}
+\subsection*{Operacije}
+	\begin{enumerate}
+		\item Stik
+			\begin{itemize}
+				\item Nizov: 
+					\begin{eqnarray*} 
+						w & = & w_1 w_2 \ldots w_n \\ 
+						x & = & x_1 x_2 \ldots x_m \\ 
+						wx & = & w_1 w_2 \ldots w_n x_1 x_2 \ldots x_m
+					\end{eqnarray*} 
+				\item Množic:
+					\begin{eqnarray*} 
+						A & = & \lbrace w_1 ,\ w_2 ,\ \ldots ,\ w_n \rbrace \\ 
+						B & = & \lbrace x_1 ,\ x_2 ,\ \ldots ,\ x_m \rbrace \\ 
+						A \circ B & = & \lbrace w_ix_j \ | \ w_i \in A \ \wedge \ x_i \in B \rbrace \\
+					\end{eqnarray*} 
+
+			\end{itemize}
+		\item Potenciranje
+			\begin{eqnarray*} 
+				A^k & = & A \circ A \circ \cdots \circ A \ = \ \bigcirc_{k} A^k \\
+				A^0 & = & \lbrace \varepsilon \rbrace 
+			\end{eqnarray*} 		
+		\item Iteracija
+			\begin{eqnarray*} 
+				A^* & = & A^0 \bigcup A^1 \bigcup A^2 \cdots  \ = \ \bigcup_{i=0}^{ \infty } A^i \\
+				\Sigma^* & = & \mbox{ množica vseh možnih besed}
+			\end{eqnarray*} 		
+		\item Jezik - jezik $L$ nad $ \Sigma $ je poljubna podmnožica $ \Sigma^* $ 
+			\begin{eqnarray*} 
+				L & \subseteq & \Sigma^* \\
+				L_1 & = & \lbrace \rbrace \ \ \rightarrow \mbox{ prazen jezik} \\
+				L_2 & = & \lbrace \varepsilon \rbrace  \ \ \rightarrow \mbox{ ni prazen jezik} 
+			\end{eqnarray*} 
+	\end{enumerate}
+
+\section{Regularni Izrazi}
+	\begin{itemize}
+		\item $ \underline{\phi} $ opisuje prazen jezik $ L(\underline{\phi})= \lbrace \rbrace $
+		\item $ \underline{ \varepsilon } $ opisuje jezik $ L(\underline{ \varepsilon })= \lbrace \varepsilon\rbrace $
+		\item $ \underline{a} \ , \ a \in \Sigma $ opisuje $ L ( \underline{a} ) = \lbrace a \rbrace $
+		\item $ (r_1 + r_2) $ opisuje $ L(r_1 + r_2) = L(r_1) \bigcup L( r_2) $
+		\item $ (r_1  r_2) $ opisuje $ L(r_1  r_2) = L(r_1) L( r_2) $
+		\item $ (r^*) $ opisuje $ (L(r))^* $
+	\end{itemize}
+	Jezik ki ga opisuje poljubni Regularni izraz (RI) se imenuje Regularni jezik.
+	\begin{itemize}
+		\item $\Sigma^* $ je regularni izraz
+		\item $ \lbrace \rbrace $ je regularni izraz
+		\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 $ \underline{ni} regularni izraz
+	\end{itemize}
+	
+	\subsection*{primeri}
+	\begin{enumerate}
+		\item abeceda $ \Sigma = \lbrace 0,1 \rbrace $ \\
+			Opiši vse nize, ki se končajo z nizom $00$.\\
+			\begin{displaymath}
+				r = (0+1)^*00
+			\end{displaymath}
+		\item abeceda $ \Sigma = \lbrace a,b,c \rbrace $ \\
+			Opiši vse nize, pri katerih so vsi $a$-ji pred $b$-ji in vsi $b$-ji pred $c$-ji.\\
+			\begin{displaymath}
+				a^*b^*c^*
+			\end{displaymath}
+		\item abeceda $ \Sigma = \lbrace a,b,c \rbrace $ \\
+			Opiši vse nize, ki vsebujejo vsaj dva niza '$aa$', ki se ne prekrivata.\\
+			\begin{displaymath}
+				(a+b+c)^* aa (a+b+c)^* aa (a+b+c)^* 
+			\end{displaymath}
+		\item abeceda $ \Sigma = \lbrace a,b,c \rbrace $ \\
+			Opiši vse nize, ki vsebuje vsaj dva niza '$aa$' ki se lahko prekrivata\\
+			\begin{displaymath}
+				(a+b+c)^* aa (a+b+c)^* aa (a+b+c)^* + (a+b+c)^* aaa (a+b+c)^* 
+			\end{displaymath}
+		\item abeceda $ \Sigma = \lbrace 0,1 \rbrace $ \\
+			Opiši vse nize, ki ne vsebujejo niza $11$\\
+			\begin{eqnarray*} 
+				(\varepsilon  + 1 )(0^*01)^* 0^* \\
+				(\varepsilon  + 1 )(0^* + 01)^* \\
+			\end{eqnarray*} 
+		\item S slovensko abecedo napisi besedo "ljubljana" v vseh sklonih (case insensitive)
+			\begin{displaymath}
+				(L+l) (J+j) (U+u) (B+b) (L+l) (J+j) (A+a) (N+n) \left( (A+a)(O+o)(E+e)(I+i) \right) 
+			\end{displaymath}
+			Koliko nizov opišemo s tem regularnim izrazom?\\
+			\begin{displaymath}
+				2^8 \cdot 2^3 = 2^{11} \mbox{ nizov}
+			\end{displaymath}
+	\end{enumerate}
+
+\section{Končni avtomati}
+	\subsection{Nedeterministični končni avtomat z epsilon prehodi }
+		$ \varepsilon-NKA \ \mbox{ je } \  M = < Q , \Sigma , \delta ,q_0 , F > $
+		\begin{itemize}
+			\item $ Q $ - končna množica stanj
+			\item $ \Sigma $ - abeceda, ki vsebuje tudi $\varepsilon$
+			\item $ \delta $ - funkcija prehodov ($\delta : Q \times \Sigma \rightarrow 2^{Q}$)
+			\item $ q_0 $ - začetno stanje
+			\item $ F $ - množica končnih stanj
+		\end{itemize}
+	
+	\subsection{Nedeterministični končni avtomat}
+		$ NKA \ \mbox{ je } \  M = < Q , \Sigma , \delta ,q_0 , F > $
+		\begin{itemize}
+			\item $ Q $ - končna množica stanj
+			\item $ \Sigma $ - abeceda
+			\item $ \delta $ - funkcija prehodov ($\delta : Q \times \Sigma \rightarrow 2^{Q}$)
+			\item $ q_0 $ - začetno stanje
+			\item $ F $ - množica končnih stanj
+		\end{itemize}		
+
+	\subsection{Deterministični končni avtomat}
+		$ DKA \ \mbox{ je } \  M = < Q , \Sigma , \delta ,q_0 , F > $
+		\begin{itemize}
+			\item $ Q $ - končna množica stanj
+			\item $ \Sigma $ - abeceda
+			\item $ \delta $ - funkcija prehodov ($\delta : Q \times \Sigma \rightarrow Q$)
+			\item $ q_0 $ - začetno stanje
+			\item $ F $ - množica končnih stanj
+		\end{itemize}	
+
+		\subsubsection*{primeri}
+			\begin{enumerate}
+				\item	
+			
+			
+			\end{enumerate}		
+	\subsection{Regularne gramatike}
+	Desno linearne, levo linearne, ...
+	
+	\subsection{Pretvarjanje med regularnimi ...}
+	Regularni izrazi, regularne gramatike in vsi do sedaj omenjeni avtomati so enako močni in je možno poljubnega pretvarjati med njimi.
+	%nekako tako mam v lanskih vajah, vrjetno mam letos bl prov :)
+	%ps. lanske vaje so ful ugly, tko d si nism kj velik pomagov
+	%\subsubsection{KA $\rightarrow$ DLG}
+	%\subsubsection{DLG $\rightarrow$ KA}
+	%\subsubsection{KA $\rightarrow$ RI}
+	%\subsubsection{NKA $\rightarrow$ DKA}
+	%\subsubsection{$\varepsilon$-NKA $\rightarrow$ NKA}
+	%\subsubsection{RI $\rightarrow$ $\varepsilon$-NKA}
+
+\newpage
+\section{Slovar}
+\begin{itemize}
+\item Razred - razred je množica elementov, ki ga lahko podamo z naštevanjem elementov ali z opisom lastnosti (opisni ali konceptualni razredi)
+
+
+\end{itemize}
+
+
+\end{document}
