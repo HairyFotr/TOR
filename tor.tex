@@ -1,3 +1,5 @@
+%
+%
 \documentclass[10pt,a4paper,oneside]{book}
 
 %Hello there. Don't know what to do?
@@ -12,41 +14,16 @@
 \usepackage{makeidx}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage[margin=1in]{geometry}
 
-%%
-%% kao predloge
-\newcommand\fnurl[2]{%
-  \href{#2}{#1}\footnote{\url{#2}}%
-}
-\newcommand\Prim{%
-    \textbf{Primer: }%
-}
-\newcommand\br{%? any better ideas?
-\ \\ \\
-}
-\newenvironment{items}{
-\begin{itemize}
-	\setlength{\itemsep}{2pt}
-	\setlength{\parskip}{0pt}
-	\setlength{\parsep}{0pt}
-	\setlength{\topsep}{0pt}
-	\setlength{\leftskip}{0.15cm}
-}{\end{itemize}}
-\newcommand\Def[1]{%
-\begin{items}%
-	\item[\textbf{Def.:}]{#1}%
-\end{items}%
-}
-%%
-%%
-
+\usepackage{torstyle}
+%torstlye predloge:
+%Definicija \Def{}
+%Primer \Prim{}
+%Prirejen itemize \begin{items}
 \hypersetup{
     pdftitle={Teoretične osnove računalništva - Zapiski predavanj 2010/2011},
-    colorlinks=true,
-    linkcolor=black,
-    urlcolor=blue
 }
+
 \begin{document}
 \begin{titlepage}
 \begin{center}
@@ -112,8 +89,7 @@ Nekateri zgodnji poskusi formalizacije pojma algoritma:%? zgodovinsko zaporedje,
 
 %?slika nadzorne enote, traku in okna
 
-\Def{Turingov stroj je sedmerka $M=(Q, \Sigma, \Gamma, \delta, q_0, B, F)$
-kjer je:
+\Def{Turingov stroj je definiran kot sedmerka $M=\langle Q, \Sigma, \Gamma, \delta, q_0, B, F \rangle $, kjer je:
 \begin{items}
 	\item $Q$ končna množica stanj
 	\item $\Sigma$ končna množica vhodnih simbolov, $Q \cap \Sigma = \emptyset$
@@ -135,6 +111,7 @@ Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
 \end{items}}
 
 \subsection{Relacija $\vdash$}
+\Prim{lolololol\br lollol \br lolololo}
 \Def{Če sta $u,v$ trenutna opisa, ter $v$ neposredno sledi iz $u$ v enem koraku Turingovega stroja, tedaj pišemo $u \vdash v$.
 \br
 Naj bo $x_1 \dots x_{i-1}\ q\ x_i \dots x_n$ trenutni opis:
