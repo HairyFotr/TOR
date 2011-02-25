@@ -49,13 +49,11 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 %I've got 23 problems, but a bitch ain't one. -Hilbert, 1900
 %\br
 Leta 1900 je Nemški matematik David Hilbert objavil seznam triidvajsetih nerešenih problemov v matematiki. Eden izmed Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja postopek, po katerem ugotovimo rešljivost poljubne Diofantske enačbe -- torej, ali lahko ugotovimo, če ima polinom s celoštevilskimi koeficienti $P(x_1, x_2, \dots, x_n)=0$, celoštevilsko rešitev.
-
-Kljub temu, da je Emil Post že leta 1944 slutil, da je problem nerešljiv, je to dokončno dokazal rus Jurij Matijaševič šele leta 1970 v svojem doktorskem delu. Med reševanjem problema pa so se matematiki že prej začeli ukvarjati s formalizacijo pojma postopka oz. algoritma.
-\br
-Intuitivna definicija se glasi nekako tako:
+%?non-sequitur... vsaj dokler ne bo ogromno več zgodovine tu :)
+Kljub temu, da je Emil Post že leta 1944 slutil, da je problem nerešljiv, je to dokončno dokazal rus Jurij Matijaševič šele leta 1970 v svojem doktorskem delu. Med reševanjem problema pa so se matematiki že prej začeli ukvarjati s formalizacijo pojma postopka oz. algoritma. Intuitivna definicija tega se glasi nekako tako:
 \Def{Algoritem je zaporedje ukazov,
 s katerimi se v končnem številu korakov opravi neka naloga.}
-Ostaja pa še kar nekaj odprtih vprašanj, npr.:
+Pri tem pa ostaja še kar nekaj odprtih vprašanj, npr.:
 \begin{items}
 \item Kakšni naj bodo ukazi? 
 	\begin{items}
@@ -64,35 +62,35 @@ Ostaja pa še kar nekaj odprtih vprašanj, npr.:
 	\end{items}
 \item Koliko ukazov naj bo?
 	\begin{items}
-	\item Končno - ali je s tako množico res mogoče rešiti vsako nalogo?
+	\item Končno - ali je s končno množico res mogoče rešiti vsako nalogo?
 	\item Neskončno - kakšen izvajalec ukazov je sposoben izvršiti neskončno različnih ukazov?
 	\end{items}
 \item So ukazi zvezni ali diskretni?
 \item V kakšnem pomnilniku so ukazi shranjeni?
 	\begin{items}%?verjetno ista vprašanja kot pri št. ukazov?
-	\item Končnem
-	\item Neskončnem
+	\item Končnem - ali s končnim zaporedjem ukazov res lahko mogoče rešimo vsako nalogo?
+	\item Neskončnem - %?
 	\end{items}
 \end{items}
-Nekateri zgodnji poskusi formalizacije pojma algoritma:%? zgodovinsko zaporedje, letnice, imena modelov, moar info
+Nekateri zgodnji poskusi formalizacije pojma algoritma so:%? zgodovinsko zaporedje, letnice, imena modelov, moar info
 \begin{items}
     \item GK (Kurt Gödel, Stephen Kleene) 
     \item HG (Jacques Herbrand, Kurt Gödel)
-    \item (Andrey Markov), %? sin Markova http://en.wikipedia.org/wiki/Andrey_Markov_(Soviet_mathematician)
-    \item Produkcijski sistem (Emil Post), %? je to http://en.wikipedia.org/wiki/Tag_system?
+    %\item (Andrey Markov), %? sin Markova http://en.wikipedia.org/wiki/Andrey_Markov_(Soviet_mathematician)
+    \item Produkcijski sistem (Emil Post), %? je to http://en.wikipedia.org/wiki/Tag_system? 1943?
     \item Lambda račun (Alonso Church, 1936)
     \item Turingov stroj (Alan Turing, 1936)
 \end{items}
 
 \pagebreak
 \section{Turingovi stroji}
-Turingov stroj se je uveljavil kot dober in preprost model računanja, ki zna izračunati vse kar se izračunati da (pod pogojem, da Chuch-Turingova teza drži). Turing je svoj stroj izpeljal iz razmišljanja o tem, kako človek rešuje miselne probleme na papir. Pri tem je izbral tri sestavne dele:
+Turingov stroj se je uveljavil kot uporaben in preprost model računanja, ki zna izračunati vse kar se izračunati da (pod pogojem, da Church-Turingova teza drži). Alan Turing je svoj stroj izpeljal iz razmišljanja o tem, kako človek rešuje miselne probleme na papir. Pri tem je izbral tri sestavne dele:
 \begin{items}
 \item Nadzorno enoto (glava)
-\item Čitalno okno (roka in tudi oči)
+\item Čitalno okno (roka in vid)
 \item Trak (papir)
 \end{items}
-V postopku formalizacije, je zaradi večje preprostosti, zahteval še, da je stroj sestavljen iz končno mnogo elementov, ter da deluje v diskretnih korakih.%?končno mnogo elementov? na kaj to cilja?
+V postopku formalizacije, pa je zaradi večje preprostosti, zahteval še, da je stroj sestavljen iz končno mnogo elementov, ter da deluje v diskretnih korakih.%?končno mnogo elementov? na kaj to cilja?
 
 %?slika nadzorne enote, traku in okna
 
