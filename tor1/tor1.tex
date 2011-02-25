@@ -15,11 +15,25 @@
 %Definicija \Def{}
 %Primer \Prim{}
 %Prirejen itemize \begin{items}
-\title{Teoretične osnove računalništva 1\\ \large zapiski 2010/2011}
 
 \begin{document}
-\maketitle
-\newpage
+\begin{titlepage}
+\begin{center}
+\ \\[8cm]
+{\huge Teoretične osnove računalništva}\\[1.5pt]
+{\large Zapiski predavanj 2010/2011}\\[15pt]
+{\large \today}
+\vfill
+
+\parbox{7.5cm}{
+\begin{center}
+\includegraphics[width=0.15\textwidth]{../CC}\\[5pt]
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+\end{center}
+}
+\end{center}
+\end{titlepage}
 \tableofcontents
 
 %\newpage
@@ -137,24 +151,31 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \item Jezik, ki vsebuje $\varepsilon$ (ni prazen): $L_2 = \lbrace \varepsilon \rbrace$
 \item Jezik, ki vsebuje nize "a, aa, ab": $L_3 = \lbrace a, aa, ab \rbrace$
 \end{primeri} 
-
 \section{Regularni Izrazi}
-\begin{items}
-	\item $ \underline{\phi} $ opisuje prazen jezik $ L(\underline{\phi})= \lbrace \rbrace $
-	\item $ \underline{ \varepsilon } $ opisuje jezik $ L(\underline{ \varepsilon })= \lbrace \varepsilon\rbrace $
-	\item $ \underline{a} \ , \ a \in \Sigma $ opisuje $ L ( \underline{a} ) = \lbrace a \rbrace $
-	\item $ (r_1 + r_2) $ opisuje $ L(r_1 + r_2) = L(r_1) \bigcup L( r_2) $
-	\item $ (r_1  r_2) $ opisuje $ L(r_1  r_2) = L(r_1) L( r_2) $
-	\item $ (r^*) $ opisuje $ (L(r))^* $
-\end{items}
+\Def{Osnovni izrazi:
+	\begin{items}
+	\item $\underline{\emptyset}$ je opisuje prazen jezik $ L(\underline{\emptyset})= \lbrace \rbrace$
+	\item $\underline{ \varepsilon }$ opisuje jezik $L(\underline{ \varepsilon })= \lbrace \varepsilon\rbrace$
+	\item $\underline{a}$ opisuje jezik $L( \underline{a} ) = \lbrace a \rbrace,\ a \in \Sigma$
+	\end{items}
+}
+\Def{	Pravila za generiranje kompleksnejših izrazov:%?complex might be the wrong word
+	\begin{items}
+	\item $(r_1 + r_2)$ opisuje unijo jezikov $L(r_1 + r_2) = L(r_1) \bigcup L( r_2)$
+	\item $(r_1\ r_2)$ opisuje stik jezikov $L(r_1\ r_2) = L(r_1)\cdot L( r_2)$
+	\item $(r^*)$ opisuje iteracijo jezika $(L(r))^*$
+	\end{items}
+}
+\subsection{Jezik regularnih izrazov}
+\Def{Jezik ki ga opisuje poljubni regularni izraz, je regularni jezik.}%?tu bi pasal dokaz ali opis dokaza tega
+%\Dokaz{}
+\begin{primeri}
+	%\item $\Sigma^* $ je regularni izraz %?jezik je nujno strogi subset \sigma*... ker to so vse možne besede
+	\item $ \lbrace \rbrace $ je regularni jezik
+	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
+\end{primeri}
 
-Jezik ki ga opisuje poljubni Regularni izraz (RI) se imenuje Regularni jezik.
-\begin{items}
-	\item $\Sigma^* $ je regularni izraz
-	\item $ \lbrace \rbrace $ je regularni izraz
-	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 $ \underline{ni} regularni izraz
-\end{items}
-	
+\subsection{Primeri regularnih izrazov}%?sam kaj je pa to nad naslovom :)
 \begin{primeri}
 \item Opiši vse nize, ki se končajo z nizom $00$ v abecedi $\Sigma = \{ 0,1 \}$.
 	\begin{displaymath}
@@ -238,17 +259,16 @@ Definicije želijo povedati, da so v jeziku točno tiste besede, po katerih je i
 \begin{items}
 \item V - množica spremenljivk oz. vmesnih simbolov, $V \subseteq \Sigma$
 \item T - množica znakov oz. končnih simbolov, $T \subset \Sigma$
-\item P - množica produkcij, $\left[\alpha_1 \rightarrow \alpha_2 \right], \alpha1, \alpha2 \in X$%? not quite
+\item P - množica produkcij, $\left[\alpha_1 \rightarrow \alpha_2 \right]$%? se da vse definirat tuki?
 \item S - začetni simbol, $S \in V$
 \end{items}
 Pri tem pa regularne gramatike ločimo na levo in desno-regularne.
 \begin{items}
-\item Pri levih - $X=V\circ T^*$%?na pamet epsilon še, pa P redefiniraš
-\item Pri desnih - $X=T^* \circ V$%?
+\item Pri levih so produkcije $P \subset V \times ((V \cup \{\varepsilon\})\cdot^*)$
+\item Pri desnih so produkcije $P \subset V \times (T^* \cdot (V \cup \{\varepsilon\}))$
 \end{items}
  }
-
-Desno linearne, levo linearne, ...
+To pomeni, da imamo pri levo-regularnih gramatikah vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na desni.
 
 \section{Prevedba med izvedbami regularnih jezikov}%?lame naslov, fixme
 Regularni izrazi, regularne gramatike in končni avtomati so vsi enako močni in je mogoče pretvarjati med njimi.
