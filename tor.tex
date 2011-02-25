@@ -48,9 +48,9 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 \section{Zgodovina}
 %I've got 23 problems, but a bitch ain't one. -Hilbert, 1900
 %\br
-Eden izmed Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja postopek, ki pove, če je neka poljubna diofantska enačba rešljiva - torej ali lahko ugotovimo, če ima polinom $P(x_1, x_2, \dots, x_n)=0$ celoštevilsko rešitev.
-\br
-Matematiki so se precej ukvarjali s tem problemom in kmalu ugotovili, da pojem postopka oz. algoritma ni bil dovolj dobro definiran.
+Leta 1900 je Nemški matematik David Hilbert objavil seznam triidvajsetih nerešenih problemov v matematiki. Eden izmed Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja postopek, po katerem ugotovimo rešljivost poljubne Diofantske enačbe -- torej, ali lahko ugotovimo, če ima polinom s celoštevilskimi koeficienti $P(x_1, x_2, \dots, x_n)=0$, celoštevilsko rešitev.
+
+Kljub temu, da je Emil Post že leta 1944 slutil, da je problem nerešljiv, je to dokončno dokazal rus Jurij Matijaševič šele leta 1970 v svojem doktorskem delu. Med reševanjem problema pa so se matematiki že prej začeli ukvarjati s formalizacijo pojma postopka oz. algoritma.
 \br
 Intuitivna definicija se glasi nekako tako:
 \Def{Algoritem je zaporedje ukazov,
@@ -60,12 +60,12 @@ Ostaja pa še kar nekaj odprtih vprašanj, npr.:
 \item Kakšni naj bodo ukazi? 
 	\begin{items}
 	\item Osnovni - algoritem ima veliko korakov
-	\item Kompleksni - algoritem nalogo reši v enem koraku
+	\item Kompleksni - prezapleteni ukazi so že sami algoritmi
 	\end{items}
 \item Koliko ukazov naj bo?
 	\begin{items}
 	\item Končno - ali je s tako množico res mogoče rešiti vsako nalogo?
-	\item Neskončno - kakšen izvajalec je sposoben uporabljati neskončno ukazov?
+	\item Neskončno - kakšen izvajalec ukazov je sposoben izvršiti neskončno različnih ukazov?
 	\end{items}
 \item So ukazi zvezni ali diskretni?
 \item V kakšnem pomnilniku so ukazi shranjeni?
@@ -85,7 +85,14 @@ Nekateri zgodnji poskusi formalizacije pojma algoritma:%? zgodovinsko zaporedje,
 \end{items}
 
 \pagebreak
-\section{Definicija Turingovega stroja}
+\section{Turingovi stroji}
+Turingov stroj se je uveljavil kot dober in preprost model računanja, ki zna izračunati vse kar se izračunati da (pod pogojem, da Chuch-Turingova teza drži). Turing je svoj stroj izpeljal iz razmišljanja o tem, kako človek rešuje miselne probleme na papir. Pri tem je izbral tri sestavne dele:
+\begin{items}
+\item Nadzorno enoto (glava)
+\item Čitalno okno (roka in tudi oči)
+\item Trak (papir)
+\end{items}
+V postopku formalizacije, je zaradi večje preprostosti, zahteval še, da je stroj sestavljen iz končno mnogo elementov, ter da deluje v diskretnih korakih.%?končno mnogo elementov? na kaj to cilja?
 
 %?slika nadzorne enote, traku in okna
 
@@ -99,6 +106,13 @@ Nekateri zgodnji poskusi formalizacije pojma algoritma:%? zgodovinsko zaporedje,
 	\item $B$ prazen simbol, $B \in \Gamma$
 	\item $F$ množica končnih stanj, $F \subseteq Q$ 
 \end{items}}
+Stroj deluje tako, da v vsakem koraku opravi naslednje:
+\begin{items}
+	\item preide v neko stanje
+	\item zapiše nov simbov v celico, ki je pod oknom
+	\item okno premakne eno celico levo ali desno
+\end{items}
+
 \subsection{Trenutni opis}
 \Def{$TO = \Gamma^* \times Q \times \Gamma^*$ je množica vseh trenutnih opisov.\\
 Nek trenutni opis $(\alpha_1, q, \alpha_2 )$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
@@ -111,7 +125,7 @@ Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
 \end{items}}
 
 \subsection{Relacija $\vdash$}
-\Def{Če sta $u,v$ trenutna opisa, ter $v$ neposredno sledi iz $u$ v enem koraku Turingovega stroja, tedaj pišemo $u \vdash v$.
+\Def{Če sta $u,v$ trenutna opisa iz množice $TO$, ter $v$ neposredno sledi iz $u$ v enem koraku Turingovega stroja, tedaj pišemo $u \vdash v$.
 \br
 Naj bo $x_1 \dots x_{i-1}\ q\ x_i \dots x_n$ trenutni opis:
 \begin{items}
@@ -120,10 +134,10 @@ $x_1 \dots x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots x_{i-1}\ Y\ p\ x_{i+1} \do
 \item če je $\delta(q,x_i) = (p,Y,L)$: 
 	\begin{items}
 	\item če je okno na robu ($i=1$), se Turingov stroj ustavi, ker je trak na levi omejen.
-	\item če okno ni na robu ($i>1$), potem: $x_1 \dots x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots\ p\ x_{i-1}\ Y\ x_{i+1} \dots x_n$
+	\item če okno ni na robu ($i>1$), potem: $x_1 \dots x_{i-2} x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots\ x_{i-2} p\ x_{i-1}\ Y\ x_{i+1} \dots x_n$
 	\end{items}
 \end{items}}
-\subsection{Tranzitivna ovojnica $\vdash^*$ relacije $\vdash$}%?
+\subsection{Tranzitivna ovojnica $\vdash^*$ relacije $\vdash$}%?je pravi naslov?
 \Def{$u \vdash^* v$, če obstaja tako zaporedje $x_i, (i \in [0, 1, \dots, k], k \geq 0)$, da velja $u=x_0, v=x_k$ in $x_0 \vdash x_1 \wedge x_1 \vdash x_2 \wedge \dots \wedge x_{k-1} \vdash x_k$
 \br
 Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
@@ -132,9 +146,9 @@ Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
 \begin{equation*}
 L(M) = \{ w\ |\ w \in \Sigma^* \wedge q_0w \vdash^* w_1\ q\ w_2 \wedge w_1,w_2 \in \Gamma^* \wedge q \in F \}
 \end{equation*}
+}
 %? slika z vhodno besedo na traku TS
-Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih damo na vhod stroju $M$, povzročijo, da se stroj $M$ v končno mnogo korakih znajde v končnem stanju.}
-\br
+Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih damo na vhod stroju $M$, povzročijo, da se stroj $M$ v končno mnogo korakih znajde v končnem stanju.
 \Def{Jezik $L$ je Turingov jezik, če obstaja Turingov stroj $M$, tak, da je $L = L(M)$.}
 \subsection{Ugotavljanje pripadnosti besed Turingovemu jeziku}%?made one blockoftext from a lot of text. sm kj zgrešil?
 Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
