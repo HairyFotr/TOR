@@ -5,6 +5,7 @@
 %Hello there. Don't know what to do?
 	%Search for the %? and fix/add stuff.
 	%Check zapiski 2007, your notes and your memory and fix/add stuff
+	%kul knjige imajo quote na začetku poglavij
 
 \usepackage[slovene]{babel}
 \usepackage[utf8x]{inputenc}
@@ -16,20 +17,19 @@
 \usepackage{graphicx}
 
 \usepackage{torstyle}
+%?this feels too much like CSS hacks :(
 %torstlye predloge:
 %Definicija \Def{}
 %Primer \Prim{}
 %Prirejen itemize \begin{items}
-\hypersetup{
-    pdftitle={Teoretične osnove računalništva - Zapiski predavanj 2010/2011},
-}
+\hypersetup{pdftitle={Teoretične osnove računalništva}}
 
 \begin{document}
 \begin{titlepage}
 \begin{center}
 \ \\[8cm]
-{\huge Teoretične osnove računalništva}\\[1.5pt]
-{\large Zapiski predavanj 2010/2011}\\[15pt]
+{\Huge Teoretične osnove računalništva}\\[5pt]
+{\LARGE Zapiski predavanj 2010/2011}\\[15pt]
 {\large \today}
 \vfill
 
@@ -52,7 +52,7 @@ Eden izmed Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja p
 \br
 Matematiki so se precej ukvarjali s tem problemom in kmalu ugotovili, da pojem postopka oz. algoritma ni bil dovolj dobro definiran.
 \br
-Osnovna intuitivna definicija se glasi nekako tako:
+Intuitivna definicija se glasi nekako tako:
 \Def{Algoritem je zaporedje ukazov,
 s katerimi se v končnem številu korakov opravi neka naloga.}
 Ostaja pa še kar nekaj odprtih vprašanj, npr.:
@@ -107,7 +107,7 @@ Nek trenutni opis $(\alpha_1, q, \alpha_2 )$, ali krajše $\alpha_1\ q\ \alpha_2
 Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
 \begin{items}
 	\item če je $\alpha_1 = \varepsilon$, je okno skrajno levo
-	\item če je $\alpha_2 = \varepsilon$, je okno nad B in so naprej sami B-ji
+	\item če je $\alpha_2 = \varepsilon$, je okno nad $B$ in so naprej sami $B$-ji
 \end{items}}
 
 \subsection{Relacija $\vdash$}
