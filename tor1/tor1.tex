@@ -194,16 +194,6 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\item $(r^*)$ opisuje iteracijo jezika $(L(r))^*$
 	\end{items}
 }
-\subsection{Jezik regularnih izrazov}
-\Def{Jezik ki ga opisuje poljubni regularni izraz, je regularni jezik.}%?tu bi pasal dokaz ali opis dokaza tega
-%\Dokaz{}
-\begin{primeri}
-	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
-	\item $ \lbrace \rbrace $ je regularni jezik
-	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
-\end{primeri}
-
-\subsection{Primeri regularnih izrazov}%?sam kaj je pa to nad naslovom :)
 \begin{primeri}
 \item Opiši vse nize, ki se končajo z nizom $00$ v abecedi $\Sigma = \{ 0,1 \}$.
 	\begin{displaymath}
@@ -234,6 +224,14 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 		\begin{displaymath}
 		2^8 \cdot 2^3 = 2^{11} \mbox{ nizov}
 		\end{displaymath}
+\end{primeri}
+\subsection{Jezik regularnih izrazov}
+\Def{Jezik ki ga opisuje poljubni regularni izraz, je regularni jezik.}%?tu bi pasal dokaz ali opis dokaza tega
+%\Dokaz{}
+\begin{primeri}
+	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
+	\item $ \lbrace \rbrace $ je regularni jezik
+	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
 \end{primeri}
 
 \section{Končni avtomati}
@@ -274,7 +272,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\begin{equation*}
 	L=\{ w\ |\ \hat\delta(q_0, w) \cap F \neq \emptyset \}
 	\end{equation*}
-	kjer je $\hat\delta(q,w)$ posplošena funkcija prehodov v večih korakov.}%?Y you no define \varepsilon closure?
+	kjer je $\hat\delta(q,w)$ posplošena funkcija prehodov v večih korakih.}%?Y you no define \varepsilon closure?
 \Def{Jezik DKA je definiran kot:
 	\begin{equation*}
 	L=\{ w\ |\ \delta(q_0, w) \in F \}
@@ -344,8 +342,6 @@ ki jih prepišemo v en sam regularni izraz oblike:
   \draw [->] (q2) to[bend left]  node[auto] {$0$} (q1);
   \draw [->] (q2) to[loop above] node[auto] {$1$} (q2);
 \end{tikzpicture}
-
-%Regularni izraz po tistem postopku, ki še ni.. reference potem
 \ \\
 Regularni izraz dobimo po postopku iz \ref{KA-RI}:
 \begin{displaymath}
