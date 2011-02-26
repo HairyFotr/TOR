@@ -110,8 +110,8 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\end{items}
 \item $\sqrt[3]{2}$ je racionalno število.
 	\begin{items}
-	\item Če je $\sqrt[3]{2}$ racionalno število, ga je moč zapisati kot ulomek.
-	\item Predpostavimo, da je ulomek okrajšan, torej, da velja: $GCD(a,b)=1$):
+	\item Če je $\sqrt[3]{2}$ racionalno število, ga je moč zapisati kot ulomek $\frac{a}{b}$.
+	\item Predpostavimo, da je ulomek $\frac{a}{b}$ okrajšan (torej, da velja: $GCD(a,b)=1$):
 		\begin{align*}
 		\sqrt[3]{2} &= \frac{a}{b}\\
 		2 &= \left( \frac{a}{b} \right)^3\\
@@ -187,7 +187,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\item $\underline{a}$ opisuje jezik $L( \underline{a} ) = \lbrace a \rbrace,\ a \in \Sigma$
 	\end{items}
 }
-\Def{	Pravila za generiranje kompleksnejših izrazov:%?complex might be the wrong word
+\Def{Pravila za generiranje sestavljenih izrazov:
 	\begin{items}
 	\item $(r_1 + r_2)$ opisuje unijo jezikov $L(r_1 + r_2) = L(r_1) \bigcup L( r_2)$
 	\item $(r_1\ r_2)$ opisuje stik jezikov $L(r_1\ r_2) = L(r_1)\cdot L( r_2)$
@@ -216,7 +216,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 		(\varepsilon  + 1 )(0^*01)^* 0^* \\
 		(\varepsilon  + 1 )(0^* + 01)^* \\
 		\end{align*} 
-	\item S slovensko abecedo opisi besedo "Ljubljana" v vseh sklonih in vseh mešanicah velikih in malih črk.
+	\item S slovensko abecedo opiši besedo "Ljubljana" v vseh sklonih in vseh mešanicah velikih in malih črk.
 		\begin{displaymath}
 		(L+l) (J+j) (U+u) (B+b) (L+l) (J+j) (A+a) (N+n) \left( (A+a)(O+o)(E+e)(I+i) \right) 
 		\end{displaymath}
@@ -297,7 +297,19 @@ Pri tem pa regularne gramatike ločimo na levo in desno-regularne.
 To pomeni, da imamo pri levo-regularnih gramatikah vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na desni.
 
 \section{Prevedba med izvedbami regularnih jezikov}%?lame naslov, fixme
-Regularni izrazi, regularne gramatike in končni avtomati so vsi enako močni in je mogoče pretvarjati med njimi.
+Regularni izrazi, regularne gramatike in končni avtomati so vsi enako močni in je mogoče pretvarjati med njimi. V tem odseku bomo predstavili naslednje prevedbe:\\[12pt]%?ustrezno dopolni :)
+\begin{center}
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (RI)   at (0bp,0bp)   {RI};
+	\node (eNKA) at (75bp,0bp)  {$\varepsilon$NKA};
+	\node (NKA)  at (150bp,0bp) {NKA};
+	\node (DKA)  at (225bp,0bp) {DKA};
+	\node (DLG)  at (300bp,0bp) {DLG};
+	\node (LLG)  at (375bp,0bp) {LLG};
+
+	\draw [bend left,->]  (DKA) to node[auto] {$1$} (RI);
+\end{tikzpicture}
+\end{center}
 
 	%nekako tako mam v lanskih vajah, vrjetno mam letos bl prov :)
 	%ps. lanske vaje so ful ugly, tko d si nism kj velik pomagov
@@ -313,13 +325,13 @@ Končni avtomat v regularni izraz prevedemo po metodi z eliminacijo. Pri tej met
 \br
 Na povezavah avtomata imamo zapisane regularne izraze $R,S,Q$ in $T$,\\
 \begin{tikzpicture}[>=latex',/tikz/initial text=""]
-	\node (q0) at (0bp,0bp) [state, initial] {$q_0$};
-	\node (q1) at (100bp,0bp) [state, accepting] {$q_e$};
+	\node (q0) at (0bp,0bp)  [state, initial]   {$q_0$};
+	\node (q1) at (80bp,0bp) [state, accepting] {$q_e$};
 
-	\draw [->] (q0) to[loop above] node[auto] {$R$} (q0);
-	\draw [->] (q0) to[bend left]  node[auto] {$S$} (q1);
-	\draw [->] (q1) to[bend left]  node[auto] {$T$} (q0);
-	\draw [->] (q1) to[loop above] node[auto] {$Q$} (q1);
+	\draw [loop above,->] (q0) to node[auto] {$R$} (q0);
+	\draw [bend left,->]  (q0) to node[auto] {$S$} (q1);
+	\draw [bend left,->]  (q1) to node[auto] {$T$} (q0);
+	\draw [loop above,->] (q1) to node[auto] {$Q$} (q1);
 \end{tikzpicture}
 \\
 ki jih prepišemo v en sam regularni izraz oblike:
@@ -327,20 +339,19 @@ ki jih prepišemo v en sam regularni izraz oblike:
 (R+SQ^*T)^*SQ^*
 \end{displaymath}
 
-\section{Primeri izvedb regularnih jezikov}%?lame naslov, fixme
 \begin{primeri}
-\item Kako zapišemo DKA za preverjanje deljivosti s 3 v binarnem sistemu? Zapiši še regularni izraz.\\
+\item Zapiši DKA za preverjanje deljivosti s 3 v binarnem sistemu? Zapiši še regularni izraz.\\
 \begin{tikzpicture}[>=latex',/tikz/initial text=""]
-  \node (q0) at (0bp,0bp) [state, initial, accepting] {$q_0$};
-  \node (q1) at (75bp,0bp) [state] {$q_1$};
-  \node (q2) at (150bp,0bp) [state] {$q_2$};
-  
-  \draw [->] (q0) to[loop above] node[auto] {$0$} (q0);
-  \draw [->] (q0) to[bend left]  node[auto] {$1$} (q1);
-  \draw [->] (q1) to[bend left]  node[auto] {$1$} (q0);
-  \draw [->] (q1) to[bend left]  node[auto] {$0$} (q2);
-  \draw [->] (q2) to[bend left]  node[auto] {$0$} (q1);
-  \draw [->] (q2) to[loop above] node[auto] {$1$} (q2);
+	\node (q0) at (0bp,0bp)   [state, initial, accepting] {$q_0$};
+	\node (q1) at (75bp,0bp)  [state]                     {$q_1$};
+	\node (q2) at (150bp,0bp) [state]                     {$q_2$};
+
+	\draw [loop above,->] (q0) to node[auto] {$0$} (q0);
+	\draw [bend left,->]  (q0) to node[auto] {$1$} (q1);
+	\draw [bend left,->]  (q1) to node[auto] {$1$} (q0);
+	\draw [bend left,->]  (q1) to node[auto] {$0$} (q2);
+	\draw [bend left,->]  (q2) to node[auto] {$0$} (q1);
+ 	\draw [loop above,->] (q2) to node[auto] {$1$} (q2);
 \end{tikzpicture}
 \ \\
 Regularni izraz dobimo po postopku iz \ref{KA-RI}:
@@ -350,18 +361,32 @@ Regularni izraz dobimo po postopku iz \ref{KA-RI}:
 \end{primeri}
 
 \section{Ohranjanje regularnosti jezikov}
-Regularnost jezika ohranjajo operacije:
+Regularnost jezika po definiciji ohranjajo operacije:
 \begin{items}
 \item $L_1 \cup L_2$ - unija 
-\item $L_1 \circ L_2$ - stik 
-\item $L_1^*$ - iteracija %? v zapiskih imam poudarjeno "po definiciji".. wat?
-\item $L_1 \cap L_2$ - presek
-\item $\overline L$ - komplement
-\item $L^R$ - obrat oz. reverz
+\item $L_1 \cdot L_2$ - stik 
+\item $L_1^*$ - iteracija
+\end{items}
+Obstajajo konstruktivni postopki, ki kažejo, da regularnost ohranjajo tudi:
+\begin{items}
+\item $L_1 \cap L_2$ - presek\\
+	Iz avtomatov za $L_1$ in $L_2$ zgradimo t.i. produktni avtomat:
+		\begin{align*}
+			M_{L_1} &= \{ Q_1, \Sigma, \delta_1, q_{1_0}, F_1 \}\\
+			M_{L_2} &= \{ Q_2, \Sigma, \delta_2, q_{2_0}, F_2 \}\\
+			M_{L_1}*M_{L_2} &= \{ Q_1 \times Q_2, \Sigma, \delta_*, \langle q_{1_0}, q_{2_0} \rangle, F_1 \times F_2 \}
+		\end{align*}
+	Namesto stanj dobimo pare stanj in moramo preveriti v kateri par pridemo, če gledamo oba stara avtomata, končna pa so tista stanja, ki so končna v obeh starih avtomatih.
+	\begin{displaymath}
+		\delta_*(\langle q_1, q_2 \rangle, a) = \langle \delta_1(q_1, a), \delta_2(q_2, a)\rangle
+	\end{displaymath}
+\item $L^R$ - obrat oz. reverz\\
+	Obrnemo vse povezave, ustvarimo novo začetno stanje, ki gre po $\varepsilon$ v stara končna, staro začetno stanje pa postane edino končno stanje.
 \end{items}
 Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \begin{items}
 \item $L_1 \setminus L_2 = L_1 \cap \overline L_2$ - razlika
+\item $\overline{L} = \Sigma^* \setminus L$ - komplement
 \item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
 \end{items}
 
