@@ -9,6 +9,9 @@
 \usepackage{amssymb}
 \usepackage{makeidx}
 \usepackage{graphicx}
+\usepackage[x11names, rgb]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{automata,snakes,arrows,shapes}
 
 \usepackage{../torstyle}
 %torstlye predloge:
@@ -48,13 +51,30 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 \chapter{Uvod}
 \section{Dokazovaje}
 \subsection{Dokaz s konstrukcijo}
-Dokaz obstoja nekega objekta je to, da nam objekt uspe skonstruirati.
+Dokaz obstoja nekega matematičnega objekta je to, da nam objekt uspe skonstruirati.
 
 \begin{primeri}
-\item Ali za vsako število elementov, večje od 4, obstaja graf ki ima natanko 3 liste?
+\item Za vsak $n>4$, obstaja dvojiško drevo, ki ima natanko $3$ liste.
 %?manjka dokaz in slika
-\item $| \mathbb{R} | = | [0,1) |$
-%?manjka dokaz in še par podobnih je
+\item $| \mathbb{R} | = | [0,1) |$.\\
+	\begin{items}
+	\item Množici imata enako moč, kadar med njima obstaja bijektivna preslikava.
+	\item Vsako realno število $r$ lahko zapišemo kot:
+	\begin{displaymath}
+		r=\pm d_1 d_2 \dots d_n . \bar{d_1}\bar{d_2} \dots \bar{d_m} \dots ;\ d_1 \neq 0
+	\end{displaymath}
+	\item Definiramo preslikavo:
+	\begin{displaymath}
+		\mathbb{R}\rightarrow [0,1): r\rightarrow 0.s\bar{d_{1}}d_{n}\bar{d_{2}}d_{n-1}...\bar{d_{n}}d_{1}\bar{d_{n+1}}0\bar{d_{n+2}}0...
+	\end{displaymath}
+	kjer z $s$ določimo predznak ($s=0$, če $r \ge 0$ in $s=1$, sicer).
+	\item Vidimo:
+		\begin{items}
+		\item $|\mathbb{R}|\le |[0,1)|$, %?(ker se $0.2$ ne da preslikati v $\mathbb{R}$)??
+		\item $|\mathbb{R}|\ge |[0,1)|$, ker velja $[0,1) \subset \mathbb{R}$
+		\end{items}
+	\item Iz tega lahko sklepamo, da velja $|\mathbb{R}|=|[0,1)|$
+	\end{items}
 \end{primeri}
 	
 \subsection{Dokaz z indukcijo}
@@ -78,7 +98,7 @@ Induktivni razred $I$ sestavlja:
 Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to vodi v protislovje.
 
 \begin{primeri}
-\item Praštevil je končno mnogo
+\item Praštevil je končno mnogo.
 	\begin{items}
 	\item Predpostavimo, da poznamo vsa praštevila:\\
 		$P = \{2,3,5,...,p\}$, kjer je $p$ zadnje praštevilo 
@@ -86,16 +106,24 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\item Če pomnožimo vsa znana praštevila iz $P$ in prištejemo $1$ dobimo število, ki se ga ne da razstaviti na prafaktorje iz množice $P$:\\
 		$q = 2 * 3 * 5 * ... * p + 1$
 	\item Torej je $q$ ali praštevilo (ker ni sestavljeno), ali pa število, sestavljeno iz prafaktorjev, ki jih ni v množici $P$.
-	\item Oboje kaže na to, da v množici $P$ nimamo vseh praštevil in da to velja za vsako končno množico praštevil.
+	\item Oboje kaže na to, da v množici $P$ nimamo vseh praštevil, ter, da to velja za vsako končno množico praštevil.
 	\end{items}
-\item $\sqrt[3]{2}$ je racionalno število 
+\item $\sqrt[3]{2}$ je racionalno število.
 	\begin{items}
-	\item $\sqrt[3]{2} = \frac{a}{b}$ ker je $\frac{a}{b}$ racionalen ulomek ga lahko okrajšamo in si ga od sedaj predstavljamo okrajšanega $GCD(a,b)=1$
-	\item $ 2 = \left( \frac{a}{b} \right)^3 $
-	\item $2b^3 = a^3$ tukaj vidimo da je a sodo število, torej lahko pišemo $ a = 2k $
-	\item $2b = \left( 2k\right)^3 $
-	\item $2b = 8k $
-	\item $b = 4k $ ker je b tudi sodo število, vidimo da $GCD(a,b)=1$ ne drži, torej smo prišli v protislovje.
+	\item Če je $\sqrt[3]{2}$ racionalno število, ga je moč zapisati kot ulomek.
+	\item Predpostavimo, da je ulomek okrajšan, torej, da velja: $GCD(a,b)=1$):
+		\begin{align*}
+		\sqrt[3]{2} &= \frac{a}{b}\\
+		2 &= \left( \frac{a}{b} \right)^3\\
+		2b^3 &= a^3
+		\end{align*}
+	\item Opazimo, da je $a$ sodo število, torej lahko pišemo $a = 2k$:
+		\begin{align*}
+		2b &= \left( 2k\right)^3\\
+		2b &= 8k\\
+		b &= 4k
+		\end{align*}
+	\item Ker se je pokazalo, da je tudi $b$ sodo število, $GCD(a,b)=1$ ne more držati, torej smo prišli v protislovje in s tem dokazali, da $\sqrt[3]{2}$ ni racionalno število.
 	\end{items}
 \end{primeri}
 
@@ -105,12 +133,12 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \section{Uvod}
 \subsection*{Oznake}
 \begin{items}
-\item $a$ - simbol oz. beseda dolžine 1
-\item $\Sigma$ - abeceda oz. končna neprazna množica simbolov
-\item $w$ - besede, nizi oz. poljubno končno zaporedje  simbolov $w_1w_2 \ldots w_n$. 
-\item $|w|$ - dolžina niza - je $0$ za $w = \varepsilon$
-\item $\varepsilon$ - prazen niz oz. niz dolžine $0$
-\item $\Sigma^*$ - vse možne besede abecede
+\item $a$ - simbol (niz dolžine 1)
+\item $\Sigma$ - abeceda (končna neprazna množica simbolov)
+\item $w$ - niz ali beseda (poljubno končno zaporedje  simbolov $w_1w_2 \ldots w_n$)
+\item $|w|$ - dolžina niza
+\item $\varepsilon$ - prazen niz, $|w|=0$
+\item $\Sigma^*$ - vsi možni nizi abecede
 \end{items}
 
 \subsection*{Operacije}
@@ -119,25 +147,25 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\begin{items}
 	\item Stik nizov:
 		\begin{align*}
-		w  &= w_1 w_2 \ldots w_n\\
-		x  &= x_1 x_2 \ldots x_m\\
-		wx &= w_1 w_2 \ldots w_n x_1 x_2 \ldots x_m
+		w  &= w_1 w_2 \dots w_n\\
+		x  &= x_1 x_2 \dots x_m\\
+		wx &= w_1 w_2 \dots w_n x_1 x_2 \dots x_m
 		\end{align*}
 	\item Stik množic:
 		\begin{align*} 
-		A & = \lbrace w_1 ,\ w_2 ,\ \ldots ,\ w_n \rbrace \\ 
-		B & = \lbrace x_1 ,\ x_2 ,\ \ldots ,\ x_m \rbrace \\ 
-		A \circ B & = \lbrace w_ix_j \ | \ w_i \in A \ \wedge \ x_i \in B \rbrace
+		A & = \lbrace w_1 ,\ w_2 ,\ \dots ,\ w_n \rbrace \\ 
+		B & = \lbrace x_1 ,\ x_2 ,\ \dots ,\ x_m \rbrace \\ 
+		A \cdot B & = \lbrace w_ix_j \ | \ w_i \in A \ \wedge \ x_i \in B \rbrace
 		\end{align*} 
 	\end{items}
 \item Potenciranje
 	\begin{align*} 
 	A^0 & = \lbrace \varepsilon \rbrace \\
-	A^k & = A \circ A \circ \cdots \circ A \ = \ \bigcirc_{i=0}^{k} A^i \\
+	A^k & = A \cdot A \cdot \ldots \cdot A \ = \ \bigcirc_{i=1}^{k} A \\
 	\end{align*}
 \item Iteracija
 	\begin{align*} 
-	A^* &= A^0 \bigcup A^1 \bigcup A^2 \cdots  \ = \ \bigcup_{i=0}^{ \infty } A^i
+	A^* &= A^0 \cup A^1 \cup A^2 \cdots  \ = \ \bigcup_{i=0}^{ \infty } A^i
 	\end{align*} 		
 \end{items}
 \subsection*{Regularni jezik}
@@ -170,7 +198,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \Def{Jezik ki ga opisuje poljubni regularni izraz, je regularni jezik.}%?tu bi pasal dokaz ali opis dokaza tega
 %\Dokaz{}
 \begin{primeri}
-	%\item $\Sigma^* $ je regularni izraz %?jezik je nujno strogi subset \sigma*... ker to so vse možne besede
+	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
 	\item $ \lbrace \rbrace $ je regularni jezik
 	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
 \end{primeri}
@@ -252,7 +280,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	L=\{ w\ |\ \delta(q_0, w) \in F \}
 	\end{equation*}
 }
-Definicije želijo povedati, da so v jeziku točno tiste besede, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
+Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
 
 \subsection{Regularne gramatike}
 \Def{Regularna gramatika je definirana kot četvorček $G=\langle V,T,P,S \rangle$, kjer je:%?or is it NTPS?
@@ -282,25 +310,44 @@ Regularni izrazi, regularne gramatike in končni avtomati so vsi enako močni in
 	%\subsubsection{$\varepsilon$-NKA $\rightarrow$ NKA}
 	%\subsubsection{RI $\rightarrow$ $\varepsilon$-NKA}
 
-\subsection{Končni avtomat $\rightarrow$ Regularni izraz}
-Končni avtomat v regularni izraz prevedemo po metodi z eliminacijo. Pri tej metodi izberemo neko vozlišče za eliminacijo, nato pa njegove sosede povežemo med seboj, tako, da na nove povezave zapišemo regularne izraze, ki opisujejo dogajanje v tistem vozlišču. Eliminacijo ponavljamo, dokler nam ne ostanta le dve stanji, nato pa za končni zapis uporabimo naslednji recept:
+\subsection{Končni avtomat $\rightarrow$ Regularni izraz}\label{KA-RI}
+Končni avtomat v regularni izraz prevedemo po metodi z eliminacijo. Pri tej metodi izberemo neko vozlišče za eliminacijo, nato pa njegove sosede povežemo med seboj, tako, da na nove povezave zapišemo regularne izraze, ki opisujejo dogajanje v tistem vozlišču. Eliminacijo ponavljamo, dokler nam v avtomatu ne ostanta le dve stanji, nato pa za končni zapis uporabimo naslednji recept:
+\br
+Na povezavah avtomata imamo zapisane regularne izraze $R,S,Q$ in $T$,\\
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (q0) at (0bp,0bp) [state, initial] {$q_0$};
+	\node (q1) at (100bp,0bp) [state, accepting] {$q_e$};
 
+	\draw [->] (q0) to[loop above] node[auto] {$R$} (q0);
+	\draw [->] (q0) to[bend left]  node[auto] {$S$} (q1);
+	\draw [->] (q1) to[bend left]  node[auto] {$T$} (q0);
+	\draw [->] (q1) to[loop above] node[auto] {$Q$} (q1);
+\end{tikzpicture}
+\\
+ki jih prepišemo v en sam regularni izraz oblike:
 \begin{displaymath}
 (R+SQ^*T)^*SQ^*
 \end{displaymath}
 
-%? slika R=q0-q0, S=q0-qe, Q=qe-qe, T=qe-q0
-
 \section{Primeri izvedb regularnih jezikov}%?lame naslov, fixme
 \begin{primeri}
-\item Kako zapišemo DKA za preverjanje deljivosti s 3 v binarnem sistemu? Zapiši še regularni izraz.
-%?make pretty DOT/TKIZ :) q0-0-q0, q0-1-q1, q1-0-q2, q1-1-q2, q2-0-q1, q1-1-q0
-\ \\
-\includegraphics[width=4cm]{./DKAdiv3}
+\item Kako zapišemo DKA za preverjanje deljivosti s 3 v binarnem sistemu? Zapiši še regularni izraz.\\
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+  \node (q0) at (0bp,0bp) [state, initial, accepting] {$q_0$};
+  \node (q1) at (75bp,0bp) [state] {$q_1$};
+  \node (q2) at (150bp,0bp) [state] {$q_2$};
+  
+  \draw [->] (q0) to[loop above] node[auto] {$0$} (q0);
+  \draw [->] (q0) to[bend left]  node[auto] {$1$} (q1);
+  \draw [->] (q1) to[bend left]  node[auto] {$1$} (q0);
+  \draw [->] (q1) to[bend left]  node[auto] {$0$} (q2);
+  \draw [->] (q2) to[bend left]  node[auto] {$0$} (q1);
+  \draw [->] (q2) to[loop above] node[auto] {$1$} (q2);
+\end{tikzpicture}
 
 %Regularni izraz po tistem postopku, ki še ni.. reference potem
 \ \\
-Regularni izraz:
+Regularni izraz dobimo po postopku iz \ref{KA-RI}:
 \begin{displaymath}
 (0+1(01^*0)^*1)^*
 \end{displaymath}
@@ -309,19 +356,19 @@ Regularni izraz:
 \section{Ohranjanje regularnosti jezikov}
 Regularnost jezika ohranjajo operacije:
 \begin{items}
-\item Unija $\cup$
-\item Stik $\circ$
-\item Iteracija (po Def.)$\ ^*$
-\item Presek $\cap$
-\item Komplement $\ ^C$ %?rly C
-\item Obrat oz. reverz $\ ^R$
+\item $L_1 \cup L_2$ - unija 
+\item $L_1 \circ L_2$ - stik 
+\item $L_1^*$ - iteracija %? v zapiskih imam poudarjeno "po definiciji".. wat?
+\item $L_1 \cap L_2$ - presek
+\item $\overline L$ - komplement
+\item $L^R$ - obrat oz. reverz
 \end{items}
-Omenimo še nekaj sestavljenih operacij (vse izmed njih ohranjajo regularnost):
+Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \begin{items}
-\item Razlika $=\cap^C$%?lol -> \
-\item Ekskluzivni ali $\vee=$ %? =?
+\item $L_1 \setminus L_2 = L_1 \cap \overline L_2$ - razlika
+\item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
 \end{items}
-	
+
 \pagebreak
 
 %?appendix this:
