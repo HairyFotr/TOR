@@ -11,7 +11,7 @@
 \usepackage{graphicx}
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{automata,snakes,arrows,shapes}
+\usetikzlibrary{automata,snakes,arrows,shapes,decorations.text}
 
 \usepackage{../torstyle}
 %torstlye predloge:
@@ -49,8 +49,26 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 
 \pagebreak
 \chapter{Uvod}
-\section{Dokazovaje}
-\subsection{Dokaz s konstrukcijo}
+\section{Chomskyeva hiearhija}
+\begin{center}
+\begin{tikzpicture}
+	\draw (0cm,0cm) circle (5cm);
+	\node at (0,3.9cm) {Turingovi jeziki};%{\nameref{chap:Turingovi jeziki}};
+
+	\draw (0cm,-0.8cm) circle (4cm);
+	\node at (0,2cm) {Kontekstno-odvisni jeziki};%{\nameref{chap:Kontekstno
+
+	\draw (0cm,-1.6cm) circle (3cm);
+	\node at (0,0cm) {\nameref{chap:Kontekstno-neodvisni jeziki}};
+
+	\draw (0cm,-2.4cm) circle (2cm);
+	\node at (0,-2cm) {\nameref{chap:Regularni jeziki}};
+\end{tikzpicture}
+\end{center}
+
+\section{Matematične osnove}
+\subsection{Dokazovanje}
+\subsubsection{Dokaz s konstrukcijo}
 Dokaz obstoja nekega matematičnega objekta je to, da nam objekt uspe skonstruirati.
 
 \begin{primeri}
@@ -77,7 +95,7 @@ Dokaz obstoja nekega matematičnega objekta je to, da nam objekt uspe skonstruir
 	\end{items}
 \end{primeri}
 	
-\subsection{Dokaz z indukcijo}
+\subsubsection{Dokaz z indukcijo}
 Če je množica induktivni razred\footnote{Glej slovarček na koncu.}, lahko z matematično indukcijo dokazujemo neko lastnost članov množice.
 \br
 Induktivni razred $I$ sestavlja:
@@ -94,7 +112,7 @@ Induktivni razred $I$ sestavlja:
 \item \fnurl{Hilbertove krivulje}{http://en.wikipedia.org/wiki/Hilbert_curve}
 \end{primeri}
 
-\subsection{Dokaz s protislovjem}
+\subsubsection{Dokaz s protislovjem}
 Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to vodi v protislovje.
 
 \begin{primeri}
@@ -128,7 +146,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \end{primeri}
 
 \pagebreak
-\chapter{Regularni jeziki}
+\chapter{Regularni jeziki}\label{chap:Regularni jeziki}
 
 \section{Uvod}
 \subsection*{Oznake}
@@ -239,8 +257,8 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \Def{ $\varepsilon$NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta ,q_0 , F \rangle$, kjer je:
 	\begin{items}
 	\item $ Q $ - končna množica stanj
-	\item $ \Sigma $ - vhodna abeceda, $\varepsilon \in \Sigma$
-	\item $ \delta $ - funkcija prehodov ($\delta : Q \times \Sigma \rightarrow 2^{Q}$)
+	\item $ \Sigma $ - vhodna abeceda
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightarrow 2^{Q}$
 	\item $ q_0 $ - začetno stanje
 	\item $ F $ - množica končnih stanj
 	\end{items}
@@ -251,7 +269,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\begin{items}
 	\item $ Q $ - končna množica stanj
 	\item $ \Sigma $ - vhodna abeceda
-	\item $ \delta $ - funkcija prehodov ($\delta : Q \times \Sigma \rightarrow 2^{Q}$)
+	\item $ \delta $ - funkcija prehodov $\delta : Q \times \Sigma \rightarrow 2^{Q}$
 	\item $ q_0 $ - začetno stanje
 	\item $ F $ - množica končnih stanj
 	\end{items}		
@@ -261,7 +279,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\begin{items}
 	\item $ Q $ - končna množica stanj
 	\item $ \Sigma $ - vhodna abeceda
-	\item $ \delta $ - funkcija prehodov ($\delta : Q \times \Sigma \rightarrow Q$)
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times \Sigma \rightarrow Q$
 	\item $ q_0 $ - začetno stanje
 	\item $ F $ - množica končnih stanj
 	\end{items}	
@@ -290,7 +308,7 @@ Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz 
 \end{items}
 Pri tem pa regularne gramatike ločimo na levo in desno-regularne.
 \begin{items}
-\item Pri levih so produkcije $P \subset V \times ((V \cup \{\varepsilon\})\cdot^*)$
+\item Pri levih so produkcije $P \subset V \times ((V \cup \{\varepsilon\})\cdot T^*)$
 \item Pri desnih so produkcije $P \subset V \times (T^* \cdot (V \cup \{\varepsilon\}))$
 \end{items}
  }
@@ -307,7 +325,7 @@ Regularni izrazi, regularne gramatike in končni avtomati so vsi enako močni in
 	\node (DLG)  at (300bp,0bp) {DLG};
 	\node (LLG)  at (375bp,0bp) {LLG};
 
-	\draw [bend left,->]  (DKA) to node[auto] {$1$} (RI);
+	\draw [bend left,->]  (DKA) to node[auto] {\ref{KA-RI}} (RI);
 \end{tikzpicture}
 \end{center}
 
@@ -390,7 +408,29 @@ Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
 \end{items}
 
-\pagebreak
+\chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
+\section{Kontekstno-neodvisne gramatike}
+\section{Skladovni avtomati}
+\Def{Skladovni avtomat je definiran kot sedmerka $M=\langle Q, \Sigma, \Gamma, \delta, q_0, Z_0, F \rangle$, kjer je:
+	\begin{items}
+	\item $ Q $ - končna množica stanj
+	\item $ \Sigma $ - vhodna abeceda
+	\item $ \Gamma $ - skladovna abeceda
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}$%? zakaj U \varepsilon?
+	\item $ q_0 $ - začetno stanje, $q_0 \in Q$
+	\item $ Z_0 $ - začetni skladovni simbol, $Z_0 \in \Gamma$
+	\item $ F $ - množica končnih stanj
+	\end{items}
+}
+\subsection{Trenutni opis}
+\Def{Trenutni opis je trojka $\langle q, w, \gamma \rangle \in Q \times \Sigma^* \times \Gamma^*$, pri čemer je $q$ trenutno stanje, $w$ preostanek vhodnega niza, ter $\gamma$ trenutna vsebina sklada}
+\subsection{Relacija $\vdash$}
+\Def{Relacija $\vdash$ nas pelje iz enega trenutnega opisa v drugega, če je ta prehod predviden v funkciji prehodov $\delta$:
+	\begin{displaymath}
+	\langle q, aw, Z\gamma \rangle \vdash \langle p, w, \gamma'\gamma \rangle \iff \langle p, \gamma' \rangle \in \delta(q,a,Z)
+	\end{displaymath}
+}
+\subsection{Jezik skladovnega avtomata}
 
 %?appendix this:
 \chapter{Slovar}
