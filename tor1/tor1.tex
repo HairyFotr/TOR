@@ -197,7 +197,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \item Jezik, ki vsebuje $\varepsilon$ (ni prazen): $L_2 = \lbrace \varepsilon \rbrace$
 \item Jezik, ki vsebuje nize "a, aa, ab": $L_3 = \lbrace a, aa, ab \rbrace$
 \end{primeri} 
-\section{Regularni Izrazi}
+\section{Regularni izrazi}\label{sec:RI}
 \Def{Osnovni izrazi:
 	\begin{items}
 	\item $\underline{\emptyset}$ je opisuje prazen jezik $ L(\underline{\emptyset})= \lbrace \rbrace$
@@ -252,9 +252,9 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 \rbrace $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
 	\item[note:] regularni jeziki ne znajo držati neskončno - poljubno mnogo - informacij o prejšnjih znakih. Kasneje bomo za dokazovanje uporabljali lemo o napihovanju regularnih jezikov.\end{primeri}
 
-\section{Končni avtomati}
+\section{Končni avtomati}\label{sec:KA}
 \subsection{Nedeterministični končni avtomati z $\varepsilon$-prehodi }
-\Def{ $\varepsilon$NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta ,q_0 , F \rangle$, kjer je:
+\Def{$\varepsilon$NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta ,q_0 , F \rangle$, kjer je:
 	\begin{items}
 	\item $ Q $ - končna množica stanj
 	\item $ \Sigma $ - vhodna abeceda
@@ -267,7 +267,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 }
 	
 \subsection{Nedeterministični končni avtomati}
-\Def{ NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
+\Def{NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
 	\begin{items}
 	\item $ Q $ - končna množica stanj
 	\item $ \Sigma $ - vhodna abeceda
@@ -300,7 +300,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 }
 Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
 
-\subsection{Regularne gramatike}
+\subsection{Levo in desno-regularne gramatike}\label{sec:LG}
 \Def{Regularna gramatika je definirana kot četvorček $G=\langle V,T,P,S \rangle$, kjer je:%?or is it NTPS?
 \begin{items}
 \item V - množica spremenljivk oz. vmesnih simbolov, $V \subseteq \Sigma$
@@ -411,20 +411,39 @@ Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \end{items}
 
 \section{Dokazovanje regularnosti jezika}
-
-Dostikrat hočemo sestaviti regularen izraz za določen jezik in niti ne vemo ali je regularen izraz sploh regularen ali ne. Za to imamo nekaj metod za dokazovanje regularnosti jezika.
-\subsection*{Dokazovanje da je jezik regularen}
+%Dostikrat hočemo sestaviti regularen izraz za določen jezik in niti ne vemo ali je regularen izraz sploh regularen ali ne. Za to imamo nekaj metod za dokazovanje regularnosti jezika.%?false... ne moreš sestavit regularnega izraza, ki ni regularen :)
+Kadar želimo ugotoviti, ali je nek jezik regularen, to lahko storimo na več načinov:
 \begin{items}
-	\item konstrukcija končnega avtomata $ \varepsilon NKA \mbox{ , } NKA \mbox{ ali } DKA$, ki sprejema jezik
-	\item zapis regularnega izraza, ki sprejema jezik.
+\item Pokažemo da je regularen:
+	\begin{items}
+	\item Jezik skonstruiramo v enem izmed formalizmov, ki sprejemajo regularne jezike:
+		\begin{items}
+		\item \nameref{sec:KA}
+		\item \nameref{sec:RI}
+		\item \nameref{sec:LG}
+		\end{items}
+	\end{items}
+\item Dokažemo da ni regularen:
+	\begin{items}
+	\item Z uporabo leme o napihovanju za regularne jezike (glej \ref{sec:Lema za RJ})
+	\item Dokažemo, da jezik ne spada niti v nek širši razred jezikov (recimo, dokažemo, da ni kontekstno neodvisen)
+	\end{items}
 \end{items}
-\subsection*{Dokazovanje da jezik ni regularen}
-\begin{items}
-	\item lema o napihovanju regularnih jezikov
-	\item če dokažemo da jezik ni kontekstno neodvisen - kako to naredimo bomo pokazali v naslednjem poglavju.
-\end{items}
+%?what is this, I don't even :D
 Opozorilo: Če zapišemo regularni izraz za jezik, ali naredimo končni avtomat, moramo dobro preveriti da ne obstaja kakšen protiprimer. Torej beseda ki je v jeziku in jo končni avtomat ali regularni izraz ne sprejme, ali obratno.\\
 Če nam ne uspe dokaza (da je ali da ni regularni jezik) do konca speljati, to ne moremo vzeti kot dokaz da ravno nasprotno drži. Velja da v takem primeru še nič ne vemo o regularnosti jezika.
+
+\subsection{Lema o napihovanju za regularne jezike}\label{sec:Lema za RJ}
+
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (70bp,0bp) [state]            {};
+	\node (q2) at (140bp,0bp) [state, accepting] {};
+
+	\draw [decorate, decoration={snake},->]  (q0) to node[auto] {$u$} (q1);
+	\draw [decorate, decoration={snake}, loop,->] (q1) to node[auto] {$v$} (q1);
+	\draw [decorate, decoration={snake},->]  (q1) to node[auto] {$z$} (q2);
+\end{tikzpicture}
 
 \chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
 \section{Kontekstno-neodvisne gramatike}
