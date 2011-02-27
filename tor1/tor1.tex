@@ -49,20 +49,23 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 
 \pagebreak
 \chapter{Uvod}
-\section{Chomskyeva hiearhija}
-\begin{center}
-\begin{tikzpicture}
+\section{Chomskyeva hiearhija jezikov}
+\begin{center}%?is it too big? :P
+\begin{tikzpicture}[scale=1.2]
+	\draw (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
+	\node at (4.6cm,4.6cm) {\huge $\Sigma^*$};
+
 	\draw (0cm,0cm) circle (5cm);
-	\node at (0,3.9cm) {Turingovi jeziki};%{\nameref{chap:Turingovi jeziki}};
+	\node at (0,3.9cm) {\large Turingovi jeziki};%{\nameref{chap:Turingovi jeziki}};
 
 	\draw (0cm,-0.8cm) circle (4cm);
-	\node at (0,2cm) {Kontekstno-odvisni jeziki};%{\nameref{chap:Kontekstno
+	\node at (0,1.9cm) {\large Kontekstno-odvisni jeziki};%{\nameref{chap:Kontekstno
 
 	\draw (0cm,-1.6cm) circle (3cm);
-	\node at (0,0cm) {\nameref{chap:Kontekstno-neodvisni jeziki}};
+	\node at (0,-0.1cm) {\large \nameref{chap:Kontekstno-neodvisni jeziki}};
 
 	\draw (0cm,-2.4cm) circle (2cm);
-	\node at (0,-2cm) {\nameref{chap:Regularni jeziki}};
+	\node at (0,-2.1cm) {\large \nameref{chap:Regularni jeziki}};
 \end{tikzpicture}
 \end{center}
 
@@ -229,11 +232,13 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 		\begin{displaymath}
 		(a+b+c)^* aa (a+b+c)^* aa (a+b+c)^* + (a+b+c)^* aaa (a+b+c)^* 
 		\end{displaymath}
-	\item Opiši vse nize, ki ne vsebujejo niza $11$ v abecedi $\Sigma = \lbrace 0,1 \rbrace$\\
-		\begin{align*} 
-		(\varepsilon  + 1 )(0^*01)^* 0^* \\
-		(\varepsilon  + 1 )(0^* + 01)^* \\
-		\end{align*} 
+	\item Opiši vse nize, ki ne vsebujejo niza $11$ v abecedi $\Sigma = \lbrace 0,1 \rbrace$
+		\begin{displaymath} 
+		(\varepsilon  + 1 )(0^*01)^* 0^*
+		\end{displaymath} 
+		\begin{displaymath} 
+		(\varepsilon  + 1 )(0^* + 01)^*
+		\end{displaymath} 
 	\item S slovensko abecedo opiši besedo "Ljubljana" v vseh sklonih in vseh mešanicah velikih in malih črk.
 		\begin{displaymath}
 		(L+l) (J+j) (U+u) (B+b) (L+l) (J+j) (A+a) (N+n) \left( (A+a)(O+o)(E+e)(I+i) \right) 
@@ -245,12 +250,13 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \end{primeri}
 \subsection{Jezik regularnih izrazov}
 \Def{Jezik ki ga opisuje poljubni regularni izraz, je regularni jezik.}%?tu bi pasal dokaz ali opis dokaza tega
-%\Dokaz{}
+Regularni jeziki ne vsebujejo informacije o prejšnjih znakih in se z njimi ne da opisati poljubnega jezika. Kasneje bomo za dokazovanje tega uporabljali lemo o napihovanju za regularne jezike (glej \ref{sec:Lema za RJ}).
+
 \begin{primeri}
 	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
 	\item $ \lbrace \rbrace $ je regularni jezik
 	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 \rbrace $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
-	\item[note:] regularni jeziki ne znajo držati neskončno - poljubno mnogo - informacij o prejšnjih znakih. Kasneje bomo za dokazovanje uporabljali lemo o napihovanju regularnih jezikov.\end{primeri}
+\end{primeri}
 
 \section{Končni avtomati}\label{sec:KA}
 \subsection{Nedeterministični končni avtomati z $\varepsilon$-prehodi }
@@ -258,14 +264,14 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\begin{items}
 	\item $ Q $ - končna množica stanj
 	\item $ \Sigma $ - vhodna abeceda
-	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightarrow P(Q)$
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightarrow 2^Q$
 	\item $ q_0 $ - začetno stanje
 	\item $ F $ - množica končnih stanj
-	\item[razlaga:] $P(Q)=2^Q $ je potenčna množica stanj avtomata. To pomeni da je so v $P(Q)$ vse možne kombinacije stanj.\\
-	                Recimo da se nahajamo v stanju A, potem nas funkcija prehodov $ \delta $ pripelje v vsa mozna stanja do katerih pridemo iz $A$ z določenim simbolom abecede in z vsemi $ \varepsilon $ prehodi, naprimer $ \lbrace A_1,A2, \ldots , A_n \rbrace$. Tukaj je množica stanj $ \lbrace A_1,A2, \ldots , A_n \rbrace $ elemnt potenčne množice $P(Q)$
 	\end{items}
 }
-	
+%?razlaga potenčne množice bi šla lahko nekam med mat. osnove... imam še en kup stvari o teoriji množic nekje. Drugač je pa kul - epsilon-closure je že napol opisan :)
+$2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ vse možne kombinacije stanj. Recimo da se nahajamo v stanju A, potem nas funkcija prehodov $ \delta $ pripelje v vsa mozna stanja do katerih pridemo iz $A$ z določenim simbolom abecede in z vsemi $ \varepsilon $ prehodi, naprimer $ \lbrace A_1,A2, \ldots , A_n \rbrace$. Tukaj je množica stanj $ \lbrace A_1,A2, \ldots , A_n \rbrace $ element potenčne množice $P(Q)$
+
 \subsection{Nedeterministični končni avtomati}
 \Def{NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
 	\begin{items}
