@@ -249,8 +249,8 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \begin{primeri}
 	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
 	\item $ \lbrace \rbrace $ je regularni jezik
-	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
-\end{primeri}
+	\item $ \lbrace 0^n 1^n \ | \ n \geqslant 0 \rbrace $ \underline{ni} regularni jezik%?to bi blo kul pokazat... sam a se da že tuki to?
+	\item[note:] regularni jeziki ne znajo držati neskončno - poljubno mnogo - informacij o prejšnjih znakih. Kasneje bomo za dokazovanje uporabljali lemo o napihovanju regularnih jezikov.\end{primeri}
 
 \section{Končni avtomati}
 \subsection{Nedeterministični končni avtomati z $\varepsilon$-prehodi }
@@ -258,9 +258,11 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\begin{items}
 	\item $ Q $ - končna množica stanj
 	\item $ \Sigma $ - vhodna abeceda
-	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightarrow 2^{Q}$
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightarrow P(Q)$
 	\item $ q_0 $ - začetno stanje
 	\item $ F $ - množica končnih stanj
+	\item[razlaga:] $P(Q)=2^Q $ je potenčna množica stanj avtomata. To pomeni da je so v $P(Q)$ vse možne kombinacije stanj.\\
+	                Recimo da se nahajamo v stanju A, potem nas funkcija prehodov $ \delta $ pripelje v vsa mozna stanja do katerih pridemo iz $A$ z določenim simbolom abecede in z vsemi $ \varepsilon $ prehodi, naprimer $ \lbrace A_1,A2, \ldots , A_n \rbrace$. Tukaj je množica stanj $ \lbrace A_1,A2, \ldots , A_n \rbrace $ elemnt potenčne množice $P(Q)$
 	\end{items}
 }
 	
@@ -407,6 +409,22 @@ Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \item $\overline{L} = \Sigma^* \setminus L$ - komplement
 \item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
 \end{items}
+
+\section{Dokazovanje regularnosti jezika}
+
+Dostikrat hočemo sestaviti regularen izraz za določen jezik in niti ne vemo ali je regularen izraz sploh regularen ali ne. Za to imamo nekaj metod za dokazovanje regularnosti jezika.
+\subsection*{Dokazovanje da je jezik regularen}
+\begin{items}
+	\item konstrukcija končnega avtomata $ \varepsilon NKA \mbox{ , } NKA \mbox{ ali } DKA$, ki sprejema jezik
+	\item zapis regularnega izraza, ki sprejema jezik.
+\end{items}
+\subsection*{Dokazovanje da jezik ni regularen}
+\begin{items}
+	\item lema o napihovanju regularnih jezikov
+	\item če dokažemo da jezik ni kontekstno neodvisen - kako to naredimo bomo pokazali v naslednjem poglavju.
+\end{items}
+Opozorilo: Če zapišemo regularni izraz za jezik, ali naredimo končni avtomat, moramo dobro preveriti da ne obstaja kakšen protiprimer. Torej beseda ki je v jeziku in jo končni avtomat ali regularni izraz ne sprejme, ali obratno.\\
+Če nam ne uspe dokaza (da je ali da ni regularni jezik) do konca speljati, to ne moremo vzeti kot dokaz da ravno nasprotno drži. Velja da v takem primeru še nič ne vemo o regularnosti jezika.
 
 \chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
 \section{Kontekstno-neodvisne gramatike}
