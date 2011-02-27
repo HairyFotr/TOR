@@ -385,7 +385,7 @@ Regularnost jezika po definiciji ohranjajo operacije:
 \begin{items}
 \item $L_1 \cup L_2$ - unija 
 \item $L_1 \cdot L_2$ - stik 
-\item $L_1^*$ - iteracija
+\item $L^*$ - iteracija
 \end{items}
 Obstajajo konstruktivni postopki, ki kažejo, da regularnost ohranjajo tudi:
 \begin{items}
@@ -426,7 +426,7 @@ Kadar želimo ugotoviti, ali je nek jezik regularen, to lahko storimo na več na
 \item Dokažemo da ni regularen:
 	\begin{items}
 	\item Z uporabo leme o napihovanju za regularne jezike (glej \ref{sec:Lema za RJ})
-	\item Dokažemo, da jezik ne spada niti v nek širši razred jezikov (recimo, dokažemo, da ni kontekstno neodvisen)
+	\item Dokažemo, da jezik ne spada niti v nek širši razred jezikov (recimo, dokažemo, da ni kontekstno-neodvisen)
 	\end{items}
 \end{items}
 %?what is this, I don't even :D
@@ -434,8 +434,24 @@ Opozorilo: Če zapišemo regularni izraz za jezik, ali naredimo končni avtomat,
 Če nam ne uspe dokaza (da je ali da ni regularni jezik) do konca speljati, to ne moremo vzeti kot dokaz da ravno nasprotno drži. Velja da v takem primeru še nič ne vemo o regularnosti jezika.
 
 \subsection{Lema o napihovanju za regularne jezike}\label{sec:Lema za RJ}
+Lemo o napihovanju za regularne jezike uporabljamo za dokazovanje, da nek jezik ne spada v razred regularnih jezikov. 
+\Def{Za vsak regularni jezik obstaja neka konstanta $n$, taka, da lahko vsako besedo $w$ iz jezika, daljšo od $n$, razbijemo na tri dele:
+	\begin{displaymath}
+	w=u\cdot v\cdot z
+	\end{displaymath}
+	Pri tem velja:
+	\begin{items}
+	\item $|uv| \leq n$
+	\item $|v| \geq 1$
+	\item $uv^iz \in L,\ \forall i \geq 0$ (napihovanje)
+	\end{items}
+}
+Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero pri napihovanju ne ostanemo znotraj jezika. Če nam tega z izbrano besedo ne uspe dokazati, še nismo dokazali da je jezik regularen -- edini pravi dokaz tega je konstrukcija jezika v enem izmed regularnih formalizmov.
+\br
+Če zgornjo definicijo pogledamo v kontekstu končnih avtomatov in vzamemo, da je $n \geq |Q|$, vidimo, da mora v avtomatu obstajati nek cikel, saj sicer tako dolge besede ne bi mogli sprejeti.
 
-\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+\begin{center}
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]%scale=0.70, every state/.style={scale=0.70}]
 	\node (q0) at (0bp,0bp)  [state, initial]   {};
 	\node (q1) at (70bp,0bp) [state]            {};
 	\node (q2) at (140bp,0bp) [state, accepting] {};
@@ -444,6 +460,7 @@ Opozorilo: Če zapišemo regularni izraz za jezik, ali naredimo končni avtomat,
 	\draw [decorate, decoration={snake}, loop,->] (q1) to node[auto] {$v$} (q1);
 	\draw [decorate, decoration={snake},->]  (q1) to node[auto] {$z$} (q2);
 \end{tikzpicture}
+\end{center}
 
 \chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
 \section{Kontekstno-neodvisne gramatike}
