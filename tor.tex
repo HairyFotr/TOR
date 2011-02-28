@@ -167,107 +167,100 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 %? slika venn... odločljivi jeziki so znotraj Turingovih
 
 \begin{primeri}
-\item {TS, ki sprejema: $\{0^n 1^n | n \geq 1\}$
+\item Zapiši Turingov stroj, ki sprejema jezik $L=\{0^n 1^n | n \geq 1\}$\\
+	Osnovna ideja:
 	\begin{items}
-	\item $00\dots011\dots1$
-	    Zamenja levo 0 z X
-
-    \item $X0\dots011\dots1$%?ne pač mbox, ampak to v škalti or smth
-    gre desno in ko doseže prvo 1 zamenja 1 z Y
-    \item $X0\dots0Y1\dots1$
-    Gre do najbolj desnega X...
+	\item $0^{n}1^{n}$ - vhodna beseda
+	\item $X0^{n-1}1^{n}$ - zamenjamo levo $0$ z $X$
+	\item $X0^{n-1}Y1^{n-1}$ - premaknemo se desno do najbolj leve $1$ in jo zamenjamo z $Y$
+	\item $XX0^{n-2}Y1^{n-1}$\\ 
+		$XX0^{n-2}YY1^{n-2}$ - ponovimo in vidimo, da bomo niz sprejeli, če je prave oblike.
 	\end{items}
+	Turingov stroj zapišemo kot $M=\langle Q,\Sigma,\Gamma,\delta,q_0,B,F \rangle$:
 	\begin{items}
-    \item $Q=\{q_0, q_1,q_2,q_3,q_4\}$
+    \item $Q=\{ q_0,q_1,q_2,q_3,q_4 \}$
     \item $\Sigma = \{ 0,1 \}$
     \item $\Gamma = \{ 0,1,B,X,Y \}$
     \item $F = \{ q_4 \}$
-    \item $\delta$...
+    \item $\delta$ bomo definirali s tabelo
 	\end{items}
-    
+
+    Pomen stanj:
     \begin{items}
     \item $q_0$ - začetno stanje in stanje pred zamenjavo 0 z X
-    \item $q_1$ - v tem stanju se pomika desno do 1
-    \item $q_2$ - v to stanje preide po zamenjavi 1 z Y in gre levo do zadnjega X
-    \item $q_3$ - v to stanje preide, ko najde X in se premane nekrat v desno
+    \item $q_1$ - premikanje desno do 1
+    \item $q_2$ - zamenjava 1 z Y in premikanje levo do X
+    \item $q_3$ - najde X in se premik desno
     \item $q_4$ - končno stanje
     \end{items}
 
-    Napišemo tabelo:\\
-    \begin{tabular}{ c | c c c c c}%?()\langle\rangle
-      \ & 0 & 1 & B & X & Y\\ \hline
-      $x_0$& $\langle q_1,X,D\rangle$ & -- & -- & $\langle q_3,Y,D\rangle$ & --\\
-      $x_1$& $\langle q_1,0,D\rangle$ & $\langle q_2,Y,L\rangle$ & -- & $\langle q_1,Y,D\rangle$ & --\\
-      $x_2$& $\langle q_2,0,D\rangle$ & -- & $\langle q_0,X,D\rangle$ & $\langle q_2,Y,D\rangle$ & --\\
-      $x_3$& -- & -- & -- & $\langle q_3,Y,D\rangle$ & $\langle q_4,B,D\rangle$\\
-      $x_4$& -- & -- & -- & -- & --\\
-    \end{tabular}
+    Tabela prehajanja stanj:\\
+    \begin{tabular}{ c | c c c c c}
+	& 0 & 1 & B & X & Y\\ \hline
+	$x_0$& $\langle q_1,X,D\rangle$ & -- & -- & $\langle q_3,Y,D\rangle$ & --\\
+	$x_1$& $\langle q_1,0,D\rangle$ & $\langle q_2,Y,L\rangle$ & -- & $\langle q_1,Y,D\rangle$ & --\\
+	$x_2$& $\langle q_2,0,D\rangle$ & -- & $\langle q_0,X,D\rangle$ & $\langle q_2,Y,L\rangle$ & --\\
+	$x_3$& -- & -- & -- & $\langle q_3,Y,D\rangle$ & $\langle q_4,B,D\rangle$\\
+	$x_4$& -- & -- & -- & -- & --\\
+	\end{tabular}
 	\br
-	Simuliramo s trenutnimi opisi:\\
-	$q_0 0011 \vdash X q_1 011 \vdash X 0 q_1 11 \vdash X q_2 0 Y 1 \vdash \dots$
-}
-\item {Turingov stroj kot računalnik funkcij:\\
-    $M=\langle Q, \Sigma, \Gamma, \delta, q_0, B, F \rangle$
-    
-    %?also, to je trak stroja
-    $00\dots0100\dots01\dots1000\dots$
-    %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)
-    
-    Lahko, da se stroj M ustavi ter, da ima na traku tedaj m ničel (in B na levi in desni od te grupe)
-    
-    Lahko, da je stroj s tem izračunal neko funkcijo $f^{(k)}:\mathbb{N}^k_+ \rightarrow \mathbb{N}_+$ oz. $f(i_1, i_2, \dots, i_n) = m$
-    %?Kjer 0^e predstavlja število e-1
-    %Ali pa da začnemo z 0, ker itak 1 loči števila
-    %Ampak nima veze :)
-    $f$ ni nujno definirana pri vsaki $k$-terici števil iz $\mathbb{N}$, torej je parcialna funkcija. %pač na podmnožici N^k
-    TS M hkrati računa več funkcij $f^{(1)}.., f^{(2)}.., .... fn$
-    
-    %parcialna, ker se ne ustavi, ali pri tem ne vrne bloka ničel
-    %lahko je tudi totalna
-    %
-}
-\end{primeri}    
-\subsection{Parcialna rekurzivna funkcija}
-Parcialna rekurzivna funkcija je vsaka funkcija, ki jo računa nek TS (v opisanem smislu)
-\Def{$f^k:\mathbb{N} \rightarrow \mathbb{N}$ je prf, če obstaja Turingov stroj, ki računa to $f$ kot smo opisali.
-    Če je $f^k$ definirana za vse $k$-terice je totalna rf, oz. samo rf.
- }
-%to je uvod v church-turinga... pač turing je trdil da gre to za vse
+	Izvajanje stroja s trenutnimi opisi:
+	\begin{displaymath}
+	q_0 0011 \vdash X q_1 011 \vdash X 0 q_1 11 \vdash X q_2 0 Y 1 \vdash \dots
+	\end{displaymath}
+\end{primeri}
+%?zapiski 2007 imajo tu še nekaj o turingovih jezikih
+\subsection{Turingov stroj kot računalnik funkcij}
+Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo pozitivna naravna števila, ločena z enicami:
+\begin{displaymath}
+0^{i_1}\ 1\ 0^{i_2}\ 1 \ \dots\ 1 0^{i_k}
+%?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)  
+\end{displaymath}
+Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ničel $0^m$, na levi in desni strani skupine pa same $B$-je. S tem je stroj lahko izračunal neko funkcijo
+\begin{displaymath}
+f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}_+ \mbox{\ \ oz. \ \ } f(i_1, i_2, \dots, i_k) = m
+\end{displaymath}
+Funkcija $f$ ni nujno definirana za vsako $k$-terico iz $\mathbb{N}_+^k$, torej je parcialna funkcija, kadar pa je definirana povsod, pravimo da je totalna. Stroj se pri nedefiniranih $k$-tericah pač na neki točki ustavi in pri tem na traku ne pusti le ene skupine ničel.
+Isti turingov stroj hkrati računa več funkcij: $f^{(1)}, f^{(2)}, \dots f^{(k)}$.%?računa ali "lahko računa".. ne štekam ubistvu čist
 
-Trditev: Vse običajne aritmetične funkcije (na $\mathbb{N}^k$) so prf ali celo rf
-Primer: $+, *, n!, 2^n, |^- log n, m^n, \dots$
-%so najdl primer, ki ne spada z diagonalizaijo
+\subsubsection{Parcialna rekurzivna funkcija}
+\Def{Vsaka funkcija $f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}$, ki jo lahko izračuna nek Turingov stroj, je parcialna rekurzivna funkcija. Če je $f^{(k)}$ definirana za vse $k$-terice, jo imenujemo totalna rekurzivna funkcija (včasih samo rekurzivna funkcija)}
+Vse običajne aritmetične funkcije (na $\mathbb{N}^k$) so parcialne ali celo totalne rekurzivne funkcije. V nadaljevanju si bomo pogledali nekaj primerov, tu jih le nekaj naštejmo: $+, *, n!, 2^n, \lceil \log(n) \rceil, m^n, \dots$.
+%so najdl primer, ki ne spada sem z diagonalizaijo
 %na začetku so gledali totalne... pa so vidl da morajo parcialne
 \begin{primeri}
 \item
-    Ali je $f(m,n)=m+n$ rekurzivna?
-    Skica stroja, ki računa m+n
+    Ali je $f(m,n)=m+n$ rekurzivna?\\
+    Skica stroja, ki računa $m+n$:
     \begin{items}
-    \item vhodna beseda je $0^m 1 0^m$
-    \item izbrišemo prvo ničlo
-    \item se premakne do 1 in zamenja z 0
-    \end{items}%?naredi cel stroj
+    \item $0^m 1 0^m$ - vhodna beseda
+    \item $B0^{m-1} 1 0^m$ - izbriši prvo ničlo
+    \item $B0^{m+n}$ - premakni se do 1 in jo zamenjaj z 0
+    \end{items}%?DN naredi cel stroj
 \item
-    Ali je $f(m,n)=m*n$ parcialno rekurzivna?
-    Skica stroja, ki računa m*n
+    Ali je $f(m,n)=m*n$ parcialno rekurzivna?\\
+    Skica stroja, ki računa $m*n$:
     \begin{items}
-    \item vhodna beseda je $0^m 1 0^n$
-    \item na konec zapišemo 1 ... $0^m 1 0^n 1$
-    \item premakni se na začetek in izbriši eno 0 ... $B 0^{m-1} 1 0^n 1$
-    \item prekopiraj $n$ ničel na konec ... $B 0^{m-1} 1 0^m 1 0^n$
-    \item ponavljaj, dokler ni več ničel pred prvo 1 ... $B^{m} 1 0^m 1 0^{m*n}$
-    \item izbriši del, ki ne spada v rezultat $0^{m*n}$
+    \item $0^m 1 0^n$ - vhodna beseda
+    \item $0^m 1 0^n 1$ - premakni se na konec in zapiši 1 (ločnica za rezultat)
+    \item $B 0^{m-1} 1 0^n 1$ - premakni se na začetek in izbriši 0
+    \item $B 0^{m-1} 1 0^m 1 0^n$ - prekopiraj $n$ ničel za ločnico (in ničle)
+    \item $B^{m} 1 0^m 1 0^{m*n}$ - ponavljaj tadva koraka, dokler ni več ničel pred prvo 1
+    \item $B^{m+n+2}0^{m*n}$ - izbriši del, ki ne spada v rezultat 
     \end{items}%?naredi cel stroj
-}
 \end{primeri}
-%ali se da to lažje/hitreje počet?
-\subsection{Konstrukcija TS}
-Obstaja nekaj tehnik, ki poenostavijo in pohitrijo sestavljanje (funkcije delta), Turnigovih strojev
-\begin{items}
-\item Uporaba nadzorne enote za pomnilnik
-\item Uporaba večsmernega traku
-\item Prestavljanje večjega dela traku
-\item Podprogrami
-\ens{items}
+
+\subsection{Lažja konstrukcija Turingovih strojev}
+Obstaja nekaj tehnik, ki poenostavijo in pohitrijo sestavljanje Turingovih strojev.%tu itak mislimo funkcije delta
 \subsubsection{Nadzorna enota kot pomnilnik}
+%?v stanje nadzorne enote shranimo nekaj začasnih vrednosti
+\subsubsection{Večsledni trak}%?pravi naslov?
+%?pač imamo več sledi.. če rabimo eno pač \times^k \Gamma stanja damo vse v \Gamma
+\subsubsection{Prestavljanje vsebine traku}
+%?lol, "guba"
+\subsubsection{Podprogrami}
+Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
+
+%?tu je razlagal tisto neizračunljivo funkcijo. @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
+
 \end{document}
