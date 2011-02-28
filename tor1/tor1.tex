@@ -56,16 +56,16 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 	\node at (4.6cm,4.6cm) {\huge $\Sigma^*$};
 
 	\draw (0cm,0cm) circle (5cm);
-	\node at (0,3.9cm) {\large Turingovi jeziki};%{\nameref{chap:Turingovi jeziki}};
+	\node at (0,4cm) {\large Turingovi jeziki};%{\nameref{chap:Turingovi jeziki}};
 
 	\draw (0cm,-0.8cm) circle (4cm);
-	\node at (0,1.9cm) {\large Kontekstno-odvisni jeziki};%{\nameref{chap:Kontekstno
+	\node at (0,2cm) {\large Kontekstno-odvisni jeziki};%{\nameref{chap:Kontekstno
 
 	\draw (0cm,-1.6cm) circle (3cm);
-	\node at (0,-0.1cm) {\large \nameref{chap:Kontekstno-neodvisni jeziki}};
+	\node at (0,0cm) {\large \nameref{chap:Kontekstno-neodvisni jeziki}};
 
 	\draw (0cm,-2.4cm) circle (2cm);
-	\node at (0,-2.1cm) {\large \nameref{chap:Regularni jeziki}};
+	\node at (0,-2cm) {\large \nameref{chap:Regularni jeziki}};
 \end{tikzpicture}
 \end{center}
 
@@ -86,9 +86,9 @@ Dokaz obstoja nekega matematičnega objekta je to, da nam objekt uspe skonstruir
 	\end{displaymath}
 	\item Definiramo preslikavo:
 	\begin{displaymath}
-		\mathbb{R}\rightarrow [0,1): r\rightarrow 0.s\bar{d_{1}}d_{n}\bar{d_{2}}d_{n-1}...\bar{d_{n}}d_{1}\bar{d_{n+1}}0\bar{d_{n+2}}0...
+		\mathbb{R}\rightarrow [0,1): r \rightarrow 0.s\overline{d_1} d_{n} \overline{d_2} d_{n-1} \dots \overline{d_{n-1}} d_2 \overline{d_n} d_1 \overline{d_{n+1}} 0\overline{d_{n+2}} 0 \dots
 	\end{displaymath}
-	kjer z $s$ določimo predznak ($s=0$, če $r \ge 0$ in $s=1$, sicer).
+	kjer $s$ določa predznak ($s=0$, če $r \ge 0$ in $s=1$, sicer).
 	\item Vidimo:
 		\begin{items}
 		\item $|\mathbb{R}|\le |[0,1)|$, %?(ker se $0.2$ ne da preslikati v $\mathbb{R}$)??

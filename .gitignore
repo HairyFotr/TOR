@@ -18,6 +18,7 @@
 *.fdb_latexmk
 *.pdfsync
 *.synctex.gz
+*.synctex.gz(busy)
 *.nav
 *.snm
 *.vrb
