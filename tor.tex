@@ -195,6 +195,7 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
     \end{items}
 
     Tabela prehajanja stanj:\\
+	\begin{center}
     \begin{tabular}{ c | c c c c c}
 	& 0 & 1 & B & X & Y\\ \hline
 	$x_0$& $\langle q_1,X,D\rangle$ & -- & -- & $\langle q_3,Y,D\rangle$ & --\\
@@ -203,6 +204,7 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 	$x_3$& -- & -- & -- & $\langle q_3,Y,D\rangle$ & $\langle q_4,B,D\rangle$\\
 	$x_4$& -- & -- & -- & -- & --\\
 	\end{tabular}
+	\end{center}
 	\br
 	Izvajanje stroja s trenutnimi opisi:
 	\begin{displaymath}
@@ -213,7 +215,7 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 \subsection{Turingov stroj kot računalnik funkcij}
 Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo pozitivna naravna števila, ločena z enicami:
 \begin{displaymath}
-0^{i_1}\ 1\ 0^{i_2}\ 1 \ \dots\ 1 0^{i_k}
+0^{i_1} 1 0^{i_2} 1  \dots 1 0^{i_k}
 %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)  
 \end{displaymath}
 Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ničel $0^m$, na levi in desni strani skupine pa same $B$-je. S tem je stroj lahko izračunal neko funkcijo
@@ -259,7 +261,7 @@ Obstaja nekaj tehnik, ki poenostavijo in pohitrijo sestavljanje Turingovih stroj
 \subsubsection{Prestavljanje vsebine traku}
 %?lol, "guba"
 \subsubsection{Podprogrami}
-Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
+%?Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
 
 %?tu je razlagal tisto neizračunljivo funkcijo. @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
 
