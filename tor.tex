@@ -211,7 +211,7 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
     
     %?also, to je trak stroja
     $00\dots0100\dots01\dots1000\dots$
-    %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila
+    %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)
     
     Lahko, da se stroj M ustavi ter, da ima na traku tedaj m ničel (in B na levi in desni od te grupe)
     
@@ -237,6 +237,37 @@ Parcialna rekurzivna funkcija je vsaka funkcija, ki jo računa nek TS (v opisane
 Trditev: Vse običajne aritmetične funkcije (na $\mathbb{N}^k$) so prf ali celo rf
 Primer: $+, *, n!, 2^n, |^- log n, m^n, \dots$
 %so najdl primer, ki ne spada z diagonalizaijo
-%na začetku so gledali totalne...
-
+%na začetku so gledali totalne... pa so vidl da morajo parcialne
+\begin{primeri}
+\item
+    Ali je $f(m,n)=m+n$ rekurzivna?
+    Skica stroja, ki računa m+n
+    \begin{items}
+    \item vhodna beseda je $0^m 1 0^m$
+    \item izbrišemo prvo ničlo
+    \item se premakne do 1 in zamenja z 0
+    \end{items}%?naredi cel stroj
+\item
+    Ali je $f(m,n)=m*n$ parcialno rekurzivna?
+    Skica stroja, ki računa m*n
+    \begin{items}
+    \item vhodna beseda je $0^m 1 0^n$
+    \item na konec zapišemo 1 ... $0^m 1 0^n 1$
+    \item premakni se na začetek in izbriši eno 0 ... $B 0^{m-1} 1 0^n 1$
+    \item prekopiraj $n$ ničel na konec ... $B 0^{m-1} 1 0^m 1 0^n$
+    \item ponavljaj, dokler ni več ničel pred prvo 1 ... $B^{m} 1 0^m 1 0^{m*n}$
+    \item izbriši del, ki ne spada v rezultat $0^{m*n}$
+    \end{items}%?naredi cel stroj
+}
+\end{primeri}
+%ali se da to lažje/hitreje počet?
+\subsection{Konstrukcija TS}
+Obstaja nekaj tehnik, ki poenostavijo in pohitrijo sestavljanje (funkcije delta), Turnigovih strojev
+\begin{items}
+\item Uporaba nadzorne enote za pomnilnik
+\item Uporaba večsmernega traku
+\item Prestavljanje večjega dela traku
+\item Podprogrami
+\ens{items}
+\subsubsection{Nadzorna enota kot pomnilnik}
 \end{document}
