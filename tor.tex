@@ -106,13 +106,13 @@ V postopku formalizacije, pa je zaradi večje preprostosti, zahteval še, da je 
 Stroj deluje tako, da v vsakem koraku opravi naslednje:
 \begin{items}
 	\item preide v neko stanje
-	\item zapiše nov simbov v celico, ki je pod oknom
+	\item zapiše nov simbol v celico, ki je pod oknom
 	\item okno premakne eno celico levo ali desno
 \end{items}
 
 \subsection{Trenutni opis}
 \Def{$TO = \Gamma^* \times Q \times \Gamma^*$ je množica vseh trenutnih opisov.\\
-Nek trenutni opis $(\alpha_1, q, \alpha_2 )$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
+Nek trenutni opis $\langle \alpha_1, q, \alpha_2 \rangle$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
 %?slika TS z označenim \alpha_1, \alpha_2
 \br
 Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
@@ -126,9 +126,9 @@ Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
 \br
 Naj bo $x_1 \dots x_{i-1}\ q\ x_i \dots x_n$ trenutni opis:
 \begin{items}
-\item če je $\delta(q,x_i) = (p,Y,D)$:\\
+\item če je $\delta(q,x_i) = \langle p,Y,D \rangle$:\\
 $x_1 \dots x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots x_{i-1}\ Y\ p\ x_{i+1} \dots x_n$
-\item če je $\delta(q,x_i) = (p,Y,L)$: 
+\item če je $\delta(q,x_i) = \langle p,Y,L \rangle$: 
 	\begin{items}
 	\item če je okno na robu ($i=1$), se Turingov stroj ustavi, ker je trak na levi omejen.
 	\item če okno ni na robu ($i>1$), potem: $x_1 \dots x_{i-2} x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots\ x_{i-2} p\ x_{i-1}\ Y\ x_{i+1} \dots x_n$
@@ -222,7 +222,7 @@ Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ni�
 \begin{displaymath}
 f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}_+ \mbox{\ \ oz. \ \ } f(i_1, i_2, \dots, i_k) = m
 \end{displaymath}
-Funkcija $f$ ni nujno definirana za vsako $k$-terico iz $\mathbb{N}_+^k$, torej je parcialna funkcija, kadar pa je definirana povsod, pravimo da je totalna. Stroj se pri nedefiniranih $k$-tericah pač na neki točki ustavi in pri tem na traku ne pusti le ene skupine ničel.
+Funkcija $f$ ni nujno definirana za vsako $k$-terico iz $\mathbb{N}_+^k$, torej je parcialna funkcija, kadar pa je definirana povsod, pravimo da je totalna. Stroj se pri nedefiniranih $k$-tericah pač na neki točki ustavi in pri tem na traku ne pusti le ene skupine ničel, ali pa se sploh ne ustavi.
 Isti turingov stroj hkrati računa več funkcij: $f^{(1)}, f^{(2)}, \dots f^{(k)}$.%?računa ali "lahko računa".. ne štekam ubistvu čist
 
 \subsubsection{Parcialna rekurzivna funkcija}
