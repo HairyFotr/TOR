@@ -5,6 +5,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \usepackage[margin=1in]{geometry}
 \usepackage{enumerate}
+\usepackage{verbatim}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -26,31 +27,34 @@
 	\setlength{\parsep}{0pt}
 	\setlength{\topsep}{0pt}
 }{\end{itemize}}
-\newcommand\Dokaz[1]{%
-\begin{items}%
-	\setlength{\leftskip}{0.5cm}
-	\item[\textbf{Dokaz:}]{#1}%
-\end{items}%
-}
-\newcommand\Def[1]{%
-\begin{items}%
-	\setlength{\leftskip}{0.15cm}
-	\item[\textbf{Def.:}]{#1}%
-\end{items}%
-}
-\newcommand\Prim[1]{%
-\begin{items}%
-	\setlength{\leftskip}{0.65cm}
-	\item[\textbf{Primer:}]{#1}%
-\end{items}%
-}
-\newenvironment{primeri}{%
-{\subsection*{Primeri:}}
-\begin{enumerate}[\bf Pr{i}mer 1:]%
+\newenvironment{enum}[1]{
+\begin{enumerate}[#1]
 	\setlength{\itemsep}{2pt}
 	\setlength{\parskip}{0pt}
 	\setlength{\parsep}{0pt}
 	\setlength{\topsep}{0pt}
-	\setlength{\leftskip}{0cm}
 }{\end{enumerate}}
+
+%stari način:
+%\newcommand\Def[1]{%
+%\begin{items}%
+%	\setlength{\leftskip}{0.15cm}
+%	\item[\textbf{Def.:}]{#1}%
+%\end{items}%
+%}
+\newcommand\Def[1]{
+\begin{enum}{\bf Def.:}
+	\item #1
+\end{enum}}
+
+\newcommand\Primer[1]{
+\begin{enum}{\bf Pr{i}mer:}
+	\item #1
+\end{enum}}
+
+
+\newenvironment{primeri}{
+{\subsection*{Primeri:}}
+\begin{enum}{\bf Pr{i}mer 1:}}
+{\end{enum}}
 

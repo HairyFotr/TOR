@@ -19,7 +19,7 @@
 %?this feels too much like CSS hacks :(
 %torstlye predloge:
 %Definicija \Def{}
-%Primer \Prim{}
+%Primer \Primer{}
 %Prirejen itemize \begin{items}
 \hypersetup{pdftitle={Teoretične osnove računalništva}}
 
@@ -50,8 +50,7 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 Leta 1900 je Nemški matematik David Hilbert objavil seznam triidvajsetih nerešenih problemov v matematiki. Eden izmed Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja postopek, po katerem ugotovimo rešljivost poljubne Diofantske enačbe -- torej, ali lahko ugotovimo, če ima polinom s celoštevilskimi koeficienti $P(x_1, x_2, \dots, x_n)=0$, celoštevilsko rešitev.
 %?non-sequitur... vsaj dokler ne bo ogromno več zgodovine tu :)
 Kljub temu, da je Emil Post že leta 1944 slutil, da je problem nerešljiv, je to dokončno dokazal rus Jurij Matijaševič šele leta 1970 v svojem doktorskem delu. Med reševanjem problema pa so se matematiki že prej začeli ukvarjati s formalizacijo pojma postopka oz. algoritma. Intuitivna definicija tega se glasi nekako tako:
-\Def{Algoritem je zaporedje ukazov,
-s katerimi se v končnem številu korakov opravi neka naloga.}
+\Def{Algoritem je zaporedje ukazov, s katerimi se v končnem številu korakov opravi neka naloga.}
 Pri tem pa ostaja še kar nekaj odprtih vprašanj, npr.:
 \begin{items}
 \item Kakšni naj bodo ukazi? 
@@ -166,13 +165,12 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 
 %? slika venn... odločljivi jeziki so znotraj Turingovih
 
-\begin{primeri}
-\item Zapiši Turingov stroj, ki sprejema jezik $L=\{0^n 1^n | n \geq 1\}$\\
-	Osnovna ideja:
+\Primer{Zapiši Turingov stroj, ki sprejema jezik $L=\{0^n 1^n | n \geq 1\}$\\
+	Skica izvajanja stroja:
 	\begin{items}
 	\item $0^{n}1^{n}$ - vhodna beseda
-	\item $X0^{n-1}1^{n}$ - zamenjamo levo $0$ z $X$
-	\item $X0^{n-1}Y1^{n-1}$ - premaknemo se desno do najbolj leve $1$ in jo zamenjamo z $Y$
+	\item $X0^{n-1}1^{n}$ - zamenjamo najbolj levo $0$ z $X$
+	\item $X0^{n-1}Y1^{n-1}$ - premaknemo okno desno do najbolj leve $1$ in jo zamenjamo z $Y$
 	\item $XX0^{n-2}Y1^{n-1}$\\ 
 		$XX0^{n-2}YY1^{n-2}$ - ponovimo in vidimo, da bomo niz sprejeli, če je prave oblike.
 	\end{items}
@@ -207,32 +205,28 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 	\end{center}
 	\br
 	Izvajanje stroja s trenutnimi opisi:
-	\begin{displaymath}
-	q_0 0011 \vdash X q_1 011 \vdash X 0 q_1 11 \vdash X q_2 0 Y 1 \vdash \dots
-	\end{displaymath}
-\end{primeri}
+	\[ q_0 0011 \vdash X q_1 011 \vdash X 0 q_1 11 \vdash X q_2 0 Y 1 \vdash \dots \]
+}
 %?zapiski 2007 imajo tu še nekaj o turingovih jezikih
 \subsection{Turingov stroj kot računalnik funkcij}
 Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo pozitivna naravna števila, ločena z enicami:
-\begin{displaymath}
-0^{i_1} 1 0^{i_2} 1  \dots 1 0^{i_k}
+	\[ 0^{i_1} 1 0^{i_2} 1  \dots 1 0^{i_k} \]
 %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)  
-\end{displaymath}
+%?slika TS z števili i_j na traku
 Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ničel $0^m$, na levi in desni strani skupine pa same $B$-je. S tem je stroj lahko izračunal neko funkcijo
-\begin{displaymath}
-f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}_+ \mbox{\ \ oz. \ \ } f(i_1, i_2, \dots, i_k) = m
-\end{displaymath}
+	\[ f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}_+ \mbox{\ \ oz. \ \ } f(i_1, i_2, \dots, i_k) = m \]
+%?slika TS s skupino ničel na traku
 Funkcija $f$ ni nujno definirana za vsako $k$-terico iz $\mathbb{N}_+^k$, torej je parcialna funkcija, kadar pa je definirana povsod, pravimo da je totalna. Stroj se pri nedefiniranih $k$-tericah pač na neki točki ustavi in pri tem na traku ne pusti le ene skupine ničel, ali pa se sploh ne ustavi.
 Isti turingov stroj hkrati računa več funkcij: $f^{(1)}, f^{(2)}, \dots f^{(k)}$.%?računa ali "lahko računa".. ne štekam ubistvu čist
 
 \subsubsection{Parcialna rekurzivna funkcija}
 \Def{Vsaka funkcija $f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}$, ki jo lahko izračuna nek Turingov stroj, je parcialna rekurzivna funkcija. Če je $f^{(k)}$ definirana za vse $k$-terice, jo imenujemo totalna rekurzivna funkcija (včasih samo rekurzivna funkcija)}
-Vse običajne aritmetične funkcije (na $\mathbb{N}^k$) so parcialne ali celo totalne rekurzivne funkcije. V nadaljevanju si bomo pogledali nekaj primerov, tu jih le nekaj naštejmo: $+, *, n!, 2^n, \lceil \log(n) \rceil, m^n, \dots$.
-%so najdl primer, ki ne spada sem z diagonalizaijo
+Vse običajne aritmetične funkcije so parcialne ali celo totalne rekurzivne funkcije. V primerih si bomo pogledali nekaj primerov, tu pa jih nekaj naštejmo: $m+n,\ m*n,\ n!,\ 2^n,\ \lceil \log(n) \rceil,\ m^n,\ \dots$.
+%so najdl primer, ki ne spada sem z diagonalizacijo
 %na začetku so gledali totalne... pa so vidl da morajo parcialne
 \begin{primeri}
 \item
-    Ali je $f(m,n)=m+n$ rekurzivna?\\
+    Ali je $f(m,n)=m+n$ (parcialno) rekurzivna?\\
     Skica stroja, ki računa $m+n$:
     \begin{items}
     \item $0^m 1 0^m$ - vhodna beseda
@@ -240,7 +234,7 @@ Vse običajne aritmetične funkcije (na $\mathbb{N}^k$) so parcialne ali celo to
     \item $B0^{m+n}$ - premakni se do 1 in jo zamenjaj z 0
     \end{items}%?DN naredi cel stroj
 \item
-    Ali je $f(m,n)=m*n$ parcialno rekurzivna?\\
+    Ali je $f(m,n)=m*n$ (parcialno) rekurzivna?\\
     Skica stroja, ki računa $m*n$:
     \begin{items}
     \item $0^m 1 0^n$ - vhodna beseda
@@ -255,14 +249,78 @@ Vse običajne aritmetične funkcije (na $\mathbb{N}^k$) so parcialne ali celo to
 \subsection{Lažja konstrukcija Turingovih strojev}
 Obstaja nekaj tehnik, ki poenostavijo in pohitrijo sestavljanje Turingovih strojev.%tu itak mislimo funkcije delta
 \subsubsection{Nadzorna enota kot pomnilnik}
-%?v stanje nadzorne enote shranimo nekaj začasnih vrednosti
-\subsubsection{Večsledni trak}%?pravi naslov?
-%?pač imamo več sledi.. če rabimo eno pač \times^k \Gamma stanja damo vse v \Gamma
+Vsako stanje stroja, je sestavljeno iz dveh delov -- stanja avtomata, ter shrambe za tračne znake. Novo množico stanj zapišemo kot $Q=K\times\Gamma$, kjer je $K$ stara množica stanj in $\Gamma$ tračna abeceda.
+\Primer{Sestavi Turingov stroj za razpoznavanje besed, pri katerih se prvi znak ne ponovi:\\
+	Stroj $M=\langle Q,\Sigma,\Gamma,\delta,q_0,B,F \rangle$ zapišemo kot:
+	\begin{items}
+	\item $M=\langle Q, \{0,1\}, \{0,1,B\}, \delta, \langle q_0, B \rangle, B, F \rangle$
+	\item $Q=\{ q_0, q_1 \} \times \{0,1,B\} = \{ \langle q_0, 0\rangle , \langle q_0, 1\rangle , \langle q_0, B\rangle , \langle q_1, 0\rangle , \langle q_1, 1\rangle , \langle q_1, B\rangle\} $
+	\item $F=\{ \langle q_1, B \rangle \}$
+	\item $\delta$ zapišemo kot:
+		\begin{items}
+		\item Shrani prvi znak besede v stanje stroja:\\
+			$\delta(\langle q_0, B\rangle, 0) = \langle\langle q_1, 0 \rangle, 0, D\rangle$\\
+			$\delta(\langle q_0, B\rangle, 1) = \langle\langle q_1, 1 \rangle, 1, D\rangle$
+		\item Premakni okno v desno do prvega znaka, enakega shranjenemu:\\
+			$\delta(\langle q_1, 0\rangle, 1) = \langle\langle q_1, 0 \rangle, 1, D\rangle$\\
+			$\delta(\langle q_1, 1\rangle, 0) = \langle\langle q_1, 1 \rangle, 0, D\rangle$
+		\item Če prebereš $B$, pojdi v končno stanje:\\
+			$\delta(\langle q_1, 0\rangle, B) = \langle\langle q_1, B \rangle, karkoli \rangle$\\
+			$\delta(\langle q_1, 1\rangle, B) = \langle\langle q_1, B \rangle, karkoli \rangle$
+		\item Sicer se ustavi. To dosežemo tako, da ne definiramo prehodov:\\
+			$\delta(\langle q_1, 0\rangle, 0)$ in $\delta(\langle q_1, 1\rangle, 1)$
+		\end{items}
+	\end{items}
+}
+\subsubsection{Večsledni trak}
+Na traku imamo več kot eno sled, kar pomeni, da s traku beremo $k$-terice tračnih znakov, kar formalno zapišemo kot: $\Gamma=\Gamma_1\times\Gamma_2\times\dots\times\Gamma_k$.
+\Primer{Sestavi Turingov stroj, ki preveri, ali je vhodno število praštevilo.\\
+	Skica stroja:
+	\begin{items}
+	\item Trak ima tri sledi:
+		\begin{items}
+		\item na prvi sledi je vhodno število
+		\item na drugi sledi je števec, ki na začetku hrani število 2
+		\item tretjo sled uporabimo za delovno sled, na začetku je lahko prazna.
+		\end{items}
+	\item Stroj deluje tako:
+		\begin{items}
+		\item prepiši število s prve sledi na tretjo sled
+		\item odštevaj število iz druge sledi od števila na tretji sledi
+		\item če se odštevanje konča z 0, se ustavi (ni praštevilo)
+		\item sicer število na drugi sledi povečaj za 1
+		\item če je število na drugi sledi enako tistemu na prvi, sprejmemo (je praštevilo)
+		\item sicer, ponovimo postopek
+		\end{items}
+	\end{items}
+}
 \subsubsection{Prestavljanje vsebine traku}
-%?lol, "guba"
+Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izrezali iz traku in nato trak zlepili nazaj skupaj, izrezane simbole pa bi si pri tem seveda radi nekako zapomnili. Tudi to metodo realiziramo s pomočjo shrambe za tračne simbole v nadzorni enoti, a moramo pri tem paziti, da je funkcija prehodov pravilno napisana.
+%?slika "guba"
+%?slika nadzorna enota
+\Primer{Sestavi Turingov stroj, ki premakne vsebino traku za 2 celici v desno.\\
+	Skica stroja:
+	\begin{items}
+    \item $Q$ vsebuje stanja oblike: $\langle q, A_1, A_2 \rangle;\ q \in \{ q_1, q_2 \},\ A_1, A_2 \in \Gamma$
+    \item $\Gamma$ poleg ostalih znakov, vsebuje še poseben znak $X$, ki označuje izpraznjeno celico na traku
+	\item $F=\{ q_2 \}$
+	\item $\delta$ zapišemo kot:
+		\begin{items}
+		\item Prva koraka -- zapomni si in izprazni prvi in drugi znak:\\
+			$\delta(\langle q_1, B, B\rangle, A_1) = \langle\langle q_1, B, A_1 \rangle, X, D \rangle $\\
+			$\delta(\langle q_1, B, A_1\rangle, A_2) = \langle\langle q_1, A_1, A_2 \rangle, X, D \rangle $
+		\item Zapomni si nov znak in prvega iz shrambe zapiši na trak:\\
+			$\delta(\langle q_1, A_i, A_{i+1}\rangle, A_{i+2}) = \langle\langle q_1, A_{i+1}, A_{i+2} \rangle, A_i, D \rangle $
+		\item Zadnja koraka -- zapiši vsebino shrambe na trak:\\
+			$\delta(\langle q_1, A_{n-1}, A_{n}\rangle, B) = \langle\langle q_1, A_{n}, B \rangle, A_{n-1}, D \rangle $\\
+			$\delta(\langle q_1, A_{n}, B\rangle, B) = \langle\langle q_2, B, B \rangle, A_{n}, L \rangle $
+		\end{items}
+	\end{items}
+}
+
 \subsubsection{Podprogrami}
 %?Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
 
-%?tu je razlagal tisto neizračunljivo funkcijo. @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
+%?tu je razlagal tisto neizračunljivo funkcijo nad matrikami. @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
 
 \end{document}
