@@ -53,7 +53,7 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 \begin{center}%?is it too big? :P
 \begin{tikzpicture}[scale=1.2]
 	\draw (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
-	\node at (4.6cm,4.6cm) {\huge $\Sigma^*$};
+	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat slivnika... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
 
 	\draw (0cm,0cm) circle (5cm);
 	\node at (0,4cm) {\large Turingovi jeziki};%{\nameref{chap:Turingovi jeziki}};
@@ -281,6 +281,13 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	\item $ F $ - množica končnih stanj
 	\end{items}		
 }
+Funkcija $\varepsilon$-closure($q$) nam pove, do katerih stanj lahko pridemo iz stanja $q$ po $\varepsilon$ prehodih.
+\Def{$\varepsilon$-closure($q$)$ = \{ q_k\ |\ \exists q_1, q_2, \dots q_n \in Q,\ q=q_1 \wedge q_i \in \delta(q_{i-1}, \varepsilon) \}$}
+Definirajmo še posplošeno funkcijo prehodov $\hat\delta$, ki nam pove, do katerega stanja pridemo po nekem nizu.
+\Def{$\hat\delta(q, \varepsilon) = \varepsilon$-closure($q$)\\
+	$\hat\delta(q, a) = \delta(q, a)$\\
+	$\hat\delta(q, wa) = \varepsilon$-closure($\{ q''\ |\ q' \in \hat\delta(q, w) \wedge q'' \in \delta(q', a) \})$}
+
 \subsection{Deterministični končni avtomat}
 \Def{DKA je definiran kot petorka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
 	\begin{items}
@@ -300,7 +307,7 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	kjer je $\hat\delta(q,w)$ posplošena funkcija prehodov v večih korakih.}%?Y you no define \varepsilon closure?
 \Def{Jezik DKA je definiran kot:
 	\begin{equation*}
-	L=\{ w\ |\ \delta(q_0, w) \in F \}
+	L=\{ w\ |\ \hat\delta(q_0, w) \in F \}
 	\end{equation*}
 }
 Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
