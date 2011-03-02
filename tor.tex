@@ -283,7 +283,7 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
 
 \section{Levo in desno-regularne gramatike}\label{sec:LG}
-\Def{Regularna gramatika je definirana kot četvorček $G=\langle V,T,P,S \rangle$, kjer je:%?or is it NTPS?
+\Def{Regularna gramatika je definirana kot četvorček $G=\langle V,T,P,S \rangle$, kjer je:
 \begin{items}
 \item V - množica spremenljivk oz. vmesnih simbolov, $V \subseteq \Sigma$
 \item T - množica znakov oz. končnih simbolov, $T \subset \Sigma$
@@ -301,13 +301,13 @@ To pomeni, da imamo pri levo-regularnih gramatikah vmesne simbole lahko le na sk
 \section{Jezik regularnih jezikov}
 %?tu bi pasal dokazi :)
 \Def{Jezik ki ga opisuje poljubni regularni izraz, končni avtomat, levo ali desno-linearna gramatika, je regularni jezik.}
-Regularni jeziki ne vsebujejo informacije o prejšnjih znakih vhodnega niza in se z njimi ne da opisati poljubnega jezika. (za postopke dokazovanja regularnosti glej \ref{sec:Dokazovanje za RJ}).
+Regularni jeziki ne vsebujejo informacije o prejšnjih znakih vhodnega niza in se z njimi ne da opisati poljubnega jezika. (za postopke dokazovanja regularnosti glej \ref{sec:Dokazovanje RJ}).
 \begin{primeri}
 	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
 	\item $L =\{ \}$ - prazen jezik
 	\item $L = \{ \varepsilon \}$ - jezik, ki vsebuje $\varepsilon$ (ni prazen)
 	\item $L = \{ a, aa, ab \}$ - jezik, ki vsebuje nize "a, aa, ab"
-	\item $L = \{ 0^n 1^n \ | \ n \geqslant 0 \} $ - \underline{ni} regularni jezik, saj si poljubnega števila $n$ ne moremo zapomniti.
+	\item $L = \{ 0^n 1^n \ | \ n > 0 \} $ - jezik, ki \underline{ni} regularen (ne moremo si zapomniti poljubnega števila $n$)
 \end{primeri}
 
 \section{Ohranjanje regularnosti jezikov}
@@ -420,7 +420,8 @@ Kadar ugotavljamo, ali je nek jezik regularen, to lahko naredimo na več načino
 		\end{items}
 	\end{items}
 \end{items}
-%?what is this, I don't even :D
+
+%?mislim, da je to pokrito tuki pri lemi...
 %Opozorilo: Če zapišemo regularni izraz za jezik, ali naredimo končni avtomat, moramo dobro preveriti da ne obstaja kakšen protiprimer. Torej beseda ki je v jeziku in jo končni avtomat ali regularni izraz ne sprejme, ali obratno.\\
 %Če nam ne uspe dokaza (da je ali da ni regularni jezik) do konca speljati, to ne moremo vzeti kot dokaz da ravno nasprotno drži. Velja da v takem primeru še nič ne vemo o regularnosti jezika.
 
@@ -451,6 +452,15 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 
 \chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
 \section{Kontekstno-neodvisne gramatike}
+%?oznake, izpeljave, ...
+\Def{Kontekstno-neodvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
+\begin{items}
+\item N - množica spremenljivk oz. vmesnih simbolov
+\item T - množica znakov oz. končnih simbolov
+\item P - množica produkcij
+\item S - začetni simbol
+\end{items}
+}
 
 \subsection{Chomskyeva normalna oblika}
 \Def{Kontekstno-neodvisna gramatika je v Chomskyevi normalni obliki, kadar nima nekoristnih simbolov, ter so vse produkcije naslednjih dveh oblik:\\
@@ -497,9 +507,40 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 %\item Razred - razred je množica elementov, ki ga lahko podamo z naštevanjem elementov ali z opisom lastnosti (opisni ali konceptualni razredi)
 %\end{items}
 
-%----------------------------------------------------------------------
+%--------------------------------TOR1 line--------------------------------------
+
 \chapter{Kontekstno-odvisni jeziki}\label{chap:Kontekstno-odvisni jeziki}
-Prepoznajo jezik $L=\{ a^n b^n c^n | n>0 \}$, imajo gramatike s produkcijami oblike $AaB \rightarrow \alpha_1 a \beta_2$.
+\section{Kontekstno-odvisne gramatike}
+\Def{Kontekstno-odvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer so:
+	\begin{items}
+	\item N - množica spremenljivk oz. vmesnih simbolov
+	\item T - množica znakov oz. končnih simbolov
+	\item P - množica produkcij
+	\item S - začetni simbol
+	\end{items}
+	Pri tem je:
+	\[ P \subset \left[\alpha_1 A \alpha_2 \rightarrow \alpha_1 \gamma \alpha_2 \right] \]
+	\[ \alpha_1,\alpha_2,\gamma \in (N \cup T)^*,\ \ \gamma \ne \emptyset \]
+}
+
+
+\Primer{Sestavi kontekstno-odvisno gramatiko, ki sprejme jezik $L=\{ a^n b^n c^n\ |\ n>0 \}$.
+	\begin{align*}
+	S &\rightarrow aSBC\\
+	S &\rightarrow aBC \\
+	CB &\rightarrow HB \\
+	HB &\rightarrow HC \\
+	HC &\rightarrow BC \\
+	aB &\rightarrow ab \\
+	bB &\rightarrow bb \\
+	bC &\rightarrow bc \\
+	cC &\rightarrow cc \\
+	\end{align*}
+	S kompleksnejšo kontekstno-odvisno gramatiko lahko sprejmemo tudi jezik $\{ a^n b^n c^n d^n\ |\ n>0 \}$
+}
+
+\
+%--------------------------------TOR2 line--------------------------------------
 
 \chapter{Turingovi jeziki}\label{chap:Turingovi jeziki}
 \section{Zgodovina}
