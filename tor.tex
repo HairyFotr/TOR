@@ -32,28 +32,29 @@
 \begin{document}
 \begin{titlepage}
 \begin{center}
+%looks useful
+%{\resizebox{15cm}{!}{Teoretične osnove računalništva}}\\[5pt]
 \ \\[1cm]
-{\Huge Teoretične osnove računalništva}\\[5pt]
-{\LARGE Zapiski predavanj 2010/2011}\\[15pt]
-{\large \today}\\[2.5cm]
-\begin{center}%?is it too big? :P
-\begin{tikzpicture}[scale=1.2]
+{\Huge\bf Teoretične osnove računalništva}\\[1cm]
+{\huge \today}\ \\[1.5cm]
+%Odkar sem dodal kontekstno-odvisne in linearne, to ni več to :P
+%{\LARGE Zapiski predavanj 2010/2011}\\[15pt]
+\begin{tikzpicture}[scale=1.35]
 	\draw (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
 	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat slivnika... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
 
 	\draw (0cm,0cm) circle (5cm);
-	\node at (0,4cm) {\large \nameref{chap:Turingovi jeziki}};
+	\node at (0,4cm) {\large\bf \nameref{chap:Turingovi jeziki}};
 
 	\draw (0cm,-0.8cm) circle (4cm);
-	\node at (0,2cm) {\large \nameref{chap:Kontekstno-odvisni jeziki}};
+	\node at (0,2cm) {\large\bf \nameref{chap:Kontekstno-odvisni jeziki}};
 
 	\draw (0cm,-1.6cm) circle (3cm);
-	\node at (0,0cm) {\large \nameref{chap:Kontekstno-neodvisni jeziki}};
+	\node at (0,0cm) {\large\bf \nameref{chap:Kontekstno-neodvisni jeziki}};
 
 	\draw (0cm,-2.4cm) circle (2cm);
-	\node at (0,-2cm) {\large \nameref{chap:Regularni jeziki}};
+	\node at (0,-2cm) {\large\bf \nameref{chap:Regularni jeziki}};
 \end{tikzpicture}
-\end{center}
 
 \vfill
 \parbox{7.5cm}{
@@ -165,7 +166,6 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \item $\varepsilon$ - prazen niz, $|w|=0$
 \item $\Sigma^*$ - vsi možni nizi abecede
 \end{items}
-
 
 \subsection{Operacije nad regularnimi jeziki}
 \begin{items}
@@ -284,33 +284,43 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	\end{equation*}
 }
 Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
-
-\section{Levo in desno-regularne gramatike}\label{sec:LG}
-\Def{Regularna gramatika je definirana kot četvorček $G=\langle V,T,P,S \rangle$, kjer je:
+\pagebreak
+\section{Levo in desno-linearne gramatike}\label{sec:LLGDLG}
+Posebnost linearnih gramatik je v tem, da imajo na desni strani produkcij največ en vmesni simbol, ampak ta model je že močnejši od regularnih jezikov (glej \ref{sec:LG}), če pa se omejimo le na tiste produkcije, ki imajo ta edini vmesni simbol vedno na skrajno levi strani, ali pa vedno na skrajni desni strani niza, dobimo model, ki opisuje regularne jezike.
+%
+\Def{Regularna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
 \begin{items}
-\item V - množica spremenljivk oz. vmesnih simbolov, $V \subseteq \Sigma$
-\item T - množica znakov oz. končnih simbolov, $T \subset \Sigma$
-\item P - množica produkcij, $\left[\alpha_1 \rightarrow \alpha_2 \right]$%? se da vse definirat tuki?
-\item S - začetni simbol, $S \in V$
+\item N - množica spremenljivk oz. vmesnih simbolov, $N \subseteq \Sigma$
+\item T - množica znakov oz. končnih simbolov, $T \subset \Sigma,\ N\cap T = \emptyset$
+\item P - množica produkcij
+\item S - začetni simbol, $S \in N$
 \end{items}
-Pri tem pa regularne gramatike ločimo na levo in desno-regularne.
-\begin{items}
-\item Pri levih so produkcije $P \subset V \times ((V \cup \{\varepsilon\})\cdot T^*)$
-\item Pri desnih so produkcije $P \subset V \times (T^* \cdot (V \cup \{\varepsilon\}))$
-\end{items}
- }
-
-\subsection{Relacija izpeljave $\Rightarrow$}
-\Def{Relacija izpeljave $\Rightarrow$ po nekem vmesnem simbolu $A$, preko neke produkcije iz $P$, preslika trenutni niz gramatike v nov niz:
-	\[ \alpha_1 A \alpha_2 \Rightarrow \alpha_1 \gamma \alpha_2  \]
-Pri tem je $A$ vmesni simbol, ostali pa so v splošnem mešanica vmesnih in končnih simbolov:
-	\[ A \in V,\ \ \alpha_1,\gamma,\alpha_2 \in (V \cup T)^*,\ \ \gamma \neq \emptyset\]
-	\[ \left[\alpha_1 A \alpha_2 \rightarrow \alpha_1 \gamma \alpha_2\right] \in P \]
+Pri tem je abeceda $\Sigma = N \cup T$ in $N\cap T = \emptyset$.
 }
-Pri levo in desno-regularnih gramatikah je posebnost to, da imamo pri levo-linearnih vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na desni, torej:
-	\[ A \alpha \Rightarrow B \gamma \alpha, \mbox{ pri levih, ter}\]
-	\[ \alpha A \Rightarrow \alpha \gamma B, \mbox{ pri desnih.}\]
-	\[ A,B \in V,\ \ \alpha, \gamma \in T^*, \gamma \neq \emptyset\]
+\subsection{Produkcije}
+\Def{Pri levo in desno-linearnih gramatikah, s produkcijami slikamo nek vmesni simbol v niz, ki ima lahko vmesni simbol le na skrajno levi pri levo-linearnih, oz. le na skrajno desni pri desno-linearnih:
+	\begin{items}
+	\item $P \subset N \times ((N\cup \{\varepsilon\})T^*)$ - pri levo-linearnih gramatikah
+	\item $P \subset N \times (T^* (N\cup \{\varepsilon\}))$ - pri desno-linearnih gramatikah
+	\end{items}
+	%neko moje bluzenje... mogoče je prov.
+	%\[ \left[ A \rightarrow B \beta \right] \in P \mbox{ pri levo, ter}\]
+	%\[ \left[ A \rightarrow \beta B \right] \in P \mbox{ pri desno-linearnih gramatikah}\]
+	%\[ A \in V,\ \ B \in (V \cup \{\varepsilon\}),\ \ \beta \in T^* \]
+}
+\subsection{Relacija izpeljave $\Rightarrow$}
+\Def{Relacija izpeljave pri levo in desno-linearnih gramatikah prek neke produkcije iz $P$, slika trenutni niz v nov niz, tako, da ima novi niz vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na skrajno desni strani, torej:
+	\begin{items}
+	\item $\left[ A \rightarrow B \beta \right]$ - pri levo-linearnih gramatikah
+	\item $\left[ A \rightarrow \beta B \right]$ - pri desno-linearnih gramatikah
+	\end{items}
+	Pri tem je $A \in N,\ B \in (N \cup \{\varepsilon\}),\ \beta \in T^*$
+}
+\Def{Kadar želimo pokazati, da je mogoče z enim ali več koraki mogoče priti iz enega niza do drugega, to lahko zapišemo s posplošeno relacijo izpeljave $\Rightarrow^*$.
+	%homebrew definicija
+	\[ \alpha \Rightarrow^* \beta \mbox{\ \ \ n.t.k.\ \ \ } \alpha = \alpha_0 \Rightarrow \alpha_1 \Rightarrow \dots \Rightarrow \alpha_k = \beta;\ k>0 \]
+}
+\subsection{Jezik gramatik}
 
 \section{Jezik regularnih jezikov}
 %?tu bi pasal dokazi :)
@@ -352,7 +362,7 @@ Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
 \end{items}
 
-\section{Prevedba med modeli regularnih jezikov}%?lame naslov, fixme
+\section{Prevedbe med modeli regularnih jezikov}%?lame naslov, fixme
 Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli in je mogoče pretvarjati med njimi. V tem odseku bomo predstavili naslednje prevedbe:\\[12pt]%?ustrezno dopolni :)
 \begin{center}
 \begin{tikzpicture}[>=latex',/tikz/initial text=""]
@@ -364,6 +374,9 @@ Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli
 	\node (LLG)  at (375bp,0bp) {LLG};
 
 	\draw [bend left,->]  (DKA) to node[auto] {\ref{KA-RI}} (RI);
+	\draw [bend right,->]  (DLG) to node[auto] {\ref{DLG-eNKA}} (eNKA);
+	\draw [->]  (DKA) to node[auto] {} (NKA);
+	\draw [->]  (NKA) to node[auto] {} (eNKA);
 \end{tikzpicture}
 \end{center}
 
@@ -408,9 +421,44 @@ ki jih prepišemo v en sam regularni izraz oblike:
  	\draw [loop above,->] (q2) to node[auto] {$1$} (q2);
 \end{tikzpicture}
 \ \\
-Regularni izraz dobimo po postopku iz \ref{KA-RI}:
+Iz grafa eliminiramo eno stanje in zapišemo regularni izraz:
 \[ (0+1(01^*0)^*1)^* \]
+Možna pa je še ena rešitev, če eliminiramo drugo stanje.%napiši jo :P
 \end{primeri}
+
+\subsection{Desno-linearna gramatika $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{DLG-eNKA}
+Vhodno stanje avtomata je začetni simbol gramatike, nato pa stanja označujemo glede na končne in vmesne simbole, ki jih moramo še porabiti. Produkcije predstavljajo $\varepsilon$ prehode v avtomatu, preostali prehodi avtomata pa so črke, ki jih generiramo.
+
+\Primer{Pretvori podano desno-linearno gramatiko v nedeterministični končni avtomat z $\varepsilon$-prehodi.
+\begin{align*}
+S &\rightarrow abA\ |\ aS\\
+A &\rightarrow aa\ |\ bA\\
+\end{align*}
+\ \\[-25pt]%lol, hack
+Po zgoraj opisanem postopku dobimo:\\ \ \\
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (S)   at (0bp,0bp)     [state, initial]  {$S$};
+	\node (aS)  at (40bp,40bp)   [state]           {$aS$};
+	\node (abA) at (40bp,-40bp)  [state]           {$abA$};
+	\node (bA)  at (80bp,-40bp)  [state]           {$bA$};
+	\node (A)   at (120bp,0bp)   [state]           {$A$};
+	\node (aa)  at (160bp,0bp)   [state]           {$aa$};
+	\node (a)   at (200bp,0bp)   [state]           {$a$};
+	\node (e)   at (240bp,0bp)   [state,accepting] {$\varepsilon$};
+
+	\draw [bend left,->]  (S) to node[auto] {$\varepsilon$} (aS);
+	\draw [bend left,->]  (aS) to node[auto] {$a$} (S);
+	\draw [->]  (S) to node[auto] {$\varepsilon$} (abA);
+	\draw [->]  (abA) to node[auto] {$a$} (bA);
+	\draw [bend left,->]  (bA) to node[auto] {$b$} (A);
+	\draw [->]  (A) to node[auto] {$\varepsilon$} (aa);
+	\draw [->]  (aa) to node[auto] {$a$} (a);
+	\draw [->]  (a) to node[auto] {$a$} (e);
+	\draw [bend left,->]  (A) to node[auto] {$\varepsilon$} (bA);
+\end{tikzpicture}
+}
+
+
 
 \section{Dokazovanje regularnosti jezika}\label{sec:Dokazovanje RJ}
 %Dostikrat hočemo sestaviti regularen izraz za določen jezik in niti ne vemo ali je regularen izraz sploh regularen ali ne. Za to imamo nekaj metod za dokazovanje regularnosti jezika.%?false... ne moreš sestavit regularnega izraza, ki ni regularen :)
@@ -464,6 +512,21 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 \end{center}
 Če zgornjo definicijo pogledamo v kontekstu končnih avtomatov, vidimo, da je $n$ gotovo večji od števila stanj, saj mora za napihovanje v avtomatu obstajati nek cikel, sicer bi bi veljalo $|v|=0$.
 
+\chapter{Linearni jeziki}
+\section{Linearne gramatike}\label{sec:LG}
+\Def{Linearna gramatika je gramatika, ki ima na desni strani produkcij največ en vmesni simbol.\\
+	Definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer so:
+	\begin{items}
+	\item N - množica spremenljivk oz. vmesnih simbolov
+	\item T - množica znakov oz. končnih simbolov
+	\item P - množica produkcij
+	\item S - začetni simbol
+	\end{items}
+}
+\Primer{Sestavi linearno gramatiko, ki sprejme jezik $L=\{ a^n b^n \ |\ n>0 \}$.
+	\[ S \rightarrow aSb\ |\ \varepsilon \]
+}
+
 \chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
 \section{Kontekstno-neodvisne gramatike}
 %?oznake, izpeljave, ...
@@ -476,7 +539,7 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 \end{items}
 }
 
-%to je še treba nekam umestit kasneje
+%to je še treba nekam umestit
 \Def{Kontekstno-neodvisna gramatika je dvoumna, kadar do nekega končnega niza lahko pridemo po več različnih izpeljavah.}
 
 \Def{Kontekstno-neodvisna gramatika je deterministična, kadar za jezik, ki ga gramatika opisuje, obstaja vsaj ena gramatika, ki ni dvoumna. Ni nujno, da je taka gramatika, ki jo imamo - važno je, da taka gramatika obstaja.}
