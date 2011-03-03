@@ -6,6 +6,9 @@
 	%Search for the %? and fix/add stuff.
 	%Check zapiski 2007, your notes and your memory and fix/add stuff
 	%kul knjige imajo quote na začetku poglavij
+%
+%lol, windows newline bug poje to vrsto včasih :P
+%\documentclass[10pt,a4paper,oneside]{book}
 
 \usepackage[slovene]{babel}
 \usepackage[utf8x]{inputenc}
@@ -296,7 +299,18 @@ Pri tem pa regularne gramatike ločimo na levo in desno-regularne.
 \item Pri desnih so produkcije $P \subset V \times (T^* \cdot (V \cup \{\varepsilon\}))$
 \end{items}
  }
-To pomeni, da imamo pri levo-regularnih gramatikah vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na desni.
+
+\subsection{Relacija izpeljave $\Rightarrow$}
+\Def{Relacija izpeljave $\Rightarrow$ po nekem vmesnem simbolu $A$, preko neke produkcije iz $P$, preslika trenutni niz gramatike v nov niz:
+	\[ \alpha_1 A \alpha_2 \Rightarrow \alpha_1 \gamma \alpha_2  \]
+Pri tem je $A$ vmesni simbol, ostali pa so v splošnem mešanica vmesnih in končnih simbolov:
+	\[ A \in V,\ \ \alpha_1,\gamma,\alpha_2 \in (V \cup T)^*,\ \ \gamma \neq \emptyset\]
+	\[ \left[\alpha_1 A \alpha_2 \rightarrow \alpha_1 \gamma \alpha_2\right] \in P \]
+}
+Pri levo in desno-regularnih gramatikah je posebnost to, da imamo pri levo-linearnih vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na desni, torej:
+	\[ A \alpha \Rightarrow B \gamma \alpha, \mbox{ pri levih, ter}\]
+	\[ \alpha A \Rightarrow \alpha \gamma B, \mbox{ pri desnih.}\]
+	\[ A,B \in V,\ \ \alpha, \gamma \in T^*, \gamma \neq \emptyset\]
 
 \section{Jezik regularnih jezikov}
 %?tu bi pasal dokazi :)
@@ -461,6 +475,11 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 \item S - začetni simbol
 \end{items}
 }
+
+%to je še treba nekam umestit kasneje
+\Def{Kontekstno-neodvisna gramatika je dvoumna, kadar do nekega končnega niza lahko pridemo po več različnih izpeljavah.}
+
+\Def{Kontekstno-neodvisna gramatika je deterministična, kadar za jezik, ki ga gramatika opisuje, obstaja vsaj ena gramatika, ki ni dvoumna. Ni nujno, da je taka gramatika, ki jo imamo - važno je, da taka gramatika obstaja.}
 
 \subsection{Chomskyeva normalna oblika}
 \Def{Kontekstno-neodvisna gramatika je v Chomskyevi normalni obliki, kadar nima nekoristnih simbolov, ter so vse produkcije naslednjih dveh oblik:\\
