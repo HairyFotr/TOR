@@ -37,11 +37,10 @@
 \ \\[1cm]
 {\Huge\bf Teoretične osnove računalništva}\\[1cm]
 {\huge \today}\ \\[1.5cm]
-%Odkar sem dodal kontekstno-odvisne in linearne, to ni več to :P
-%{\LARGE Zapiski predavanj 2010/2011}\\[15pt]
+%{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več to :P
 \begin{tikzpicture}[scale=1.35]
 	\draw (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
-	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat slivnika... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
+	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
 
 	\draw (0cm,0cm) circle (5cm);
 	\node at (0,4cm) {\large\bf \nameref{chap:Turingovi jeziki}};
@@ -76,6 +75,13 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 %	$ A = \{ a_1, a_1, a_3, \ldots \} $ - naštevanje elementov\\
 %	$ B = \{ n | \ \mbox{pravilo za n} \} \ $ - opis elementov
 %\end{itemize}
+
+%?appendix this:
+%\chapter{Slovar}
+%?zihr obstaja neki za to, sicer naredi definitions okolje
+%\begin{items}
+%\item Razred - razred je množica elementov, ki ga lahko podamo z naštevanjem elementov ali z opisom lastnosti (opisni ali konceptualni razredi)
+%\end{items}
 
 \pagebreak
 \chapter{Uvod}
@@ -377,6 +383,7 @@ Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli
 	\draw [bend right,->]  (DLG) to node[auto] {\ref{DLG-eNKA}} (eNKA);
 	\draw [->]  (DKA) to node[auto] {} (NKA);
 	\draw [->]  (NKA) to node[auto] {} (eNKA);
+	\draw [->]  (RI) to node[auto] {\ref{RI-eNKA}} (eNKA);
 \end{tikzpicture}
 \end{center}
 
@@ -388,7 +395,84 @@ Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli
 	%\subsubsection{NKA $\rightarrow$ DKA}
 	%\subsubsection{$\varepsilon$-NKA $\rightarrow$ NKA}
 	%\subsubsection{RI $\rightarrow$ $\varepsilon$-NKA}
+\pagebreak%delete this, if it gets weird :)
+\subsection{Regularni izraz $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{RI-eNKA}
+%konstanta
+\def\RIeNKAscale{0.60}
 
+Pretvoriti moramo le osnovne in sestavljene regularne izraze, nato pa ustrezne avotmate samo povezujemo skupaj.
+\begin{center}
+\begin{minipage}[t]{6cm}
+Osnovni izrazi:
+\begin{itemize}
+\item $r = \emptyset$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp) [state, accepting] {};
+\end{tikzpicture}
+\item $r = \varepsilon$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp) [state, accepting] {};
+
+	\draw [->] (q0) to node[auto] {$\varepsilon$} (q1);
+\end{tikzpicture}
+\item $r = a$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp) [state, accepting] {};
+
+	\draw [->] (q0) to node[auto] {$a$} (q1);
+\end{tikzpicture}
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{7cm}
+%?kul bi blo obkrožit kaj so tu osnovni izrazi
+Sestavljeni izrazi:
+\begin{itemize}
+\item $r = a + b$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,40bp)  [state]   {};
+	\node (q2) at (160bp,40bp)  [state]   {};
+	\node (q3) at (80bp,-40bp)  [state]   {};
+	\node (q4) at (160bp,-40bp)  [state]   {};
+	\node (qe) at (240bp,0bp) [state, accepting] {};
+
+	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q1);
+	\draw [->]  (q1) to node[auto] {$a$} (q2);
+	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q3);
+	\draw [->]  (q3) to node[auto] {$b$} (q4);
+	\draw [->]  (q2) to node[auto] {$\varepsilon$} (qe);
+	\draw [->]  (q4) to node[auto] {$\varepsilon$} (qe);
+\end{tikzpicture}
+\item $r = a\cdot b$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp)  [state]   {};
+	\node (q2) at (160bp,0bp)  [state]   {};
+	\node (qe) at (240bp,0bp) [state, accepting] {};
+
+	\draw [->]  (q0) to node[auto] {$a$} (q1);
+	\draw [->]  (q1) to node[auto] {$\varepsilon$} (q2);
+	\draw [->]  (q2) to node[auto] {$b$} (qe);
+\end{tikzpicture}
+\item $r = a^*$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp)  [state]   {};
+	\node (q2) at (160bp,0bp)  [state]   {};
+	\node (qe) at (240bp,0bp) [state, accepting] {};
+
+	\draw [bend left, ->]  (q0) to node[auto] {$\varepsilon$} (qe);
+	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q1);
+	\draw [->]  (q1) to node[auto] {$a$} (q2);
+	\draw [bend left,->]  (q2) to node[auto] {$\varepsilon$} (q1);
+	\draw [->]  (q2) to node[auto] {$\varepsilon$} (qe);
+\end{tikzpicture}
+\end{itemize}
+\end{minipage}
+\end{center}
 \subsection{Končni avtomat $\rightarrow$ Regularni izraz}\label{KA-RI}
 Končni avtomat v regularni izraz prevedemo po metodi z eliminacijo. Pri tej metodi izberemo neko vozlišče za eliminacijo, nato pa njegove sosede povežemo med seboj, tako, da na nove povezave zapišemo regularne izraze, ki opisujejo dogajanje v tistem vozlišču. Eliminacijo ponavljamo, dokler nam v avtomatu ne ostanta le dve stanji, nato pa za končni zapis uporabimo naslednji recept:
 \br
@@ -458,8 +542,6 @@ Po zgoraj opisanem postopku dobimo:\\ \ \\
 \end{tikzpicture}
 }
 
-
-
 \section{Dokazovanje regularnosti jezika}\label{sec:Dokazovanje RJ}
 %Dostikrat hočemo sestaviti regularen izraz za določen jezik in niti ne vemo ali je regularen izraz sploh regularen ali ne. Za to imamo nekaj metod za dokazovanje regularnosti jezika.%?false... ne moreš sestavit regularnega izraza, ki ni regularen :)
 Kadar ugotavljamo, ali je nek jezik regularen, to lahko naredimo na več načinov:
@@ -470,16 +552,14 @@ Kadar ugotavljamo, ali je nek jezik regularen, to lahko naredimo na več načino
 		\begin{items}
 		\item \nameref{sec:KA}
 		\item \nameref{sec:RI}
-		\item \nameref{sec:LG}
+		\item \nameref{sec:LLGDLG}
 		\end{items}
 	\end{items}
 \item Dokažemo da ni regularen:
 	\begin{items}
-	\item Z uporabo leme o napihovanju za regularne jezike (glej \ref{sec:Lema za RJ})
-	\item Pokažemo, da jezik ne spada niti v nek širši razred jezikov:
-		\begin{items}
-		\item Dokažemo, da ni kontekstno-neodvisen (glej \ref{sec:Dokazovanje KNJ})
-		\end{items}
+	\item Z uporabo leme o napihovanju za regularne jezike
+	\item Z uporabo izreka Myhill-Nerode
+	\item Dokažemo, da jezik ne spada niti v nek širši razred jezikov (glej \ref{sec:Dokazovanje KNJ})
 	\end{items}
 \end{items}
 
@@ -512,7 +592,14 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 \end{center}
 Če zgornjo definicijo pogledamo v kontekstu končnih avtomatov, vidimo, da je $n$ gotovo večji od števila stanj, saj mora za napihovanje v avtomatu obstajati nek cikel, sicer bi bi veljalo $|v|=0$.
 
-\chapter{Linearni jeziki}
+\subsection{Izrek Myhill-Nerode}
+
+
+\subsection{Minimizacija končnih avtomatov}
+
+
+\chapter{Linearni jeziki}\label{sec:LJ}
+%nismo delali pri TOR ;)
 \section{Linearne gramatike}\label{sec:LG}
 \Def{Linearna gramatika je gramatika, ki ima na desni strani produkcij največ en vmesni simbol.\\
 	Definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer so:
@@ -523,10 +610,15 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 	\item S - začetni simbol
 	\end{items}
 }
-\Primer{Sestavi linearno gramatiko, ki sprejme jezik $L=\{ a^n b^n \ |\ n>0 \}$.
-	\[ S \rightarrow aSb\ |\ \varepsilon \]
-}
-
+\begin{primeri}
+\item Sestavi linearno gramatiko, ki sprejme jezik $L=\{ a^n b^n \ |\ n>0 \}$.
+	\[ S \rightarrow aSb\ |\ ab \]
+\item Sestavi linearno gramatiko, ki sprejme jezik $L=\{ 1 0^n 1 0^n 1\ |\ n \geq 2 \}$.
+	\[ S \rightarrow 100A001 \]
+	\[ A \rightarrow 0A0\ |\ 1 \]
+\item Sestavi linearno gramatiko, ki sprejme jezik $L=\{ w w^R\ |\ w \in \{ 0,1 \} \}$.
+	\[ S \rightarrow 1S1\ |\ 0S0\ |\ \varepsilon \]
+\end{primeri}
 \chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
 \section{Kontekstno-neodvisne gramatike}
 %?oznake, izpeljave, ...
@@ -582,15 +674,6 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 \subsection{Lema o napihovanju za kontekstno-neodvisne jezike}
 \subsection{Ogdenova lema za kontekstno-neodvisne jezike}
 
-%?appendix this:
-%\chapter{Slovar}
-%?zihr obstaja neki za to, sicer naredi definitions okolje
-%\begin{items}
-%\item Razred - razred je množica elementov, ki ga lahko podamo z naštevanjem elementov ali z opisom lastnosti (opisni ali konceptualni razredi)
-%\end{items}
-
-%--------------------------------TOR1 line--------------------------------------
-
 \chapter{Kontekstno-odvisni jeziki}\label{chap:Kontekstno-odvisni jeziki}
 \section{Kontekstno-odvisne gramatike}
 \Def{Kontekstno-odvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer so:
@@ -602,11 +685,12 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 	\end{items}
 	Pri tem je:
 	\[ P \subset \left[\alpha_1 A \alpha_2 \rightarrow \alpha_1 \gamma \alpha_2 \right] \]
-	\[ \alpha_1,\alpha_2,\gamma \in (N \cup T)^*,\ \ \gamma \ne \emptyset \]
+	\[ A \in N,\ \ \alpha_1,\alpha_2 \in (N \cup T)^*,\ \ \gamma \in (N \cup T)^+ \]
+	Torej, niz z vsaj enim vmesnim simbolom preslikamo v nek drug niz. Pri tem je omejitev, da končnih simbolov ne smemo spreminjati.
 }
 
-
-\Primer{Sestavi kontekstno-odvisno gramatiko, ki sprejme jezik $L=\{ a^n b^n c^n\ |\ n>0 \}$.
+\begin{primeri}
+\item Sestavi kontekstno-odvisno gramatiko, ki sprejme jezik $L=\{ a^n b^n c^n\ |\ n>0 \}$.
 	\begin{align*}
 	S &\rightarrow aSBC\\
 	S &\rightarrow aBC \\
@@ -618,10 +702,18 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 	bC &\rightarrow bc \\
 	cC &\rightarrow cc \\
 	\end{align*}
-	S kompleksnejšo kontekstno-odvisno gramatiko lahko sprejmemo tudi jezik $\{ a^n b^n c^n d^n\ |\ n>0 \}$
+	S kompleksnejšo kontekstno-odvisno gramatiko sprejmemo tudi jezik $\{ a^n b^n c^n d^n\ |\ n>0 \}$
+\end{primeri}
+\subsection{Kurodova normalna oblika}
+\Def{Kontekstno-odvisna gramatika je v Kurodovi normalni obliki, kadar so vse produkcije oblike:		\begin{align*}
+	AB &\rightarrow CD\\
+	A &\rightarrow BC \\
+	A &\rightarrow B \\
+	A &\rightarrow a \\
+	\end{align*}
+	\[ a \in T,\ \ A,B,C,D \in N \]
 }
 
-\
 %--------------------------------TOR2 line--------------------------------------
 
 \chapter{Turingovi jeziki}\label{chap:Turingovi jeziki}
