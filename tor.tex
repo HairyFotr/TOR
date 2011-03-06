@@ -3,7 +3,7 @@
 \documentclass[10pt,a4paper,oneside]{book}
 
 %Hello there. Don't know what to do?
-	%Search for the %? and fix/add stuff.
+	%Search for the %? or \fixme and fix/add stuff.
 	%Check zapiski 2007, your notes and your memory and fix/add stuff
 	%kul knjige imajo quote na začetku poglavij
 %
@@ -778,28 +778,28 @@ Turingov stroj se je uveljavil kot uporaben in preprost model računanja, ki zna
 \item Trak (papir)
 \end{items}
 V postopku formalizacije, pa je zaradi večje preprostosti, zahteval še, da je stroj sestavljen iz končno mnogo elementov, ter da deluje v diskretnih korakih.%?končno mnogo elementov? na kaj to cilja?
-\br
-\begin{tikzpicture}[start chain, node distance=-0.15mm, cell/.style={draw, on chain, minimum size=0.6cm}]
-	\node (ne) at (110bp, 60bp) [draw, thick, minimum height=1.2cm]  {Nadzorna enota};
-
+\ \\
+\begin{center}
+\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
 	\node (Trak) [on chain] {Trak};
 	\foreach \x in {1,2,...,5} {
 		\node ({A\x}) [cell] {$A_{\x}$};
-		\ifnum \x=5 
-			\node ({Ad1}) [cell] {...};
-			\node ({Ai}) [cell, very thick] {$A_i$};
-			\node ({Ad2}) [cell] {...};
-			\node ({An}) [cell] {$A_n$};
-			\node ({Ab1}) [cell] {$B$};
-			\node ({Ab2}) [cell] {$B$};
-			\node ({Ad3}) [cell] {...};
-		\fi
 	}
-	\node (dots) [on chain] {$\dots$};
+	\node ({Ad1}) [cell] {\ ...\ \ };
+	\node ({Ai}) [cell, ultra thick] {$A_i$};
+	\node ({Ad2}) [cell] {\ ...\ \ };
+	\node ({An}) [cell] {$A_n$};
+	\node ({Ab1}) [cell] {$B$};
+	\node ({Ab2}) [cell] {$B$};
+	\node ({Ad3}) [cell] {\ ...\ \ };
+	\node ({end}) [cell, draw=white] {};
 
-	\draw (ne.south) -- (110bp, 25bp) -- (132bp, 25bp) [->] to (Ai.north);
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (110bp, 60bp) [draw, minimum height=1.2cm]  {Nadzorna enota};
+	\draw (ne.south) -- (110bp, 25bp) -- (137.5bp, 25bp) [->] to (Ai.north);
 	\node [below] at (Ai.south) {Čitalno okno};
 \end{tikzpicture}
+\end{center}
 
 \Def{Turingov stroj je definiran kot sedmerka $M=\langle Q, \Sigma, \Gamma, \delta, q_0, B, F \rangle $, kjer je:
 \begin{items}
@@ -821,9 +821,27 @@ Stroj deluje tako, da v vsakem koraku opravi naslednje:
 \subsect{Trenutni opis}
 \Def{$TO = \Gamma^* \times Q \times \Gamma^*$ je množica vseh trenutnih opisov.\\
 Nek trenutni opis $\langle \alpha_1, q, \alpha_2 \rangle$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
-\br\fixme - slika Turingovega stroja z označenim $\alpha_1, \alpha_2$
 \br
-Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
+\begin{center}
+\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
+	\node ({alpha1}) [cell, minimum width=4cm] {$\alpha_1$};
+	\node ({Ai}) [cell, ultra thick] {};
+	\node ({alpha2}) [cell, minimum width=3.5cm] {$\alpha_2$\ \ \ };
+	%\node ({Ad2}) [cell] {};
+	\node ({Ab1}) [cell] {$B$};
+	\node ({Ab2}) [cell] {$B$};
+	\node ({Ad3}) [cell] {\ ...\ \ };
+	\node ({end}) [cell, draw=white] {};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (50bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q$};
+	\draw (ne.south) -- (50bp, 25bp) -- (66bp, 25bp) [->] to (Ai.north);
+	%\node [below, minimum width=4cm] at (alpha1.south) {$\alpha_1$};
+	%\node [below, minimum width=4cm] at (alpha2.south) {$\alpha_2$\ \ \ \ };
+\end{tikzpicture}
+\end{center}
+\br
+Čitalno okno je nad prvim znakom niza $\alpha_2$, iz tega lahko razberemo:
 \begin{items}
 	\item če je $\alpha_1 = \varepsilon$, je okno skrajno levo
 	\item če je $\alpha_2 = \varepsilon$, je okno nad $B$ in so naprej sami $B$-ji
@@ -852,8 +870,22 @@ Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
 L(M) = \{ w\ |\ w \in \Sigma^* \wedge q_0w \vdash^* w_1\ q\ w_2 \wedge w_1,w_2 \in \Gamma^* \wedge q \in F \}
 \end{equation*}
 }
-\fixme - slika z vhodno besedo na traku TS\br
 Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih damo na vhod stroju $M$, povzročijo, da se stroj $M$ v končno mnogo korakih znajde v končnem stanju.
+\ \\
+\begin{center}
+\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
+	\node ({Ai}) [cell, ultra thick] {};
+	\node ({w}) [cell, minimum width=4cm] {$w$\ \ \ \ };
+	\node ({Ab1}) [cell] {$B$};
+	\node ({Ab2}) [cell] {$B$};
+	\node ({Ad}) [cell] {\ ...\ \ };
+	\node ({end}) [cell, draw=white] {};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (90bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (90bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
+\end{tikzpicture}
+\end{center}
 \Def{Jezik $L$ je Turingov jezik, če obstaja Turingov stroj $M$, tak, da je $L = L(M)$.}
 \subsect{Ugotavljanje pripadnosti besed Turingovemu jeziku}
 Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
@@ -866,7 +898,7 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 	\end{items}
 \end{items}
 
-\fixme - vennov diagram beseda w znotraj L kroga...
+%?\fixme - vennov diagram beseda w znotraj L kroga... pomojm ne rabmo :P
 
 %?where does this go?
 %Terminologija: re (recursively enumerable, Turing recognizable)%?semi-decidable? 
@@ -919,12 +951,32 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 %?zapiski 2007 imajo tu še nekaj o turingovih jezikih
 \subsect{Turingov stroj kot računalnik funkcij}
 Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo pozitivna naravna števila, ločena z enicami:
-	\[ 0^{i_1} 1 0^{i_2} 1  \dots 1 0^{i_k} \]
+%	\[ 0^{i_1} 1 0^{i_2} 1  \dots 1 0^{i_k} \]
 %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)  
-\fixme - slika TS s števili $i_j$ na traku\br
-Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ničel $0^m$, na levi in desni strani skupine pa same $B$-je. S tem je stroj lahko izračunal neko funkcijo
+\ \\
+\begin{center}
+\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
+	\node ({Ai}) [cell, ultra thick] {};
+	\node ({A0}) [cell, minimum width=3cm] {$0^{i_1}$\ \ \ };
+	\node ({Ab1}) [cell] {$1$};
+	\node ({A1}) [cell, minimum width=2cm] {$0^{i_2}$};
+	\node ({Ab1}) [cell] {$1$};
+	\node ({Ad1}) [cell] {\ ...\ \ };
+	\node ({Ab1}) [cell] {$1$};
+	\node ({A1}) [cell, minimum width=4cm] {$0^{i_k}$\ \ \ \ };
+	\node ({Ab1}) [cell] {$B$};
+	\node ({Ab1}) [cell] {$B$};
+	\node ({Ad2}) [cell] {\ ...\ \ };
+	\node ({end}) [cell, draw=white] {};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (70bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (70bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
+\end{tikzpicture}
+\end{center}
+Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ničel $0^m$, na levi in desni strani skupine pa same $B$-je. S tem je stroj morda izračunal neko funkcijo:
 	\[ f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}_+ \mbox{\ \ oz. \ \ } f(i_1, i_2, \dots, i_k) = m \]
-\fixme - slika TS s skupino ničel na traku\br
+%?\fixme - slika TS s skupino ničel na traku\br... pomojm ne rabmo :P
 Funkcija $f$ ni nujno definirana za vsako $k$-terico iz $\mathbb{N}_+^k$, torej je parcialna funkcija, kadar pa je definirana povsod, pravimo da je totalna. Stroj se pri nedefiniranih $k$-tericah pač na neki točki ustavi in pri tem na traku ne pusti le ene skupine ničel, ali pa se sploh ne ustavi.
 Isti turingov stroj hkrati računa več funkcij: $f^{(1)}, f^{(2)}, \dots f^{(k)}$.%?računa ali "lahko računa".. ne štekam ubistvu čist
 
@@ -1005,7 +1057,7 @@ Na traku imamo več kot eno sled, kar pomeni, da s traku beremo $k$-terice trač
 }
 \subsubsection{Prestavljanje vsebine traku}
 Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izrezali iz traku in nato trak zlepili nazaj skupaj, izrezane simbole pa bi si pri tem seveda radi nekako zapomnili. Tudi to metodo realiziramo s pomočjo shrambe za tračne simbole v nadzorni enoti, a moramo pri tem paziti, da je funkcija prehodov pravilno napisana.
-\fixme slika "gube" na traku in slika nadzorne enote
+\br\fixme slika "gube" na traku in slika nadzorne enote
 \Primer{Sestavi Turingov stroj, ki premakne vsebino traku za 2 celici v desno.\\
 	Skica stroja:
 	\begin{items}
@@ -1026,10 +1078,11 @@ Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izr
 	\end{items}
 }
 
+%?\fixme ... tu je razlagal tisto neizračunljivo funkcijo nad matrikami. btw, @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
+
 \subsubsection{Podprogrami}
 \fixme
 %?Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
 
-%?tu je razlagal tisto neizračunljivo funkcijo nad matrikami. @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
 
 \end{document}
