@@ -13,6 +13,20 @@
     urlcolor=blue
 }
 
+%ker sem len za pisat, oz. na predavanjih je treba bit hiter :)
+%subsection + hint pagebreak
+\def\sect{
+\pagebreak[3]\section
+}
+\def\subsect{
+\pagebreak[2]\subsection
+}
+\def\subsubsect{
+\pagebreak[1]\subsubsection
+}
+\newcommand\chap[1]{
+\chapter{#1}\label{chap:#1}
+}
 
 \newcommand\fnurl[2]{%
   \href{#2}{#1}\footnote{\url{#2}}%

@@ -69,7 +69,7 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 \tableofcontents
 \pagebreak
 %\newpage
-%\section{Notacija}
+%\sect{Notacija}
 %\begin{itemize}
 %	\item[Množice:] Označimo z velikimi tiskanimi črkami. Podamo jih lahko na naslednje načine\\
 %	$ A = \{ a_1, a_1, a_3, \ldots \} $ - naštevanje elementov\\
@@ -84,9 +84,10 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 %\end{items}
 
 \pagebreak
-\chapter{Uvod}
-\section{Matematične osnove}
-\subsection{Dokazovanje}
+\chap{Uvod}
+\sect{Matematične osnove}
+\subsect{Teorija množic}
+\subsect{Dokazovanje}
 \subsubsection{Dokaz s konstrukcijo}
 Dokaz obstoja nekega matematičnega objekta je to, da nam ga uspe sestaviti.
 
@@ -158,12 +159,8 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\item Ker se je pokazalo, da je tudi $b$ sodo število, $GCD(a,b)=1$ ne more držati, torej smo prišli v protislovje in s tem dokazali, da $\sqrt[3]{2}$ ni racionalno število.
 	\end{items}
 \end{primeri}
-
-\pagebreak
-\chapter{Regularni jeziki}\label{chap:Regularni jeziki}
-
-\section{Uvod}
-\subsection{Uporabljene oznake}
+\sect{Osnove teorije jezikov}
+\subsect{Uporabljene oznake}
 \begin{items}
 \item $a$ - znak ali simbol (niz dolžine 1)
 \item $\Sigma$ - abeceda (končna neprazna množica znakov)
@@ -173,36 +170,36 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \item $\Sigma^*$ - vsi možni nizi abecede
 \end{items}
 
-\subsection{Operacije nad regularnimi jeziki}
-\begin{items}
-\item Stik
-	\begin{items}
-	\item Stik nizov:
-		\begin{align*}
-		w  &= w_1 w_2 \dots w_n\\
-		x  &= x_1 x_2 \dots x_m\\
-		wx &= w_1 w_2 \dots w_n x_1 x_2 \dots x_m
-		\end{align*}
-	\item Stik množic:
-		\begin{align*} 
-		A & = \{ w_1 ,\ w_2 ,\ \dots ,\ w_n \} \\ 
-		B & = \{ x_1 ,\ x_2 ,\ \dots ,\ x_m \} \\ 
-		A \cdot B & = \{ w_ix_j \ | \ w_i \in A \ \wedge \ x_i \in B \}
-		\end{align*} 
-	\end{items}
-\item Potenciranje
+\subsect{Operacije nad jeziki}
+\subsubsect{Stik nizov}
+	\begin{align*}
+	w  &= a_1 a_2 \dots a_n\\
+	x  &= b_1 b_2 \dots b_m\\
+	wx &= a_1 a_2 \dots a_n b_1 b_2 \dots b_m
+	\end{align*}
+\subsubsect{Stik}
+	\begin{align*} 
+	A & = \{ w_1 ,\ w_2 ,\ \dots ,\ w_n \} \\ 
+	B & = \{ x_1 ,\ x_2 ,\ \dots ,\ x_m \} \\ 
+	A \cdot B & = \{ w_ix_j \ | \ w_i \in A \ \wedge \ x_i \in B \}
+	\end{align*} 
+\subsubsect{Potenciranje}
 	\begin{align*} 
 	A^0 & = \{ \varepsilon \} \\
 	A^k & = A \cdot A \cdot \ldots \cdot A \ = \ \bigcirc_{i=1}^{k} A \\
 	\end{align*}
-\item Iteracija
+\subsubsect{Iteracija}
 	\begin{align*} 
 	A^* &= A^0 \cup A^1 \cup A^2 \cdots  \ = \ \bigcup_{i=0}^{ \infty } A^i
 	\end{align*} 		
-\end{items}
+\subsubsect{Obrat}
+	\begin{align*}
+	w  &= a_1 a_2 \dots a_{n-1} a_n\\
+	w^R  &= a_n a_{n-1} \dots a_2 a_1\\
+	\end{align*}
 
-\pagebreak
-\section{Regularni izrazi}\label{sec:RI}
+\chap{Regularni jeziki}
+\sect{Regularni izrazi}\label{sec:RI}
 \Def{Imamo tri osnovne izraze:
 	\begin{items}
 	\item $\underline{\emptyset}$ je opisuje prazen jezik $ L(\underline{\emptyset})= \{ \}$
@@ -233,9 +230,8 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 		Koliko različnih nizov opišemo s tem regularnim izrazom?\\
 		\[ 2^8 \cdot 2^3 = 2^{11} \mbox{ nizov} \]
 \end{primeri}
-
-\section{Končni avtomati}\label{sec:KA}
-\subsection{Nedeterministični končni avtomati z $\varepsilon$-prehodi }
+\sect{Končni avtomati}\label{sec:KA}
+\subsect{Nedeterministični končni avtomati z $\varepsilon$-prehodi }
 \Def{$\varepsilon$NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta ,q_0 , F \rangle$, kjer je:
 	\begin{items}
 	\item $ Q $ - končna množica stanj
@@ -248,7 +244,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 %?razlaga potenčne množice bi šla lahko nekam med mat. osnove... imam še en kup stvari o teoriji množic nekje. Drugač je pa kul - epsilon-closure je že napol opisan :)
 $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ vse možne kombinacije stanj. Recimo da se nahajamo v stanju A, potem nas funkcija prehodov $ \delta $ pripelje v vsa mozna stanja do katerih pridemo iz $A$ z določenim znakom abecede in z vsemi $ \varepsilon $ prehodi, naprimer $ \{ A_1,A2, \ldots , A_n \}$. Tukaj je množica stanj $ \{ A_1,A2, \ldots , A_n \} $ element potenčne množice $P(Q)$
 
-\subsection{Nedeterministični končni avtomati}
+\subsect{Nedeterministični končni avtomati}
 \Def{NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
 	\begin{items}
 	\item $ Q $ - končna množica stanj
@@ -258,16 +254,15 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	\item $ F $ - množica končnih stanj
 	\end{items}		
 }
-\Def{Funkcija $\varepsilon$-closure($q$) nam pove, do katerih stanj lahko pridemo iz stanja $q$ po $\varepsilon$ prehodih.\\
-	$\varepsilon$-closure($q$)$ = \{ q_k\ |\ \exists q_1, q_2, \dots q_n \in Q,\ q=q_1 \wedge q_i \in \delta(q_{i-1}, \varepsilon) \}$
+\Def{Funkcija $\varepsilon$-closure($q$) nam pove, do katerih stanj lahko pridemo iz stanja $q$ po $\varepsilon$ prehodih.
+	\[ \varepsilon\mbox{-closure}(q) = \{ q_k\ |\ \exists q_1, q_2, \dots q_n \in Q,\ q=q_1 \wedge q_i \in \delta(q_{i-1}, \varepsilon) \} \]
 }
-\Def{Posplošena funkcija prehodov $\hat\delta$ nam pove, do katerega stanja pridemo po nekem nizu.\\
-	$\hat\delta(q, \varepsilon) = \varepsilon$-closure($q$)\\
-	$\hat\delta(q, a) = \delta(q, a)$\\
-	$\hat\delta(q, wa) = \varepsilon$-closure($\{ q''\ |\ q' \in \hat\delta(q, w) \wedge q'' \in \delta(q', a) \})$
+\Def{Posplošena funkcija prehodov $\hat\delta$ nam pove, do katerih stanj pridemo po nekem nizu.		\[ \hat\delta(q, \varepsilon) = \varepsilon\mbox{-closure}(q) \]
+	\[ \hat\delta(q, a) = \delta(q, a) \]
+	\[ \hat\delta(q, wa) = \varepsilon\mbox{-closure}(\{ q''\ |\ q' \in \hat\delta(q, w) \wedge q'' \in \delta(q', a) \})\]
 }
 
-\subsection{Deterministični končni avtomat}
+\subsect{Deterministični končni avtomat}
 \Def{DKA je definiran kot petorka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
 	\begin{items}
 	\item $ Q $ - končna množica stanj
@@ -278,7 +273,7 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	\end{items}	
 }
 
-\subsection{Jeziki končnih avtomatov}
+\subsect{Jeziki končnih avtomatov}
 \Def{Jezik $\varepsilon$NKA ter NKA je definiran kot:
 	\begin{equation*}
 	L=\{ w\ |\ \hat\delta(q_0, w) \cap F \neq \emptyset \}
@@ -290,11 +285,11 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	\end{equation*}
 }
 Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
-\pagebreak
-\section{Levo in desno-linearne gramatike}\label{sec:LLGDLG}
-Posebnost linearnih gramatik je v tem, da imajo na desni strani produkcij največ en vmesni simbol, ampak ta model je že močnejši od regularnih jezikov (glej \ref{sec:LG}), če pa se omejimo le na tiste produkcije, ki imajo ta edini vmesni simbol vedno na skrajno levi strani, ali pa vedno na skrajni desni strani niza, dobimo model, ki opisuje regularne jezike.
+
+\sect{Levo in desno-linearne gramatike}\label{sec:LLGDLG}
+Posebnost linearnih gramatik je v tem, da imajo na desni strani produkcij največ en vmesni simbol, ampak ta model je že nekoliko močnejši od regularnih jezikov (glej \ref{sec:LG}), če pa se omejimo le na tiste produkcije, ki imajo ta edini vmesni simbol vedno na skrajno levi strani, ali pa vedno na skrajni desni strani niza, dobimo model, ki opisuje regularne jezike.
 %
-\Def{Regularna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
+\Def{Linearna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
 \begin{items}
 \item N - množica spremenljivk oz. vmesnih simbolov, $N \subseteq \Sigma$
 \item T - množica znakov oz. končnih simbolov, $T \subset \Sigma,\ N\cap T = \emptyset$
@@ -303,7 +298,7 @@ Posebnost linearnih gramatik je v tem, da imajo na desni strani produkcij najve�
 \end{items}
 Pri tem je abeceda $\Sigma = N \cup T$ in $N\cap T = \emptyset$.
 }
-\subsection{Produkcije}
+\subsect{Produkcije}
 \Def{Pri levo in desno-linearnih gramatikah, s produkcijami slikamo nek vmesni simbol v niz, ki ima lahko vmesni simbol le na skrajno levi pri levo-linearnih, oz. le na skrajno desni pri desno-linearnih:
 	\begin{items}
 	\item $P \subset N \times ((N\cup \{\varepsilon\})T^*)$ - pri levo-linearnih gramatikah
@@ -314,7 +309,7 @@ Pri tem je abeceda $\Sigma = N \cup T$ in $N\cap T = \emptyset$.
 	%\[ \left[ A \rightarrow \beta B \right] \in P \mbox{ pri desno-linearnih gramatikah}\]
 	%\[ A \in V,\ \ B \in (V \cup \{\varepsilon\}),\ \ \beta \in T^* \]
 }
-\subsection{Relacija izpeljave $\Rightarrow$}
+\subsect{Relacija izpeljave $\Rightarrow$}
 \Def{Relacija izpeljave pri levo in desno-linearnih gramatikah prek neke produkcije iz $P$, slika trenutni niz v nov niz, tako, da ima novi niz vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na skrajno desni strani, torej:
 	\begin{items}
 	\item $\left[ A \rightarrow B \beta \right]$ - pri levo-linearnih gramatikah
@@ -326,9 +321,9 @@ Pri tem je abeceda $\Sigma = N \cup T$ in $N\cap T = \emptyset$.
 	%homebrew definicija
 	\[ \alpha \Rightarrow^* \beta \mbox{\ \ \ n.t.k.\ \ \ } \alpha = \alpha_0 \Rightarrow \alpha_1 \Rightarrow \dots \Rightarrow \alpha_k = \beta;\ k>0 \]
 }
-\subsection{Jezik gramatik}
+\subsect{Jezik gramatik}
 
-\section{Jezik regularnih jezikov}
+\sect{Jezik regularnih jezikov}
 %?tu bi pasal dokazi :)
 \Def{Jezik ki ga opisuje poljubni regularni izraz, končni avtomat, levo ali desno-linearna gramatika, je regularni jezik.}
 Regularni jeziki ne vsebujejo informacije o prejšnjih znakih vhodnega niza in se z njimi ne da opisati poljubnega jezika. (za postopke dokazovanja regularnosti glej \ref{sec:Dokazovanje RJ}).
@@ -340,7 +335,7 @@ Regularni jeziki ne vsebujejo informacije o prejšnjih znakih vhodnega niza in s
 	\item $L = \{ 0^n 1^n \ | \ n > 0 \} $ - jezik, ki \underline{ni} regularen (ne moremo si zapomniti poljubnega števila $n$)
 \end{primeri}
 
-\section{Ohranjanje regularnosti jezikov}
+\sect{Ohranjanje regularnosti jezikov}
 Regularnost jezika že po definiciji ohranjajo operacije:
 \begin{items}
 \item $L_1 \cup L_2$ - unija 
@@ -358,7 +353,7 @@ Obstajajo postopki za konstrukcijo, ki kažejo, da regularnost ohranjajo tudi:
 		\end{align*}
 	Namesto stanj dobimo pare stanj in moramo preveriti v kateri par pridemo, če gledamo oba stara avtomata, končna pa so tista stanja, ki so končna v obeh starih avtomatih.
 	\[ \delta_*(\langle q_1, q_2 \rangle, a) = \langle \delta_1(q_1, a), \delta_2(q_2, a)\rangle \]
-\item $L^R$ - obrat oz. reverz\\
+\item $L^R$ - obrat\\
 	Obrnemo vse povezave, ustvarimo novo začetno stanje, ki gre po $\varepsilon$ v stara končna, staro začetno stanje pa postane edino končno stanje.
 \end{items}
 Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
@@ -368,7 +363,7 @@ Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
 \end{items}
 
-\section{Prevedbe med modeli regularnih jezikov}%?lame naslov, fixme
+\sect{Prevedbe med modeli regularnih jezikov}%?lame naslov, fixme
 Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli in je mogoče pretvarjati med njimi. V tem odseku bomo predstavili naslednje prevedbe:\\[12pt]%?ustrezno dopolni :)
 \begin{center}
 \begin{tikzpicture}[>=latex',/tikz/initial text=""]
@@ -395,8 +390,7 @@ Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli
 	%\subsubsection{NKA $\rightarrow$ DKA}
 	%\subsubsection{$\varepsilon$-NKA $\rightarrow$ NKA}
 	%\subsubsection{RI $\rightarrow$ $\varepsilon$-NKA}
-\pagebreak%delete this, if it gets weird :)
-\subsection{Regularni izraz $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{RI-eNKA}
+\subsect{Regularni izraz $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{RI-eNKA}
 %konstanta
 \def\RIeNKAscale{0.60}
 
@@ -430,7 +424,7 @@ Osnovni izrazi:
 %?kul bi blo obkrožit kaj so tu osnovni izrazi
 Sestavljeni izrazi:
 \begin{itemize}
-\item $r = a + b$\\
+\item $r = r_1 + r_2$\\
 \begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
 	\node (q0) at (0bp,0bp)  [state, initial]   {};
 	\node (q1) at (80bp,40bp)  [state]   {};
@@ -440,24 +434,24 @@ Sestavljeni izrazi:
 	\node (qe) at (240bp,0bp) [state, accepting] {};
 
 	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q1);
-	\draw [->]  (q1) to node[auto] {$a$} (q2);
+	\draw [decorate, decoration={snake},->]  (q1) to node[auto] {$r_1$} (q2);
 	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q3);
-	\draw [->]  (q3) to node[auto] {$b$} (q4);
+	\draw [decorate, decoration={snake},->]  (q3) to node[auto] {$r_2$} (q4);
 	\draw [->]  (q2) to node[auto] {$\varepsilon$} (qe);
 	\draw [->]  (q4) to node[auto] {$\varepsilon$} (qe);
 \end{tikzpicture}
-\item $r = a\cdot b$\\
+\item $r = r_1\cdot r_2$\\
 \begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
 	\node (q0) at (0bp,0bp)  [state, initial]   {};
 	\node (q1) at (80bp,0bp)  [state]   {};
 	\node (q2) at (160bp,0bp)  [state]   {};
 	\node (qe) at (240bp,0bp) [state, accepting] {};
 
-	\draw [->]  (q0) to node[auto] {$a$} (q1);
+	\draw [decorate, decoration={snake},->]  (q0) to node[auto] {$r_1$} (q1);
 	\draw [->]  (q1) to node[auto] {$\varepsilon$} (q2);
-	\draw [->]  (q2) to node[auto] {$b$} (qe);
+	\draw [decorate, decoration={snake},->]  (q2) to node[auto] {$r_2$} (qe);
 \end{tikzpicture}
-\item $r = a^*$\\
+\item $r = r_1^*$\\
 \begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
 	\node (q0) at (0bp,0bp)  [state, initial]   {};
 	\node (q1) at (80bp,0bp)  [state]   {};
@@ -466,14 +460,14 @@ Sestavljeni izrazi:
 
 	\draw [bend left, ->]  (q0) to node[auto] {$\varepsilon$} (qe);
 	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q1);
-	\draw [->]  (q1) to node[auto] {$a$} (q2);
+	\draw [decorate, decoration={snake},->]  (q1) to node[auto] {$r_1$} (q2);
 	\draw [bend left,->]  (q2) to node[auto] {$\varepsilon$} (q1);
 	\draw [->]  (q2) to node[auto] {$\varepsilon$} (qe);
 \end{tikzpicture}
 \end{itemize}
 \end{minipage}
 \end{center}
-\subsection{Končni avtomat $\rightarrow$ Regularni izraz}\label{KA-RI}
+\subsect{Končni avtomat $\rightarrow$ Regularni izraz}\label{KA-RI}
 Končni avtomat v regularni izraz prevedemo po metodi z eliminacijo. Pri tej metodi izberemo neko vozlišče za eliminacijo, nato pa njegove sosede povežemo med seboj, tako, da na nove povezave zapišemo regularne izraze, ki opisujejo dogajanje v tistem vozlišču. Eliminacijo ponavljamo, dokler nam v avtomatu ne ostanta le dve stanji, nato pa za končni zapis uporabimo naslednji recept:
 \br
 Na povezavah avtomata imamo zapisane regularne izraze $R,S,Q$ in $T$,\\
@@ -510,7 +504,7 @@ Iz grafa eliminiramo eno stanje in zapišemo regularni izraz:
 Možna pa je še ena rešitev, če eliminiramo drugo stanje.%napiši jo :P
 \end{primeri}
 
-\subsection{Desno-linearna gramatika $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{DLG-eNKA}
+\subsect{Desno-linearna gramatika $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{DLG-eNKA}
 Vhodno stanje avtomata je začetni simbol gramatike, nato pa stanja označujemo glede na končne in vmesne simbole, ki jih moramo še porabiti. Produkcije predstavljajo $\varepsilon$ prehode v avtomatu, preostali prehodi avtomata pa so črke, ki jih generiramo.
 
 \Primer{Pretvori podano desno-linearno gramatiko v nedeterministični končni avtomat z $\varepsilon$-prehodi.
@@ -524,11 +518,11 @@ Po zgoraj opisanem postopku dobimo:\\ \ \\
 	\node (S)   at (0bp,0bp)     [state, initial]  {$S$};
 	\node (aS)  at (40bp,40bp)   [state]           {$aS$};
 	\node (abA) at (40bp,-40bp)  [state]           {$abA$};
-	\node (bA)  at (80bp,-40bp)  [state]           {$bA$};
-	\node (A)   at (120bp,0bp)   [state]           {$A$};
-	\node (aa)  at (160bp,0bp)   [state]           {$aa$};
-	\node (a)   at (200bp,0bp)   [state]           {$a$};
-	\node (e)   at (240bp,0bp)   [state,accepting] {$\varepsilon$};
+	\node (bA)  at (90bp,-40bp)  [state]           {$bA$};
+	\node (A)   at (130bp,0bp)   [state]           {$A$};
+	\node (aa)  at (180bp,0bp)   [state]           {$aa$};
+	\node (a)   at (230bp,0bp)   [state]           {$a$};
+	\node (e)   at (280bp,0bp)   [state,accepting] {$\varepsilon$};
 
 	\draw [bend left,->]  (S) to node[auto] {$\varepsilon$} (aS);
 	\draw [bend left,->]  (aS) to node[auto] {$a$} (S);
@@ -542,7 +536,7 @@ Po zgoraj opisanem postopku dobimo:\\ \ \\
 \end{tikzpicture}
 }
 
-\section{Dokazovanje regularnosti jezika}\label{sec:Dokazovanje RJ}
+\sect{Dokazovanje regularnosti jezika}\label{sec:Dokazovanje RJ}
 %Dostikrat hočemo sestaviti regularen izraz za določen jezik in niti ne vemo ali je regularen izraz sploh regularen ali ne. Za to imamo nekaj metod za dokazovanje regularnosti jezika.%?false... ne moreš sestavit regularnega izraza, ki ni regularen :)
 Kadar ugotavljamo, ali je nek jezik regularen, to lahko naredimo na več načinov:
 \begin{items}
@@ -567,7 +561,7 @@ Kadar ugotavljamo, ali je nek jezik regularen, to lahko naredimo na več načino
 %Opozorilo: Če zapišemo regularni izraz za jezik, ali naredimo končni avtomat, moramo dobro preveriti da ne obstaja kakšen protiprimer. Torej beseda ki je v jeziku in jo končni avtomat ali regularni izraz ne sprejme, ali obratno.\\
 %Če nam ne uspe dokaza (da je ali da ni regularni jezik) do konca speljati, to ne moremo vzeti kot dokaz da ravno nasprotno drži. Velja da v takem primeru še nič ne vemo o regularnosti jezika.
 
-\subsection{Lema o napihovanju za regularne jezike}\label{sec:Lema za RJ}
+\subsect{Lema o napihovanju za regularne jezike}\label{sec:Lema za RJ}
 Lemo o napihovanju za regularne jezike uporabljamo za dokazovanje, da nek jezik ne spada v razred regularnih jezikov. 
 \Def{Za vsak regularni jezik obstaja neka konstanta $n$, taka, da lahko vsako besedo $w$ iz jezika, daljšo od $n$, razbijemo na tri dele:
 	\[ w=u\ v\ z \]
@@ -592,15 +586,15 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 \end{center}
 Če zgornjo definicijo pogledamo v kontekstu končnih avtomatov, vidimo, da je $n$ gotovo večji od števila stanj, saj mora za napihovanje v avtomatu obstajati nek cikel, sicer bi bi veljalo $|v|=0$.
 
-\subsection{Izrek Myhill-Nerode}
+\subsect{Izrek Myhill-Nerode}
 
 
-\subsection{Minimizacija končnih avtomatov}
+\subsect{Minimizacija končnih avtomatov}
 
 
-\chapter{Linearni jeziki}\label{sec:LJ}
+\chap{Linearni jeziki}
 %nismo delali pri TOR ;)
-\section{Linearne gramatike}\label{sec:LG}
+\sect{Linearne gramatike}\label{sec:LG}
 \Def{Linearna gramatika je gramatika, ki ima na desni strani produkcij največ en vmesni simbol.\\
 	Definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer so:
 	\begin{items}
@@ -610,6 +604,7 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 	\item S - začetni simbol
 	\end{items}
 }
+Posebna primera sta levo in desno-linearne gramatike, ki opisujeta regularne jezike (glej \ref{sec:LLGDLG})%?dvojina: amidoingitrite?
 \begin{primeri}
 \item Sestavi linearno gramatiko, ki sprejme jezik $L=\{ a^n b^n \ |\ n>0 \}$.
 	\[ S \rightarrow aSb\ |\ ab \]
@@ -619,8 +614,8 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 \item Sestavi linearno gramatiko, ki sprejme jezik $L=\{ w w^R\ |\ w \in \{ 0,1 \} \}$.
 	\[ S \rightarrow 1S1\ |\ 0S0\ |\ \varepsilon \]
 \end{primeri}
-\chapter{Kontekstno-neodvisni jeziki}\label{chap:Kontekstno-neodvisni jeziki}
-\section{Kontekstno-neodvisne gramatike}
+\chap{Kontekstno-neodvisni jeziki}
+\sect{Kontekstno-neodvisne gramatike}
 %?oznake, izpeljave, ...
 \Def{Kontekstno-neodvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
 \begin{items}
@@ -636,19 +631,19 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 
 \Def{Kontekstno-neodvisna gramatika je deterministična, kadar za jezik, ki ga gramatika opisuje, obstaja vsaj ena gramatika, ki ni dvoumna. Ni nujno, da je taka gramatika, ki jo imamo - važno je, da taka gramatika obstaja.}
 
-\subsection{Chomskyeva normalna oblika}
+\subsect{Chomskyeva normalna oblika}
 \Def{Kontekstno-neodvisna gramatika je v Chomskyevi normalni obliki, kadar nima nekoristnih simbolov, ter so vse produkcije naslednjih dveh oblik:\\
 	\[ A \rightarrow a \]
 	\[ A \rightarrow BC \]
 	\[ a \in T,\ \ B,C \in N \]
 }
-\subsection{Greibachina normalna oblika}
+\subsect{Greibachina normalna oblika}
 \Def{Kontekstno-neodvisna gramatika je v Greibachini normalni obliki, kadar so vse produkcije oblike:\\
-	\[ A \rightarrow a\alpha\]
-	\[ a \in T,\ \ \alpha \in N^* \]
+	\[ A \rightarrow a\gamma\]
+	\[ a \in T,\ \ \gamma \in N^* \]
 }
 
-\section{Skladovni avtomati}
+\sect{Skladovni avtomati}
 \Def{Skladovni avtomat je definiran kot sedmerka $M=\langle Q, \Sigma, \Gamma, \delta, q_0, Z_0, F \rangle$, kjer je:
 	\begin{items}
 	\item $ Q $ - končna množica stanj
@@ -660,22 +655,22 @@ Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero 
 	\item $ F $ - množica končnih stanj
 	\end{items}
 }
-\subsection{Trenutni opis}
+\subsect{Trenutni opis}
 \Def{Trenutni opis je trojka $\langle q, w, \gamma \rangle \in Q \times \Sigma^* \times \Gamma^*$, pri čemer je $q$ trenutno stanje, $w$ preostanek vhodnega niza, ter $\gamma$ trenutna vsebina sklada}
-\subsection{Relacija $\vdash$}
+\subsect{Relacija $\vdash$}
 \Def{Relacija $\vdash$ nas pelje iz enega trenutnega opisa v drugega, če je ta prehod predviden v funkciji prehodov $\delta$:
 	\[ \langle q, aw, Z\gamma \rangle \vdash \langle p, w, \gamma'\gamma \rangle \iff \langle p, \gamma' \rangle \in \delta(q,a,Z) \]
 }
 Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali več-kratna uporaba relacije $\vdash$. Pove nam to, da pridemo iz enega trenutnega opisa do drugega, prek enega ali večih prehodov, pod pogojem, da vse vmesne prehode predvideva funkcija prehodov $\delta$.
 
-\subsection{Jezik skladovnega avtomata}
+\subsect{Jezik skladovnega avtomata}
 
-\section{Dokazovanje kontekstne-neodvisnosti}\label{sec:Dokazovanje KNJ}
-\subsection{Lema o napihovanju za kontekstno-neodvisne jezike}
-\subsection{Ogdenova lema za kontekstno-neodvisne jezike}
+\sect{Dokazovanje kontekstne-neodvisnosti jezika}\label{sec:Dokazovanje KNJ}
+\subsect{Lema o napihovanju za kontekstno-neodvisne jezike}
+\subsect{Ogdenova lema za kontekstno-neodvisne jezike}
 
-\chapter{Kontekstno-odvisni jeziki}\label{chap:Kontekstno-odvisni jeziki}
-\section{Kontekstno-odvisne gramatike}
+\chap{Kontekstno-odvisni jeziki}
+\sect{Kontekstno-odvisne gramatike}
 \Def{Kontekstno-odvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer so:
 	\begin{items}
 	\item N - množica spremenljivk oz. vmesnih simbolov
@@ -704,7 +699,7 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 	\end{align*}
 	S kompleksnejšo kontekstno-odvisno gramatiko sprejmemo tudi jezik $\{ a^n b^n c^n d^n\ |\ n>0 \}$
 \end{primeri}
-\subsection{Kurodova normalna oblika}
+\subsect{Kurodova normalna oblika}
 \Def{Kontekstno-odvisna gramatika je v Kurodovi normalni obliki, kadar so vse produkcije oblike:		\begin{align*}
 	AB &\rightarrow CD\\
 	A &\rightarrow BC \\
@@ -716,8 +711,8 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 
 %--------------------------------TOR2 line--------------------------------------
 
-\chapter{Turingovi jeziki}\label{chap:Turingovi jeziki}
-\section{Zgodovina}
+\chap{Turingovi jeziki}
+\sect{Zgodovina}
 %I've got 23 problems, but a bitch ain't one. -Hilbert, 1900
 %\br
 Leta 1900 je Nemški matematik David Hilbert objavil seznam triidvajsetih nerešenih problemov v matematiki. Eden izmed Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja postopek, po katerem ugotovimo rešljivost poljubne Diofantske enačbe -- torej, ali lahko ugotovimo, če ima polinom s celoštevilskimi koeficienti $P(x_1, x_2, \dots, x_n)=0$, celoštevilsko rešitev.
@@ -754,7 +749,7 @@ Nekateri zgodnji poskusi formalizacije pojma algoritma so:%? zgodovinsko zapored
 \end{items}
 
 \pagebreak
-\section{Turingovi stroji}
+\sect{Turingovi stroji}
 Turingov stroj se je uveljavil kot uporaben in preprost model računanja, ki zna izračunati vse kar se izračunati da (pod pogojem, da Church-Turingova teza drži). Alan Turing je svoj stroj izpeljal iz razmišljanja o tem, kako človek rešuje miselne probleme na papir. Pri tem je izbral tri sestavne dele:
 \begin{items}
 \item Nadzorno enoto (glava)
@@ -782,7 +777,7 @@ Stroj deluje tako, da v vsakem koraku opravi naslednje:
 	\item okno premakne eno celico levo ali desno
 \end{items}
 
-\subsection{Trenutni opis}
+\subsect{Trenutni opis}
 \Def{$TO = \Gamma^* \times Q \times \Gamma^*$ je množica vseh trenutnih opisov.\\
 Nek trenutni opis $\langle \alpha_1, q, \alpha_2 \rangle$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
 %?slika TS z označenim \alpha_1, \alpha_2
@@ -793,7 +788,7 @@ Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
 	\item če je $\alpha_2 = \varepsilon$, je okno nad $B$ in so naprej sami $B$-ji
 \end{items}}
 
-\subsection{Relacija $\vdash$}
+\subsect{Relacija $\vdash$}
 \Def{Če sta $u,v$ trenutna opisa iz množice $TO$, ter $v$ neposredno sledi iz $u$ v enem koraku Turingovega stroja, tedaj pišemo $u \vdash v$.
 \br
 Naj bo $x_1 \dots x_{i-1}\ q\ x_i \dots x_n$ trenutni opis:
@@ -806,11 +801,11 @@ $x_1 \dots x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots x_{i-1}\ Y\ p\ x_{i+1} \do
 	\item če okno ni na robu ($i>1$), potem: $x_1 \dots x_{i-2} x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots\ x_{i-2} p\ x_{i-1}\ Y\ x_{i+1} \dots x_n$
 	\end{items}
 \end{items}}
-\subsection{Tranzitivna ovojnica $\vdash^*$ relacije $\vdash$}%?je pravi naslov?
+\subsect{Tranzitivna ovojnica $\vdash^*$ relacije $\vdash$}%?je pravi naslov?
 \Def{$u \vdash^* v$, če obstaja tako zaporedje $x_i, (i \in [0, 1, \dots, k], k \geq 0)$, da velja $u=x_0, v=x_k$ in $x_0 \vdash x_1 \wedge x_1 \vdash x_2 \wedge \dots \wedge x_{k-1} \vdash x_k$
 \br
 Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
-\section{Jezik Turingovega stroja}
+\sect{Jezik Turingovega stroja}
 \Def{Jezik Turingovega stroja je definiran kot:
 \begin{equation*}
 L(M) = \{ w\ |\ w \in \Sigma^* \wedge q_0w \vdash^* w_1\ q\ w_2 \wedge w_1,w_2 \in \Gamma^* \wedge q \in F \}
@@ -819,7 +814,7 @@ L(M) = \{ w\ |\ w \in \Sigma^* \wedge q_0w \vdash^* w_1\ q\ w_2 \wedge w_1,w_2 \
 %? slika z vhodno besedo na traku TS
 Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih damo na vhod stroju $M$, povzročijo, da se stroj $M$ v končno mnogo korakih znajde v končnem stanju.
 \Def{Jezik $L$ je Turingov jezik, če obstaja Turingov stroj $M$, tak, da je $L = L(M)$.}
-\subsection{Ugotavljanje pripadnosti besed Turingovemu jeziku}%?made one blockoftext from a lot of text. sm kj zgrešil?
+\subsect{Ugotavljanje pripadnosti besed Turingovemu jeziku}%?made one blockoftext from a lot of text. sm kj zgrešil?
 Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 \begin{items}
 \item Odločljive - obstaja algoritem, s katerim se lahko za poljubno besedo odločimo, ali pripada jeziku.
@@ -881,7 +876,7 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 	\[ q_0 0011 \vdash X q_1 011 \vdash X 0 q_1 11 \vdash X q_2 0 Y 1 \vdash \dots \]
 }
 %?zapiski 2007 imajo tu še nekaj o turingovih jezikih
-\subsection{Turingov stroj kot računalnik funkcij}
+\subsect{Turingov stroj kot računalnik funkcij}
 Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo pozitivna naravna števila, ločena z enicami:
 	\[ 0^{i_1} 1 0^{i_2} 1  \dots 1 0^{i_k} \]
 %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)  
@@ -919,7 +914,7 @@ Vse običajne aritmetične funkcije so parcialne ali celo totalne rekurzivne fun
     \end{items}%?naredi cel stroj
 \end{primeri}
 
-\subsection{Lažja konstrukcija Turingovih strojev}
+\subsect{Lažja konstrukcija Turingovih strojev}
 Obstaja nekaj tehnik, ki poenostavijo in pohitrijo sestavljanje Turingovih strojev.%tu itak mislimo funkcije delta
 \subsubsection{Nadzorna enota kot pomnilnik}
 Vsako stanje stroja, je sestavljeno iz dveh delov -- stanja avtomata, ter shrambe za tračne znake. Novo množico stanj zapišemo kot $Q=K\times\Gamma$, kjer je $K$ stara množica stanj in $\Gamma$ tračna abeceda.
