@@ -19,7 +19,7 @@
 \usepackage{graphicx}
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{automata,snakes,arrows,shapes,decorations.text}
+\usetikzlibrary{calc,automata,snakes,arrows,shapes,decorations.text,positioning,shapes.arrows,chains}
 
 \usepackage{torstyle}
 %?this feels too much like CSS hacks :(
@@ -92,8 +92,30 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 Dokaz obstoja nekega matematičnega objekta je to, da nam ga uspe sestaviti.
 
 \begin{primeri}
-\item Za vsak $n>4$, obstaja dvojiško drevo, ki ima natanko $3$ liste.
-%?manjka dokaz in slika
+\item Za vsak $n>4$, obstaja dvojiško drevo, ki ima natanko $3$ liste.\\
+	Primer za $n=5$:
+	\br
+	\hspace*{1cm}\begin{tikzpicture}[level distance=6mm, inner sep=-0.3mm]
+		\node (root) {$\bigcirc$}
+		child { node (a) {$\bigcirc$} 
+			child { node (b) {$\bigcirc$} }
+			child { node (c) {$\bigcirc$} }
+		}
+		child { node (d) {$\bigcirc$} };
+	\end{tikzpicture}
+	\br
+	Primer za $n>5$, pri čemer je "$...$", poljubno vejitev samo v levo:
+	\br
+	\hspace*{1cm}\begin{tikzpicture}[level distance=6mm, inner sep=-0.3mm]
+		\node (root) {$\bigcirc$}
+		child { node (a) [inner sep=1mm] {$\dots$} {
+			child { node (b) [left=0.5cm] {$\bigcirc$} 
+				child { node (c) {$\bigcirc$} }
+				child { node (d) {$\bigcirc$} }}
+		}}
+		child { node (e) {$\bigcirc$} };
+	\end{tikzpicture}
+	\\
 \item $| \mathbb{R} | = | [0,1) |$.\\
 	\begin{items}
 	\item Množici imata enako moč, kadar med njima obstaja bijektivna preslikava.
@@ -104,8 +126,8 @@ Dokaz obstoja nekega matematičnega objekta je to, da nam ga uspe sestaviti.
 	kjer $s$ določa predznak ($s=0$, če $r \ge 0$ in $s=1$, sicer).
 	\item Vidimo:
 		\begin{items}
-		\item $|\mathbb{R}|\le |[0,1)|$, %?(ker se $0.2$ ne da preslikati v $\mathbb{R}$)??
 		\item $|\mathbb{R}|\ge |[0,1)|$, ker velja $[0,1) \subset \mathbb{R}$
+		\item $|\mathbb{R}|\le |[0,1)|$,\fixme%?(ker se $0.2$ ne da preslikati v $\mathbb{R}$)??
 		\end{items}
 	\item Iz tega lahko sklepamo, da velja $|\mathbb{R}|=|[0,1)|$
 	\end{items}
@@ -124,7 +146,7 @@ Dokaz obstoja nekega matematičnega objekta je to, da nam ga uspe sestaviti.
 	\item Baza: $1 \in \mathbb{N}$ 
 	\item Pravila generiranja: $n \in \mathbb{N} \Longrightarrow n+1 \in \mathbb{N} $
 	\end{items}
-\item \fnurl{Hilbertove krivulje}{http://en.wikipedia.org/wiki/Hilbert_curve}
+\item Hilbertove krivulje \fixme
 \end{primeri}
 
 \subsubsection{Dokaz s protislovjem}
@@ -278,7 +300,7 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	\begin{equation*}
 	L=\{ w\ |\ \hat\delta(q_0, w) \cap F \neq \emptyset \}
 	\end{equation*}
-	kjer je $\hat\delta(q,w)$ posplošena funkcija prehodov v večih korakih.}%?Y you no define \varepsilon closure?
+	kjer je $\hat\delta(q,w)$ posplošena funkcija prehodov v večih korakih.}
 \Def{Jezik DKA je definiran kot:
 	\begin{equation*}
 	L=\{ w\ |\ \hat\delta(q_0, w) \in F \}
@@ -363,7 +385,7 @@ Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
 \item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
 \end{items}
 
-\sect{Prevedbe med modeli regularnih jezikov}%?lame naslov, fixme
+\sect{Prevedbe med modeli regularnih jezikov}
 Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli in je mogoče pretvarjati med njimi. V tem odseku bomo predstavili naslednje prevedbe:\\[12pt]%?ustrezno dopolni :)
 \begin{center}
 \begin{tikzpicture}[>=latex',/tikz/initial text=""]
@@ -421,7 +443,6 @@ Osnovni izrazi:
 \end{itemize}
 \end{minipage}
 \begin{minipage}[t]{7cm}
-%?kul bi blo obkrožit kaj so tu osnovni izrazi
 Sestavljeni izrazi:
 \begin{itemize}
 \item $r = r_1 + r_2$\\
@@ -716,7 +737,7 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 %I've got 23 problems, but a bitch ain't one. -Hilbert, 1900
 %\br
 Leta 1900 je Nemški matematik David Hilbert objavil seznam triidvajsetih nerešenih problemov v matematiki. Eden izmed Hilbertovih problemov (deseti po vrsti), je vprašanje, ali obstaja postopek, po katerem ugotovimo rešljivost poljubne Diofantske enačbe -- torej, ali lahko ugotovimo, če ima polinom s celoštevilskimi koeficienti $P(x_1, x_2, \dots, x_n)=0$, celoštevilsko rešitev.
-%?non-sequitur... vsaj dokler ne bo ogromno več zgodovine tu :)
+%?več zgodovine tu :)
 Kljub temu, da je Emil Post že leta 1944 slutil, da je problem nerešljiv, je to dokončno dokazal rus Jurij Matijaševič šele leta 1970 v svojem doktorskem delu. Med reševanjem problema pa so se matematiki že prej začeli ukvarjati s formalizacijo pojma postopka oz. algoritma. Intuitivna definicija tega se glasi nekako tako:
 \Def{Algoritem je zaporedje ukazov, s katerimi se v končnem številu korakov opravi neka naloga.}
 Pri tem pa ostaja še kar nekaj odprtih vprašanj, npr.:
@@ -735,10 +756,10 @@ Pri tem pa ostaja še kar nekaj odprtih vprašanj, npr.:
 \item V kakšnem pomnilniku so ukazi shranjeni?
 	\begin{items}%?verjetno ista vprašanja kot pri št. ukazov?
 	\item Končnem - ali s končnim zaporedjem ukazov res lahko mogoče rešimo vsako nalogo?
-	\item Neskončnem - %?
+	\item Neskončnem - \fixme%?
 	\end{items}
 \end{items}
-Nekateri zgodnji poskusi formalizacije pojma algoritma so:%? zgodovinsko zaporedje, letnice, imena modelov, moar info
+Nekateri zgodnji poskusi formalizacije pojma algoritma so: \fixme%? zgodovinsko zaporedje, letnice, imena modelov, moar info
 \begin{items}
     \item GK (Kurt Gödel, Stephen Kleene) 
     \item HG (Jacques Herbrand, Kurt Gödel)
@@ -757,8 +778,28 @@ Turingov stroj se je uveljavil kot uporaben in preprost model računanja, ki zna
 \item Trak (papir)
 \end{items}
 V postopku formalizacije, pa je zaradi večje preprostosti, zahteval še, da je stroj sestavljen iz končno mnogo elementov, ter da deluje v diskretnih korakih.%?končno mnogo elementov? na kaj to cilja?
+\br
+\begin{tikzpicture}[start chain, node distance=-0.15mm, cell/.style={draw, on chain, minimum size=0.6cm}]
+	\node (ne) at (110bp, 60bp) [draw, thick, minimum height=1.2cm]  {Nadzorna enota};
 
-%?slika nadzorne enote, traku in okna
+	\node (Trak) [on chain] {Trak};
+	\foreach \x in {1,2,...,5} {
+		\node ({A\x}) [cell] {$A_{\x}$};
+		\ifnum \x=5 
+			\node ({Ad1}) [cell] {...};
+			\node ({Ai}) [cell, very thick] {$A_i$};
+			\node ({Ad2}) [cell] {...};
+			\node ({An}) [cell] {$A_n$};
+			\node ({Ab1}) [cell] {$B$};
+			\node ({Ab2}) [cell] {$B$};
+			\node ({Ad3}) [cell] {...};
+		\fi
+	}
+	\node (dots) [on chain] {$\dots$};
+
+	\draw (ne.south) -- (110bp, 25bp) -- (132bp, 25bp) [->] to (Ai.north);
+	\node [below] at (Ai.south) {Čitalno okno};
+\end{tikzpicture}
 
 \Def{Turingov stroj je definiran kot sedmerka $M=\langle Q, \Sigma, \Gamma, \delta, q_0, B, F \rangle $, kjer je:
 \begin{items}
@@ -780,7 +821,7 @@ Stroj deluje tako, da v vsakem koraku opravi naslednje:
 \subsect{Trenutni opis}
 \Def{$TO = \Gamma^* \times Q \times \Gamma^*$ je množica vseh trenutnih opisov.\\
 Nek trenutni opis $\langle \alpha_1, q, \alpha_2 \rangle$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
-%?slika TS z označenim \alpha_1, \alpha_2
+\br\fixme - slika Turingovega stroja z označenim $\alpha_1, \alpha_2$
 \br
 Iz $\alpha_1$ in $\alpha_2$, lahko razberemo:
 \begin{items}
@@ -801,7 +842,7 @@ $x_1 \dots x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots x_{i-1}\ Y\ p\ x_{i+1} \do
 	\item če okno ni na robu ($i>1$), potem: $x_1 \dots x_{i-2} x_{i-1}\ q\ x_i \dots x_n \vdash x_1 \dots\ x_{i-2} p\ x_{i-1}\ Y\ x_{i+1} \dots x_n$
 	\end{items}
 \end{items}}
-\subsect{Tranzitivna ovojnica $\vdash^*$ relacije $\vdash$}%?je pravi naslov?
+Imamo pa tudi posplošeno relacijo $u \vdash^* v$, ki pove, da trenutni opis $v$ sledi iz $u$ v enem ali večih korakih.
 \Def{$u \vdash^* v$, če obstaja tako zaporedje $x_i, (i \in [0, 1, \dots, k], k \geq 0)$, da velja $u=x_0, v=x_k$ in $x_0 \vdash x_1 \wedge x_1 \vdash x_2 \wedge \dots \wedge x_{k-1} \vdash x_k$
 \br
 Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
@@ -811,10 +852,10 @@ Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
 L(M) = \{ w\ |\ w \in \Sigma^* \wedge q_0w \vdash^* w_1\ q\ w_2 \wedge w_1,w_2 \in \Gamma^* \wedge q \in F \}
 \end{equation*}
 }
-%? slika z vhodno besedo na traku TS
+\fixme - slika z vhodno besedo na traku TS\br
 Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih damo na vhod stroju $M$, povzročijo, da se stroj $M$ v končno mnogo korakih znajde v končnem stanju.
 \Def{Jezik $L$ je Turingov jezik, če obstaja Turingov stroj $M$, tak, da je $L = L(M)$.}
-\subsect{Ugotavljanje pripadnosti besed Turingovemu jeziku}%?made one blockoftext from a lot of text. sm kj zgrešil?
+\subsect{Ugotavljanje pripadnosti besed Turingovemu jeziku}
 Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 \begin{items}
 \item Odločljive - obstaja algoritem, s katerim se lahko za poljubno besedo odločimo, ali pripada jeziku.
@@ -825,13 +866,13 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 	\end{items}
 \end{items}
 
-%? slika venn.. x znotraj L kroga... v kvadratu
+\fixme - vennov diagram beseda w znotraj L kroga...
 
 %?where does this go?
 %Terminologija: re (recursively enumerable, Turing recognizable)%?semi-decidable? 
 %Rekurzivni jezik (decidable)%?where does this go?
 
-%? slika venn... odločljivi jeziki so znotraj Turingovih
+\fixme - vennov diagram odločljivi jeziki znotraj Turingovih?
 
 \Primer{Zapiši Turingov stroj, ki sprejema jezik $L=\{0^n 1^n | n \geq 1\}$\\
 	Skica izvajanja stroja:
@@ -880,10 +921,10 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
 Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo pozitivna naravna števila, ločena z enicami:
 	\[ 0^{i_1} 1 0^{i_2} 1  \dots 1 0^{i_k} \]
 %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)  
-%?slika TS z števili i_j na traku
+\fixme - slika TS s števili $i_j$ na traku\br
 Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ničel $0^m$, na levi in desni strani skupine pa same $B$-je. S tem je stroj lahko izračunal neko funkcijo
 	\[ f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}_+ \mbox{\ \ oz. \ \ } f(i_1, i_2, \dots, i_k) = m \]
-%?slika TS s skupino ničel na traku
+\fixme - slika TS s skupino ničel na traku\br
 Funkcija $f$ ni nujno definirana za vsako $k$-terico iz $\mathbb{N}_+^k$, torej je parcialna funkcija, kadar pa je definirana povsod, pravimo da je totalna. Stroj se pri nedefiniranih $k$-tericah pač na neki točki ustavi in pri tem na traku ne pusti le ene skupine ničel, ali pa se sploh ne ustavi.
 Isti turingov stroj hkrati računa več funkcij: $f^{(1)}, f^{(2)}, \dots f^{(k)}$.%?računa ali "lahko računa".. ne štekam ubistvu čist
 
@@ -964,8 +1005,7 @@ Na traku imamo več kot eno sled, kar pomeni, da s traku beremo $k$-terice trač
 }
 \subsubsection{Prestavljanje vsebine traku}
 Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izrezali iz traku in nato trak zlepili nazaj skupaj, izrezane simbole pa bi si pri tem seveda radi nekako zapomnili. Tudi to metodo realiziramo s pomočjo shrambe za tračne simbole v nadzorni enoti, a moramo pri tem paziti, da je funkcija prehodov pravilno napisana.
-%?slika "guba"
-%?slika nadzorna enota
+\fixme slika "gube" na traku in slika nadzorne enote
 \Primer{Sestavi Turingov stroj, ki premakne vsebino traku za 2 celici v desno.\\
 	Skica stroja:
 	\begin{items}
@@ -987,6 +1027,7 @@ Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izr
 }
 
 \subsubsection{Podprogrami}
+\fixme
 %?Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
 
 %?tu je razlagal tisto neizračunljivo funkcijo nad matrikami. @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
