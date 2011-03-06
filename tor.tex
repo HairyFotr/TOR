@@ -795,7 +795,7 @@ V postopku formalizacije, pa je zaradi večje preprostosti, zahteval še, da je 
 	\node ({end}) [cell, draw=white] {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (110bp, 60bp) [draw, minimum height=1.2cm]  {Nadzorna enota};
+	\node (ne) at (110bp, 60bp) [draw, minimum height=1.2cm, minimum width=3cm]  {Nadzorna enota};
 	\draw (ne.south) -- (110bp, 25bp) -- (137.5bp, 25bp) [->] to (Ai.north);
 	\node [below] at (Ai.south) {Čitalno okno};
 \end{tikzpicture}
@@ -865,12 +865,12 @@ Imamo pa tudi posplošeno relacijo $u \vdash^* v$, ki pove, da trenutni opis $v$
 \br
 Torej, trenutni opis $v$ sledi iz $u$, v $k$ korakih Turingovega stroja.}
 \sect{Jezik Turingovega stroja}
-\Def{Jezik Turingovega stroja je definiran kot:
+\Def{Jezik Turingovega stroja je:
 \begin{equation*}
-L(M) = \{ w\ |\ w \in \Sigma^* \wedge q_0w \vdash^* w_1\ q\ w_2 \wedge w_1,w_2 \in \Gamma^* \wedge q \in F \}
+L(M) = \{ w\ |\ w \in \Sigma^* \wedge \varepsilon\ q_0\ w \vdash^*\alpha_1\ q_F\ \alpha_2 \wedge \alpha_1,\alpha_2 \in \Gamma^*, q_F \in F \}
 \end{equation*}
 }
-Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih damo na vhod stroju $M$, povzročijo, da se stroj $M$ v končno mnogo korakih znajde v končnem stanju.
+Z besedami to pomeni, da je jezik Turingovega stroja množica besed, ki če jih damo na vhod stroja, povzročijo, da se ta v končno mnogo korakih znajde v končnem stanju.
 \ \\
 \begin{center}
 \begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
@@ -885,6 +885,8 @@ Z besedami to pomeni, da je $L(M)$ množica besed $w \in \Sigma^*$, ki če jih d
 	\node (ne) at (90bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
 	\draw (ne.south) -- (90bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
 \end{tikzpicture}
+\br
+Začetna konfiguracija Turingovega stroja.
 \end{center}
 \Def{Jezik $L$ je Turingov jezik, če obstaja Turingov stroj $M$, tak, da je $L = L(M)$.}
 \subsect{Ugotavljanje pripadnosti besed Turingovemu jeziku}
@@ -957,13 +959,13 @@ Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo poz
 \begin{center}
 \begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
 	\node ({Ai}) [cell, ultra thick] {};
-	\node ({A0}) [cell, minimum width=3cm] {$0^{i_1}$\ \ \ };
+	\node ({A0}) [cell, minimum width=2cm] {$0^{i_1}$\ \ \ };
 	\node ({Ab1}) [cell] {$1$};
-	\node ({A1}) [cell, minimum width=2cm] {$0^{i_2}$};
+	\node ({A1}) [cell, minimum width=1.4cm] {$0^{i_2}$};
 	\node ({Ab1}) [cell] {$1$};
 	\node ({Ad1}) [cell] {\ ...\ \ };
 	\node ({Ab1}) [cell] {$1$};
-	\node ({A1}) [cell, minimum width=4cm] {$0^{i_k}$\ \ \ \ };
+	\node ({A1}) [cell, minimum width=2.8cm] {$0^{i_k}$\ \ \ \ };
 	\node ({Ab1}) [cell] {$B$};
 	\node ({Ab1}) [cell] {$B$};
 	\node ({Ad2}) [cell] {\ ...\ \ };
