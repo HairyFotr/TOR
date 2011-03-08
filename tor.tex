@@ -2,12 +2,14 @@
 %
 \documentclass[10pt,a4paper,oneside]{book}
 
+
+
 %Hello there. Don't know what to do?
 	%Search for the %? or \fixme and fix/add stuff.
 	%Check zapiski 2007, your notes and your memory and fix/add stuff
 	%kul knjige imajo quote na začetku poglavij
 %
-%lol, windows newline bug poje to vrsto včasih :P
+%lol, windows newline bug poje to vrsto na začetku včasih :P
 %\documentclass[10pt,a4paper,oneside]{book}
 
 \usepackage[slovene]{babel}
@@ -37,7 +39,7 @@
 \ \\[1cm]
 {\Huge\bf Teoretične osnove računalništva}\\[1cm]
 {\huge \today}\ \\[1.5cm]
-%{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več to :P
+%{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več samo to :P
 \begin{tikzpicture}[scale=1.35]
 	\draw (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
 	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
@@ -1089,106 +1091,108 @@ Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izr
 \fixme
 %?Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
 
-\section{Moč TS}
-V moč Turingovega stroja se prepričamo tako, da dokažemo, da so navidez močnejši stroji ravno tako močni kot osnovni Turingov stroj. Ogledali pa si bomo tudi nekaj drugačnih načinov računanja.
+\section{Moč Turingovega stroja}
+V moč Turingovega stroja se bomo prepričali na dva načina -- tako, da bomo pokazali, da so različne razširitve Turingovega stroja enako močne kot osnovni model, ter tako, da bomo pokazali, da je tudi nekaj precej drugačnih modelov računanja enako močnih.
 
-Vsi so enako močni
+\Odmakni{Postopek dokazovanja}{Recimo, da je $\mathcal{M}$ razred modelov, za katerega želimo dokazati, da so ekvivalentni TS, moramo poiskati sistematičen, končen postopek S, ki poljubnemu stroju $M \in \mathcal{M}$ priredi nek TS $M'$, ki je sposoben simulirati $M$.}
 
-Postopek dokazovanja: Če je $\mathcal{M}$ razred modelov, za katerega želimo dokazati, da so ekvivalentni TS, moramo poiskati sistematičen, končen postopek S, ki poljubnemu stroju $M \in \mathcal{M}$ priredi nek TS $M'$, ki je sposoben simulirati $M$.
+\fixme - slika krog $\mathcal{M}$ s točko M $\rightarrow$ TS s točko M
 
-\fixme - slika krog $\mathcal{M}$ z točko M -> TS z točko M
+\subsect{Turingov stroj z dvosmernim trakom}
+Imamo Turingov stroj, ki ima trak neomejen v obe smeri. Vhodna beseda se vpiše nekam na trak, okno se prestavi na prvi znak besede.
 
-\subsubsect{Turingov stroj z dvosmernim trakom}
-Trak je neomejen v obe smeri
-Vhodna beseda se vpiše nekam na trak, okno se prestavi na prvi znak besede
-
-\ \\
+%kako zbrišem črto pri prvem ...?
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
-	\node ({end}) [cell, thick, draw=white] {};
-	\node ({Ad2}) [cell] {\ ...\ \ };
+\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}, endcell/.style={cell, ultra thick, draw=white}]
+	\node ({Ad}) [cell] {\ ...\ \ };
+	\node ({Ab}) [cell] {$B$};
+	\node ({Ab}) [cell] {$B$};
 	\node ({Ai}) [cell, ultra thick] {};
-	\node ({A1}) [cell, minimum width=4cm] {$w$\ \ \ \ \ };
-	\node ({Ab1}) [cell] {$B$};
-	\node ({Ab1}) [cell] {$B$};
-	\node ({Ad2}) [cell] {\ ...\ \ };
-	\node ({end}) [cell, thick, draw=white] {};
+	\node ({w})  [cell, minimum width=4cm] {$w$\ \ \ \ \ };
+	\node ({Ab}) [cell] {$B$};
+	\node ({Ab}) [cell] {$B$};
+	\node ({Ad}) [cell] {\ ...\ \ };
+	\node ({end}) [endcell] {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (70bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
-	\draw (ne.south) -- (70bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
+	\node (ne) at (95bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (95bp, 25bp) -- (53.5bp, 25bp) [->] to (Ai.north);
 \end{tikzpicture}
 \end{center}
+\br
+Stroj je definiran skoraj enako kot običajni Turingov stroj, le funkcija prehodov $\delta$ je enostavnejša, saj ni treba skrbeti, kaj se zgodi, če zadanemo levi rob, kot pri običajnem Turingovemu stroju.
 
-Stroj je definiran enako: $M=\langle Q,\Sigma,\Gamma,\delta,q_0,B,F \rangle$
-le $\delta$ je enostavnejša, saj ni treba skrbeti kaj se zgodi, ko zadanemo levi rob.
-
-Trditev: ni šibkejši od osnovnega
-Dokaz: lahko se vede kot da je omejen na levi
-
-?: Ali je močnejši od osnovnega? Ne.
-Dokaz: Imamo poljuben Turingov stroj z dvosmernim trakom.
+\Trditev{Turingov stroj z dvosmernim trakom ni šibkejši od osnovnega Turingovega stroja.}
+\Dokaz{Lahko se vede kot da je omejen na levi.\fixme - to smo delali na vajah}
 \ \\
+\Trditev{Turingov stroj z dvosmernim trakom ni močnejši od osnovnega.}
+\Dokaz{Imamo poljuben Turingov stroj z dvosmernim trakom:
+\ \\
+%kako zbrišem črto pri prvem ...?
 \begin{center}
 \begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
 	\node ({end}) [cell, thick, draw=white] {};
 	\node ({Ad2}) [cell] {\ ...\ \ };
-	\node ({Ai}) [cell, ultra thick] {};
+	\node ({A1}) [cell] {$A_{-3}$};
 	\node ({A1}) [cell] {$A_{-2}$};
 	\node ({A1}) [cell] {$A_{-1}$};
-	\node ({A1}) [cell] {$A_{0}$};
+	\node ({Ai}) [cell, ultra thick] {$A_{0}$};
 	\node ({A1}) [cell] {$A_{1}$};
 	\node ({A1}) [cell] {$A_{2}$};
+	\node ({A1}) [cell] {$A_{3}$};
 	\node ({Ad2}) [cell] {\ ...\ \ };
 	\node ({end}) [cell, thick, draw=white] {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (70bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
-	\draw (ne.south) -- (70bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
+	\node (ne) at (85bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (85bp, 25bp) -- (115bp, 25bp) [->] to (Ai.north);
 \end{tikzpicture}
 \end{center}
-Priredimo mu dvosledni TS M'
+\ \\
+Priredimo mu dvosledni Turingov stroj $M'$:
 \ \\
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell1/.style={draw, very thin, on chain=1, minimum size=0.6cm}, cell2/.style={draw, very thin, on chain=2, minimum size=0.6cm}]
-	\node ({end}) [cell1, thick, draw=white] {};
-	\node ({Ad2}) [cell1] {\ ...\ \ };
-	\node ({Ai}) [cell1, ultra thick] {};
-	\node ({A1}) [cell1] {$A_{0}$};
+\begin{tikzpicture}[start chain=a, start chain=b, node distance=-0.075mm, thick, cell/.style={draw, very thin, minimum size=0.6cm, minimum width=1cm}, cell1/.style={cell, on chain=a}, cell2/.style={cell, on chain=b}]
+	\node ({Ai}) [cell1, ultra thick] {$A_{0}$};
 	\node ({A1}) [cell1] {$A_{1}$};
 	\node ({A1}) [cell1] {$A_{2}$};
+	\node ({A1}) [cell1] {$A_{3}$};
 	\node ({Ad2}) [cell1] {\ ...\ \ };
 	\node ({end}) [cell1, thick, draw=white] {};
-	\node ({end}) [cell1, thick, draw=white] {};
-	\node ({Ad2}) [cell1] {\ ...\ \ };
 
-	\node ({Ai}) [cell2, ultra thick] {};
-	\node ({A1}) [cell2] {$A_{#}$};
+	\node ({Ai2}) at (0bp,-0.6cm) [cell2, ultra thick] {\#};
 	\node ({A1}) [cell2] {$A_{-1}$};
 	\node ({A1}) [cell2] {$A_{-2}$};
+	\node ({A1}) [cell2] {$A_{-3}$};
 	\node ({Ad2}) [cell2] {\ ...\ \ };
 	\node ({end}) [cell2, thick, draw=white] {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (70bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
-	\draw (ne.south) -- (70bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
+	\node (ne) at (40bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (40bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
 \end{tikzpicture}
 \end{center}
 
-# bo povedal, da je okno na robu in je treba gledati na drugo sled.
+Stroj $M'$ deluje tako:
+\begin{items}
+\item naeenkrat dela le z eno sledjo
+\item ko na drugi sledi vidi \#, zamenja aktivno sled
+\item na zgornji sledi dela enako kot $M$
+\item na spodnji se obrne smer premikanja
+\end{items}
+%(tu smo pomojem napisali še 2x isto)
 
-M deluje tko, da 
-upošteva (bere in piše) naeenkrat le eno sled in se obrne, ko vidi # na spodni sledi
-na zgornji sledi dela enako
-na spodnji pa obnemo levo/desno
-(napisali še 2x isto?)
+%Formalizacija... ne bomo delal
 
-Formalizacija... ne bomo delal
+%Sklep.. sta ekvivalentna - kar izračuna dvosmerni, lahko tudi osnovni.
+%Izrek: Za jezik L obstaja TS z dvosmernim trakom, n.t.k., za L obstaja osnovni TS.
 
-Sklep.. sta ekvivalentna - kar izračuna dvosmerni, lahko tudi osnovni.
+%nekdo je vprašal, če je bijekcija, pa je rekel, da ne čist?
+}
 
-Izrek: Za jezik L obstaja TS z dvosmernim trakom, n.t.k., za L obstaja osnovni TS.
-%ni čist bijekcija?
+%?------------------------neurejeno-----------------------------
+
+\begin{comment}
 \subsubsect{Večtračni Turingov stroj}
 TS ima več trakov
 ... po eno na trak
@@ -1315,5 +1319,5 @@ Church
 
 \subsubsect{Algoritmi Markova}
 Markov
-
+\end{comment}
 \end{document}

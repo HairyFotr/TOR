@@ -1,4 +1,6 @@
-im{}
+%torstyle predloge:
+%Definicija \Def{}
+%Primer \Prim{}
 %Prirejen itemize \begin{items}
 \NeedsTeXFormat{LaTeX2e}
 \usepackage[margin=1in]{geometry}
@@ -64,15 +66,27 @@ im{}
 %
 %morda možen način: neki: \marginpar{}
 
-\newcommand\Def[1]{
-\begin{enum}{\bf Def.:}
-	\item #1
+%tu je treba pazit - argumenti enuma so mal posebni... glej pr{i}mer :)
+\newcommand\Odmakni[2]{
+\begin{enum}{\bf #1:}
+	\item #2
 \end{enum}}
 
-\newcommand\Primer[1]{
-\begin{enum}{\bf Pr{i}mer:}
-	\item #1
-\end{enum}}
+\newcommand\Def[1]{\Odmakni{Def.}{#1}}
+\newcommand\Primer[1]{\Odmakni{Pr{i}mer}{#1}}
+\newcommand\Trditev[1]{\Odmakni{Trd{i}tev}{#1}}
+\newcommand\Dokaz[1]{\Odmakni{Dokaz}{#1}}
+\newcommand\Izrek[1]{\Odmakni{Izrek}{#1}}
+
+%\newcommand\Def[1]{
+%\begin{enum}{\bf Def.:}
+%	\item #1
+%\end{enum}}
+
+%\newcommand\Primer[1]{
+%\begin{enum}{\bf Pr{i}mer:}
+%	\item #1
+%\end{enum}}
 
 
 \newenvironment{primeri}{
