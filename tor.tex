@@ -782,25 +782,25 @@ Turingov stroj se je uveljavil kot uporaben in preprost model računanja, ki zna
 V postopku formalizacije, pa je zaradi večje preprostosti, zahteval še, da je stroj sestavljen iz končno mnogo elementov, ter da deluje v diskretnih korakih.%?končno mnogo elementov? na kaj to cilja?
 \ \\
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
-	\node (Trak) [on chain] {Trak};
+\begin{tikzturing}
+	\node [on chain=trak] {Trak};
 	\foreach \x in {1,2,...,5} {
-		\node ({A\x}) [cell] {$A_{\x}$};
+		\node [cell] {$A_{\x}$};
 	}
-	\node ({Ad1}) [cell] {\ ...\ \ };
-	\node ({Ai}) [cell, ultra thick] {$A_i$};
-	\node ({Ad2}) [cell] {\ ...\ \ };
-	\node ({An}) [cell] {$A_n$};
-	\node ({Ab1}) [cell] {$B$};
-	\node ({Ab2}) [cell] {$B$};
-	\node ({Ad3}) [cell] {\ ...\ \ };
-	\node ({end}) [cell, draw=white] {};
+	\node      [cell]           {\ ...\ \ };
+	\node (Ai) [cell, selected] {$A_i$};
+	\node      [cell]           {\ ...\ \ };
+	\node      [cell]           {$A_n$};
+	\node      [cell]           {$B$};
+	\node      [cell]           {$B$};
+	\node      [cell]           {\ ...\ \ };
+	\node      [cell, end]      {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (110bp, 60bp) [draw, minimum height=1.2cm, minimum width=3cm]  {Nadzorna enota};
+	\node (ne) at (110bp, 70bp) [head, minimum height=1.4cm, minimum width=3cm]  {Nadzorna enota};
 	\draw (ne.south) -- (110bp, 25bp) -- (137.5bp, 25bp) [->] to (Ai.north);
 	\node [below] at (Ai.south) {Čitalno okno};
-\end{tikzpicture}
+\end{tikzturing}
 \end{center}
 
 \Def{Turingov stroj je definiran kot sedmerka $M=\langle Q, \Sigma, \Gamma, \delta, q_0, B, F \rangle $, kjer je:
@@ -825,22 +825,21 @@ Stroj deluje tako, da v vsakem koraku opravi naslednje:
 Nek trenutni opis $\langle \alpha_1, q, \alpha_2 \rangle$, ali krajše $\alpha_1\ q\ \alpha_2$ opisuje konfiguracijo Turingovega stroja.
 \br
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
-	\node ({alpha1}) [cell, minimum width=4cm] {$\alpha_1$};
-	\node ({Ai}) [cell, ultra thick] {};
-	\node ({alpha2}) [cell, minimum width=3.5cm] {$\alpha_2$\ \ \ };
-	%\node ({Ad2}) [cell] {};
-	\node ({Ab1}) [cell] {$B$};
-	\node ({Ab2}) [cell] {$B$};
-	\node ({Ad3}) [cell] {\ ...\ \ };
-	\node ({end}) [cell, draw=white] {};
+\begin{tikzturing}
+	\node      [cell, minimum width=3.6cm] {$\alpha_1$};
+	\node (Ai) [cell, selected]            {};
+	\node      [cell, minimum width=3cm]   {$\alpha_2$\ \ \ };
+	\node      [cell]                      {$B$};
+	\node      [cell]                      {$B$};
+	\node      [cell]                      {\ ...\ \ };
+	\node      [cell, end]                 {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (50bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q$};
-	\draw (ne.south) -- (50bp, 25bp) -- (66bp, 25bp) [->] to (Ai.north);
+	\node (ne) at (40bp, 60bp) [head]  {$q$};
+	\draw (ne.south) -- (40bp, 25bp) -- (60.5bp, 25bp) [->] to (Ai.north);
 	%\node [below, minimum width=4cm] at (alpha1.south) {$\alpha_1$};
 	%\node [below, minimum width=4cm] at (alpha2.south) {$\alpha_2$\ \ \ \ };
-\end{tikzpicture}
+\end{tikzturing}
 \end{center}
 \br
 Čitalno okno je nad prvim znakom niza $\alpha_2$, iz tega lahko razberemo:
@@ -875,18 +874,18 @@ L(M) = \{ w\ |\ w \in \Sigma^* \wedge \varepsilon\ q_0\ w \vdash^*\alpha_1\ q_F\
 Z besedami to pomeni, da je jezik Turingovega stroja množica besed, ki če jih damo na vhod stroja, povzročijo, da se ta v končno mnogo korakih znajde v končnem stanju.
 \ \\
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
-	\node ({Ai}) [cell, ultra thick] {};
-	\node ({w}) [cell, minimum width=4cm] {$w$\ \ \ \ };
-	\node ({Ab1}) [cell] {$B$};
-	\node ({Ab2}) [cell] {$B$};
-	\node ({Ad}) [cell] {\ ...\ \ };
-	\node ({end}) [cell, draw=white] {};
+\begin{tikzturing}
+	\node (Ai) [cell, selected]          {};
+	\node      [cell, minimum width=4cm] {$w$\ \ \ \ \ };
+	\node      [cell]                    {$B$};
+	\node      [cell]                    {$B$};
+	\node      [cell]                    {\ ...\ \ };
+	\node      [cell, end]               {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (90bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\node (ne) at (90bp, 60bp) [head] {$q_0$};
 	\draw (ne.south) -- (90bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
-\end{tikzpicture}
+\end{tikzturing}
 \br
 Začetna konfiguracija Turingovega stroja.
 \end{center}
@@ -959,24 +958,24 @@ Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo poz
 %?skupine ničel so i_1, i_2, ..., kjer so i naravna števila (mjbi i+1 ničel)  
 \ \\
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
-	\node ({Ai}) [cell, ultra thick] {};
-	\node ({A0}) [cell, minimum width=2cm] {$0^{i_1}$\ \ \ };
-	\node ({Ab1}) [cell] {$1$};
-	\node ({A1}) [cell, minimum width=1.4cm] {$0^{i_2}$};
-	\node ({Ab1}) [cell] {$1$};
-	\node ({Ad1}) [cell] {\ ...\ \ };
-	\node ({Ab1}) [cell] {$1$};
-	\node ({A1}) [cell, minimum width=2.8cm] {$0^{i_k}$\ \ \ \ };
-	\node ({Ab1}) [cell] {$B$};
-	\node ({Ab1}) [cell] {$B$};
-	\node ({Ad2}) [cell] {\ ...\ \ };
-	\node ({end}) [cell, draw=white] {};
+\begin{tikzturing}
+	\node (Ai) [cell, selected]            {};
+	\node      [cell, minimum width=2cm]   {$0^{i_1}$\ \ \ };
+	\node      [cell]                      {$1$};
+	\node      [cell, minimum width=1.4cm] {$0^{i_2}$};
+	\node      [cell]                      {$1$};
+	\node      [cell]                      {\ ...\ \ };
+	\node      [cell]                      {$1$};
+	\node      [cell, minimum width=2.6cm] {$0^{i_k}$\ \ \ \ };
+	\node      [cell]                      {$B$};
+	\node      [cell]                      {$B$};
+	\node      [cell]                      {\ ...\ \ };
+	\node      [cell, end]                 {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
 	\node (ne) at (70bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
 	\draw (ne.south) -- (70bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
-\end{tikzpicture}
+\end{tikzturing}
 \end{center}
 Recimo, da se stroj po nekem številu korakov ustavi in ima na traku skupino ničel $0^m$, na levi in desni strani skupine pa same $B$-je. S tem je stroj morda izračunal neko funkcijo:
 	\[ f^{(k)}:\mathbb{N}_+^k \rightarrow \mathbb{N}_+ \mbox{\ \ oz. \ \ } f(i_1, i_2, \dots, i_k) = m \]
@@ -1103,25 +1102,25 @@ Imamo Turingov stroj, ki ima trak neomejen v obe smeri. Vhodna beseda se vpiše 
 
 %kako zbrišem črto pri prvem ...?
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}, endcell/.style={cell, ultra thick, draw=white}]
-	\node ({Ad}) [cell] {\ ...\ \ };
-	\node ({Ab}) [cell] {$B$};
-	\node ({Ab}) [cell] {$B$};
-	\node ({Ai}) [cell, ultra thick] {};
-	\node ({w})  [cell, minimum width=4cm] {$w$\ \ \ \ \ };
-	\node ({Ab}) [cell] {$B$};
-	\node ({Ab}) [cell] {$B$};
-	\node ({Ad}) [cell] {\ ...\ \ };
-	\node ({end}) [endcell] {};
+\begin{tikzturing}
+	\node      [cell]                    {\ ...\ \ };
+	\node      [cell]                    {$B$};
+	\node      [cell]                    {$B$};
+	\node (Ai) [cell, selected]          {};
+	\node      [cell, minimum width=4cm] {$w$\ \ \ \ \ };
+	\node      [cell]                    {$B$};
+	\node      [cell]                    {$B$};
+	\node      [cell]                    {\ ...\ \ };
+	\node      [cell, end]               {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
 	\node (ne) at (95bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
 	\draw (ne.south) -- (95bp, 25bp) -- (53.5bp, 25bp) [->] to (Ai.north);
-\end{tikzpicture}
+\end{tikzturing}
 \end{center}
 \br
 Stroj je definiran skoraj enako kot običajni Turingov stroj, le funkcija prehodov $\delta$ je enostavnejša, saj ni treba skrbeti, kaj se zgodi, če zadanemo levi rob, kot pri običajnem Turingovemu stroju.
-
+\br
 \Trditev{Turingov stroj z dvosmernim trakom ni šibkejši od osnovnega Turingovega stroja.}
 \Dokaz{Lahko se vede kot da je omejen na levi.\fixme - to smo delali na vajah}
 \ \\
@@ -1130,47 +1129,44 @@ Stroj je definiran skoraj enako kot običajni Turingov stroj, le funkcija prehod
 \ \\
 %kako zbrišem črto pri prvem ...?
 \begin{center}
-\begin{tikzpicture}[start chain, node distance=-0.075mm, thick, cell/.style={draw, very thin, on chain, minimum size=0.6cm}]
-	\node ({end}) [cell, thick, draw=white] {};
-	\node ({Ad2}) [cell] {\ ...\ \ };
-	\node ({A1}) [cell] {$A_{-3}$};
-	\node ({A1}) [cell] {$A_{-2}$};
-	\node ({A1}) [cell] {$A_{-1}$};
-	\node ({Ai}) [cell, ultra thick] {$A_{0}$};
-	\node ({A1}) [cell] {$A_{1}$};
-	\node ({A1}) [cell] {$A_{2}$};
-	\node ({A1}) [cell] {$A_{3}$};
-	\node ({Ad2}) [cell] {\ ...\ \ };
-	\node ({end}) [cell, thick, draw=white] {};
+\begin{tikzturing}
+	\node [cell] {\ ...\ \ };
+
+	\foreach \x in {-3,-2,-1} { \node [cell] {$A_{\x}$}; }
+	\node (Ai) [cell, selected] {$A_{0}$};
+	\foreach \x in {1,2,3} { \node [cell] {$A_{\x}$}; }
+
+	\node [cell] {\ ...\ \ };
+	\node [cell, end]      {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
-	\node (ne) at (85bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
-	\draw (ne.south) -- (85bp, 25bp) -- (115bp, 25bp) [->] to (Ai.north);
-\end{tikzpicture}
+	\node (ne) at (70bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (70bp, 25bp) -- (95bp, 25bp) [->] to (Ai.north);
+\end{tikzturing}
 \end{center}
 \ \\
 Priredimo mu dvosledni Turingov stroj $M'$:
 \ \\
 \begin{center}
-\begin{tikzpicture}[start chain=a, start chain=b, node distance=-0.075mm, thick, cell/.style={draw, very thin, minimum size=0.6cm, minimum width=1cm}, cell1/.style={cell, on chain=a}, cell2/.style={cell, on chain=b}]
-	\node ({Ai}) [cell1, ultra thick] {$A_{0}$};
-	\node ({A1}) [cell1] {$A_{1}$};
-	\node ({A1}) [cell1] {$A_{2}$};
-	\node ({A1}) [cell1] {$A_{3}$};
-	\node ({Ad2}) [cell1] {\ ...\ \ };
-	\node ({end}) [cell1, thick, draw=white] {};
+\begin{tikzturing}
+	\node (Ai) [cell1, selected] {$A_{0}$};
+	\node at (0bp,-0.6cm) [cell2, selected] {\#};
 
-	\node ({Ai2}) at (0bp,-0.6cm) [cell2, ultra thick] {\#};
-	\node ({A1}) [cell2] {$A_{-1}$};
-	\node ({A1}) [cell2] {$A_{-2}$};
-	\node ({A1}) [cell2] {$A_{-3}$};
-	\node ({Ad2}) [cell2] {\ ...\ \ };
-	\node ({end}) [cell2, thick, draw=white] {};
+	\foreach \x in {1,2,3} {
+		\node [cell1] {$A_{\x}$};
+		\node [cell2] {$A_{-\x}$};
+	}
+
+	\node [cell1] {\ ...\ \ };
+	\node [cell2]  {\ ...\ \ };
+
+	\node [cell1, end] {};
+	\node [cell2, end] {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
 	\node (ne) at (40bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
 	\draw (ne.south) -- (40bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
-\end{tikzpicture}
+\end{tikzturing}
 \end{center}
 
 Stroj $M'$ deluje tako:

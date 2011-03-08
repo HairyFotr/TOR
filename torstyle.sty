@@ -13,6 +13,7 @@
     urlcolor=blue
 }
 
+%oznake/opozorila, da nekaj manjka, 
 \newcommand\fixme[0]{
 {${\color{red}\bullet}$}
 }
@@ -20,8 +21,31 @@
 {${\color{red}\bullet}$}
 }
 
+%predloge za tikz
+\newenvironment{tikzturing}{
+\pgfkeys{tikz/.cd, node distance=-0.075mm, thick,
+	%za en trak
+	start chain=trak,
+	%za več trakov
+	start chain=trak1, start chain=trak2, start chain=trak3, 
+	%celice
+	cell/.style={draw, very thin, minimum size=0.6cm, on chain=trak},
+	cell1/.style={cell, on chain=trak1, minimum width=1cm},
+	cell2/.style={cell, on chain=trak2, minimum width=1cm},
+	cell3/.style={cell, on chain=trak3, minimum width=1cm},
+	selected/.style={ultra thick},
+	end/.style={ultra thick, draw=white},
+	%nadzorna enota
+	head/.style={draw, minimum width=2cm, minimum height=1.2cm}
+}
+\begin{tikzpicture}}{\end{tikzpicture}}
+
+
 %ker sem len za pisat, oz. na predavanjih je treba bit hiter :)
-%subsection + hint pagebreak
+%subsection + hint pagebreak + label
+\newcommand\chap[1]{
+\chapter{#1}\label{chap:#1}
+}
 \def\sect{
 \pagebreak[3]\section
 }
@@ -30,9 +54,6 @@
 }
 \def\subsubsect{
 \pagebreak[1]\subsubsection
-}
-\newcommand\chap[1]{
-\chapter{#1}\label{chap:#1}
 }
 
 \newcommand\fnurl[2]{%
