@@ -21,7 +21,7 @@
 \usepackage{graphicx}
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{calc,automata,snakes,arrows,shapes,decorations.text,positioning,shapes.arrows,chains}
+\usetikzlibrary{calc,automata,snakes,arrows,shapes,decorations,positioning,shapes.arrows,chains,shadows}
 
 \usepackage{torstyle}
 %?this feels too much like CSS hacks :(
@@ -40,20 +40,20 @@
 {\Huge\bf Teoretične osnove računalništva}\\[1cm]
 {\huge \today}\ \\[1.5cm]
 %{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več samo to :P
-\begin{tikzpicture}[scale=1.35]
+\begin{tikzpicture}[scale=1.35, very thick, circ/.style={thin, decorate, decoration={random steps, segment length=3pt, amplitude=0.75pt}}]
 	\draw (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
 	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
 
-	\draw (0cm,0cm) circle (5cm);
+	\draw[circ] (0cm,0cm) circle (5cm);
 	\node at (0,4cm) {\large\bf \nameref{chap:Turingovi jeziki}};
 
-	\draw (0cm,-0.8cm) circle (4cm);
+	\draw[circ] (0cm,-0.8cm) circle (4cm);
 	\node at (0,2cm) {\large\bf \nameref{chap:Kontekstno-odvisni jeziki}};
 
-	\draw (0cm,-1.6cm) circle (3cm);
+	\draw[circ] (0cm,-1.6cm) circle (3cm);
 	\node at (0,0cm) {\large\bf \nameref{chap:Kontekstno-neodvisni jeziki}};
 
-	\draw (0cm,-2.4cm) circle (2cm);
+	\draw[circ] (0cm,-2.4cm) circle (2cm);
 	\node at (0,-2cm) {\large\bf \nameref{chap:Regularni jeziki}};
 \end{tikzpicture}
 
@@ -761,11 +761,11 @@ Pri tem pa ostaja še kar nekaj odprtih vprašanj, npr.:
 	\item Neskončnem - \fixme%?
 	\end{items}
 \end{items}
-Nekateri zgodnji poskusi formalizacije pojma algoritma so: \fixme%? zgodovinsko zaporedje, letnice, imena modelov, moar info
+Nekateri zgodnji poskusi formalizacije pojma algoritma so:%? zgodovinsko zaporedje, letnice, imena modelov, moar info
 \begin{items}
-    \item GK (Kurt Gödel, Stephen Kleene) 
-    \item HG (Jacques Herbrand, Kurt Gödel)
-    %\item (Andrey Markov), %? sin Markova http://en.wikipedia.org/wiki/Andrey_Markov_(Soviet_mathematician)
+    \item Rekurzivne funkcije (Kurt Gödel, Stephen Kleene) 
+    \item Splošne rekurzivne funkcije (Jacques Herbrand, Kurt Gödel)
+    \item Algoritmi Markova (Andrey Markov, ml.), %sin Markova http://en.wikipedia.org/wiki/Andrey_Markov_(Soviet_mathematician)
     \item Produkcijski sistem (Emil Post), %? je to http://en.wikipedia.org/wiki/Tag_system? 1943?
     \item Lambda račun (Alonso Church, 1936)
     \item Turingov stroj (Alan Turing, 1936)
@@ -1091,11 +1091,24 @@ Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izr
 %?Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
 
 \section{Moč Turingovega stroja}
-V moč Turingovega stroja se bomo prepričali na dva načina -- tako, da bomo pokazali, da so različne razširitve Turingovega stroja enako močne kot osnovni model, ter tako, da bomo pokazali, da je tudi nekaj precej drugačnih modelov računanja enako močnih.
+V moč Turingovega stroja se bomo prepričali na dva načina -- tako, da bomo pokazali, da so različne razširitve Turingovega stroja enako močne kot osnovni model, ter tako, da bomo pokazali, da je tudi nekaj precej drugačnih modelov računanja enako močnih. Nato pa bomo pogledali še nekaj stvari, ki jih Turingov stroj kljub vsemu ne more izračunati.
 
-\Odmakni{Postopek dokazovanja}{Recimo, da je $\mathcal{M}$ razred modelov, za katerega želimo dokazati, da so ekvivalentni TS, moramo poiskati sistematičen, končen postopek S, ki poljubnemu stroju $M \in \mathcal{M}$ priredi nek TS $M'$, ki je sposoben simulirati $M$.}
+\Odmakni{Postopek dokazovanja}{Recimo, da je $\mathcal{M}$ razred modelov, za katerega želimo dokazati, da so ekvivalentni TS, moramo poiskati sistematičen, končen postopek S, ki poljubnemu stroju $M \in \mathcal{M}$ priredi nek TS $M'$, ki je sposoben simulirati $M$.
+\begin{center}
+\begin{tikzpicture}[vert/.style={circle, draw,fill=black, inner sep=1pt}]
+	\node (l) [vert] at (0.1cm, 0.2cm) {};
+	\node [below=2pt] at (l.south) {$M$};
+	\node (r) [vert] at (4.6cm, 0.8cm) {};
+	\node [below=2pt] at (r.south){$M'$};
 
-\fixme - slika krog $\mathcal{M}$ s točko M $\rightarrow$ TS s točko M
+	\draw (0cm,0cm) ellipse (1.3cm and 1.1cm) node(le) {};
+	\node at (le) [below=1.2cm] {$\mathcal{M}$};
+	\draw (4.5cm,0.2cm) ellipse (1.4cm and 1.0cm) node(re) {};
+	\node at (re) [below=1.1cm] {TS};
+
+	\draw [bend left, ->] (l) to (r);
+\end{tikzpicture}
+\end{center}}
 
 \subsect{Turingov stroj z dvosmernim trakom}
 Imamo Turingov stroj, ki ima trak neomejen v obe smeri. Vhodna beseda se vpiše nekam na trak, okno se prestavi na prvi znak besede.
@@ -1186,30 +1199,54 @@ Stroj $M'$ deluje tako:
 %nekdo je vprašal, če je bijekcija, pa je rekel, da ne čist?
 }
 
+\subsubsect{Večtračni Turingov stroj}
+Večtračni Turingov stroj ima več trakov, ki so neomejeni v obe strani, ter vsak trak ima svoje okno, ki se neodvisno premika ob vsakem koraku. Na začetku imamo po dogovoru vhodno besedo na prvem traku in je okno prvega traku na prvem znaku vhodne besede.
+
+\begin{center}
+\begin{tikzturing}[cell11/.style={cell1,fill=white}]
+	\node [cell11] {\ ...\ \ };
+	\node at (0bp,-1.6cm) [cell2]  {\ ...\ \ };
+
+	\node (Ai) [cell11, selected] {$w_{0}$};
+	\node (Ai2) [cell2, selected] {$B$};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (67bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (67bp, 25bp) -- (29bp, 25bp) [->] to (Ai.north);
+	\draw (ne.south) -- (67bp, -20bp) -- (29bp, -20bp) [->] to (Ai2.north);
+
+	\foreach \x in {1,2,3} {
+		\node [cell11] {$w_{\x}$};
+		\node [cell2] {$B$};
+	}
+
+	\node [cell11] {\ ...\ \ };
+	\node [cell2]  {\ ...\ \ };
+
+	\node [cell11, end] {};
+	\node [cell2, end] {};
+
+\end{tikzturing}
+\end{center}
+
+\Def{Korak stroja $\delta$ opišemo kot:
+	\[\delta = Q \times \Gamma^k \rightarrow Q\times(\Gamma\times\{ L,D,N \})^k \]
+	Torej, na vsakem koraku dobimo iz trenutnega stanje glave, ter tračnega simbola iz vsakega traku, neko novo stanje, ter za vsak trak neodvisno nov simbol in premik.}
+
+\Trditev{Večtračni Turingov stroj je enako močen kot osnovni model.}
+\Dokaz{
+	\Odmakni{($\Rightarrow$)}{Preprosto delamo vse le na prvem traku}
+	\Odmakni{($\Leftarrow$)}{Vzamemo $k$-tračni Turingov stroj M in $2k$-sledni v obe strani neskončni M'.}}
+\begin{comment}
+		\fixme
+		dve sledi za vsak trak.. na prvi oznka X, ki pove ...
+		na spodnji je ... stroja M
+	
+	\fixme - slika z dvemi trakovi in en večsledni
 %?------------------------neurejeno-----------------------------
 
-\begin{comment}
-\subsubsect{Večtračni Turingov stroj}
-TS ima več trakov
-... po eno na trak
-na prvem traku je okno na prvem znaku besede
+%\begin{comment}
 
-\fixme - slika več trakov
-
-korak stroja $\delta = Q \times \Gamma^k \rightarrow Q\times(\Gamma\times\{ L,D,N \})^k$
-
-odvisno od stanja in znakov na k-tih oknih naredi:
-spremeni stanje 
-neodvisno od drugih zamenja znake v oknih
-premakne okna
-
-Večtračni je enako močen
--> damo vhodno besedo in delamo vse na enem traku
-<- večtračni TS M in 2k-sledni {v obe strani neskončni} osnovni M'
-dve sledi za vsak trak.. na prvi oznka X, ki pove ...
-na spodnji je ... stroja M
-
-\fixme - slika z dvemi trakovi in en večsledni
 % [a] b
 %  c [d]
 %-------------
@@ -1303,11 +1340,12 @@ premikamo se lahko v 2k smeri
 \fixme - slika z večimi okni
 
 \subsubsect{Rekurzivne funkcije}
-Gödel, Kleene
+%Gödel, Kleene
 
-\subsubsect{??}
+\subsubsect{Splošne rekurzivne funkcije}
+%Herbrand, Gödel
 
-\subsubsect{Postov}
+\subsubsect{Postov?}
 Post
 
 \subsubsect{Lamba račun}
