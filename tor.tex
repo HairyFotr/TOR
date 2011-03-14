@@ -36,10 +36,10 @@
 %{\resizebox{15cm}{!}{Teoretične osnove računalništva}}\\[5pt]
 \ \\[1cm]
 {\Huge\bf Teoretične osnove računalništva}\\[1cm]
-{\huge \today}\ \\[1.5cm]
+{\huge \today}\ \\[1.55cm]
 %{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več samo to :P
-\begin{tikzpicture}[scale=1.35, very thick, circ/.style={thin, decorate, decoration={random steps, segment length=3pt, amplitude=0.75pt}}]
-	\draw (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
+\begin{tikzpicture}[scale=1.35, very thick, circ/.style={thin}]%?tole ful upočasni pdflatex%, decorate, decoration={snake, amplitude=0.75pt}}]
+	\draw [rounded corners=10pt] (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
 	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
 
 	\draw[circ] (0cm,0cm) circle (5cm);
@@ -1235,7 +1235,10 @@ Večtračni Turingov stroj ima več trakov, ki so neomejeni v obe strani, ter vs
 \Dokaz{
 	\Odmakni{($\Rightarrow$)}{Preprosto delamo vse le na prvem traku}
 	\Odmakni{($\Leftarrow$)}{Vzamemo $k$-tračni Turingov stroj M in $2k$-sledni v obe strani neskončni M'.}}
-\begin{comment}
+\pagebreak
+{\Huge od tu naprej je neurejeni del zapiskov.. halp!\\}
+\color{gray}
+
 		\fixme
 		dve sledi za vsak trak.. na prvi oznka X, ki pove ...
 		na spodnji je ... stroja M
@@ -1360,12 +1363,12 @@ Dodal je pravili sestavljanja, kako iz začetnih in že sestavljenih dobimo novo
 Konstrukcija take funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije, to pa je tudi kandidat za formalni opis pojma algoritma.
 \br
 Ampak... Ackermannova funkcija ni primitivno rekurzivna in narašča hitreje od vsake funkije, ki pripada primitivno rekuzivnim.
-\[ A(m,n) { n+1, m=0 
-          { A(m-1,1), m>0 in n=0
-          { A(m-1,1, A(m, n-1)), m>0 in n>0\]%obstaja šeena def
+%\[ A(m,n) { n+1, m=0 
+%          { A(m-1,1), m>0 in n=0
+%          { A(m-1,1, A(m, n-1)), m>0 in n>0\]%obstaja šeena def
 
 Kleene leta 1936 doda šeeno pravilo sestavljanja, $\mu$-operacija. %to zato, da naredi totalno, čeprov je možno parcialne
-\Def{Totalne š.t. funkcije f:N^k:N, ki se dajo konstruirati iz treh začetnih funkcij s končno mnogo uporabami treh pravil sestavljanja se imenujejo rekurzivne funkcije.}
+\Def{Totalne š.t. funkcije $f:N^k\leftarrow N$, ki se dajo konstruirati iz treh začetnih funkcij s končno mnogo uporabami treh pravil sestavljanja se imenujejo rekurzivne funkcije.}
 
 Razred rekurzivnih funkcij
 ...
@@ -1375,20 +1378,21 @@ Razred rekurzivnih funkcij
 \item $\pi(n_1, n_2, \dots, n_k)=n_i \forall n..$ - projekcija
 \end{items}
 Pravila sestavljanja
-1. Če so dane funkcije g:N^m->N in n_h:N^k->N, kjer i 1-m, potem je funkcija f(n_1...n_k) po def g(h1(n...nk)m...,h_m(n...nk)) sestavljana s kompozicijo funckij
-2. Le sta dani funkciji g:N^k->N in h:N^{k+1}->n, potem je f definiriana z \[f(n_1, ..., nk, 0) po def g(n_1, ..., n_k)\]
-\[f(n_1, ..., nk, m+1) po def h(n_1, ..., n_k, m, f(n_1, ... n_k, m)) za m\geq 0\]
-sestavljeno s .... in g in h
-3.Če je funkcija g:N^k+1->N taka, da za vsako k-terico naravnih števil n_1, \dots, n_k obstaja n .. m, da je g(n_1, \dots, n_k, m) = 0, potem je funkcija:
-\[ f(n_1, \dots, n_k) po def \mu x g(n_1, \dots, n_k, X)\]
-sestavljena z $\mu$-operacijo iz funkcije g.
+1. Če so dane funkcije $g:N^m \leftarrow N$ in $n_h:N^k \leftarrow N$, kjer i 1-m, potem je funkcija $f(n_1,n_2,\dots,n_k) \mbox{ po def } g(h_{1}(n_1,n_2,\dots,n_k),\dots,h_m(n_1,n_2,\dots,n_k))$ sestavljena s kompozicijo funkcij
+2. Če sta dani funkciji $g:N^k \leftarrow N$ in $h:N^{k+1}  \leftarrow n$, potem je $f$ definiriana z:
+	\[f(n_1, n_2, \dots, n_k, 0) \mbox{ po def } g(n_1, n_2, \dots, n_k)\]
+	\[f(n_1, n_2, \dots, n_k, m+1) \mbox{ po def } h(n_1, n_2, \dots, n_k, m), f(n_1, n_2, \dots, n_k, m)), za m \geq 0\]
+sestavljeno s .... in $g$ in $h$
+3. Če je funkcija $g:N^{k+1} \leftarrow N$ taka, da za vsako $k$-terico naravnih števil $n_1, n_2, \dots, n_k$ obstaja n ..neki.. m, da je $g(n_1, n_2, \dots, n_k, m) = 0$, potem je funkcija:
+\[ f(n_1, n_2, \dots, n_k) po def \mu x g(n_1, \dots, n_k, x)\]
+sestavljena z $\mu$-operacijo iz funkcije $g$.
 %Pri tem je $\mu$-operacija definirana z:
 %\[ \mu x g(n_1, \dots, n_k, x) po def je najmanjši X, pri katerem je g (n_1, \dots n_k, X) = 0\]
 
 %---
-Konstrukcija rekurzivne funkcije f je končno zaporedje $f_1,f_2,\dots,f_l$, kjer je $f_l=f$ in je vsaka funkcija $f_i$ vmes, bodisi začetna, bodisi sestavljena z enim izmed treh pravil iz predhodnic v tem zaporedju %glej grafek
+Konstrukcija rekurzivne funkcije $f$ je končno zaporedje $f_1,f_2,\dots,f_L$, kjer je $f_L=f$ in je vsaka funkcija $f_i$ vmes, bodisi začetna, bodisi sestavljena z enim izmed treh pravil iz predhodnic v tem zaporedju %glej grafek
 
-%zaeenkrat nismo našli Ackermann2 :)
+%zaeenkrat nismo našli Ackermann2, ki bi to pokvarila :)
 \Odmakni{Povzetek}{Algoritem po Gödel-Kleenu(GK) je ravno konstrkucija rekurzivne funkcije.\\
 	Računanje po GK je izračun vrednosti funkcije tako, kot jo narekuje njena konstrukcija.\\
 	Funkcija je izračunljiva po GK, če je rekurzivna.}
@@ -1396,13 +1400,13 @@ Konstrukcija rekurzivne funkcije f je končno zaporedje $f_1,f_2,\dots,f_l$, kje
 \subsubsect{Splošne rekurzivne funkcije}
 Herbrand je študiral, kako poljubno ŠT funkcijo definirati s sistemom enačb.
 
-f je neznana funkcija, $g_1, \dots g_m$ pa znane %mestnost?
+f je neznana funkcija, $g_1, g_2, \dots g_m$ pa znane %mestnost?
 f-je in g-je poljubno vstavljamo kot argumente v druge, nato pa nekatere dobljene izraze izenačimo, potem pa če ima dobljeni sistem natanko eno rešitev za funkcijo f, potem je f rekurzivna.%preden je umrl v alpah je poslal tako pismo gödlu.. katerega leta?
 Gödel je dodal dve dodatni zahtevi... f se sme na levi strani enačb sme pojaviti v obliki $f(g(...), g_k(...)$ %Herbrand je dovoljeval f(g...f...g), kar je preveč divje
-f naj bo povsod na N^k definirana (totalna).
+f naj bo povsod na $N^k$ definirana (totalna).
 Če se jo da zapisati s takim sistemom, je zapisana s standardnim sistemom. Tedaj je tak sistem za f z oznako $\varepsilon(f)$.
 
-Kakšna so pravila za računanje vrednosti $f(n_1, \dots, n_k)$ iz $\varepsilon(f)$. %leta 1934 je ugotovil, da
+Kakšna so pravila za računanje vrednosti $f(n_1, n_2, \dots, n_k)$ iz $\varepsilon(f)$. %leta 1934 je ugotovil, da
 Pravili sta samo 2.
 1. v enačbi lahko vse pokave iste spremenljivke zamenjamo z istim naravnim številom???
 2. v enačbi lahko pojave funkcije zamenjamo z njeno vrednostjo
@@ -1410,7 +1414,7 @@ Pravili sta samo 2.
 Godel trdi: funkcija f za katero obstaja $\varepsilon(f)$ , se imenjue splošno rekurzivna%it's first def'd here.
 
 \Odmakni{Povzetek}{Algoritem po Herbrant-Gödlu(HG) je $\varepsilon(f)$.\\
-	Računanje po HG je izračun vrednosti funkcije f(n_1,\dots,n_k) iz $\varepsilon(f)$ z uporabo pravil 1,2 .\\%izr. je, sta rekla... oz je samo Gödel reku... :D
+	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$ z uporabo pravil 1,2.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
 	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
 
 \subsubsect{$\lambda$ račun}%1932,1933 Alonso Church
@@ -1460,7 +1464,7 @@ Korak: prebere iz celice pod oknom znak in iz začetka vrste znak. na podlagi te
 	Funkcija je izračunljiva po Postu, če njeno vrednost lahko izračuna Postov stroj.}
 
 \subsubsect{Algoritmi Markova}%194..
-Imamo abecedo $\Sigma$, kočno zaporedje produkcij:
+Imamo abecedo $\Sigma$, končno zaporedje produkcij:
 $x_1 \leftarrow y_1$
 $x_2 \leftarrow y_2$
 ...
@@ -1492,6 +1496,4 @@ Turing je postavil domnevo: "algoritem"  debela leftright puščica algoritem po
 %lol, trolla moje latex skille :)
 
 Church-Turingova teza: algoritem intuitivno debela leftright puščica algoritem po Turingu%bolj točno program turing stroja in turing zato, ker je najbl cute
-
-\end{comment}
 \end{document}
