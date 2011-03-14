@@ -1346,6 +1346,7 @@ premikamo se lahko v 2k smeri
 %Cilji: storga mat. definicija pojmov s tem da zadosti 2 stvarem:
 	%zajeti mora vse "izračunljve funkcije" (vse kar si lahko zamislimo kot problem za računanje)
 	%za vsako tako f, mora biti razviden mehaničen postopek za izračun njenih vrednosti
+%(HK,HG,lambda)
 
 %zgledovanje po (naravnem) jeziku
 %Postov stroj, Algoritmi Markova
@@ -1393,13 +1394,51 @@ Konstrukcija rekurzivne funkcije f je končno zaporedje $f_1,f_2,\dots,f_l$, kje
 	Funkcija je izračunljiva po GK, če je rekurzivna.}
 
 \subsubsect{Splošne rekurzivne funkcije}
-Herbrand, Gödel
+Herbrand je študiral, kako poljubno ŠT funkcijo definirati s sistemom enačb.
+
+f je neznana funkcija, $g_1, \dots g_m$ pa znane %mestnost?
+f-je in g-je poljubno vstavljamo kot argumente v druge, nato pa nekatere dobljene izraze izenačimo, potem pa če ima dobljeni sistem natanko eno rešitev za funkcijo f, potem je f rekurzivna.%preden je umrl v alpah je poslal tako pismo gödlu.. katerega leta?
+Gödel je dodal dve dodatni zahtevi... f se sme na levi strani enačb sme pojaviti v obliki $f(g(...), g_k(...)$ %Herbrand je dovoljeval f(g...f...g), kar je preveč divje
+f naj bo povsod na N^k definirana (totalna).
+Če se jo da zapisati s takim sistemom, je zapisana s standardnim sistemom. Tedaj je tak sistem za f z oznako $\varepsilon(f)$.
+
+Kakšna so pravila za računanje vrednosti $f(n_1, \dots, n_k)$ iz $\varepsilon(f)$. %leta 1934 je ugotovil, da
+Pravili sta samo 2.
+1. v enačbi lahko vse pokave iste spremenljivke zamenjamo z istim naravnim številom???
+2. v enačbi lahko pojave funkcije zamenjamo z njeno vrednostjo
+
+Godel trdi: funkcija f za katero obstaja $\varepsilon(f)$ , se imenjue splošno rekurzivna%it's first def'd here.
+
+\Odmakni{Povzetek}{Algoritem po Herbrant-Gödlu(HG) je $\varepsilon(f)$.\\
+	Računanje po HG je izračun vrednosti funkcije f(n_1,\dots,n_k) iz $\varepsilon(f)$ z uporabo pravil 1,2 .\\%izr. je, sta rekla... oz je samo Gödel reku... :D
+	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
+
+\subsubsect{$\lambda$ račun}%1932,1933 Alonso Church
+Imamo vhodni izraz, ki opisuje neko funkcijo f in argumente $n_1, \dots, n_k$.
+
+Kako je funkcija opisana?
+Začetni $\lambda$-term
+
+Cilj: preoblikovati začetni $\lambda$-term v končni $\lambda$-term, tak, ki bo opisoval ravno vrednost $f(n_1, \dots, n_k)$
+%this shit is exclusive :D
+
+To preoblikovanje dosežemo z uporabo t.i. redukcij. Ta\\
+bodisi preimenuje spremenljivko v $\lambda$-termu, $(\alpha)$
+bodisi uporabi neko funkcijo nad njenimi argumenti.$(\beta)$ %a se da $\lambda$-term makro, ki bo pogledal nazaj in se pravilno sklonil? :D
+
+$t0->t1->...->tK$
+$f, n1, n2, ... nk$....$f(n_1, \dots, n_k)$
+
+\Def{funkcija, ki jo je možno predstaviti in računati v tem lambda računu, taka funkcija je $\lambda$-definabilna}%fo'real!
+
+\Odmakni{Povzetek}{Algoritem po Churchu je $\lambda$-term.\\
+	Računanje po Churchu je preoblikovanje začetnega $\lambda$-terma v končni $\lambda$-term z redukcijami.\\
+	Funkcija je izračunljiva po Churchu, če je $\lambda$-definabilna.}
+
+
 
 \subsubsect{Postov Stroj}
-%Post
-
-\subsubsect{Lamba račun}
-Church
+Post
 
 \subsubsect{Algoritmi Markova}
 Markov
