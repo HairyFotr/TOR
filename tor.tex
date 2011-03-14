@@ -1,6 +1,4 @@
-%
-%
-\documentclass[10pt,a4paper,oneside]{book}
+side]{book}
 
 
 
@@ -1339,14 +1337,66 @@ premikamo se lahko v 2k smeri
 \subsubsect{Turingov stroj z več okni}
 \fixme - slika z večimi okni
 
+%-----------------------predavanja 4-------------------------------
+%Turing se je zgledoval po človeku
+
+%drugi po funkcijah
+%kaj je računanje, izračunljivost, algoritem... na številsko-teoretskih funkcijah f:N->N ... totalne/parcialne
+%študirali so totalne f:N->N
+%Cilji: storga mat. definicija pojmov s tem da zadosti 2 stvarem:
+	%zajeti mora vse "izračunljve funkcije" (vse kar si lahko zamislimo kot problem za računanje)
+	%za vsako tako f, mora biti razviden mehaničen postopek za izračun njenih vrednosti
+
+%zgledovanje po (naravnem) jeziku
+%Postov stroj, Algoritmi Markova
+%računanje oz. reševanje mat. problemov je pri človeku preoblikovanje množice besed v drugo (opis problema, v opis rešitve)
+
 \subsubsect{Rekurzivne funkcije}
-%Gödel, Kleene
+%(GK) Gödel, Kleene
+Definiral je funkcije: ničelna, naslednik, projekcija.
+Dodal je pravili sestavljanja, kako iz začetnih in že sestavljenih dobimo novo: kompozicija, primitivna rekurzija. %grafek vseh sestavljivih (primitivno rekurzivnih) funkcij \_/
+%godel je probal par funkcij in mu je ratal... kar je blo lepo... še lepš pa:
+Konstrukcija take funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije, to pa je tudi kandidat za formalni opis pojma algoritma.
+\br
+Ampak... Ackermannova funkcija ni primitivno rekurzivna in narašča hitreje od vsake funkije, ki pripada primitivno rekuzivnim.
+\[ A(m,n) { n+1, m=0 
+          { A(m-1,1), m>0 in n=0
+          { A(m-1,1, A(m, n-1)), m>0 in n>0\]%obstaja šeena def
+
+Kleene leta 1936 doda šeeno pravilo sestavljanja, $\mu$-operacija. %to zato, da naredi totalno, čeprov je možno parcialne
+\Def{Totalne š.t. funkcije f:N^k:N, ki se dajo konstruirati iz treh začetnih funkcij s končno mnogo uporabami treh pravil sestavljanja se imenujejo rekurzivne funkcije.}
+
+Razred rekurzivnih funkcij
+...
+\begin{items}
+\item $\zeta(n)=0 \forall n$ - ničelna
+\item $\sigma(n)=n+1 \forall n$ - naslednik
+\item $\pi(n_1, n_2, \dots, n_k)=n_i \forall n..$ - projekcija
+\end{items}
+Pravila sestavljanja
+1. Če so dane funkcije g:N^m->N in n_h:N^k->N, kjer i 1-m, potem je funkcija f(n_1...n_k) po def g(h1(n...nk)m...,h_m(n...nk)) sestavljana s kompozicijo funckij
+2. Le sta dani funkciji g:N^k->N in h:N^{k+1}->n, potem je f definiriana z \[f(n_1, ..., nk, 0) po def g(n_1, ..., n_k)\]
+\[f(n_1, ..., nk, m+1) po def h(n_1, ..., n_k, m, f(n_1, ... n_k, m)) za m\geq 0\]
+sestavljeno s .... in g in h
+3.Če je funkcija g:N^k+1->N taka, da za vsako k-terico naravnih števil n_1, \dots, n_k obstaja n .. m, da je g(n_1, \dots, n_k, m) = 0, potem je funkcija:
+\[ f(n_1, \dots, n_k) po def \mu x g(n_1, \dots, n_k, X)\]
+sestavljena z $\mu$-operacijo iz funkcije g.
+%Pri tem je $\mu$-operacija definirana z:
+%\[ \mu x g(n_1, \dots, n_k, x) po def je najmanjši X, pri katerem je g (n_1, \dots n_k, X) = 0\]
+
+%---
+Konstrukcija rekurzivne funkcije f je končno zaporedje $f_1,f_2,\dots,f_l$, kjer je $f_l=f$ in je vsaka funkcija $f_i$ vmes, bodisi začetna, bodisi sestavljena z enim izmed treh pravil iz predhodnic v tem zaporedju %glej grafek
+
+%zaeenkrat nismo našli Ackermann2 :)
+\Odmakni{Povzetek}{Algoritem po Gödel-Kleenu(GK) je ravno konstrkucija rekurzivne funkcije.\\
+	Računanje po GK je izračun vrednosti funkcije tako, kot jo narekuje njena konstrukcija.\\
+	Funkcija je izračunljiva po GK, če je rekurzivna.}
 
 \subsubsect{Splošne rekurzivne funkcije}
-%Herbrand, Gödel
+Herbrand, Gödel
 
-\subsubsect{Postov?}
-Post
+\subsubsect{Postov Stroj}
+%Post
 
 \subsubsect{Lamba račun}
 Church
