@@ -1,6 +1,6 @@
-side]{book}
-
-
+%
+%
+\documentclass[10pt,a4paper,oneside]{book}
 
 %Hello there. Don't know what to do?
 	%Search for the %? or \fixme and fix/add stuff.
@@ -1435,12 +1435,63 @@ $f, n1, n2, ... nk$....$f(n_1, \dots, n_k)$
 	Računanje po Churchu je preoblikovanje začetnega $\lambda$-terma v končni $\lambda$-term z redukcijami.\\
 	Funkcija je izračunljiva po Churchu, če je $\lambda$-definabilna.}
 
+%zgledovanje po jeziku (glej gor)
 
+\subsubsect{Postov Stroj}%1936, Post
+%podoben turingovemu
+%nadzorna enota
+%trak s celicami
+%okno
+%+vrsta z znaki povezana v nadz enoto in iz nadzorne grejo lahko na konec vrste
 
-\subsubsect{Postov Stroj}
-Post
+Model je podoben Turingovemu stroju, z naslenjimi spremembami:
+\begin{items}
+\item s traku le bere znake
+\item Uporablja vrsto znakov
+\end{items}
 
-\subsubsect{Algoritmi Markova}
-Markov
+Korak: prebere iz celice pod oknom znak in iz začetka vrste znak. na podlagi teh dveh znakov in stanja bo premaknil okno, nov znak dal na konec vrste in prešel v novo stanje.
+
+%iz jezika? how? najprej: graf: opis problema pride v začetno vozlišče, nato po grafu potuje in se spreminja, dokler ne pride v končno stanje - rezultat. besedi se odreže prvi znak in glede na to se izbere pot v grafu, ali spremeni besedo, etc.. stroj to simulira.
+%zgleda končen... kaj zdj? trak je končen, vrsta, stanja, ... %i dunno lol
+
+\Odmakni{Povzetek}{Algoritem po Postu je program Postovega stroja.\\
+	Računanje po Postu je izvajanje programa Postovega stroja.\\
+	Funkcija je izračunljiva po Postu, če njeno vrednost lahko izračuna Postov stroj.}
+
+\subsubsect{Algoritmi Markova}%194..
+Imamo abecedo $\Sigma$, kočno zaporedje produkcij:
+$x_1 \leftarrow y_1$
+$x_2 \leftarrow y_2$
+...
+$x_n \leftarrow y_n$
+$x,y \in \Sigma^*$%string v string
+
+Produkija preoblikuje besedo tako da v tej besedi nadomesti skrajno levi pojav $x_i$ z $y_i$ %slikca beseda prej potem... x1->y1
+%samo leva izpeljava, WTF?
+
+Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končno. V vsakem koraku se trenutna beseda preoblikuje s prvo (levo) možno produkcijo.
+
+\Odmakni{Povzetek}{Algoritem po Markovu je gramatika.\\
+	Računanje po Markovu je preoblikovanje vhodne besede z dano gramatiko.\\
+	Funkcija je izračunljiva po Markovu, če njeno vrednost računa kaka gramatika}
+
+%poudarki: kaj imajo skupnega?
+%razumno zmogljivi - končo različnih ukazov, vsak ukaz se izvede v končno korakih / času, v enem koraku se opravi končno veliko dela, učinek ukaza je predvidljiv(tudi nedeterminističnem... mjbi kvantni ne).
+%potencialno neskončen spomin brez omejitev dostopa
+
+%zdj pa neki za lepe sanje:
+%vsi so se matral še kj več narest
+\subsection{Church-Turingova teza}
+Church je postavil domnevo... "algoritem" debela leftright puščica algoritem po Churchu %lol, kar sm js reku je algoritem :P glej sigma pri Churchu... Gödel ga je nekoliko zavrnil, vmes turing neodvisno do podobnega
+
+Turing je postavil domnevo: "algoritem"  debela leftright puščica algoritem po Turingu
+
+%Kdo je imel prav? oba, lol
+
+%lol, trolla moje latex skille :)
+
+Church-Turingova teza: algoritem intuitivno debela leftright puščica algoritem po Turingu%bolj točno program turing stroja in turing zato, ker je najbl cute
+
 \end{comment}
 \end{document}
