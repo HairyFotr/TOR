@@ -1,5 +1,3 @@
-%
-%
 \documentclass[10pt,a4paper,oneside]{book}
 
 %Hello there. Don't know what to do?
@@ -549,7 +547,7 @@ Po zgoraj opisanem postopku dobimo:\\ \ \\
 	\draw [bend left,->]  (aS) to node[auto] {$a$} (S);
 	\draw [->]  (S) to node[auto] {$\varepsilon$} (abA);
 	\draw [->]  (abA) to node[auto] {$a$} (bA);
-	\draw [bend left,->]  (bA) to node[auto] {$b$} (A);
+	\draw [bend left,->]  (bA) to node[auto] {\color{gray}$B$} (A);
 	\draw [->]  (A) to node[auto] {$\varepsilon$} (aa);
 	\draw [->]  (aa) to node[auto] {$a$} (a);
 	\draw [->]  (a) to node[auto] {$a$} (e);
@@ -789,8 +787,8 @@ V postopku formalizacije, pa je zaradi večje preprostosti, zahteval še, da je 
 	\node (Ai) [cell, selected] {$A_i$};
 	\node      [cell]           {\ ...\ \ };
 	\node      [cell]           {$A_n$};
-	\node      [cell]           {$B$};
-	\node      [cell]           {$B$};
+	\node      [cell]           {\color{gray}$B$};
+	\node      [cell]           {\color{gray}$B$};
 	\node      [cell]           {\ ...\ \ };
 	\node      [cell, end]      {};
 
@@ -827,8 +825,8 @@ Nek trenutni opis $\langle \alpha_1, q, \alpha_2 \rangle$, ali krajše $\alpha_1
 	\node      [cell, minimum width=3.6cm] {$\alpha_1$};
 	\node (Ai) [cell, selected]            {};
 	\node      [cell, minimum width=3cm]   {$\alpha_2$\ \ \ };
-	\node      [cell]                      {$B$};
-	\node      [cell]                      {$B$};
+	\node      [cell]                      {\color{gray}$B$};
+	\node      [cell]                      {\color{gray}$B$};
 	\node      [cell]                      {\ ...\ \ };
 	\node      [cell, end]                 {};
 
@@ -875,8 +873,8 @@ Z besedami to pomeni, da je jezik Turingovega stroja množica besed, ki če jih 
 \begin{tikzturing}
 	\node (Ai) [cell, selected]          {};
 	\node      [cell, minimum width=4cm] {$w$\ \ \ \ \ };
-	\node      [cell]                    {$B$};
-	\node      [cell]                    {$B$};
+	\node      [cell]                    {\color{gray}$B$};
+	\node      [cell]                    {\color{gray}$B$};
 	\node      [cell]                    {\ ...\ \ };
 	\node      [cell, end]               {};
 
@@ -965,8 +963,8 @@ Imamo Turingov stroj, ki ima na traku neko število ničel, ki predstavljajo poz
 	\node      [cell]                      {\ ...\ \ };
 	\node      [cell]                      {$1$};
 	\node      [cell, minimum width=2.6cm] {$0^{i_k}$\ \ \ \ };
-	\node      [cell]                      {$B$};
-	\node      [cell]                      {$B$};
+	\node      [cell]                      {\color{gray}$B$};
+	\node      [cell]                      {\color{gray}$B$};
 	\node      [cell]                      {\ ...\ \ };
 	\node      [cell, end]                 {};
 
@@ -1008,9 +1006,26 @@ Vse običajne aritmetične funkcije so parcialne ali celo totalne rekurzivne fun
     \end{items}%?naredi cel stroj
 \end{primeri}
 
-\subsect{Lažja konstrukcija Turingovih strojev}
-Obstaja nekaj tehnik, ki poenostavijo in pohitrijo sestavljanje Turingovih strojev.%tu itak mislimo funkcije delta
-\subsubsection{Nadzorna enota kot pomnilnik}
+\sect{Razširitve in alternative Turingovemu stroju}
+V tem odseku bomo spoznali nekaj razširitev Turingovega stroja in pokazali da so enako močne kot osnovni model. Poleg tega bomo naredili še pregled alternativnih modelov, za katere se je tudi izkazalo, da so enako močni.%, nato pa si bomo ogledali še nekaj stvari, ki jih Turingov stroj kljub vsemu ne more izračunati.
+
+\Odmakni{Postopek dokazovanja}{Recimo, da je $\mathcal{M}$ razred modelov, za katerega želimo dokazati, da je ekvivalenten razredu Turingovih strojev. Poiskati moramo sistematičen, končen postopek S, ki poljubnemu stroju $M \in \mathcal{M}$ priredi nek Turingov stroj $M'$, ki je sposoben simulirati $M$.
+\begin{center}
+\begin{tikzpicture}[vert/.style={circle, draw,fill=black, inner sep=1pt}]
+	\node (l) [vert] at (0.1cm, 0.2cm) {};
+	\node [below=2pt] at (l.south) {$M$};
+	\node (r) [vert] at (4.6cm, 0.8cm) {};
+	\node [below=2pt] at (r.south){$M'$};
+
+	\draw (0cm,0cm) ellipse (1.3cm and 1.1cm) node(le) {};
+	\node at (le) [below=1.2cm] {$\mathcal{M}$};
+	\draw (4.5cm,0.2cm) ellipse (1.4cm and 1.0cm) node(re) {};
+	\node at (re) [below=1.1cm] {TS};
+
+	\draw [bend left, ->] (l) to node[auto] {S} (r);
+\end{tikzpicture}
+\end{center}}
+\subsect{Nadzorna enota kot pomnilnik}
 Vsako stanje stroja, je sestavljeno iz dveh delov -- stanja avtomata, ter shrambe za tračne znake. Novo množico stanj zapišemo kot $Q=K\times\Gamma$, kjer je $K$ stara množica stanj in $\Gamma$ tračna abeceda.
 \Primer{Sestavi Turingov stroj za razpoznavanje besed, pri katerih se prvi znak ne ponovi:\\
 	Stroj $M=\langle Q,\Sigma,\Gamma,\delta,q_0,B,F \rangle$ zapišemo kot:
@@ -1034,10 +1049,34 @@ Vsako stanje stroja, je sestavljeno iz dveh delov -- stanja avtomata, ter shramb
 		\end{items}
 	\end{items}
 }
-\subsubsection{Večsledni trak}
+\subsect{Večsledni trak}
 Na traku imamo več kot eno sled, kar pomeni, da s traku beremo $k$-terice tračnih znakov, kar zapišemo kot: $\Gamma=\Gamma_1\times\Gamma_2\times\dots\times\Gamma_k$.
+\ \\
+\begin{center}
+\begin{tikzturing}
+	\node (Ai) [cell1, selected] {$A1_{0}$};
+	\node at (0bp,-0.6cm) [cell2, selected] {$A2_{0}$};
+	\node at (0bp,-1.2cm) [cell3, selected] {$A3_{0}$};
 
-\fixme - slika večslednega stroja
+	\foreach \x in {1,2,3} {
+		\node [cell1] {$A1_{\x}$};
+		\node [cell2] {$A2_{\x}$};
+		\node [cell3] {$A3_{\x}$};
+	}
+
+	\node [cell1] {\ ...\ \ };
+	\node [cell2]  {\ ...\ \ };
+	\node [cell3]  {\ ...\ \ };
+
+	\node [cell1, end] {};
+	\node [cell2, end] {};
+	\node [cell3, end] {};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (40bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
+	\draw (ne.south) -- (40bp, 25bp) -- (0bp, 25bp) [->] to (Ai.north);
+\end{tikzturing}
+\end{center}
 
 \Primer{Sestavi Turingov stroj, ki preveri, ali je vhodno število praštevilo.\\
 	Skica stroja:
@@ -1059,7 +1098,7 @@ Na traku imamo več kot eno sled, kar pomeni, da s traku beremo $k$-terice trač
 		\end{items}
 	\end{items}
 }
-\subsubsection{Prestavljanje vsebine traku}
+\subsect{Prestavljanje vsebine traku}
 Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izrezali iz traku in nato trak zlepili nazaj skupaj, izrezane simbole pa bi si pri tem seveda radi nekako zapomnili. Tudi to metodo realiziramo s pomočjo shrambe za tračne simbole v nadzorni enoti, a moramo pri tem paziti, da je funkcija prehodov pravilno napisana.
 \br\fixme slika "gube" na traku in slika nadzorne enote
 \Primer{Sestavi Turingov stroj, ki premakne vsebino traku za 2 celici v desno.\\
@@ -1084,43 +1123,23 @@ Recimo, da bi s traku radi vzeli nekaj zaporednih znakov tako, kot da bi jih izr
 
 %?\fixme ... tu je razlagal tisto neizračunljivo funkcijo nad matrikami. btw, @zidar: poglej tor2-dodatno.pdf - tam govori o preroku
 
-\subsubsection{Podprogrami}
+\subsect{Podprogrami}
 \fixme
 %?Imamo neka posebna stanja, ki signalizirajo vhod in izhod iz podprograma%?je tu govoril o dveh strojih?
 
-\section{Moč Turingovega stroja}
-V moč Turingovega stroja se bomo prepričali na dva načina -- tako, da bomo pokazali, da so različne razširitve Turingovega stroja enako močne kot osnovni model, ter tako, da bomo pokazali, da je tudi nekaj precej drugačnih modelov računanja enako močnih. Nato pa bomo pogledali še nekaj stvari, ki jih Turingov stroj kljub vsemu ne more izračunati.
-
-\Odmakni{Postopek dokazovanja}{Recimo, da je $\mathcal{M}$ razred modelov, za katerega želimo dokazati, da so ekvivalentni TS, moramo poiskati sistematičen, končen postopek S, ki poljubnemu stroju $M \in \mathcal{M}$ priredi nek TS $M'$, ki je sposoben simulirati $M$.
-\begin{center}
-\begin{tikzpicture}[vert/.style={circle, draw,fill=black, inner sep=1pt}]
-	\node (l) [vert] at (0.1cm, 0.2cm) {};
-	\node [below=2pt] at (l.south) {$M$};
-	\node (r) [vert] at (4.6cm, 0.8cm) {};
-	\node [below=2pt] at (r.south){$M'$};
-
-	\draw (0cm,0cm) ellipse (1.3cm and 1.1cm) node(le) {};
-	\node at (le) [below=1.2cm] {$\mathcal{M}$};
-	\draw (4.5cm,0.2cm) ellipse (1.4cm and 1.0cm) node(re) {};
-	\node at (re) [below=1.1cm] {TS};
-
-	\draw [bend left, ->] (l) to (r);
-\end{tikzpicture}
-\end{center}}
-
 \subsect{Turingov stroj z dvosmernim trakom}
-Imamo Turingov stroj, ki ima trak neomejen v obe smeri. Vhodna beseda se vpiše nekam na trak, okno se prestavi na prvi znak besede.
+Imamo Turingov stroj, ki ima trak neomejen v obe smeri. Vhodna beseda je na začetku napisana nekje na traku, okno pa je na prvem znaku besede.
 
 %kako zbrišem črto pri prvem ...?
 \begin{center}
 \begin{tikzturing}
 	\node      [cell]                    {\ ...\ \ };
-	\node      [cell]                    {$B$};
-	\node      [cell]                    {$B$};
+	\node      [cell]                    {\color{gray}$B$};
+	\node      [cell]                    {\color{gray}$B$};
 	\node (Ai) [cell, selected]          {};
 	\node      [cell, minimum width=4cm] {$w$\ \ \ \ \ };
-	\node      [cell]                    {$B$};
-	\node      [cell]                    {$B$};
+	\node      [cell]                    {\color{gray}$B$};
+	\node      [cell]                    {\color{gray}$B$};
 	\node      [cell]                    {\ ...\ \ };
 	\node      [cell, end]               {};
 
@@ -1129,14 +1148,14 @@ Imamo Turingov stroj, ki ima trak neomejen v obe smeri. Vhodna beseda se vpiše 
 	\draw (ne.south) -- (95bp, 25bp) -- (53.5bp, 25bp) [->] to (Ai.north);
 \end{tikzturing}
 \end{center}
-\br
-Stroj je definiran skoraj enako kot običajni Turingov stroj, le funkcija prehodov $\delta$ je enostavnejša, saj ni treba skrbeti, kaj se zgodi, če zadanemo levi rob, kot pri običajnem Turingovemu stroju.
+\ \\
+Stroj je definiran skoraj enako kot osnovni Turingov stroj, le funkcija prehodov $\delta$ je enostavnejša, saj ni treba skrbeti, kaj se zgodi, če zadanemo levi rob, kot pri običajnem Turingovemu stroju.
 \br
 \Trditev{Turingov stroj z dvosmernim trakom ni šibkejši od osnovnega Turingovega stroja.}
-\Dokaz{Lahko se vede kot da je omejen na levi.\fixme - to smo delali na vajah}
+\Dokaz{Stroj se lahko vede kot da je omejen na levi. Na začetku izvajanja se premaknemo levo, zapišemo poseben znak, ki nam pomeni konec traku. Nato se premaknemo desno in stroj normalno izvajamo.}%to smo delali tudi na vajah - check it
 \ \\
 \Trditev{Turingov stroj z dvosmernim trakom ni močnejši od osnovnega.}
-\Dokaz{Imamo poljuben Turingov stroj z dvosmernim trakom:
+\Dokaz{Imamo Turingov stroj $M$ z dvosmernim trakom:
 \ \\
 %kako zbrišem črto pri prvem ...?
 \begin{center}
@@ -1156,7 +1175,7 @@ Stroj je definiran skoraj enako kot običajni Turingov stroj, le funkcija prehod
 \end{tikzturing}
 \end{center}
 \ \\
-Priredimo mu dvosledni Turingov stroj $M'$:
+Stroju $M$ priredimo dvosledni Turingov stroj $M'$. Zgornja sled nam bo predstavljala celice od $A_0$ naprej, spodnja pa vse tiste, levo od $A_0$:
 \ \\
 \begin{center}
 \begin{tikzturing}
@@ -1197,89 +1216,151 @@ Stroj $M'$ deluje tako:
 %nekdo je vprašal, če je bijekcija, pa je rekel, da ne čist?
 }
 
-\subsubsect{Večtračni Turingov stroj}
-Večtračni Turingov stroj ima več trakov, ki so neomejeni v obe strani, ter vsak trak ima svoje okno, ki se neodvisno premika ob vsakem koraku. Na začetku imamo po dogovoru vhodno besedo na prvem traku in je okno prvega traku na prvem znaku vhodne besede.
+\subsect{Večtračni Turingov stroj}
+Večtračni Turingov stroj ima $k>1$ trakov, ki so neomejeni v obe strani. Poleg tega ima vsak trak svoje okno, ki se lahko neodvisno od ostalih premika ob vsakem koraku. Spet imamo na začetku vhodno besedo na prvem traku in je okno prvega traku na prvem znaku vhodne besede, na ostali trakovi pa so prazni.
 
 \begin{center}
-\begin{tikzturing}[cell11/.style={cell1,fill=white}]
+\begin{tikzturing}[cell11/.style={cell1,fill=white}, cell22/.style={cell2,fill=white}]
 	\node [cell11] {\ ...\ \ };
-	\node at (0bp,-1.6cm) [cell2]  {\ ...\ \ };
+	\node at (0bp,-1.5cm) [cell22]  {\ ...\ \ };
+	\node at (0bp,-3.0cm) [cell3]  {\ ...\ \ };
 
 	\node (Ai) [cell11, selected] {$w_{0}$};
-	\node (Ai2) [cell2, selected] {$B$};
+	\node (Ai2) [cell22, selected] {\color{gray}$B$};
+	\node (Ai3) [cell3, selected] {\color{gray}$B$};
 
 	%?must be a better way, zadnja črta niti ni naravnost
 	\node (ne) at (67bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q_0$};
 	\draw (ne.south) -- (67bp, 25bp) -- (29bp, 25bp) [->] to (Ai.north);
 	\draw (ne.south) -- (67bp, -20bp) -- (29bp, -20bp) [->] to (Ai2.north);
+	\draw (ne.south) -- (67bp, -65bp) -- (29bp, -65bp) [->] to (Ai3.north);
 
 	\foreach \x in {1,2,3} {
 		\node [cell11] {$w_{\x}$};
-		\node [cell2] {$B$};
+		\node [cell22] {\color{gray}$B$};
+		\node [cell3] {\color{gray}$B$};
 	}
+
+	\node [cell11] {\ ...\ \ };
+	\node [cell22]  {\ ...\ \ };
+	\node [cell3]  {\ ...\ \ };
+
+	\node [cell11, end] {};
+	\node [cell22, end] {};
+	\node [cell3, end] {};
+\end{tikzturing}
+\end{center}
+
+\Def{Korak stroja $\delta$ opišemo kot:
+	\[\delta = Q \times \Gamma^k \rightarrow Q\times(\Gamma\times\{ L,D,- \})^k \]
+	Torej, na vsakem koraku dobimo iz trenutnega stanje, ter tračnega simbola vsakega traku, neko novo stanje, ter za vsak trak neodvisno nov simbol in premik.}
+
+\Trditev{Večtračni Turingov stroj je enako močen kot osnovni model.}
+\Dokaz{
+	\Odmakni{($\Rightarrow$)}{Večtračni Turingov stroj uporabi le prvi trak.}
+	\Odmakni{($\Leftarrow$)}{Turingovemu stroju $M$ s $k$-trakovi priredimo $2k$-sledni v obe strani neskončni Turingov stroj $M'$.
+	Za vsak trak stroja $M$ imamo tako dve sledi v $M'$ -- na zgornji sledi je zapisana oznaka $X$, ki pove, kje naj bi bilo okno na tem traku stroja $M$, na spodnji sledi pa je zapisana vsebina tega traku stroja $M$.
+
+\begin{center}
+\begin{minipage}[t]{6cm}
+\begin{tikzturing}[cell11/.style={cell1,fill=white}]
+	\node [cell11] {\ ...\ \ };
+	\node at (0bp,-1.5cm) [cell2]  {\ ...\ \ };
+
+	\node (Ai) [cell11, selected] {$a$};
+
+	\node       [cell2] {$c$};
+	\node (Ai2) [cell2, selected] {$d$};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (50bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q$};
+	\draw (ne.south) -- (50bp, 25bp) -- (29bp, 25bp) [->] to (Ai.north);
+	\draw (ne.south) -- (50bp, 25bp) -- (57bp, 25bp) [->] to (Ai2.north);
+
+	\node [cell11] {\color{gray}$B$};
+
+	\node [cell11] {\color{gray}$B$};
+	\node [cell2]  {\color{gray}$B$};
 
 	\node [cell11] {\ ...\ \ };
 	\node [cell2]  {\ ...\ \ };
 
 	\node [cell11, end] {};
 	\node [cell2, end] {};
+\end{tikzturing}
+$k$-tračni stroj $M$
+\end{minipage}
+\begin{minipage}[t]{6cm}
+\begin{tikzturing}
+	\node [cell1] {\ ...\ \ };
+	\node at (0bp,-0.6cm) [cell2]  {\ ...\ \ };
+	\node at (0bp,-1.2cm) [cell3]  {\ ...\ \ };
+	\node at (0bp,-1.8cm) [cell4]  {\ ...\ \ };
+
+	\node [cell1] {$X$}; \node [cell1] {\color{gray}$B$};
+	\node [cell2] {$a$}; \node [cell2] {\color{gray}$B$};
+	\node [cell3] {\color{gray}$B$}; \node [cell3] {$X$};
+	\node [cell4] {$c$}; \node [cell4] {$d$};
+
+	\node (Ai) [cell1,selected] {\color{gray}$B$};
+	\node      [cell2,selected] {\color{gray}$B$};
+	\node      [cell3,selected] {\color{gray}$B$};
+	\node      [cell4,selected] {\color{gray}$B$};
+
+	\node [cell1] {\ ...\ \ };
+	\node [cell2] {\ ...\ \ };
+	\node [cell3] {\ ...\ \ };
+	\node [cell4] {\ ...\ \ };
+
+	\node [cell1, end] {};
+	\node [cell2, end] {};
+	\node [cell3, end] {};
+	\node [cell4, end] {};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (60bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q$};
+	\draw (ne.south) -- (60bp, 25bp) -- (85.5bp, 25bp) [->] to (Ai.north);
 
 \end{tikzturing}
+$2k$-sledni stroj $M'$
+\end{minipage}
 \end{center}
+\br
 
-\Def{Korak stroja $\delta$ opišemo kot:
-	\[\delta = Q \times \Gamma^k \rightarrow Q\times(\Gamma\times\{ L,D,N \})^k \]
-	Torej, na vsakem koraku dobimo iz trenutnega stanje glave, ter tračnega simbola iz vsakega traku, neko novo stanje, ter za vsak trak neodvisno nov simbol in premik.}
+Stroj $M'$ torej hrani trenutni položaj na trakovih s dodatno sledjo, ki ima v ustrezni celici zapisan simbol $X$.
+\br
+Poleg tega pa pri $M'$ potrebujemo še drugačno nadzorno enoto, ki hrani:
+\begin{items}
+\item Stanje stroja
+\item $k$ tračnih simbolov
+\item Števec na intervalu $[0,k]$, ki nam pove, koliko simbolov $X$ je še desno od trenutnega položaja okna.
+\end{items}
+\ \\
+Stroj $M'$ simulira en korak stroja $M$ tako da:
+\begin{items}
+\item Okno pomika v desno
+\item Ko na neki sledi naleti na simbol $X$:
+	\begin{items}
+	\item V nadzorno enoto shrani simbol iz naslednje sledi
+	\item Zmanjša števec za 1.
+	\end{items}
+\item Ko števec doseže 0, se začne pomikati v levo
+\item Ko naleti na simbol $X$
+	\begin{items}
+	\item Zamenja tračni simbol na naslednji sledi, enako kot bi naredil stroj $M$
+	\item Premakne se levo ali desno, enako kot bi naredil stroj $M$
+	\item Poveča števec za 1
+	\end{items}
+\item Ko števec doseže $k$, nadzorna enota preide v novo stanje, enako kot bi naredil stroj $M$
+\end{items}
+\ \\
+En korak stroja $M$ torej simuliramo s končno dolgim sprehodom v desno in levo.
+}}%konec dokaza
 
-\Trditev{Večtračni Turingov stroj je enako močen kot osnovni model.}
-\Dokaz{
-	\Odmakni{($\Rightarrow$)}{Preprosto delamo vse le na prvem traku}
-	\Odmakni{($\Leftarrow$)}{Vzamemo $k$-tračni Turingov stroj M in $2k$-sledni v obe strani neskončni M'.}}
-\pagebreak
-{\Huge od tu naprej je neurejeni del zapiskov.. halp!\\}
-\color{gray}
+\Neurejeno
 
-		\fixme
-		dve sledi za vsak trak.. na prvi oznka X, ki pove ...
-		na spodnji je ... stroja M
-	
-	\fixme - slika z dvemi trakovi in en večsledni
-%?------------------------neurejeno-----------------------------
-
-%\begin{comment}
-
-% [a] b
-%  c [d]
-%-------------
-%  X   []
-%  a b []
-%    X []
-%  c d []
-
-... , ki vsebuje
-stanje
-prostor za k ... znakov
-števec je omejen za štetje 0..k
-
-M' simuliramo en korak stroja M tako
-...pod njim in zmanjša števec za 1
-ko števec pade na nič, se začne pomikati v levo
-pri tem pomikanju v levo, vsakokrat, ko najde X  .. 
-	pod njim  .... (kot bi zamenjal M v svojem ...)
-	
-	poveča števec za 1
-ko števec naraste na k, se pomikanje v levo konča, nadzorna enota predie v novo stanje
-
-Torej en korak stroja M simulira M' s končno dolgim sprehodom iz desne pa v levo?
-
-%Formalizacija: nismo delal
-
-enako sta močna
-
-Izrek: za L obstaja večtrani TS ntk, obstaja za L običajni TS.
-
-\subsubsect{Nedeterministični Turingov stroj}
-$\delta:Q\times\Gamma \rightarrow 2^{Q\times\Gamma\times\{ L,D,N \}}$
+\subsect{Nedeterministični Turingov stroj}
+$\delta:Q\times\Gamma \rightarrow 2^{Q\times\Gamma\times\{ L,D,- \}}$
 .. ... ... toda le končno mnogo
 
 \Primer{
@@ -1288,12 +1369,12 @@ stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede, če je t
 ...: ...
 }
 
-\Def{NTS sprejme besedo, kadar obstaja konno zaporedje kononononooooooooooo!!! korakov, ki se konča v končnem stanju
-}
-NTS zmore vse kar zmore osnovni TS
-Dokaz: $\delta$ osnovnega TS je le poseben primer delte NTS
-NTS Ni močnejši
-Dokaz: simulacija NTS z osnovnim:
+Nedeterministični Turingov stroj sprejme besedo, kadar obstaja končno zaporedje korakov, po katerem pridemo do končnega stanja.
+
+\Trditev{Nedeterministični Turingov stroj zmore vse kar zmore osnovni Turingov stroj.}
+\Dokaz{Funkcija prehodov $\delta$ osnovnega TS je le poseben primer funkcije $\delta$ nedeterminističnega Turingovega stroja.}
+\Trditev{Nedeterministični Turingov stroj ni močnejši od osnovnega modela.}
+\Dokaz{simulacija NTS z osnovnim:
 %slika 
 %
 % d     a
@@ -1306,7 +1387,7 @@ Stroju M priredimo trisledni osnovni TS M'
 na prvi sledi ima M' vhodno besedo M
 na drugi sledi M' generira/izpisuje navodila eno za drugim. navodila so besed nad {1,2...r} v leksikografskem redu.
 npr r=3 ... 1,2,3, 11, 12, 13, 21, 22, 23, 31, 32, 33, 111, 112, 
-na tretji sledi simulira stroj M, kot da bi M sam izbral svoje poteze, skladno s tekočim navodilom. ajprov?
+na tretji sledi simulira stroj M, kot da bi M sam izbral svoje poteze, skladno s tekočim navodilom.% ajprov?
 
 Natančneje:
 M' na 2. sledi sestavi novo, naslednje navodilo
@@ -1320,14 +1401,12 @@ sicer če ne pride do konca navodila, ali pa se ustavi v nekončnem stanju, pote
 %kaj če se navodilo zacikla? to se da rešit... i dunno :)
 %aha, ne more se - ... ker ima končno mnogo nečesa
 %hm a se lahko nts konča, simulator pa zacikla? nas ne briga.
+}
+%Trditev: če M sprejme besedo, jo sprejme tudi M' 
+%Dokaz: 
+%izrek: za L obstaja nts, ntk za L obstaja osnovni ts.
 
-Trditev: če M sprejme besedo, jo sprejme tudi M' 
-Dokaz: 
-
-izrek: za L obstaja nts, ntk za L obstaja osnovni ts.
-
-
-\subsubsect{Večdimenzionalni Turingov stroj}
+\subsect{Večdimenzionalni Turingov stroj}
 ... k>=2
 premikamo se lahko v 2k smeri
 ...
@@ -1355,7 +1434,7 @@ premikamo se lahko v 2k smeri
 %Postov stroj, Algoritmi Markova
 %računanje oz. reševanje mat. problemov je pri človeku preoblikovanje množice besed v drugo (opis problema, v opis rešitve)
 
-\subsubsect{Rekurzivne funkcije}
+\subsect{Rekurzivne funkcije}
 %(GK) Gödel, Kleene
 Definiral je funkcije: ničelna, naslednik, projekcija.
 Dodal je pravili sestavljanja, kako iz začetnih in že sestavljenih dobimo novo: kompozicija, primitivna rekurzija. %grafek vseh sestavljivih (primitivno rekurzivnih) funkcij \_/
@@ -1417,7 +1496,7 @@ Godel trdi: funkcija f za katero obstaja $\varepsilon(f)$ , se imenjue splošno 
 	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$ z uporabo pravil 1,2.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
 	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
 
-\subsubsect{$\lambda$ račun}%1932,1933 Alonso Church
+\subsect{$\lambda$-račun}%1932,1933 Alonso Church
 Imamo vhodni izraz, ki opisuje neko funkcijo f in argumente $n_1, \dots, n_k$.
 
 Kako je funkcija opisana?
@@ -1441,7 +1520,7 @@ $f, n1, n2, ... nk$....$f(n_1, \dots, n_k)$
 
 %zgledovanje po jeziku (glej gor)
 
-\subsubsect{Postov Stroj}%1936, Post
+\subsect{Postov Stroj}%1936, Post
 %podoben turingovemu
 %nadzorna enota
 %trak s celicami
@@ -1463,7 +1542,7 @@ Korak: prebere iz celice pod oknom znak in iz začetka vrste znak. na podlagi te
 	Računanje po Postu je izvajanje programa Postovega stroja.\\
 	Funkcija je izračunljiva po Postu, če njeno vrednost lahko izračuna Postov stroj.}
 
-\subsubsect{Algoritmi Markova}%194..
+\subsect{Algoritmi Markova}%194..
 Imamo abecedo $\Sigma$, končno zaporedje produkcij:
 $x_1 \leftarrow y_1$
 $x_2 \leftarrow y_2$
@@ -1486,7 +1565,7 @@ Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končn
 
 %zdj pa neki za lepe sanje:
 %vsi so se matral še kj več narest
-\subsection{Church-Turingova teza}
+\sect{Church-Turingova teza}
 Church je postavil domnevo... "algoritem" debela leftright puščica algoritem po Churchu %lol, kar sm js reku je algoritem :P glej sigma pri Churchu... Gödel ga je nekoliko zavrnil, vmes turing neodvisno do podobnega
 
 Turing je postavil domnevo: "algoritem"  debela leftright puščica algoritem po Turingu

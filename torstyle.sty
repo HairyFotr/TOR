@@ -27,12 +27,15 @@
 	%za en trak
 	start chain=trak,
 	%za več trakov
-	start chain=trak1, start chain=trak2, start chain=trak3, 
+	start chain=trak1, start chain=trak2, start chain=trak3,
+	start chain=trak4, start chain=trak5, 
 	%celice
 	cell/.style={draw, very thin, minimum size=0.6cm, on chain=trak},
 	cell1/.style={cell, on chain=trak1, minimum width=1cm},
 	cell2/.style={cell, on chain=trak2, minimum width=1cm},
 	cell3/.style={cell, on chain=trak3, minimum width=1cm},
+	cell4/.style={cell, on chain=trak4, minimum width=1cm},
+	cell5/.style={cell, on chain=trak5, minimum width=1cm},
 	selected/.style={ultra thick},
 	end/.style={ultra thick, draw=white},
 	%nadzorna enota
@@ -40,6 +43,11 @@
 }
 \begin{tikzpicture}}{\end{tikzpicture}}
 
+%neurejeni del zapiskov
+\def\Neurejeno{
+\pagebreak
+{\Huge od tu naprej je neurejeni del zapiskov.. halp!\\}
+\color{gray}}
 
 %ker sem len za pisat, oz. na predavanjih je treba bit hiter :)
 %subsection + hint pagebreak + label
