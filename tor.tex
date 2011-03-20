@@ -547,7 +547,7 @@ Po zgoraj opisanem postopku dobimo:\\ \ \\
 	\draw [bend left,->]  (aS) to node[auto] {$a$} (S);
 	\draw [->]  (S) to node[auto] {$\varepsilon$} (abA);
 	\draw [->]  (abA) to node[auto] {$a$} (bA);
-	\draw [bend left,->]  (bA) to node[auto] {\color{gray}$B$} (A);
+	\draw [bend left,->]  (bA) to node[auto] {$b$} (A);
 	\draw [->]  (A) to node[auto] {$\varepsilon$} (aa);
 	\draw [->]  (aa) to node[auto] {$a$} (a);
 	\draw [->]  (a) to node[auto] {$a$} (e);
@@ -1277,7 +1277,7 @@ Večtračni Turingov stroj ima $k>1$ trakov, ki so neomejeni v obe strani. Poleg
 	\draw (ne.south) -- (50bp, 25bp) -- (29bp, 25bp) [->] to (Ai.north);
 	\draw (ne.south) -- (50bp, 25bp) -- (57bp, 25bp) [->] to (Ai2.north);
 
-	\node [cell11] {\color{gray}$B$};
+	\node [cell11] {$b$};
 
 	\node [cell11] {\color{gray}$B$};
 	\node [cell2]  {\color{gray}$B$};
@@ -1298,7 +1298,7 @@ $k$-tračni stroj $M$
 	\node at (0bp,-1.8cm) [cell4]  {\ ...\ \ };
 
 	\node [cell1] {$X$}; \node [cell1] {\color{gray}$B$};
-	\node [cell2] {$a$}; \node [cell2] {\color{gray}$B$};
+	\node [cell2] {$a$}; \node [cell2] {$b$};
 	\node [cell3] {\color{gray}$B$}; \node [cell3] {$X$};
 	\node [cell4] {$c$}; \node [cell4] {$d$};
 
