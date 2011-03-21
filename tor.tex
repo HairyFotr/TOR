@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper,oneside]{book}
+de]{book}
 
 %Hello there. Don't know what to do?
 	%Search for the %? or \fixme and fix/add stuff.
@@ -1575,4 +1575,158 @@ Turing je postavil domnevo: "algoritem"  debela leftright puščica algoritem po
 %lol, trolla moje latex skille :)
 
 Church-Turingova teza: algoritem intuitivno debela leftright puščica algoritem po Turingu%bolj točno program turing stroja in turing zato, ker je najbl cute
+%-----------------------predavanja 5-------------------------------
+
+Kaj je prinesla Church-Turingova teza?
+%%1
+algoritem%oblaček 
+%<---> ni dokazano ampak vseen puščica
+\fixme - krog... alg, kot so ga opisali (in okrog napisani T<=>P<=>GK<=>HG<=>M)
+
+"algoritem" <---> program TS%okvir
+
+%----
+
+računanje%oblaček
+%<--->
+\fixme - krog... računanje, kot so ga opisali...% in okrog napisani T<=>P<=>GK<=>HG<=>M
+
+"računanje" <---> delovanje TS%okvir
+
+%----
+
+izračunljiva funkcija%oblaček
+%<--->
+\fixme - krog... izr. funkcija, kot so jo opisali...% in okrog napisani T<=>P<=>GK<=>HG<=>M
+
+"izračunljiva f" <---> f izračunljiva s TS%okvir
+
+\Odmakni{Težava}{...}
+
+\subsubsect{Težave s totalnimi funkcijami}
+$f:\mathcal{N}\rightarrow\mathcal{M}$%
+\Odmakni{?}{Kako na splošno dokazati, da je neka funkcija res totalna?\\
+V najslabšem primeru, bi bilo treba preizkusiti za vsak $x\inA$, ali je funkcija pri tem $x$ definirana ( pišemo: $f(x)\uparrow$ )\\
+Če je A neskončen, ta način ni finiten.}
+\Odmakni{=>}{Pojem izračunljivosti funkcije se opira na nek algoritmično težko določljiv pojem totalnosti}
+
+%slikca dva kroga A, B... \forall x ... f(x)
+
+%%2
+Po CT tezi je izračunljiva ... rekurziva funkcija %oz. vsaka, ki jo računa TS
+\begin{items}
+\item moč N^k:N je c (moč realnih števil)%?
+\item rekurzivnih funkcije je \Aleph0 (števno mnogo)
+\item Vsako definira program TS, programov pa je števno mnogo.
+\item ? ali je med vsemi funkcijami ($\mathcal{N}^\mathcal{N}$) možno najti tako, ki je izračunljiva, pa ni rekurzivna.
+\item DA -- dokaz z diagonalizacijo:\\
+\end{items}
+\Trditev{Obstaja izračunljiva funkcija, ki ni rekurzivna.}
+\Dokaz{ 
+	\begin{items}
+	\item definicije funkcij so končna zaporedja.%(Trditev)
+	\item uredimo zaporedja po dolžini, enako dolga pa leksikografsko
+	\item => lahko govorimo o prvem, drugem, ..., o $n$-tem programu TS. Zato lahko tudi prvi, drugi, ... n-ti rekurzivni funkciji.
+	\item označimo n-to rekurzivno funkcijo z f_n 
+	\item definirajmo ......
+		g(n, a_1,\dots, a_k) po def. f_n(a_1, a_2, \dots, a_k}+1, kjr $a_i\in \mathcal{N}$%označimo z *
+
+funkcija je izračunljiva
+algoritem je ....
+....
+\item ali je  g tudi rekurzivna
+	ali obstaja program TS, ki je izračuna.
+	
+\item predpostavka: g je rekrivna
+	Tedaj obstaja nek naravni m, da je f_m = g.%nti program po vrsti. označimo z **
+	Poglejmo vrednost g(mmmm)
+	iz (*) sledi g(m, m, \dots, m) = f_m(m, m, \dots, m)
+	iz (**) sledi f_m(m, m, \dots, m) = g(m, m, \dots, m)
+	iz tega sledi f_m(m, m, \dots, m) = f_m(m, m, \dots, m) +1 %označimo z ***
+	in pridemo v protislovje -- g ni rekurzivna.%intuitivno smo sestavili funkcijo...
+	torej obstaja funkcija, ki je izračunljiva in ni rekurzivna.% če gledamo po godlu... mogoče moramo dodati trem še kakšno pravilo za .. ali sestavljanje
+	
+	kaj sedaj? 
+	Ali naj dodajo začetne funkcije, ali pravila za dodajanje, če gledamo model ... Godel
+	Ne, pridemo v isto protislovje.
+
+	Ali je to ovrglo CT tezo?
+	Ne. Ugotovili so, da se je treba odpovedati zahtevi, da so funkcije le totalne. Dopustiti je treba tudi sestavljene parcialne.
+	%pri parcialnih funkcijah f = f+1 lahko ni definirano in to je ok
+	Takrat *** ni več nujno protislovje, saj je lahko $f_m(mmmm)\uparrow$.
+	\end{items}
+}
+\Odmakni{Sklep}{Funkcija je "izračunljiva" <---> f računa nek TS tam, kejr je definirana}
+%rekurzivne -> parcialne rekurzivne... so izračunljive
+%vpr: kako dobimo n-ti turingov stroj, pa da je totalen, ... obratno je nekako :)
+
+\section{Univerzalni Turingov stroj}
+%če bi lahko TS oštevilčil, bi lahko kodo stroja dal na vhod in bi TS računal s TS.
+%Ideja je prišla od Godla: un grafek... ali je sistem popoln. ko je oštevilčil stvari, je lahko imel referenco in samo-referenco
+\Odmakni{Ideja}{Turingove stroje bi radi oštevilčili. \\
+	Če bi imel vsak Turingov stroj svoj indeks, bi nek drug Turingov stroj lahko računal z drugimi stroji oz. z njihovimi ideksi.
+	Kdaj je to koristno?}
+
+\subsubsect{Kodiranje Turingovih strojev}
+Kako poljuben Turingov stroj zakodirati z abecedo $\{0,1\}$?
+Zadošča da zakodiramo program $\delta$ Turingovega stroja.%kj več je waste of time... sj verjamete :)
+Naj bo $T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle$ poljuben stroj.%bomo samo delta, ostale se da razbrat ven
+Če je $\delta(q_1,a_j)=\langle q_k, a_l, S_m \rangle$ ukaz programa $\delta$, ga zakodiramo kot:
+	\[ K=0^i 1 0^j 1 0^k 1 0^l 1 0^m\]
+Ko zakodiramo vseh R ukaov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ iz katerih bomo sestavili kodo Turingovega stroja:
+	\[ <T> = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
+Na $<T>$ lahko gledamo kot da je dvojiški zapis nekega naravnega števila in to je indeks Turingovega stroja $T$.
+
+Nekatera naravna števila niso indeksi TS, zato se dogovorimo: če naravno število nima oblike *, rečemo, da je indeks praznega Turingovega stroja (njegova $\delta$ je povsod nedefnirana -- takoj se ustavi in ne sprejme nobene besede)
+Posledica: vsako naravno število, je indeks natanko enega Turingovega stroja.
+Obratno ne velja. Isti Turingov stroj ima več indeksov (dodajamo nepotrebne in nesmiselne ukaze, pa je.)
+\Trditev{Obstaja Turingov stroj, ki izračuna vse kar izračuna katerikoli drug Turingov stroj.}
+\Dokaz{Stroj si zamislimo v grobem in intuitivno zapišemo njegov program. Skličemo se na CT tezo, ki nam zagotovi obstoj nekega konkretnega TS (ki opravlja ta algoritem)}%
+
+
+Zamisel stroja U:
+
+\Odmakni{Trakovi}{
+Vhodni trak - vsebuje vhodno besedo sestavljeno iz dveh delov:
+\begin{items}
+\item Kodo $<T>$ poljubnega Turingovega stroja.
+\item Poljubno besedo $w \in \Sigma^*$
+\end{items}
+Delovni trak - sprva prazen. Stroj U .......
+Pomožni trak - sprva prazen. Stroj U ga bo uporabljal za zapis tekočega stanja stroja T in za primerjanje tega stanja s končnim stanjem stroja T.
+}
+
+Program stroja U(intuitivo)
+\begin{items}
+\item Preveri, ali je vhod oblike $<T,\ w>$, kjer je T koda nekega Turingovega stroja. Če ni, se U ustavi (tudi T bi se)
+\item Iz $<T>$ preberi kodo končnega stanja $<q_F>$, stroja T. in napisi $<q_1, q_f>$ na tretji trak.
+\item Prepiši $w$ na delovni trak in postavi okno na začetek 
+\item Denimo, da je na pomožnem traku nek par $<q_i, q_f>$ in da je v delovnem oknu znak $a$. Če je $q_i=q_f$, se stroj ustavi (tudi T bi se)
+\item Na prvem traku poišči v <T> kodo ukaza, ki se začne z $\delta(q_i, a)=\dots$
+\item Če je ne najdemo se U ustavi (tak T bi se ustavil)
+\item Denimo, da najdena koda opisuje ukaz $\delta(q_i, a)=\langle q_, b, S \rangle$ ... na drugi trak zapiši b v ... premik v smeri S
+\item Na pomožni trak namesto $<q_i,q_f>$ vpiši $<q_j,q_f>$, goto 4
+\end{items}
+\fixme slika: trije trakovi - vhodni(<T> w), delovni(wwww|a|wwww), pomožni(<qi><qF>)
+
+To je bil intuitiven opis algoritma programa stroja U - algoritma. Po CT tezi lahko sestavimo pravi TS z vsemi podrobnostmi, ki izvaja delo opisanega stroja.
+\[U=\langle Q_U,\Sigma_U,\Gamma_U,\delta_{U1},q_{U1},B,q_{Uf} \rangle  \]
+To je univerzalni Turingov stroj.
+%1996 je en rus sestavil nekaj različic stroja U... 
+% |Q_u|  |\Sigmau|
+%   15    2
+%   9     3
+%   6     4  
+%   5     5
+%   4     6 (ta ima le 22 ukazov)
+%   3     9
+%   2    18
+%kaj je wolfram tuki s cellularnimi počel?
+%eniac, ....
+\sect{Pravi stroji, ki so univerzalni}
+Spremembe:
+Vsaka celica je neposredno dosegljiva prek naslova
+Program naj bo na traku, ne v glavi
+%von neumann itak
+%trak ->pomilnik, celica pom lokacija, nadz enota CPE
 \end{document}
