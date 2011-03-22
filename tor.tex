@@ -1,4 +1,4 @@
-de]{book}
+\documentclass[10pt,a4paper,oneside]{book}
 
 %Hello there. Don't know what to do?
 	%Search for the %? or \fixme and fix/add stuff.
@@ -698,8 +698,8 @@ Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali ve�
 	\item S - začetni simbol
 	\end{items}
 	Pri tem je:
-	\[ P \subset \left[\alpha_1 A \alpha_2 \rightarrow \alpha_1 \gamma \alpha_2 \right] \]
-	\[ A \in N,\ \ \alpha_1,\alpha_2 \in (N \cup T)^*,\ \ \gamma \in (N \cup T)^+ \]
+	\[ P \subset \left[\alpha_1 A \alpha_2 \rightarrow \alpha_1 \gamma \alpha_2 \right],\ 
+	 A \in N,\ \ \alpha_1,\alpha_2 \in (N \cup T)^*,\ \ \gamma \in (N \cup T)^+ \]
 	Torej, niz z vsaj enim vmesnim simbolom preslikamo v nek drug niz. Pri tem je omejitev, da končnih simbolov ne smemo spreminjati.
 }
 
@@ -1604,9 +1604,9 @@ izračunljiva funkcija%oblaček
 \Odmakni{Težava}{...}
 
 \subsubsect{Težave s totalnimi funkcijami}
-$f:\mathcal{N}\rightarrow\mathcal{M}$%
+$f:\mathbb{N}\rightarrow\mathbb{N}$%
 \Odmakni{?}{Kako na splošno dokazati, da je neka funkcija res totalna?\\
-V najslabšem primeru, bi bilo treba preizkusiti za vsak $x\inA$, ali je funkcija pri tem $x$ definirana ( pišemo: $f(x)\uparrow$ )\\
+V najslabšem primeru, bi bilo treba preizkusiti za vsak $x\in A$, ali je funkcija pri tem $x$ definirana ( pišemo: $f(x)\uparrow$ )\\
 Če je A neskončen, ta način ni finiten.}
 \Odmakni{=>}{Pojem izračunljivosti funkcije se opira na nek algoritmično težko določljiv pojem totalnosti}
 
@@ -1615,46 +1615,42 @@ V najslabšem primeru, bi bilo treba preizkusiti za vsak $x\inA$, ali je funkcij
 %%2
 Po CT tezi je izračunljiva ... rekurziva funkcija %oz. vsaka, ki jo računa TS
 \begin{items}
-\item moč N^k:N je c (moč realnih števil)%?
-\item rekurzivnih funkcije je \Aleph0 (števno mnogo)
+\item moč $N^k:N$ je c (moč realnih števil)%?
+\item rekurzivnih funkcije je $\aleph_0$ (števno mnogo)
 \item Vsako definira program TS, programov pa je števno mnogo.
-\item ? ali je med vsemi funkcijami ($\mathcal{N}^\mathcal{N}$) možno najti tako, ki je izračunljiva, pa ni rekurzivna.
+\item ? ali je med vsemi funkcijami ($\mathbb{N}^\mathbb{N}$) možno najti tako, ki je izračunljiva, pa ni rekurzivna.
 \item DA -- dokaz z diagonalizacijo:\\
 \end{items}
 \Trditev{Obstaja izračunljiva funkcija, ki ni rekurzivna.}
-\Dokaz{ 
-	\begin{items}
-	\item definicije funkcij so končna zaporedja.%(Trditev)
-	\item uredimo zaporedja po dolžini, enako dolga pa leksikografsko
-	\item => lahko govorimo o prvem, drugem, ..., o $n$-tem programu TS. Zato lahko tudi prvi, drugi, ... n-ti rekurzivni funkciji.
-	\item označimo n-to rekurzivno funkcijo z f_n 
-	\item definirajmo ......
-		g(n, a_1,\dots, a_k) po def. f_n(a_1, a_2, \dots, a_k}+1, kjr $a_i\in \mathcal{N}$%označimo z *
+\Dokaz{Definicije funkcij so končna zaporedja.\\%(Trditev)
+uredimo zaporedja po dolžini, enako dolga pa leksikografsko\\
+$=>$ lahko govorimo o prvem, drugem, ..., o $n$-tem programu TS. Zato lahko tudi prvi, drugi, ... n-ti rekurzivni funkciji.\\
+označimo $n$-to rekurzivno funkcijo s $f_n$\\
+definirajmo ......\\
+$g(n, a_1,\dots, a_k) \mbox{ po def. } f_n(a_1, a_2, \dots, a_k)+1$, kjer $a_i\in \mathbb{N}$\\%označimo z *
+funkcija je izračunljiva\\
+algoritem je ....\\
+....\\
+ali je $g$ tudi rekurzivna\\
+ali obstaja program TS, ki je izračuna.\\
 
-funkcija je izračunljiva
-algoritem je ....
-....
-\item ali je  g tudi rekurzivna
-	ali obstaja program TS, ki je izračuna.
+predpostavka: $g$ je rekrivna\\
+	Tedaj obstaja nek naravni $m$, da je $f_m = g$.\\%nti program po vrsti. označimo z **
+	Poglejmo vrednost $g(m,m,\dots,m)$\\
+	iz (*) sledi $g(m, m, \dots, m) = f_m(m, m, \dots, m)$\\
+	iz (**) sledi $f_m(m, m, \dots, m) = g(m, m, \dots, m)$\\
+	iz tega sledi $f_m(m, m, \dots, m) = f_m(m, m, \dots, m)+1$\\ %označimo z ***
+	in pridemo v protislovje -- $g$ ni rekurzivna.\\%intuitivno smo sestavili funkcijo...
+	torej obstaja funkcija, ki je izračunljiva in ni rekurzivna.\\% če gledamo po godlu... mogoče moramo dodati trem še kakšno pravilo za .. ali sestavljanje
 	
-\item predpostavka: g je rekrivna
-	Tedaj obstaja nek naravni m, da je f_m = g.%nti program po vrsti. označimo z **
-	Poglejmo vrednost g(mmmm)
-	iz (*) sledi g(m, m, \dots, m) = f_m(m, m, \dots, m)
-	iz (**) sledi f_m(m, m, \dots, m) = g(m, m, \dots, m)
-	iz tega sledi f_m(m, m, \dots, m) = f_m(m, m, \dots, m) +1 %označimo z ***
-	in pridemo v protislovje -- g ni rekurzivna.%intuitivno smo sestavili funkcijo...
-	torej obstaja funkcija, ki je izračunljiva in ni rekurzivna.% če gledamo po godlu... mogoče moramo dodati trem še kakšno pravilo za .. ali sestavljanje
-	
-	kaj sedaj? 
-	Ali naj dodajo začetne funkcije, ali pravila za dodajanje, če gledamo model ... Godel
-	Ne, pridemo v isto protislovje.
+	kaj sedaj?\\
+	Ali naj dodajo začetne funkcije, ali pravila za dodajanje, če gledamo Godlov model\\%HG ali GK??
+	Ne, pridemo v isto protislovje.\\
 
-	Ali je to ovrglo CT tezo?
-	Ne. Ugotovili so, da se je treba odpovedati zahtevi, da so funkcije le totalne. Dopustiti je treba tudi sestavljene parcialne.
+	Ali je to ovrglo CT tezo?\\
+	Ne. Ugotovili so, da se je treba odpovedati zahtevi, da so funkcije le totalne. Dopustiti je treba tudi sestavljene parcialne.\\
 	%pri parcialnih funkcijah f = f+1 lahko ni definirano in to je ok
 	Takrat *** ni več nujno protislovje, saj je lahko $f_m(mmmm)\uparrow$.
-	\end{items}
 }
 \Odmakni{Sklep}{Funkcija je "izračunljiva" <---> f računa nek TS tam, kejr je definirana}
 %rekurzivne -> parcialne rekurzivne... so izračunljive
@@ -1712,7 +1708,7 @@ Program stroja U(intuitivo)
 To je bil intuitiven opis algoritma programa stroja U - algoritma. Po CT tezi lahko sestavimo pravi TS z vsemi podrobnostmi, ki izvaja delo opisanega stroja.
 \[U=\langle Q_U,\Sigma_U,\Gamma_U,\delta_{U1},q_{U1},B,q_{Uf} \rangle  \]
 To je univerzalni Turingov stroj.
-%1996 je en rus sestavil nekaj različic stroja U... 
+%1996 je rus Yurii Rogozhin sestavil nekaj različic stroja U... 
 % |Q_u|  |\Sigmau|
 %   15    2
 %   9     3
@@ -1721,12 +1717,14 @@ To je univerzalni Turingov stroj.
 %   4     6 (ta ima le 22 ukazov)
 %   3     9
 %   2    18
-%kaj je wolfram tuki s cellularnimi počel?
-%eniac, ....
-\sect{Pravi stroji, ki so univerzalni}
-Spremembe:
+%kaj je wolfram tu s cellularnimi počel?
+%v knjigi (5,2), kasneje (3,2)
+
+\subsect{Pravi stroji, ki so univerzalni}
+Naredimo nekaj sprememb:
 Vsaka celica je neposredno dosegljiva prek naslova
 Program naj bo na traku, ne v glavi
 %von neumann itak
 %trak ->pomilnik, celica pom lokacija, nadz enota CPE
+
 \end{document}
