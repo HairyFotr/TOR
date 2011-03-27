@@ -1,0 +1,54 @@
+﻿\chap{Kontekstno-neodvisni jeziki}
+\sect{Kontekstno-neodvisne gramatike}
+%?oznake, izpeljave, ...
+\Def{Kontekstno-neodvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
+\begin{items}
+\item N - množica spremenljivk oz. vmesnih simbolov
+\item T - množica znakov oz. končnih simbolov
+\item P - množica produkcij
+\item S - začetni simbol
+\end{items}
+}
+
+%to je še treba nekam umestit
+\Def{Kontekstno-neodvisna gramatika je dvoumna, kadar do nekega končnega niza lahko pridemo po več različnih izpeljavah.}
+
+\Def{Kontekstno-neodvisna gramatika je deterministična, kadar za jezik, ki ga gramatika opisuje, obstaja vsaj ena gramatika, ki ni dvoumna. Ni nujno, da je taka gramatika, ki jo imamo - važno je, da taka gramatika obstaja.}
+
+\subsect{Chomskyeva normalna oblika}
+\Def{Kontekstno-neodvisna gramatika je v Chomskyevi normalni obliki, kadar nima nekoristnih simbolov, ter so vse produkcije naslednjih dveh oblik:\\
+	\[ A \rightarrow a \]
+	\[ A \rightarrow BC \]
+	\[ a \in T,\ \ B,C \in N \]
+}
+\subsect{Greibachina normalna oblika}
+\Def{Kontekstno-neodvisna gramatika je v Greibachini normalni obliki, kadar so vse produkcije oblike:\\
+	\[ A \rightarrow a\gamma\]
+	\[ a \in T,\ \ \gamma \in N^* \]
+}
+
+\sect{Skladovni avtomati}
+\Def{Skladovni avtomat je definiran kot sedmerka $M=\langle Q, \Sigma, \Gamma, \delta, q_0, Z_0, F \rangle$, kjer je:
+	\begin{items}
+	\item $ Q $ - končna množica stanj
+	\item $ \Sigma $ - vhodna abeceda
+	\item $ \Gamma $ - skladovna abeceda
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \times \Gamma \rightarrow 2^{Q \times \Gamma^*}$%? zakaj U \varepsilon?
+	\item $ q_0 $ - začetno stanje, $q_0 \in Q$
+	\item $ Z_0 $ - začetni skladovni simbol, $Z_0 \in \Gamma$
+	\item $ F $ - množica končnih stanj
+	\end{items}
+}
+\subsect{Trenutni opis}
+\Def{Trenutni opis je trojka $\langle q, w, \gamma \rangle \in Q \times \Sigma^* \times \Gamma^*$, pri čemer je $q$ trenutno stanje, $w$ preostanek vhodnega niza, ter $\gamma$ trenutna vsebina sklada}
+\subsect{Relacija $\vdash$}
+\Def{Relacija $\vdash$ nas pelje iz enega trenutnega opisa v drugega, če je ta prehod predviden v funkciji prehodov $\delta$:
+	\[ \langle q, aw, Z\gamma \rangle \vdash \langle p, w, \gamma'\gamma \rangle \iff \langle p, \gamma' \rangle \in \delta(q,a,Z) \]
+}
+Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali več-kratna uporaba relacije $\vdash$. Pove nam to, da pridemo iz enega trenutnega opisa do drugega, prek enega ali večih prehodov, pod pogojem, da vse vmesne prehode predvideva funkcija prehodov $\delta$.
+
+\subsect{Jezik skladovnega avtomata}
+
+\sect{Dokazovanje kontekstne-neodvisnosti jezika}\label{sec:Dokazovanje KNJ}
+\subsect{Lema o napihovanju za kontekstno-neodvisne jezike}
+\subsect{Ogdenova lema za kontekstno-neodvisne jezike}

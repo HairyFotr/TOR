@@ -1,0 +1,391 @@
+﻿\chap{Regularni jeziki}
+\sect{Regularni izrazi}\label{sec:RI}
+\Def{Imamo tri osnovne izraze:
+	\begin{items}
+	\item $\underline{\emptyset}$ je opisuje prazen jezik $ L(\underline{\emptyset})= \{ \}$
+	\item $\underline{ \varepsilon }$ opisuje jezik $L(\underline{ \varepsilon })= \{ \varepsilon\}$
+	\item $\underline{a}$ opisuje jezik $L( \underline{a} ) = \{ a \},\ a \in \Sigma$
+	\end{items}
+	In tri pravila za generiranje sestavljenih izrazov:
+	\begin{items}
+	\item $(r_1 + r_2)$ opisuje unijo jezikov $L(r_1 + r_2) = L(r_1) \bigcup L( r_2)$
+	\item $(r_1\ r_2)$ opisuje stik jezikov $L(r_1\ r_2) = L(r_1)\cdot L( r_2)$
+	\item $(r^*)$ opisuje iteracijo jezika $(L(r))^*$
+	\end{items}
+}
+\begin{primeri}
+\item Opiši vse nize, ki se končajo z nizom $00$ v abecedi $\Sigma = \{ 0,1 \}$.
+	\[ r = (0+1)^*00 \]
+	\item Opiši vse nize, pri katerih so vsi $a$-ji pred $b$-ji in vsi $b$-ji pred $c$-ji v abecedi $\Sigma = \{ a,b,c \}$.
+		\[ a^*b^*c^* \]
+	\item Opiši vse nize, ki vsebujejo vsaj dva niza '$aa$', ki se ne prekrivata v abecedi $\Sigma = \{ a,b,c \}$.
+		\[ (a+b+c)^* aa (a+b+c)^* aa (a+b+c)^* \]
+	\item Opiši vse nize, ki vsebuje vsaj dva niza '$aa$' ki se lahko prekrivata v abecedi $\Sigma = \{ a,b,c \}$
+		\[ (a+b+c)^* aa (a+b+c)^* aa (a+b+c)^* + (a+b+c)^* aaa (a+b+c)^* \]
+	\item Opiši vse nize, ki ne vsebujejo niza $11$ v abecedi $\Sigma = \{ 0,1 \}$
+		\[ (\varepsilon  + 1 )(0^*01)^* 0^*	\]
+		\[ (\varepsilon  + 1 )(0^* + 01)^* \]
+	\item S slovensko abecedo opiši besedo "Ljubljana" v vseh sklonih in vseh mešanicah velikih in malih črk.
+		\[ (L+l)(J+j)(U+u)(B+b)(L+l)(J+j)(A+a)(N+n)( (A+a)(O+o)(E+e)(I+i) ) \]
+		Koliko različnih nizov opišemo s tem regularnim izrazom?\\
+		\[ 2^8 \cdot 2^3 = 2^{11} \mbox{ nizov} \]
+\end{primeri}
+\sect{Končni avtomati}\label{sec:KA}
+\subsect{Nedeterministični končni avtomati z $\varepsilon$-prehodi }
+\Def{$\varepsilon$NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta ,q_0 , F \rangle$, kjer je:
+	\begin{items}
+	\item $ Q $ - končna množica stanj
+	\item $ \Sigma $ - vhodna abeceda
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times (\Sigma \cup \{\varepsilon\}) \rightarrow 2^Q$
+	\item $ q_0 $ - začetno stanje
+	\item $ F $ - množica končnih stanj
+	\end{items}
+}
+%?razlaga potenčne množice bi šla lahko nekam med mat. osnove... imam še en kup stvari o teoriji množic nekje. Drugač je pa kul - epsilon-closure je že napol opisan :)
+$2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ vse možne kombinacije stanj. Recimo da se nahajamo v stanju A, potem nas funkcija prehodov $ \delta $ pripelje v vsa mozna stanja do katerih pridemo iz $A$ z določenim znakom abecede in z vsemi $ \varepsilon $ prehodi, naprimer $ \{ A_1,A2, \ldots , A_n \}$. Tukaj je množica stanj $ \{ A_1,A2, \ldots , A_n \} $ element potenčne množice $P(Q)$
+
+\subsect{Nedeterministični končni avtomati}
+\Def{NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
+	\begin{items}
+	\item $ Q $ - končna množica stanj
+	\item $ \Sigma $ - vhodna abeceda
+	\item $ \delta $ - funkcija prehodov $\delta : Q \times \Sigma \rightarrow 2^{Q}$
+	\item $ q_0 $ - začetno stanje
+	\item $ F $ - množica končnih stanj
+	\end{items}		
+}
+\Def{Funkcija $\varepsilon$-closure($q$) nam pove, do katerih stanj lahko pridemo iz stanja $q$ po $\varepsilon$ prehodih.
+	\[ \varepsilon\mbox{-closure}(q) = \{ q_k\ |\ \exists q_1, q_2, \dots q_n \in Q,\ q=q_1 \wedge q_i \in \delta(q_{i-1}, \varepsilon) \} \]
+}
+\Def{Posplošena funkcija prehodov $\hat\delta$ nam pove, do katerih stanj pridemo po nekem nizu.		\[ \hat\delta(q, \varepsilon) = \varepsilon\mbox{-closure}(q) \]
+	\[ \hat\delta(q, a) = \delta(q, a) \]
+	\[ \hat\delta(q, wa) = \varepsilon\mbox{-closure}(\{ q''\ |\ q' \in \hat\delta(q, w) \wedge q'' \in \delta(q', a) \})\]
+}
+
+\subsect{Deterministični končni avtomat}
+\Def{DKA je definiran kot petorka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
+	\begin{items}
+	\item $ Q $ - končna množica stanj
+	\item $ \Sigma $ - vhodna abeceda
+	\item $ \delta $ - funkcija prehodov, $\delta : Q \times \Sigma \rightarrow Q$
+	\item $ q_0 $ - začetno stanje
+	\item $ F $ - množica končnih stanj
+	\end{items}	
+}
+
+\subsect{Jeziki končnih avtomatov}
+\Def{Jezik $\varepsilon$NKA ter NKA je definiran kot:
+	\begin{equation*}
+	L=\{ w\ |\ \hat\delta(q_0, w) \cap F \neq \emptyset \}
+	\end{equation*}
+	kjer je $\hat\delta(q,w)$ posplošena funkcija prehodov v večih korakih.}
+\Def{Jezik DKA je definiran kot:
+	\begin{equation*}
+	L=\{ w\ |\ \hat\delta(q_0, w) \in F \}
+	\end{equation*}
+}
+Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
+
+\sect{Levo in desno-linearne gramatike}\label{sec:LLGDLG}
+Posebnost linearnih gramatik je v tem, da imajo na desni strani produkcij največ en vmesni simbol, ampak ta model je že nekoliko močnejši od regularnih jezikov (glej \ref{sec:LG}), če pa se omejimo le na tiste produkcije, ki imajo ta edini vmesni simbol vedno na skrajno levi strani, ali pa vedno na skrajni desni strani niza, dobimo model, ki opisuje regularne jezike.
+%
+\Def{Linearna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
+\begin{items}
+\item N - množica spremenljivk oz. vmesnih simbolov, $N \subseteq \Sigma$
+\item T - množica znakov oz. končnih simbolov, $T \subset \Sigma,\ N\cap T = \emptyset$
+\item P - množica produkcij
+\item S - začetni simbol, $S \in N$
+\end{items}
+Pri tem je abeceda $\Sigma = N \cup T$ in $N\cap T = \emptyset$.
+}
+\subsect{Produkcije}
+\Def{Pri levo in desno-linearnih gramatikah, s produkcijami slikamo nek vmesni simbol v niz, ki ima lahko vmesni simbol le na skrajno levi pri levo-linearnih, oz. le na skrajno desni pri desno-linearnih:
+	\begin{items}
+	\item $P \subset N \times ((N\cup \{\varepsilon\})T^*)$ - pri levo-linearnih gramatikah
+	\item $P \subset N \times (T^* (N\cup \{\varepsilon\}))$ - pri desno-linearnih gramatikah
+	\end{items}
+	%neko moje bluzenje... mogoče je prov.
+	%\[ \left[ A \rightarrow B \beta \right] \in P \mbox{ pri levo, ter}\]
+	%\[ \left[ A \rightarrow \beta B \right] \in P \mbox{ pri desno-linearnih gramatikah}\]
+	%\[ A \in V,\ \ B \in (V \cup \{\varepsilon\}),\ \ \beta \in T^* \]
+}
+\subsect{Relacija izpeljave $\Rightarrow$}
+\Def{Relacija izpeljave pri levo in desno-linearnih gramatikah prek neke produkcije iz $P$, slika trenutni niz v nov niz, tako, da ima novi niz vmesne simbole lahko le na skrajni levi, pri desno-regularnih pa le na skrajno desni strani, torej:
+	\begin{items}
+	\item $\left[ A \rightarrow B \beta \right]$ - pri levo-linearnih gramatikah
+	\item $\left[ A \rightarrow \beta B \right]$ - pri desno-linearnih gramatikah
+	\end{items}
+	Pri tem je $A \in N,\ B \in (N \cup \{\varepsilon\}),\ \beta \in T^*$
+}
+\Def{Kadar želimo pokazati, da je mogoče z enim ali več koraki mogoče priti iz enega niza do drugega, to lahko zapišemo s posplošeno relacijo izpeljave $\Rightarrow^*$.
+	%homebrew definicija
+	\[ \alpha \Rightarrow^* \beta \mbox{\ \ \ n.t.k.\ \ \ } \alpha = \alpha_0 \Rightarrow \alpha_1 \Rightarrow \dots \Rightarrow \alpha_k = \beta;\ k>0 \]
+}
+\subsect{Jezik gramatik}
+
+\sect{Jezik regularnih jezikov}
+%?tu bi pasal dokazi :)
+\Def{Jezik ki ga opisuje poljubni regularni izraz, končni avtomat, levo ali desno-linearna gramatika, je regularni jezik.}
+Regularni jeziki ne vsebujejo informacije o prejšnjih znakih vhodnega niza in se z njimi ne da opisati poljubnega jezika. (za postopke dokazovanja regularnosti glej \ref{sec:Dokazovanje RJ}).
+\begin{primeri}
+	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
+	\item $L =\{ \}$ - prazen jezik
+	\item $L = \{ \varepsilon \}$ - jezik, ki vsebuje $\varepsilon$ (ni prazen)
+	\item $L = \{ a, aa, ab \}$ - jezik, ki vsebuje nize "a, aa, ab"
+	\item $L = \{ 0^n 1^n \ | \ n > 0 \} $ - jezik, ki \underline{ni} regularen (ne moremo si zapomniti poljubnega števila $n$)
+\end{primeri}
+
+\sect{Ohranjanje regularnosti jezikov}
+Regularnost jezika že po definiciji ohranjajo operacije:
+\begin{items}
+\item $L_1 \cup L_2$ - unija 
+\item $L_1 \cdot L_2$ - stik 
+\item $L^*$ - iteracija
+\end{items}
+Obstajajo postopki za konstrukcijo, ki kažejo, da regularnost ohranjajo tudi:
+\begin{items}
+\item $L_1 \cap L_2$ - presek\\
+	Iz avtomatov za $L_1$ in $L_2$ zgradimo t.i. produktni avtomat:
+		\begin{align*}
+			M_{L_1} &= \{ Q_1, \Sigma, \delta_1, q_{1_0}, F_1 \}\\
+			M_{L_2} &= \{ Q_2, \Sigma, \delta_2, q_{2_0}, F_2 \}\\
+			M_{L_1}*M_{L_2} &= \{ Q_1 \times Q_2, \Sigma, \delta_*, \langle q_{1_0}, q_{2_0} \rangle, F_1 \times F_2 \}
+		\end{align*}
+	Namesto stanj dobimo pare stanj in moramo preveriti v kateri par pridemo, če gledamo oba stara avtomata, končna pa so tista stanja, ki so končna v obeh starih avtomatih.
+	\[ \delta_*(\langle q_1, q_2 \rangle, a) = \langle \delta_1(q_1, a), \delta_2(q_2, a)\rangle \]
+\item $L^R$ - obrat\\
+	Obrnemo vse povezave, ustvarimo novo začetno stanje, ki gre po $\varepsilon$ v stara končna, staro začetno stanje pa postane edino končno stanje.
+\end{items}
+Regularnost ohranjajo tudi vse operacije, ki so sestavljene iz zgoraj naštetih:
+\begin{items}
+\item $L_1 \setminus L_2 = L_1 \cap \overline L_2$ - razlika
+\item $\overline{L} = \Sigma^* \setminus L$ - komplement
+\item $L_1 \underline\vee L_2 = (L_1 \cup L_2) \setminus (L_1 \cap L_2)$ - ekskluzivni ali 
+\end{items}
+
+\sect{Prevedbe med modeli regularnih jezikov}
+Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli in je mogoče pretvarjati med njimi. V tem odseku bomo predstavili naslednje prevedbe:\\[12pt]%?ustrezno dopolni :)
+\begin{center}
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (RI)   at (0bp,0bp)   {RI};
+	\node (eNKA) at (75bp,0bp)  {$\varepsilon$NKA};
+	\node (NKA)  at (150bp,0bp) {NKA};
+	\node (DKA)  at (225bp,0bp) {DKA};
+	\node (DLG)  at (300bp,0bp) {DLG};
+	\node (LLG)  at (375bp,0bp) {LLG};
+
+	\draw [bend left,->]  (DKA) to node[auto] {\ref{KA-RI}} (RI);
+	\draw [bend right,->]  (DLG) to node[auto] {\ref{DLG-eNKA}} (eNKA);
+	\draw [->]  (DKA) to node[auto] {} (NKA);
+	\draw [->]  (NKA) to node[auto] {} (eNKA);
+	\draw [->]  (RI) to node[auto] {\ref{RI-eNKA}} (eNKA);
+\end{tikzpicture}
+\end{center}
+
+	%nekako tako mam v lanskih vajah, vrjetno mam letos bl prov :)
+	%ps. lanske vaje so ful ugly, tko d si nism kj velik pomagov
+	%\subsubsection{KA $\rightarrow$ DLG}
+	%\subsubsection{DLG $\rightarrow$ KA}
+	%\subsubsection{KA $\rightarrow$ RI}
+	%\subsubsection{NKA $\rightarrow$ DKA}
+	%\subsubsection{$\varepsilon$-NKA $\rightarrow$ NKA}
+	%\subsubsection{RI $\rightarrow$ $\varepsilon$-NKA}
+\subsect{Regularni izraz $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{RI-eNKA}
+%konstanta
+\def\RIeNKAscale{0.60}
+
+Pretvoriti moramo le osnovne in sestavljene regularne izraze, nato pa ustrezne avotmate samo povezujemo skupaj.
+\begin{center}
+\begin{minipage}[t]{6cm}
+Osnovni izrazi:
+\begin{itemize}
+\item $r = \emptyset$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp) [state, accepting] {};
+\end{tikzpicture}
+\item $r = \varepsilon$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp) [state, accepting] {};
+
+	\draw [->] (q0) to node[auto] {$\varepsilon$} (q1);
+\end{tikzpicture}
+\item $r = a$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp) [state, accepting] {};
+
+	\draw [->] (q0) to node[auto] {$a$} (q1);
+\end{tikzpicture}
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{7cm}
+Sestavljeni izrazi:
+\begin{itemize}
+\item $r = r_1 + r_2$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,40bp)  [state]   {};
+	\node (q2) at (160bp,40bp)  [state]   {};
+	\node (q3) at (80bp,-40bp)  [state]   {};
+	\node (q4) at (160bp,-40bp)  [state]   {};
+	\node (qe) at (240bp,0bp) [state, accepting] {};
+
+	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q1);
+	\draw [decorate, decoration={snake},->]  (q1) to node[auto] {$r_1$} (q2);
+	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q3);
+	\draw [decorate, decoration={snake},->]  (q3) to node[auto] {$r_2$} (q4);
+	\draw [->]  (q2) to node[auto] {$\varepsilon$} (qe);
+	\draw [->]  (q4) to node[auto] {$\varepsilon$} (qe);
+\end{tikzpicture}
+\item $r = r_1\cdot r_2$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp)  [state]   {};
+	\node (q2) at (160bp,0bp)  [state]   {};
+	\node (qe) at (240bp,0bp) [state, accepting] {};
+
+	\draw [decorate, decoration={snake},->]  (q0) to node[auto] {$r_1$} (q1);
+	\draw [->]  (q1) to node[auto] {$\varepsilon$} (q2);
+	\draw [decorate, decoration={snake},->]  (q2) to node[auto] {$r_2$} (qe);
+\end{tikzpicture}
+\item $r = r_1^*$\\
+\begin{tikzpicture}[>=latex',/tikz/initial text="", scale=\RIeNKAscale, every state/.style={scale=\RIeNKAscale}]]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (80bp,0bp)  [state]   {};
+	\node (q2) at (160bp,0bp)  [state]   {};
+	\node (qe) at (240bp,0bp) [state, accepting] {};
+
+	\draw [bend left, ->]  (q0) to node[auto] {$\varepsilon$} (qe);
+	\draw [->]  (q0) to node[auto] {$\varepsilon$} (q1);
+	\draw [decorate, decoration={snake},->]  (q1) to node[auto] {$r_1$} (q2);
+	\draw [bend left,->]  (q2) to node[auto] {$\varepsilon$} (q1);
+	\draw [->]  (q2) to node[auto] {$\varepsilon$} (qe);
+\end{tikzpicture}
+\end{itemize}
+\end{minipage}
+\end{center}
+\subsect{Končni avtomat $\rightarrow$ Regularni izraz}\label{KA-RI}
+Končni avtomat v regularni izraz prevedemo po metodi z eliminacijo. Pri tej metodi izberemo neko vozlišče za eliminacijo, nato pa njegove sosede povežemo med seboj, tako, da na nove povezave zapišemo regularne izraze, ki opisujejo dogajanje v tistem vozlišču. Eliminacijo ponavljamo, dokler nam v avtomatu ne ostanta le dve stanji, nato pa za končni zapis uporabimo naslednji recept:
+\br
+Na povezavah avtomata imamo zapisane regularne izraze $R,S,Q$ in $T$,\\
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (q0) at (0bp,0bp)  [state, initial]   {$q_0$};
+	\node (q1) at (80bp,0bp) [state, accepting] {$q_e$};
+
+	\draw [loop above,->] (q0) to node[auto] {$R$} (q0);
+	\draw [bend left,->]  (q0) to node[auto] {$S$} (q1);
+	\draw [bend left,->]  (q1) to node[auto] {$T$} (q0);
+	\draw [loop above,->] (q1) to node[auto] {$Q$} (q1);
+\end{tikzpicture}
+\\
+ki jih prepišemo v en sam regularni izraz oblike:
+\[ (R+SQ^*T)^*SQ^* \]
+
+\begin{primeri}
+\item Zapiši DKA za preverjanje deljivosti s 3 v binarnem sistemu? Zapiši še regularni izraz.\\
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (q0) at (0bp,0bp)   [state, initial, accepting] {$q_0$};
+	\node (q1) at (75bp,0bp)  [state]                     {$q_1$};
+	\node (q2) at (150bp,0bp) [state]                     {$q_2$};
+
+	\draw [loop above,->] (q0) to node[auto] {$0$} (q0);
+	\draw [bend left,->]  (q0) to node[auto] {$1$} (q1);
+	\draw [bend left,->]  (q1) to node[auto] {$1$} (q0);
+	\draw [bend left,->]  (q1) to node[auto] {$0$} (q2);
+	\draw [bend left,->]  (q2) to node[auto] {$0$} (q1);
+ 	\draw [loop above,->] (q2) to node[auto] {$1$} (q2);
+\end{tikzpicture}
+\ \\
+Iz grafa eliminiramo eno stanje in zapišemo regularni izraz:
+\[ (0+1(01^*0)^*1)^* \]
+Možna pa je še ena rešitev, če eliminiramo drugo stanje.%napiši jo :P
+\end{primeri}
+
+\subsect{Desno-linearna gramatika $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{DLG-eNKA}
+Vhodno stanje avtomata je začetni simbol gramatike, nato pa stanja označujemo glede na končne in vmesne simbole, ki jih moramo še porabiti. Produkcije predstavljajo $\varepsilon$ prehode v avtomatu, preostali prehodi avtomata pa so črke, ki jih generiramo.
+
+\Primer{Pretvori podano desno-linearno gramatiko v nedeterministični končni avtomat z $\varepsilon$-prehodi.
+\begin{align*}
+S &\rightarrow abA\ |\ aS\\
+A &\rightarrow aa\ |\ bA\\
+\end{align*}
+\ \\[-25pt]%lol, hack
+Po zgoraj opisanem postopku dobimo:\\ \ \\
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]
+	\node (S)   at (0bp,0bp)     [state, initial]  {$S$};
+	\node (aS)  at (40bp,40bp)   [state]           {$aS$};
+	\node (abA) at (40bp,-40bp)  [state]           {$abA$};
+	\node (bA)  at (90bp,-40bp)  [state]           {$bA$};
+	\node (A)   at (130bp,0bp)   [state]           {$A$};
+	\node (aa)  at (180bp,0bp)   [state]           {$aa$};
+	\node (a)   at (230bp,0bp)   [state]           {$a$};
+	\node (e)   at (280bp,0bp)   [state,accepting] {$\varepsilon$};
+
+	\draw [bend left,->]  (S) to node[auto] {$\varepsilon$} (aS);
+	\draw [bend left,->]  (aS) to node[auto] {$a$} (S);
+	\draw [->]  (S) to node[auto] {$\varepsilon$} (abA);
+	\draw [->]  (abA) to node[auto] {$a$} (bA);
+	\draw [bend left,->]  (bA) to node[auto] {$b$} (A);
+	\draw [->]  (A) to node[auto] {$\varepsilon$} (aa);
+	\draw [->]  (aa) to node[auto] {$a$} (a);
+	\draw [->]  (a) to node[auto] {$a$} (e);
+	\draw [bend left,->]  (A) to node[auto] {$\varepsilon$} (bA);
+\end{tikzpicture}
+}
+
+\sect{Dokazovanje regularnosti jezika}\label{sec:Dokazovanje RJ}
+%Dostikrat hočemo sestaviti regularen izraz za določen jezik in niti ne vemo ali je regularen izraz sploh regularen ali ne. Za to imamo nekaj metod za dokazovanje regularnosti jezika.%?false... ne moreš sestavit regularnega izraza, ki ni regularen :)
+Kadar ugotavljamo, ali je nek jezik regularen, to lahko naredimo na več načinov:
+\begin{items}
+\item Pokažemo da je regularen:
+	\begin{items}
+	\item Jezik skonstruiramo v enem izmed modelov, ki sprejemajo regularne jezike:
+		\begin{items}
+		\item \nameref{sec:KA}
+		\item \nameref{sec:RI}
+		\item \nameref{sec:LLGDLG}
+		\end{items}
+	\end{items}
+\item Dokažemo da ni regularen:
+	\begin{items}
+	\item Z uporabo leme o napihovanju za regularne jezike
+	\item Z uporabo izreka Myhill-Nerode
+	\item Dokažemo, da jezik ne spada niti v nek širši razred jezikov (glej \ref{sec:Dokazovanje KNJ})
+	\end{items}
+\end{items}
+
+%?mislim, da je to pokrito tuki pri lemi...
+%Opozorilo: Če zapišemo regularni izraz za jezik, ali naredimo končni avtomat, moramo dobro preveriti da ne obstaja kakšen protiprimer. Torej beseda ki je v jeziku in jo končni avtomat ali regularni izraz ne sprejme, ali obratno.\\
+%Če nam ne uspe dokaza (da je ali da ni regularni jezik) do konca speljati, to ne moremo vzeti kot dokaz da ravno nasprotno drži. Velja da v takem primeru še nič ne vemo o regularnosti jezika.
+
+\subsect{Lema o napihovanju za regularne jezike}\label{sec:Lema za RJ}
+Lemo o napihovanju za regularne jezike uporabljamo za dokazovanje, da nek jezik ne spada v razred regularnih jezikov. 
+\Def{Za vsak regularni jezik obstaja neka konstanta $n$, taka, da lahko vsako besedo $w$ iz jezika, daljšo od $n$, razbijemo na tri dele:
+	\[ w=u\ v\ z \]
+	Pri čemer velja:
+	\begin{items}
+	\item $|uv| \leq n$
+	\item $|v| > 0$
+	\item $uv^iz \in L,\ \forall i \geq 0$ (napihovanje)
+	\end{items}
+}
+Ker dokazujemo da jezik ni regularen, moramo torej najti neko besedo, za katero pri napihovanju ne ostanemo znotraj jezika. Če nam tega z izbrano besedo ne uspe dokazati, še nismo dokazali da je jezik regularen -- edini pravi dokaz tega je konstrukcija jezika v enem izmed modelov, ki opisujejo regularne jezike.
+\begin{center}
+\begin{tikzpicture}[>=latex',/tikz/initial text=""]%scale=0.70, every state/.style={scale=0.70}]
+	\node (q0) at (0bp,0bp)  [state, initial]   {};
+	\node (q1) at (70bp,0bp) [state]            {};
+	\node (q2) at (140bp,0bp) [state, accepting] {};
+
+	\draw [decorate, decoration={snake},->]  (q0) to node[auto] {$u$} (q1);
+	\draw [decorate, decoration={snake}, loop,->] (q1) to node[auto] {$v$} (q1);
+	\draw [decorate, decoration={snake},->]  (q1) to node[auto] {$z$} (q2);
+\end{tikzpicture}
+\end{center}
+Če zgornjo definicijo pogledamo v kontekstu končnih avtomatov, vidimo, da je $n$ gotovo večji od števila stanj, saj mora za napihovanje v avtomatu obstajati nek cikel, sicer bi bi veljalo $|v|=0$.
+
+\subsect{Izrek Myhill-Nerode}
+
+
+\subsect{Minimizacija končnih avtomatov}

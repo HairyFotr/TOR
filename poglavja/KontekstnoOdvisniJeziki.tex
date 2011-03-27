@@ -1,0 +1,39 @@
+﻿\chap{Kontekstno-odvisni jeziki}
+\sect{Kontekstno-odvisne gramatike}
+\Def{Kontekstno-odvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer so:
+	\begin{items}
+	\item N - množica spremenljivk oz. vmesnih simbolov
+	\item T - množica znakov oz. končnih simbolov
+	\item P - množica produkcij
+	\item S - začetni simbol
+	\end{items}
+	Pri tem je:
+	\[ P \subset \left[\alpha_1 A \alpha_2 \rightarrow \alpha_1 \gamma \alpha_2 \right],\ 
+	 A \in N,\ \ \alpha_1,\alpha_2 \in (N \cup T)^*,\ \ \gamma \in (N \cup T)^+ \]
+	Torej, niz z vsaj enim vmesnim simbolom preslikamo v nek drug niz. Pri tem je omejitev, da končnih simbolov ne smemo spreminjati.
+}
+
+\begin{primeri}
+\item Sestavi kontekstno-odvisno gramatiko, ki sprejme jezik $L=\{ a^n b^n c^n\ |\ n>0 \}$.
+	\begin{align*}
+	S &\rightarrow aSBC\\
+	S &\rightarrow aBC \\
+	CB &\rightarrow HB \\
+	HB &\rightarrow HC \\
+	HC &\rightarrow BC \\
+	aB &\rightarrow ab \\
+	bB &\rightarrow bb \\
+	bC &\rightarrow bc \\
+	cC &\rightarrow cc \\
+	\end{align*}
+	S kompleksnejšo kontekstno-odvisno gramatiko sprejmemo tudi jezik $\{ a^n b^n c^n d^n\ |\ n>0 \}$
+\end{primeri}
+\subsect{Kurodova normalna oblika}
+\Def{Kontekstno-odvisna gramatika je v Kurodovi normalni obliki, kadar so vse produkcije oblike:		\begin{align*}
+	AB &\rightarrow CD\\
+	A &\rightarrow BC \\
+	A &\rightarrow B \\
+	A &\rightarrow a \\
+	\end{align*}
+	\[ a \in T,\ \ A,B,C,D \in N \]
+}
