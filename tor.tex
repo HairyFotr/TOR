@@ -1073,4 +1073,138 @@ Program naj bo na traku, ne v glavi
 %von neumann itak
 %trak ->pomilnik, celica pom lokacija, nadz enota CPE
 
+%-----------------------predavanja 6-------------------------------
+\sect{Reševanje računskih problemov}%ne osebnih, lol
+Vrste problemov:
+\begin{items}
+\item Odločitveni - odgovorijo z DA/NE %decision yes/no... ali ima graf Hamiltonov cikel, ali je št prašzevilo
+\item Iskalni - sprašuje po odlikovanem elementu neke množice
+\item Preštevalni - število ... v množici
+\item Naštevalni - generiranje vseh odlikovanih elementov
+\end{items}
+Odločitevni so najenostavnejši, zato se jim bomo tu bolj posvetili.
+
+\subsect{Jezik odločitvenih problemov}
+Problemu priredimo nek formalen jezik - množica besed nad neko
+
+Naj bo $P$ odločitveni problem, npr. $P$="Ali je $n$ praštevilo?".
+V praksi namesto splošnega parametra $n$ vstavimo konkretni podatek, npr. "Ali je 19871 praštevilo". To je naloga.
+Naj bo $p$ naloga problema $P$. Vsaka naloga ima odgovor DA/NE. Glede na to je naloga pozitivna/negativna.
+V opisu naloge so vedno konkretni podatki.
+Prek kodirne funkcije $\langle\rangle$ dobi vsaka naloga $p$ neko kodo $\langle p\rangle\in\Sigma^*$, ki jo razume nek Turingov stroj.
+Naj bo $\langle \rangle :P\rightarrow \Sigma^*$. Zahtevamo, da je $\langle\rangle$ injektivna $(p \neq p' \Rightarrow \langle p \rangle \neq \langle p' \rangle$.%why... a ne bi blo kul met kr vse na isto?
+Naj bo jezik problema P definiran kot:
+\[ \mathcal{L}(P) \mbox{ po def. } \{ \langle p \rangle \in \Sigma^*\ |\ \mbox{p je pozitivna naloga problema P} \} \]
+
+\fixme pravokotnik P s squigly črto po sredi... pozitivne/negativne naloge in pravokotnik Sig* s podmnožico L(P) in puščica iz pozitivnih v L prek kodirne funkcije <>
+
+Torej naloga $p\in P$ je pozitivna, $\Leftrightarrow \langle p \rangle \in \mathcal{L}(P)$.
+Računanje odgovora na nalogo p lahko zamenjamo z ugotavljanjem, ali je beseda $\langle p \rangle$v jeziku $\mathcal{L}(P)$.
+%ne vemo a je na pozitivna al negativna... lažje je videt na drugi stran, če se presika v L(P)
+
+\Def{Naj bo $P$ odločitveni problem. Pravimo, da je:
+P je odločljiv, kadar je jezik problema $\mathcal{L}(P)$ rekurziven.
+P je neodločljiv, kadar jezik problema $\mathcal{L}(P)$ ni rekurziven
+P je poldločljiv, kadar je jezik problema $\mathcal{L}(P)$ Turingov(rekurzivno prešteven).%odločljivi, ampak se včasih ne ustavi
+}
+%problem smo prenesli na področje jezikov..
+\subsect{Nedločljivi problem?...}
+%Turing 1936
+Težave delajo stroji, ki se ne ustavijo.
+Ali bi lahko za poljuben par stroja in besede, $\langle T,w \rangle$, preverili, ali se T(w) ustavi.
+\Def{Problem ustavitve: $P_{\mathcal{K}_0}$ je odločitveni problem "Ali se Turingov stroj T pri besedi w ustavi?"}
+\Trditev{Problem ustavitve ni odločljiv.}
+\Dokaz{Jezik problema je: $\mathcal{K}_0=\{ \langle T, w \rangle\ |\ T \mbox{ se pri w ustavi} \}$
+Nekaj časa nas bo zanimal jezik $\mathcal{K} \subseteq \mathcal{K}_0$, ki ga dobimo iz $\mathcal{K}_0$, če za $w$ vzamemeo kar kodo stroja, torej $<T>$.
+$\mathcal{K}=\{ T,T\ |\ T \mbox{ se pri <T> ustavi. } \}$
+Temu jeziku pripada odločitveni problem $P_\mathcal{K}$ - "ali se Turingov stroj ustavi nad lastno kodo?".
+
+\Odmakni{Lema}{Problem $P_\mathcal{K}$ ni odločljiv.}
+\Dokaz{Predpostavimo, da je množica \mathcal{K} rekurzivna (torej, je njen problem odločljiv). Potem gotovo obstaja Turingov stroj $R$, ki ta jezik razpoznava. $\exists TS:R_\mathcal{K}$, ki za poljuben T odgovori $R(<T,T>)$
+
+kjer je R(<T,T>)= DA, če se T ustavi nad <T> ... NE, če se ne ustavi.
+%here comes the good/hard part
+Sestavimo nov Turingov stroj $N$ s pomočjo domnevnega $R_\mathcal{K}$:
+\fixme škatla N. vhod <T>,v škatli naredi <T,T>, preda kosmati (ne vemo če obstaja) škatli R_K z izhodi DA/NE... če DA ga vprašamo šeenkrat isto.. če ne, ne speljemo na izhod N
+\Trditev{domnevni R_K napove prihodnost stroja T, N pa bo razgalil nesposobnost R_K pri tem napovedovanju na primeru T=N}
+\Dokaz{\fixme <N> gre v <N,N>
+%R_K vrne napačen odgovor, ker se <N> ne ustavi, če naj bi se ustavil in se ustavi, če naj se ne bi ustavil. P-p-p-protislovje.
+Domnevni R_K ne bi rešil naloge p - "ali se Turingov stroj N pri vhodu <N> ustavi?"
+Sklep: K ni rekurziven jezik, zato R_K ni odločljiv problem.%problem, ki ni odločljiv!!
+}
+}%konec leme
+Tudi $P_{\mathcal{K}_0}$ ni odločljiv, sicer bi bil zagotovo odločljiv tudi podproblem $P_\mathcal{K}$.
+Sklep: Obstaja odločittveni problem, za katerega ni Turingovega stroja, ki bi ga vedno rešil.%let's call Church-Turing again....
+Turingov stroj je po CT-tezi algoritem, torej za nekatere probleme ni algoritma, ki bi ga rešil.
+%ok... what now... kaj je praktična posledica? nekaj primerov.
+%kam tu paše dokazovanje pravilnosti? ja.
+}
+\subsect{Primeri nerešljivih problemov}
+\fixme napol presekana množica - odločljivi/neodločljivi
+\Odmakni{Problem o TS:}{
+Problem garača(busy beaver).
+Vzamemo Turingove stroje, ki imajo n nekončnih stanj. Takih strojev je končno mnogo. Garač je stroj z n nekončnimi stanji, ki začne s praznim trakom in zapiše največ enic preden se ustavi.
+"Ali je Turingov stroj T garač?".
+
+Še nekaj primerov za ustavitev TS: "ali se T pri w ustavi", "ali se T pri praznem vhodu ustavi?", "ali se T pri vsakem vhodu ustavi", "ali se dva stroja ustavita pri istih vhodih?"
+
+Lastnosti jezikov TS: "Ali T razpoznava rekurziven jezik.", "ali T razpoznava regularen jezik?", ...
+
+Problemi o algoritmih in programih:
+P program... <P> je strog opis problema. A algoritem... <A> program
+Pravilnost algoritma: "ali program <A> rešuje problem <P>"
+
+Najkrajši program:
+Pravimo, da je program ekvivalenten <A>, če je za vsak vhod enak kot <A>. 
+"Ali obstaka krajši program, ki je ekvivalenten <A>"
+
+Problemi o izračunljivih funkcijah:
+$\phi:A\rightarrow B$ je izračunljiva. "Ali ima $\phi$ neprazno domeno?", "Ali ima $\phi$ neskončno domeno?", "Ali ima $\phi$ končno domeno?", "Ali je $\phi$ surjektivna?", "Ali je $\phi$ totalna?"
+
+Problemi iz matematike:
+Diofantske enačbe: "ali ima DE $p(x_1,x_2,\dots,x_n)$ celoštevilsko rešitev?" %glej na začetek poglavja
+
+Ničelni matrični produkt: \mathcal{M}=\{ M_1, M_2, \dots, M_n \} do matrike reda $n\times n$ s celoštevilskimi koeficienti. "ali je mogoče zmnožiti $M_i$, da dobimo ničelno matriko?"
+
+Problemi o gramatikah in jezikih:
+%nahitro
+Dvoumnost KNG. (Obstoj stavka, ki ima dve različi izpeljavi v KNG.)
+Ekvivalenca KNG.%recimo zanimivo za načrtovalce jezikov.
+
+Problemi matematične logike:
+%tu je menda nek uvod, ki ga ne poznamo
+"Ali so vse formule predikatnega računa prvega reda odločljive?"
+
+%zdj pridejo luštni problemi ^^
+Razni drugi problemi:
+Enakost besed: E naj bo končna množica enačb nad besedami. npr. 
+1. bc=cba
+2. ba=abc
+3. ca=ac
+Od tu lahko izpeljemo enakost abcc=cacacbaa%ne vem če je prav prepisano
+"Ali iz E sledi u=v?"
+
+Tlakovanje: Imamo končno množico tlakovcev $T=\{ \mbox{križ-kraž kvadrati z različno pobarvanimi četrtinami} \}$. Radi bi tlakovali ravnino razdeljeno na kvadrate, tako, da se vedno sosednja tlakovca ujemata v barvi.%slikica :P
+"Ali lahko tlakujemo vsak poligon v $\mathbb{Z}^2$", "ali lahko tlakujemo pot v ravini od točke A do C, s tem, da ne obiščemo točke B"
+}
+
+\subsect{Dokazovanje neodločljivosti}
+Metode dokazovanja:
+\begin{items}
+\item Neposredno dokazovanje %potrebujemo veliko intuicije. tako smo P_K dokazal
+\item Dokazovanje s prevedbo %tako smo dokazali P_k_0
+\item Dokazovanje z Riceovim izrekom %menda najlažja
+\end{items}
+
+\subsubsect{Dokazovanje s prevedbo}
+Naj bo $Q$ odločitveni problem, za katerega sumimo, da je neodločljiv.%neuničljiv, lol :P
+Dokazujemo v treh korakih:
+\begin{items}
+\item Izberi nek problem P, ki ni odločljiv. %how do i?
+\item Dokazati moramo da velja: če bi bil $Q$ odločljiv, bi bil tudi $P$ odločljiv.
+\item Če prejšnji korak uspe lahko sklenemo da Q ni odločljiv. %lol, modus tollens
+\end{items}
+V koraku 2 z domnevnim Turingovim strojem $R_\mathcal{Q}$, je treba sestavitit Turingov stroj $R_\mathcal{P}$, ki se vedno ustavi.
+%slika od prej škaltla RLP... kosmata RLQ škatla notr
+
 \end{document}
