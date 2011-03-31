@@ -912,18 +912,15 @@ Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končn
 %zdj pa neki za lepe sanje:
 %vsi so se matral še kj več narest
 \sect{Church-Turingova teza}
-Church je postavil domnevo... "algoritem" debela leftright puščica algoritem po Churchu %lol, kar sm js reku je algoritem :P glej sigma pri Churchu... Gödel ga je nekoliko zavrnil, vmes turing neodvisno do podobnega
-
-Turing je postavil domnevo: "algoritem"  debela leftright puščica algoritem po Turingu
-
+Church je postavil domnevo: ,,algoritem'' {\bf$\Longleftrightarrow$} algoritem po Churchu ($\lambda$-račun)\\%lol, kar sm js reku je algoritem :P glej sigma pri Churchu... Gödel ga je nekoliko zavrnil, vmes turing neodvisno do podobnega
+Turing je postavil domnevo: ,,algoritem''  {\bf$\Longleftrightarrow$} algoritem po Turingu (Turingovi stroji)
+\br
 %Kdo je imel prav? oba, lol
-
 %lol, trolla moje latex skille :)
-
-Church-Turingova teza: algoritem intuitivno debela leftright puščica algoritem po Turingu%bolj točno program turing stroja in turing zato, ker je najbl cute
+Church-Turingova teza: ,,algoritem'' {\bf$\Longleftrightarrow$} algoritem po Turingu (ali po katerem izmed ostalih ekvivalentnih modelov)%bolj točno program turing stroja in turing zato, ker je najbl cute
 %-----------------------predavanja 5-------------------------------
-
-Kaj je prinesla Church-Turingova teza?
+\br
+Kaj je doprinos Church-Turingove teze?
 %%1
 algoritem%oblaček 
 %<---> ni dokazano ampak vseen puščica
@@ -1005,7 +1002,7 @@ predpostavka: $g$ je rekrivna\\
 \section{Univerzalni Turingov stroj}
 %če bi lahko TS oštevilčil, bi lahko kodo stroja dal na vhod in bi TS računal s TS.
 %Ideja je prišla od Godla: un grafek... ali je sistem popoln. ko je oštevilčil stvari, je lahko imel referenco in samo-referenco
-\Odmakni{Ideja}{Turingove stroje bi radi oštevilčili. \\
+\Odmakni{{I}deja}{Turingove stroje bi radi oštevilčili. \\
 	Če bi imel vsak Turingov stroj svoj indeks, bi nek drug Turingov stroj lahko računal z drugimi stroji oz. z njihovimi ideksi.
 	Kdaj je to koristno?}
 
@@ -1028,7 +1025,7 @@ Obratno ne velja. Isti Turingov stroj ima več indeksov (dodajamo nepotrebne in 
 
 Zamisel stroja U:
 
-\Odmakni{Trakovi}{
+\Odmakni{Tr{a}kovi}{
 Vhodni trak - vsebuje vhodno besedo sestavljeno iz dveh delov:
 \begin{items}
 \item Kodo $<T>$ poljubnega Turingovega stroja.
@@ -1075,21 +1072,20 @@ Program naj bo na traku, ne v glavi
 
 %-----------------------predavanja 6-------------------------------
 \sect{Reševanje računskih problemov}%ne osebnih, lol
-Vrste problemov:
+Vrste računskih problemov lahko delimo na:
 \begin{items}
-\item Odločitveni - odgovorijo z DA/NE %decision yes/no... ali ima graf Hamiltonov cikel, ali je št prašzevilo
-\item Iskalni - sprašuje po odlikovanem elementu neke množice
-\item Preštevalni - število ... v množici
-\item Naštevalni - generiranje vseh odlikovanih elementov
+\item Odločitvene - odgovorijo na dano vprašanje z DA ali NE %decision yes/no... ali ima graf Hamiltonov cikel, ali je št prašzevilo
+\item Iskalne - sprašujejo po elementu množice, ki ima neko lastnost
+\item Preštevalne - dajo število elementov v množici, ki imajo neko lastnost
+\item Naštevalne - generirajo vse elemente v množici, ki imajo neko lastnost
 \end{items}
-Odločitevni so najenostavnejši, zato se jim bomo tu bolj posvetili.
+Odločitevni problemi so najenostavnejši, zato se jim bomo tu bolj posvetili.
 
 \subsect{Jezik odločitvenih problemov}
-Problemu priredimo nek formalen jezik - množica besed nad neko
-
-Naj bo $P$ odločitveni problem, npr. $P$="Ali je $n$ praštevilo?".
-V praksi namesto splošnega parametra $n$ vstavimo konkretni podatek, npr. "Ali je 19871 praštevilo". To je naloga.
-Naj bo $p$ naloga problema $P$. Vsaka naloga ima odgovor DA/NE. Glede na to je naloga pozitivna/negativna.
+Problemu priredimo formalen jezik (množico besed nad neko abecedo).
+\br
+S $P$ označujemo odločitveni problem (npr. $P$=\Quote{Ali je število $n$ praštevilo?}).\\
+Ko v problem $P$ vstavimo namesto $n$ nek konkretni podatek dobimo nalogo $p$. (npr. \Quote{Ali je 19871 praštevilo?}. Vsaka naloga ima odgovor DA ali NE, rečemo tudi, da je naloga pozitivna ali negativna.
 V opisu naloge so vedno konkretni podatki.
 Prek kodirne funkcije $\langle\rangle$ dobi vsaka naloga $p$ neko kodo $\langle p\rangle\in\Sigma^*$, ki jo razume nek Turingov stroj.
 Naj bo $\langle \rangle :P\rightarrow \Sigma^*$. Zahtevamo, da je $\langle\rangle$ injektivna $(p \neq p' \Rightarrow \langle p \rangle \neq \langle p' \rangle$.%why... a ne bi blo kul met kr vse na isto?
@@ -1108,29 +1104,29 @@ P je neodločljiv, kadar jezik problema $\mathcal{L}(P)$ ni rekurziven
 P je poldločljiv, kadar je jezik problema $\mathcal{L}(P)$ Turingov(rekurzivno prešteven).%odločljivi, ampak se včasih ne ustavi
 }
 %problem smo prenesli na področje jezikov..
-\subsect{Nedločljivi problem?...}
+\subsect{Neodločljivi problemi}
 %Turing 1936
 Težave delajo stroji, ki se ne ustavijo.
 Ali bi lahko za poljuben par stroja in besede, $\langle T,w \rangle$, preverili, ali se T(w) ustavi.
-\Def{Problem ustavitve: $P_{\mathcal{K}_0}$ je odločitveni problem "Ali se Turingov stroj T pri besedi w ustavi?"}
+\Def{Problem ustavitve: $P_{\mathcal{K}_0}$ je odločitveni problem \Quote{Ali se Turingov stroj $T$ pri besedi $w$ ustavi?"}}
 \Trditev{Problem ustavitve ni odločljiv.}
 \Dokaz{Jezik problema je: $\mathcal{K}_0=\{ \langle T, w \rangle\ |\ T \mbox{ se pri w ustavi} \}$
 Nekaj časa nas bo zanimal jezik $\mathcal{K} \subseteq \mathcal{K}_0$, ki ga dobimo iz $\mathcal{K}_0$, če za $w$ vzamemeo kar kodo stroja, torej $<T>$.
 $\mathcal{K}=\{ T,T\ |\ T \mbox{ se pri <T> ustavi. } \}$
-Temu jeziku pripada odločitveni problem $P_\mathcal{K}$ - "ali se Turingov stroj ustavi nad lastno kodo?".
+Temu jeziku pripada odločitveni problem $P_\mathcal{K}$ - \Quote{Ali se Turingov stroj ustavi nad lastno kodo?}.
 
 \Odmakni{Lema}{Problem $P_\mathcal{K}$ ni odločljiv.}
-\Dokaz{Predpostavimo, da je množica \mathcal{K} rekurzivna (torej, je njen problem odločljiv). Potem gotovo obstaja Turingov stroj $R$, ki ta jezik razpoznava. $\exists TS:R_\mathcal{K}$, ki za poljuben T odgovori $R(<T,T>)$
+\Dokaz{Predpostavimo, da je množica $\mathcal{K}$ rekurzivna (torej, je njen problem odločljiv). Potem gotovo obstaja Turingov stroj $R$, ki ta jezik razpoznava. $\exists TS:R_\mathcal{K}$, ki za poljuben T odgovori $R(<T,T>)$
 
 kjer je R(<T,T>)= DA, če se T ustavi nad <T> ... NE, če se ne ustavi.
 %here comes the good/hard part
 Sestavimo nov Turingov stroj $N$ s pomočjo domnevnega $R_\mathcal{K}$:
-\fixme škatla N. vhod <T>,v škatli naredi <T,T>, preda kosmati (ne vemo če obstaja) škatli R_K z izhodi DA/NE... če DA ga vprašamo šeenkrat isto.. če ne, ne speljemo na izhod N
-\Trditev{domnevni R_K napove prihodnost stroja T, N pa bo razgalil nesposobnost R_K pri tem napovedovanju na primeru T=N}
+\fixme škatla N. vhod <T>,v škatli naredi <T,T>, preda kosmati (ne vemo če obstaja) škatli $R_\mathcal{K}$ z izhodi DA/NE... če DA ga vprašamo šeenkrat isto.. če ne, ne speljemo na izhod N
+\Trditev{domnevni $R_\mathcal{K}$ napove prihodnost stroja T, N pa bo razgalil nesposobnost $R_\mathcal{K}$ pri tem napovedovanju na primeru T=N}
 \Dokaz{\fixme <N> gre v <N,N>
 %R_K vrne napačen odgovor, ker se <N> ne ustavi, če naj bi se ustavil in se ustavi, če naj se ne bi ustavil. P-p-p-protislovje.
-Domnevni R_K ne bi rešil naloge p - "ali se Turingov stroj N pri vhodu <N> ustavi?"
-Sklep: K ni rekurziven jezik, zato R_K ni odločljiv problem.%problem, ki ni odločljiv!!
+Domnevni $R_\mathcal{K}$ ne bi rešil naloge p - \Quote{Ali se Turingov stroj $N$ pri vhodu $<N>$ ustavi?}
+Sklep: K ni rekurziven jezik, zato $R_\mathcal{K}$ ni odločljiv problem.%problem, ki ni odločljiv!!
 }
 }%konec leme
 Tudi $P_{\mathcal{K}_0}$ ni odločljiv, sicer bi bil zagotovo odločljiv tudi podproblem $P_\mathcal{K}$.
@@ -1141,55 +1137,63 @@ Turingov stroj je po CT-tezi algoritem, torej za nekatere probleme ni algoritma,
 }
 \subsect{Primeri nerešljivih problemov}
 \fixme napol presekana množica - odločljivi/neodločljivi
-\Odmakni{Problem o TS:}{
-Problem garača(busy beaver).
-Vzamemo Turingove stroje, ki imajo n nekončnih stanj. Takih strojev je končno mnogo. Garač je stroj z n nekončnimi stanji, ki začne s praznim trakom in zapiše največ enic preden se ustavi.
-"Ali je Turingov stroj T garač?".
+\subsubsect{Problemi o Turingovih strojih}
+Problem garača (angl. busy beaver):
+Vzamemo Turingove stroje, ki imajo n nekončnih stanj. Takih strojev je končno mnogo. Garač je turingov stroj z natanko $n$ nekončnimi stanji, ki začne s praznim trakom in zapiše največ enic (od vseh takih strojev), preden se ustavi.
+\Quote{Ali je Turingov stroj $T$, garač?}.
+\br
+Še nekaj primerov za ustavitev Turingovega stroja: \Quote{Ali se $T$ pri $w$ ustavi?}, \Quote{Ali se $T$ pri praznem vhodu ustavi?}, \Quote{Ali se $T$ pri vsakem vhodu ustavi?}, \Quote{Ali se dva stroja ustavita pri istih vhodih?}
+\br
+Razpoznavanje jezikov:\\
+\Quote{Ali Turingov stroj $T$ razpoznava rekurziven jezik?},\\
+\Quote{Ali Turingov stroj $T$ razpoznava regularen jezik?}
 
-Še nekaj primerov za ustavitev TS: "ali se T pri w ustavi", "ali se T pri praznem vhodu ustavi?", "ali se T pri vsakem vhodu ustavi", "ali se dva stroja ustavita pri istih vhodih?"
+\subsubsect{Problemi o algoritmih in programih}
+$P$ je problem, $<P>$ opis problema.\\
+$A$ je algoritem, $<A>$ označuje program.\\
+\Quote{Ali program $<A>$ rešuje problem $<P>$?}
+\br
+Pravimo, da je program $<A'>$ ekvivalenten $<A>$, če da za vsak vhod enako vrednost kot $<A>$.\\
+\Quote{Ali obstaja program $<A'>$, ki je krajši in hkrati ekvivalenten $<A>$?}
 
-Lastnosti jezikov TS: "Ali T razpoznava rekurziven jezik.", "ali T razpoznava regularen jezik?", ...
+\subsubsect{Problemi o izračunljivih funkcijah}
+$\varphi:A\rightarrow B$ je izračunljiva funkcija.\\
+\Quote{Ali ima $\varphi$ neprazno domeno?},\\
+\Quote{Ali ima $\varphi$ neskončno domeno?},\\
+\Quote{Ali ima $\varphi$ končno domeno?},\\
+\Quote{Ali je $\varphi$ surjektivna?},\\
+\Quote{Ali je $\varphi$ totalna?}
 
-Problemi o algoritmih in programih:
-P program... <P> je strog opis problema. A algoritem... <A> program
-Pravilnost algoritma: "ali program <A> rešuje problem <P>"
+\subsubsect{Problemi iz matematike}
+\Quote{Ali ima Diofantska enačba $p(x_1,x_2,\dots,x_n)$ celoštevilsko rešitev?} %glej na začetek poglavja
+\br
+Dana je množica matrik $\mathcal{M}=\{ M_1, M_2, \dots, M_n \}$. Vse matrike so reda $n\times n$ in imajo celoštevilske koeficiente.\\
+\Quote{Ali je mogoče zmnožiti matrike $M_i$ tako, da dobimo ničelno matriko?}
 
-Najkrajši program:
-Pravimo, da je program ekvivalenten <A>, če je za vsak vhod enak kot <A>. 
-"Ali obstaka krajši program, ki je ekvivalenten <A>"
-
-Problemi o izračunljivih funkcijah:
-$\phi:A\rightarrow B$ je izračunljiva. "Ali ima $\phi$ neprazno domeno?", "Ali ima $\phi$ neskončno domeno?", "Ali ima $\phi$ končno domeno?", "Ali je $\phi$ surjektivna?", "Ali je $\phi$ totalna?"
-
-Problemi iz matematike:
-Diofantske enačbe: "ali ima DE $p(x_1,x_2,\dots,x_n)$ celoštevilsko rešitev?" %glej na začetek poglavja
-
-Ničelni matrični produkt: \mathcal{M}=\{ M_1, M_2, \dots, M_n \} do matrike reda $n\times n$ s celoštevilskimi koeficienti. "ali je mogoče zmnožiti $M_i$, da dobimo ničelno matriko?"
-
-Problemi o gramatikah in jezikih:
+\subsubsect{Problemi o gramatikah in jezikih}
 %nahitro
-Dvoumnost KNG. (Obstoj stavka, ki ima dve različi izpeljavi v KNG.)
-Ekvivalenca KNG.%recimo zanimivo za načrtovalce jezikov.
+\Quote{Ali je dana kontekstno-neodvisna gramatika dvoumna?},\\
+\Quote{Ali sta dve kontekstno-neodvisni gramatiki ekvivalentni?}%recimo zanimivo za načrtovalce jezikov.
 
-Problemi matematične logike:
-%tu je menda nek uvod, ki ga ne poznamo
-"Ali so vse formule predikatnega računa prvega reda odločljive?"
+\subsubsect{Problemi matematične logike}
+%tu je menda nek uvod, ki ga ne poznamo%what?
+\Quote{Ali so vse formule predikatnega računa prvega reda odločljive?}
 
-%zdj pridejo luštni problemi ^^
-Razni drugi problemi:
-Enakost besed: E naj bo končna množica enačb nad besedami. npr. 
-1. bc=cba
-2. ba=abc
-3. ca=ac
-Od tu lahko izpeljemo enakost abcc=cacacbaa%ne vem če je prav prepisano
-"Ali iz E sledi u=v?"
+%zdj menda pridejo luštni problemi ^^
+\subsubsect{Razni problemi}
+Enakost besed: $E$ naj bo končna množica enačb nad besedami. npr. \\
+1. bc=cba\\
+2. ba=abc\\
+3. ca=ac\\
+Od tu lahko izpeljemo enakost abcc=cacacbaa\\%ne vem če je prav prepisano
+\Quote{Ali iz $E$ sledi $u=v$?}
+\br
+Tlakovanje: Imamo končno množico tlakovcev $T=\{$\fixme križ-kraž kvadrati z različno pobarvanimi četrtinami $\}$. Radi bi tlakovali ravnino razdeljeno na kvadrate, tako, da se sosednja tlakovca vedno ujemata v barvi.%slikica :P
+\Quote{Ali lahko tlakujemo vsak poligon v $\mathbb{Z}^2$?}\\
+\Quote{Ali lahko tlakujemo pot v ravini od točke $A$ do $C$, s tem, da ne obiščemo točke $B$?}
 
-Tlakovanje: Imamo končno množico tlakovcev $T=\{ \mbox{križ-kraž kvadrati z različno pobarvanimi četrtinami} \}$. Radi bi tlakovali ravnino razdeljeno na kvadrate, tako, da se vedno sosednja tlakovca ujemata v barvi.%slikica :P
-"Ali lahko tlakujemo vsak poligon v $\mathbb{Z}^2$", "ali lahko tlakujemo pot v ravini od točke A do C, s tem, da ne obiščemo točke B"
-}
-
-\subsect{Dokazovanje neodločljivosti}
-Metode dokazovanja:
+\subsect{Dokazovanje neodločljivosti problemov}
+Neodločljivost problema lahko dokazujemo z naslednjimi metodami:
 \begin{items}
 \item Neposredno dokazovanje %potrebujemo veliko intuicije. tako smo P_K dokazal
 \item Dokazovanje s prevedbo %tako smo dokazali P_k_0
@@ -1200,11 +1204,11 @@ Metode dokazovanja:
 Naj bo $Q$ odločitveni problem, za katerega sumimo, da je neodločljiv.%neuničljiv, lol :P
 Dokazujemo v treh korakih:
 \begin{items}
-\item Izberi nek problem P, ki ni odločljiv. %how do i?
-\item Dokazati moramo da velja: če bi bil $Q$ odločljiv, bi bil tudi $P$ odločljiv.
-\item Če prejšnji korak uspe lahko sklenemo da Q ni odločljiv. %lol, modus tollens
+\item Izberemo nek problem $P$, ki ni odločljiv. %how do i? po feelingu menda
+\item Dokažemo, da velja: če bi bil $Q$ odločljiv, bi bil tudi $P$ odločljiv.
+\item Če prejšnji korak uspe lahko sklenemo da $Q$ ni odločljiv. %lol, modus tollens
 \end{items}
-V koraku 2 z domnevnim Turingovim strojem $R_\mathcal{Q}$, je treba sestavitit Turingov stroj $R_\mathcal{P}$, ki se vedno ustavi.
+V koraku 2 z domnevnim Turingovim strojem $R_Q$, je treba sestaviti Turingov stroj $R_P$, ki se vedno ustavi.
 %slika od prej škaltla RLP... kosmata RLQ škatla notr
 
 \end{document}
