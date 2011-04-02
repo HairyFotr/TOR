@@ -703,23 +703,24 @@ Stroj $M'$ simulira en korak stroja $M$ tako da:
 En korak stroja $M$ torej simuliramo s končno dolgim sprehodom v desno in levo.
 }}%konec dokaza
 
-\Neurejeno
+
 
 \subsect{Nedeterministični Turingov stroj}
-$\delta:Q\times\Gamma \rightarrow 2^{Q\times\Gamma\times\{ L,D,- \}}$
-.. ... ... toda le končno mnogo
+Za $\delta$ sedaj velja: 
+$\delta:Q\times\Gamma \rightarrow 2^{Q\times\Gamma\times\{ L,D,- \}}$\\
+Torej ima pri nekem stanju in tračnem znaku tak TS več kot le eno trojko iz $Q\times\Gamma\times\{ L,D,- \}$. Toda teh trojk je le končno mnogo.
 
 \Primer{
 $\delta(0, a) = \{ \langle q_1, b, L \rangle, \langle q_2, c, D \rangle, \langle q_3, a, L \rangle, \langle q_2, B, L \rangle \}$
-stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede, če je to vodi.
-...: ...
+stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to ni možno, se bo stroj ustavil ali pa bo mlel v neskončnost.
 }
 
-Nedeterministični Turingov stroj sprejme besedo, kadar obstaja končno zaporedje korakov, po katerem pridemo do končnega stanja.
+\Def{Nedeterministični Turingov stroj sprejme besedo, kadar obstaja končno zaporedje korakov, po katerem pridemo do končnega stanja.}
 
 \Trditev{Nedeterministični Turingov stroj zmore vse kar zmore osnovni Turingov stroj.}
 \Dokaz{Funkcija prehodov $\delta$ osnovnega TS je le poseben primer funkcije $\delta$ nedeterminističnega Turingovega stroja.}
 \Trditev{Nedeterministični Turingov stroj ni močnejši od osnovnega modela.}
+\Neurejeno
 \Dokaz{simulacija NTS z osnovnim:
 %slika 
 %
@@ -728,6 +729,7 @@ Nedeterministični Turingov stroj sprejme besedo, kadar obstaja končno zaporedj
 % q |   o
 %
 %
+
 naj ima njegov program delta v vsaki množici delta q a kvečjemu r možnih potez(oz. elementov delta? množice)
 Stroju M priredimo trisledni osnovni TS M'
 na prvi sledi ima M' vhodno besedo M
