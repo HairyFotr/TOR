@@ -710,6 +710,11 @@ Pri nedeterminističnemu Turingovemu stroju, imamo lahko v določeni konfiguraci
 
 \Def{Nedeterministični Turingov stroj sprejme besedo natanko tedaj, kadar obstaja končno zaporedje korakov, po katerem pridemo do končnega stanja.}
 
+\Primer{%nekoliko lame primer... where's the action :)
+$\delta(0, a) = \{ \langle q_1, b, L \rangle, \langle q_2, c, D \rangle, \langle q_3, a, L \rangle, \langle q_2, B, L \rangle \}$\\
+Stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to ni mogoče, se bo stroj ali ustavil v nekončnem stanju, ali pa se sploh ne bo ustavil.
+}
+
 \Trditev{Nedeterministični Turingov stroj zmore vse kar zmore osnovni Turingov stroj.}
 \Dokaz{Funkcija prehodov $\delta$ osnovnega TS je le poseben primer funkcije $\delta$ nedeterminističnega Turingovega stroja.}
 \Trditev{Nedeterministični Turingov stroj ni močnejši od osnovnega modela.}
