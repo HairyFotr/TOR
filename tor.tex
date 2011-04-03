@@ -25,7 +25,7 @@
 %Definicija \Def{}
 %Primer \Primer{}
 %Prirejen itemize \begin{items}
-\hypersetup{pdftitle={Teoretične osnove računalništva}}
+\hypersetup{pdftitle={Teoreticne osnove racunalnistva}}
 
 \begin{document}
 \begin{titlepage}
@@ -33,7 +33,7 @@
 %looks useful
 %{\resizebox{15cm}{!}{Teoretične osnove računalništva}}\\[5pt]
 \ \\[1cm]
-{\Huge\bf Teoretične osnove računalništva}\\[1cm]
+{\Huge\bf Teoreti\v cne osnove ra\v cunalni\v stva}\\[1cm]
 {\huge \today}\ \\[1.55cm]
 %{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več samo to :P
 \begin{tikzpicture}[scale=1.35, very thick, circ/.style={thin}]%?tole ful upočasni pdflatex%, decorate, decoration={snake, amplitude=0.75pt}}]
@@ -352,7 +352,7 @@ Vse običajne aritmetične funkcije so parcialne ali celo totalne rekurzivne fun
     \end{items}%?naredi cel stroj
 \end{primeri}
 
-\sect{Razširitve in alternative Turingovemu stroju}
+\sect{Razširitve Turingovega stroja}
 V tem odseku bomo spoznali nekaj razširitev Turingovega stroja in pokazali da so enako močne kot osnovni model. Poleg tega bomo naredili še pregled alternativnih modelov, za katere se je tudi izkazalo, da so enako močni.%, nato pa si bomo ogledali še nekaj stvari, ki jih Turingov stroj kljub vsemu ne more izračunati.
 
 \Odmakni{Postopek dokazovanja}{Recimo, da je $\mathcal{M}$ razred modelov, za katerega želimo dokazati, da je ekvivalenten razredu Turingovih strojev. Poiskati moramo sistematičen, končen postopek S, ki poljubnemu stroju $M \in \mathcal{M}$ priredi nek Turingov stroj $M'$, ki je sposoben simulirati $M$.
@@ -697,7 +697,7 @@ Stroj $M'$ simulira en korak stroja $M$ tako da:
 	\item Premakne se levo ali desno, enako kot bi naredil stroj $M$
 	\item Poveča števec za 1
 	\end{items}
-\item Ko števec doseže $k$, nadzorna enota preide v novo stanje, enako kot bi naredil stroj $M$
+\item Ko števec doseže $k$, nadzorna enota preide v novo stanje, enako kot bi stroj $M$
 \end{items}
 \ \\
 En korak stroja $M$ torej simuliramo s končno dolgim sprehodom v desno in levo.
@@ -706,22 +706,21 @@ En korak stroja $M$ torej simuliramo s končno dolgim sprehodom v desno in levo.
 
 
 \subsect{Nedeterministični Turingov stroj}
-Za $\delta$ sedaj velja: 
-$\delta:Q\times\Gamma \rightarrow 2^{Q\times\Gamma\times\{ L,D,- \}}$\\
-Torej ima pri nekem stanju in tračnem znaku tak TS več kot le eno trojko iz $Q\times\Gamma\times\{ L,D,- \}$. Toda teh trojk je le končno mnogo.
-
-\Primer{
-$\delta(0, a) = \{ \langle q_1, b, L \rangle, \langle q_2, c, D \rangle, \langle q_3, a, L \rangle, \langle q_2, B, L \rangle \}$
-stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to ni možno, se bo stroj ustavil ali pa bo mlel v neskončnost.
-}
+Pri nedeterminističnem Turingovemu stroju, imamo lahko v določeni konfiguraciji več možnosti, kako bo stroj nadaljeval z delom. Za formalni zapis tega je potrebno spremeniti le funkcijo prehodov $\delta$, ki sedaj slika v več novih konfiguracij:\\
+ \[ \delta:Q\times\Gamma \rightarrow 2^{Q\times\Gamma\times\{ L,D,- \}} \]
 
 \Def{Nedeterministični Turingov stroj sprejme besedo, kadar obstaja končno zaporedje korakov, po katerem pridemo do končnega stanja.}
+
+\Primer{%nekoliko lame primer... where's the action :)
+$\delta(0, a) = \{ \langle q_1, b, L \rangle, \langle q_2, c, D \rangle, \langle q_3, a, L \rangle, \langle q_2, B, L \rangle \}$\\
+Stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to ni mogoče, se bo stroj ali ustavil v nekončnem stanju, ali pa se sploh ne bo ustavil.
+}
 
 \Trditev{Nedeterministični Turingov stroj zmore vse kar zmore osnovni Turingov stroj.}
 \Dokaz{Funkcija prehodov $\delta$ osnovnega TS je le poseben primer funkcije $\delta$ nedeterminističnega Turingovega stroja.}
 \Trditev{Nedeterministični Turingov stroj ni močnejši od osnovnega modela.}
 \Neurejeno
-\Dokaz{simulacija NTS z osnovnim:
+\Dokaz{Simulacija nedeterminističnega Turingovega stroja z osnovnim:
 %slika 
 %
 % d     a
@@ -730,7 +729,7 @@ stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to n
 %
 %
 
-naj ima njegov program delta v vsaki množici delta q a kvečjemu r možnih potez(oz. elementov delta? množice)
+Naj ima njegov program delta v vsaki množici delta q a kvečjemu r možnih potez(oz. elementov delta? množice)
 Stroju M priredimo trisledni osnovni TS M'
 na prvi sledi ima M' vhodno besedo M
 na drugi sledi M' generira/izpisuje navodila eno za drugim. navodila so besed nad {1,2...r} v leksikografskem redu.
@@ -781,7 +780,7 @@ premikamo se lahko v 2k smeri
 %zgledovanje po (naravnem) jeziku
 %Postov stroj, Algoritmi Markova
 %računanje oz. reševanje mat. problemov je pri človeku preoblikovanje množice besed v drugo (opis problema, v opis rešitve)
-
+\sect{Alternative Turingovemu stroju}
 \subsect{Rekurzivne funkcije}
 %(GK) Gödel, Kleene
 Definiral je funkcije: ničelna, naslednik, projekcija.
