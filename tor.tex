@@ -704,23 +704,17 @@ En korak stroja $M$ torej simuliramo s končno dolgim sprehodom v desno in levo.
 }}%konec dokaza
 
 
-
 \subsect{Nedeterministični Turingov stroj}
-Pri nedeterminističnem Turingovemu stroju, imamo lahko v določeni konfiguraciji več možnosti, kako bo stroj nadaljeval z delom. Za formalni zapis tega je potrebno spremeniti le funkcijo prehodov $\delta$, ki sedaj slika v več novih konfiguracij:\\
+Pri nedeterminističnemu Turingovemu stroju, imamo lahko v določeni konfiguraciji več možnosti, kako bo stroj nadaljeval z delom. Za formalni zapis tega je potrebno spremeniti le funkcijo prehodov $\delta$, ki sedaj slika v množico konfiguracij, namesto v eno samo:\\
  \[ \delta:Q\times\Gamma \rightarrow 2^{Q\times\Gamma\times\{ L,D,- \}} \]
 
-\Def{Nedeterministični Turingov stroj sprejme besedo, kadar obstaja končno zaporedje korakov, po katerem pridemo do končnega stanja.}
-
-\Primer{%nekoliko lame primer... where's the action :)
-$\delta(0, a) = \{ \langle q_1, b, L \rangle, \langle q_2, c, D \rangle, \langle q_3, a, L \rangle, \langle q_2, B, L \rangle \}$\\
-Stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to ni mogoče, se bo stroj ali ustavil v nekončnem stanju, ali pa se sploh ne bo ustavil.
-}
+\Def{Nedeterministični Turingov stroj sprejme besedo natanko tedaj, kadar obstaja končno zaporedje korakov, po katerem pridemo do končnega stanja.}
 
 \Trditev{Nedeterministični Turingov stroj zmore vse kar zmore osnovni Turingov stroj.}
 \Dokaz{Funkcija prehodov $\delta$ osnovnega TS je le poseben primer funkcije $\delta$ nedeterminističnega Turingovega stroja.}
 \Trditev{Nedeterministični Turingov stroj ni močnejši od osnovnega modela.}
-\Neurejeno
-\Dokaz{Simulacija nedeterminističnega Turingovega stroja z osnovnim:
+
+\Dokaz{Simulacija nedeterminističnega Turingovega stroja z osnovnim:\\
 %slika 
 %
 % d     a
@@ -728,27 +722,49 @@ Stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to n
 % q |   o
 %
 %
+\fixme slika\\
+Naj bo $M$ nek nedeterministični Turingov storj in naj ima njegov program v vsaki mmnožici $\delta(q,a)$ največ $r$ možnih potez, kjer je $r$ končno število.\\
+Stroju $M$ priredimo osnovni 3-sledni Turingov stroj $M'$, z naslednjimi lastnostmi:
+\begin{items}
+\item na prvi sledi ima abecedo stroja $M$
+\item na drugi sledi generira zaporedje navodil besed nad abecedo $\{1, 2, \dots, r\}$ v leksikografskem vrstnem redu (npr. $r = 3: 1,2,3,11,12,13,\dots)$
+\item na tretji sledi simulira stroj $M$, kot da bi ta izbral poteze skladno s tekočimi navodili
+\end{items}
+Natančneje stroj $M'$ deluje tako:
+\begin{items}
+\item na drugi sledi sestavi novo, naslednje navodilo
+\item prepiše vhodno besedo s prve na tretjo sled
+\item na tretji sledi simulira stroj $M$, kot da bi ta izbral svoje poteze skladno s tekočimi navodili.\\
+      Pri tem:
+      \begin{items}
+      \item če $M'$ pride do konca navodila in je tedaj v končnem stanju, vhodno besedo sprejme in konča, kot bi to storil tudi $M$
+      \item sicer nadaljuje s prvim korakom ali pa se ustavi v končnem stanju
+      \end{items}
+\end{items}
+}
+\Trditev{Če $M$ sprejme besedo jo sprejme tudi $M'$.}
+\Izrek{Za jezik $L$ obstaja nedeterministični Turingov stroj natanko tedaj, ko za $L$ obstaja osnovni Turingov stroj.}
+\Neurejeno
+%naj ima njegov program delta v vsaki množici delta q a kvečjemu r možnih potez(oz. elementov delta? množice)
+%Stroju M priredimo trisledni osnovni TS M'
+%na prvi sledi ima M' vhodno besedo M
+%na drugi sledi M' generira/izpisuje navodila eno za drugim. navodila so besed nad {1,2...r} v leksikografskem redu.
+%npr r=3 ... 1,2,3, 11, 12, 13, 21, 22, 23, 31, 32, 33, 111, 112, 
+%na tretji sledi simulira stroj M, kot da bi M sam izbral svoje poteze, skladno s tekočim navodilom.% ajprov?
 
-Naj ima njegov program delta v vsaki množici delta q a kvečjemu r možnih potez(oz. elementov delta? množice)
-Stroju M priredimo trisledni osnovni TS M'
-na prvi sledi ima M' vhodno besedo M
-na drugi sledi M' generira/izpisuje navodila eno za drugim. navodila so besed nad {1,2...r} v leksikografskem redu.
-npr r=3 ... 1,2,3, 11, 12, 13, 21, 22, 23, 31, 32, 33, 111, 112, 
-na tretji sledi simulira stroj M, kot da bi M sam izbral svoje poteze, skladno s tekočim navodilom.% ajprov?
+%Natančneje:
+%M' na 2. sledi sestavi novo, naslednje navodilo
+%prepiše vhodno besedo s prvega na tretji sled (prej lahko tretha sked zbrupe(tretjo sled zbriše), če je kaj ostalo od prej)
+%na tretji sledi oponaa stroj M, kot da bi ta izbiral svoje poteze po tekočem navodilu.
 
-Natančneje:
-M' na 2. sledi sestavi novo, naslednje navodilo
-prepiše vhodno besedo s prvega na tretji sled (prej lahko tretha sked zbrupe(tretjo sled zbriše), če je kaj ostalo od prej)
-na tretji sledi oponaa stroj M, kot da bi ta izbiral svoje poteze po tekočem navodilu.
-
-pri tem: 
-če M' pride do konca navodila, in je tedaj v končnem stanju, besedo sprejmemo.
-sicer če ne pride do konca navodila, ali pa se ustavi v nekončnem stanju, potem pojdi v (natančneje prva vrstica)
+%pri tem: 
+%če M' pride do konca navodila, in je tedaj v končnem stanju, besedo sprejmemo.
+%sicer če ne pride do konca navodila, ali pa se ustavi v nekončnem stanju, potem pojdi v (natančneje prva vrstica)
 %a to je tko k depth first? recimo no
 %kaj če se navodilo zacikla? to se da rešit... i dunno :)
 %aha, ne more se - ... ker ima končno mnogo nečesa
 %hm a se lahko nts konča, simulator pa zacikla? nas ne briga.
-}
+%
 %Trditev: če M sprejme besedo, jo sprejme tudi M' 
 %Dokaz: 
 %izrek: za L obstaja nts, ntk za L obstaja osnovni ts.
