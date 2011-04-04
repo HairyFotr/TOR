@@ -1258,10 +1258,10 @@ Lastnost izračunljivih funkcij je odločljiva $\Longleftrightarrow$ je ta lastn
 \Odmakni{Dobra novica}{Ugotavljanje odločljivosti $P_L$ je enostaven, ker ga lahko nadomestimo z ugotavljanjem ali je ustrezna lastnost $L$ trivialna.}
 
 
-\Primer{$P_L eq \mbox{\Quote{Ali je \varphi totalna?}}$\\
+\Primer{$P_L$ eq \Quote{Ali je $\varphi$ totalna?}\\
 Preverimo:\\
 Ali je lastnost smiselna? DA.\\
-Ali je lastnost trivialna? NE.%ker obstajajo parcialne, poleg totalnih... in ravno zato tisto prej s totalnimi ni bilo kul
+Ali je lastnost trivialna? NE.\\%ker obstajajo parcialne, poleg totalnih... in ravno zato tisto prej s totalnimi ni bilo kul
 Torej, $P_L$ ni odločljiv problem.
 }
 \Primer{Ali ima $\varphi$ neprazno domeno?\\
@@ -1282,7 +1282,7 @@ Ali je $\varphi$ enaka drugi funkciji $\psi$?\\
 
 \Dokaz{
 Lastnost funkcij ... od ,,, \\
-Naj bo L=\{ \psi | \psi ima lastnost L\}.\\
+Naj bo $L=\{ \psi | \psi\mbox{ ima lastnost } L\}$.\\
 Problem $P_L$ je sedaj vprašanje: $\varphi =? \mathcal{L}$.\\
 Naj bo $\Theta\mathcal{L}=\{ \mbox{ vsi programi(indeksi Turingovih strojev), ki računajo funkcijo iz} \mathcal{L} \} = \cup_{\psi \in \mathcal{L}} \Theta\psi$.\\
 Ker je po predpostavki lastnost L neodvisna od načina računanja funkcije, so v množici $\Theta\mathcal{L}$ bodisi vsi programi, ki računajo neko funkcijo $\varphi$, ali pa noben.\\
@@ -1293,26 +1293,26 @@ Rice je dokazal, da je $\Theta\mathcal{L}$ odločljiv $\Longleftrightarrow$ $\Th
 %prejšnja leta drugi dokazi (brez indeksov, amapak daljši.. check 2007)
 }
 \Dokaz{
-$\emptyset$ in $\mathbb{N}$ sta obe odločljivi, zato je taka tudi $\Theta\mathcal{L}$, če je enaka kateremu od njiju.\\%kaj pomeni ES in N sta odl.? Algoritem, ki preveri pripadnost.
-Zato vzamemo, da $\Theta\mathcal{L}$ ni niti $\emtpyset$, niti $\mathbb{N}$. Sledi: $\exists a,b: a\in\Theta\mathcal{L} \wedge b\in\overline{\Theta\mathcal{L}}$
+$\emptyset$ in $\mathbb{N}$ sta obe odločljivi, torej je taka tudi $\Theta\mathcal{L}$, če je enaka kateremu od njiju.\\%kaj pomeni ES in N sta odl.? Algoritem, ki preveri pripadnost.
+Zato vzamemo, da $\Theta\mathcal{L}$ ni niti $\emptyset$, niti $\mathbb{N}$. Sledi: $\exists a,b: a\in\Theta\mathcal{L} \wedge b\in\overline{\Theta\mathcal{L}}$
 Naj bo $\varphi_n$ povsod definirana funkcija.\\
 ..Ker je $n$ naraven, je bodisi v $\Theta\mathcal{L}$, bodisi izven.\\
 Predpostavimo: $n\in\overline{\theta\mathcal{L}}$\\
-..Naj bo $f$ funkcija, ki vsak x\in\mathcal{K} preslika v $a$, vsak $x\in\overline\mathcal{K}$ pa v $n$.\\
+..Naj bo $f$ funkcija, ki vsak $x\in\mathcal{K}$ preslika v $a$, vsak $x\in\overline{\mathcal{K}}$ pa v $n$.\\
 Potem:$x\in\mathcal{K} \Longleftrightarrow f(x)\in\Theta\mathcal{L}$%tu je neka hitra prevedba :P
-To pomeni: če bi bil $\Theta\mathcal{L}$ odločljiv, je tudi $\mathcal{K}$, torej $\Theta\mathcal{L}$ ni odločljiv.%šeeno šanso imamo da dokažemo vse
-Predpostavimo: $n\in\Theta\mathcal{L}$. Analogno.
+To pomeni: če bi bil $\Theta\mathcal{L}$ odločljiv, je tudi $\mathcal{K}$, torej $\Theta\mathcal{L}$ ni odločljiv.%šeeno malenkost imamo da dokažemo vse
+Predpostavimo še: $n\in\Theta\mathcal{L}$ in dokažemo na analogen način.
 }
 %na kratko še za jezike... brez dokaza, phew.
 \subsubsect{Riceov prvi izrek za jezike}
 $L$ je lastnost, smiselna za jezike, $\mathcal{M}$ pa naj bo poljuben Turingov jezik.\\
-Problem: $Q eq $ \Quote{Al ima Turingov jezik $\mathcal{M} lastnost $L$?}.
+Problem: $Q$ eq \Quote{Ali ima Turingov jezik $\mathcal{M}$ lastnost $L$?}.
 \Def{$L$ je odločlvijv, če ke QL odločljiv problem}
 \Def{$L$ je trivialna, če jo ima bodisi vsak Turingov jezik, ali pa noben}
 Riceov izrek: Lastnost Turingovega jezika je odločljiva $\Longleftrightarrow$ lastnost je trivialna.\
 \Primer{
 \Quote{Ali Turingov jezik $\mathcal{M}$ vsebuje npr. besedo aabca?}\\
-\Quote{Ali je Turingov jezik $\mathcal{M}$ enak Turingovemu jeziku \mathcal{N}?}\\
+\Quote{Ali je Turingov jezik $\mathcal{M}$ enak Turingovemu jeziku $\mathcal{N}$?}\\
 \Quote{Ali Turingov jezik $\mathcal{M}$ regularen?}
 }
 
