@@ -1233,4 +1233,87 @@ Dokazujemo v treh korakih:
 V koraku 2 z domnevnim Turingovim strojem $R_Q$, je treba sestaviti Turingov stroj $R_P$, ki se vedno ustavi.
 %slika od prej škaltla RLP... kosmata RLQ škatla notr
 
+%-----------------------predavanja 7-------------------------------
+
+\subsubsect{Dokazovanje z Riceovim izrekom}%1951 USA
+\begin{items}
+\item Za funkcije - Vsaka netrivialna lastnost izračunljivih funkcij je neodločljiva%parcialno rekuzivnih f %RI za funkcija
+\item Za jezike - Vsaka netrivialna lastnost Turingovih jezikov je tudi neodločljiva
+\end{items}
+%kaj točno je lastnost, etc.
+\Odmakni{Podrobneje}
+{
+Naj bo $L$ neka lastnost za funkcije in naj bo $\varphi$ poljubna izračunljiva funkcija.\\
+\[P_L eq \mbox{\Quote{Ali ima $\varphi$ lastnost $L$?}}\]\\
+\Def{Funkcijska lastnost $L$ je odločljiva, če je $P_L$ odločljiv.}
+\Odmakni{?}{Kakšne smiselne lastnosti pa nas zanimajo?\\
+Samo take lastnosti L, da so neodvisne od ...(=lg,TS,...), s ....... njihove vrednosti.
+npr. \Quote{L eq \Quote{bodi totalna}}
+\Def{Lastnost funkcij L je trivialna, če jo ima bodisi vsaka ali pa nobena funkcija.}
+}
+}
+\subsubsect{Riceov prvi izrek za funkcije}
+Lastnost izračunljivih funkcij je odločljiva $\Longleftrightarrow$ je ta lastnost trivialna.
+\Odmakni{Slaba novica}{Problem $P_L$ bo odločljiv le za trivialne funkcijske lastnosti, ki navadno niso zanimive za obravnavo.}
+\Odmakni{Dobra novica}{Ugotavljanje odločljivosti $P_L$ je enostaven, ker ga lahko nadomestimo z ugotavljanjem ali je ustrezna lastnost $L$ trivialna.}
+
+
+\Primer{$P_L eq \mbox{\Quote{Ali je \varphi totalna?}}$\\
+Preverimo:\\
+Ali je lastnost smiselna? DA.\\
+Ali je lastnost trivialna? NE.%ker obstajajo parcialne, poleg totalnih... in ravno zato tisto prej s totalnimi ni bilo kul
+Torej, $P_L$ ni odločljiv problem.
+}
+\Primer{Ali ima $\varphi$ neprazno domeno?\\
+Ali ima $\varphi$ končno domeno?\\
+Ali ima $\varphi$ neskončno domeno?\\
+Ali ima $\varphi$ pri vsaj enem argumentu vrednost 3?\\
+Ali je $\varphi$ surjektivna/injektivna?\\
+Ali je $\varphi$ definirana pri 2?\\%zakaj? pač določeni se ne ustavijo
+Ali je $\varphi$ enaka drugi funkciji $\psi$?\\
+%splošno vprašanje:kaj če bi naredil en zlepek? ... začne pisat neskončno if stavkov if p=p_i then Alg_i :P
+%kaj pa če bi generirali rešitev sproti in jo preverili? .... tudi ne gre.
+}
+%stroj T_e, koda <T_e>, indeks stroja e
+%T_e ima \psi_e, oz. lastno funkcijo \varphi
+%\Theta\varphi=\{ x\ |\ \varphi=\psi_x\} - vsi programi, ki računajo \varphi... indeksna množica \varphi
+%slika stroja trak z n 0, potem trak z m 0 ... f(n)=m je lastna funkcija stroja
+%
+
+\Dokaz{
+Lastnost funkcij ... od ,,, \\
+Naj bo L=\{ \psi | \psi ima lastnost L\}.\\
+Problem $P_L$ je sedaj vprašanje: $\varphi =? \mathcal{L}$.\\
+Naj bo $\Theta\mathcal{L}=\{ \mbox{ vsi programi(indeksi Turingovih strojev), ki računajo funkcijo iz} \mathcal{L} \} = \cup_{\psi \in \mathcal{L}} \Theta\psi$.\\
+Ker je po predpostavki lastnost L neodvisna od načina računanja funkcije, so v množici $\Theta\mathcal{L}$ bodisi vsi programi, ki računajo neko funkcijo $\varphi$, ali pa noben.\\
+Zato je vprašanje ali je $\varphi\in?\mathcal{L}$ ekvivalentno vprašanju: $x\in?\Theta\mathcal{L}$, kjer je $x$ indeks poljubnega Turingovega stroja, ki računa funkcijo $\varphi$.\\
+Torej: Problem $\varphi\in?\mathcal{L}$ oz. $P_L$ je odločljiv, $\Longleftrightarrow$ jezik $\Theta\mathcal{L}$ odločljiv.%tu sedaj vstopi Rice :)
+\br
+Rice je dokazal, da je $\Theta\mathcal{L}$ odločljiv $\Longleftrightarrow$ $\Theta\mathcal{L}$, bodisi $\emptyset$, ali pa $\mathbb{N}$. %torej vsi izračunajo, ali pa noben
+%prejšnja leta drugi dokazi (brez indeksov, amapak daljši.. check 2007)
+}
+\Dokaz{
+$\emptyset$ in $\mathbb{N}$ sta obe odločljivi, zato je taka tudi $\Theta\mathcal{L}$, če je enaka kateremu od njiju.\\%kaj pomeni ES in N sta odl.? Algoritem, ki preveri pripadnost.
+Zato vzamemo, da $\Theta\mathcal{L}$ ni niti $\emtpyset$, niti $\mathbb{N}$. Sledi: $\exists a,b: a\in\Theta\mathcal{L} \wedge b\in\overline{\Theta\mathcal{L}}$
+Naj bo $\varphi_n$ povsod definirana funkcija.\\
+..Ker je $n$ naraven, je bodisi v $\Theta\mathcal{L}$, bodisi izven.\\
+Predpostavimo: $n\in\overline{\theta\mathcal{L}}$\\
+..Naj bo $f$ funkcija, ki vsak x\in\mathcal{K} preslika v $a$, vsak $x\in\overline\mathcal{K}$ pa v $n$.\\
+Potem:$x\in\mathcal{K} \Longleftrightarrow f(x)\in\Theta\mathcal{L}$%tu je neka hitra prevedba :P
+To pomeni: če bi bil $\Theta\mathcal{L}$ odločljiv, je tudi $\mathcal{K}$, torej $\Theta\mathcal{L}$ ni odločljiv.%šeeno šanso imamo da dokažemo vse
+Predpostavimo: $n\in\Theta\mathcal{L}$. Analogno.
+}
+%na kratko še za jezike... brez dokaza, phew.
+\subsubsect{Riceov prvi izrek za jezike}
+$L$ je lastnost, smiselna za jezike, $\mathcal{M}$ pa naj bo poljuben Turingov jezik.\\
+Problem: $Q eq $ \Quote{Al ima Turingov jezik $\mathcal{M} lastnost $L$?}.
+\Def{$L$ je odločlvijv, če ke QL odločljiv problem}
+\Def{$L$ je trivialna, če jo ima bodisi vsak Turingov jezik, ali pa noben}
+Riceov izrek: Lastnost Turingovega jezika je odločljiva $\Longleftrightarrow$ lastnost je trivialna.\
+\Primer{
+\Quote{Ali Turingov jezik $\mathcal{M}$ vsebuje npr. besedo aabca?}\\
+\Quote{Ali je Turingov jezik $\mathcal{M}$ enak Turingovemu jeziku \mathcal{N}?}\\
+\Quote{Ali Turingov jezik $\mathcal{M}$ regularen?}
+}
+
 \end{document}
