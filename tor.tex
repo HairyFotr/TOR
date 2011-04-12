@@ -1315,5 +1315,154 @@ Riceov izrek: Lastnost Turingovega jezika je odločljiva $\Longleftrightarrow$ l
 \Quote{Ali je Turingov jezik $\mathcal{M}$ enak Turingovemu jeziku $\mathcal{N}$?}\\
 \Quote{Ali Turingov jezik $\mathcal{M}$ regularen?}
 }
+%-----------------------predavanja 8-------------------------------
+\sect{Povzetek}
+V prejšnjem poglavjo pri izračunljivosti nas je predvsem zanimalo:
+\begin{items}
+\item Kaj se da/ne da izračunati
+\item Kaj lahko izračuna določen model računanja
+\item Ni nas zanimala časovna in prostorska zatevnost računanja
+\end{items}
 
+Pri tem smo ugotovili:
+\begin{items}
+\item Obstajajo neizračunljivi(neodločljivi) problemi
+\item Za te probleme ni splošnega algoritma, ki bi se vedno ustavil
+\item Enako bi obveljalo če bi imeli neomejeno prostora/časa 
+\end{items}
+
+\fixme slika elipsa prerezana na pol -- odločljivi/neodločljivi(našteti... + načini dokazovanja). jih je neskončno mnogo
+
+\subsect{Turingov stroj s prerokom}
+Post, Kleene in drugi so se nato začeli spraševai, kaj bi pomenilo, če bi našli rešitev za enega izmed neodločljivih problemov.
+Uvedli so Turingov stroj s prerokom, ki zna povedati ali je odgovor na odločitveni problem DA, NE, ali pa NEVEM.
+Pojavljata se dve implementaciji:
+\begin{items}
+\item Dodamo tri dodatna stanja $q_DA, q_NE$ in $q_?$, v katera stroj preide po branju vhodne besede.
+\item Imamo trak na katerem so zapisane vse rešitve za nek problem.
+\end{items}
+%Post... kaj če najdemo rešitev za enega od nodločljivih?
+%TS s prerokom (oracle) ... ima 3 dodatna stanja q_? q_DA, q_NE
+%ko prebere besedo, se premakne v eno izmed teh stanj.
+%včsaih imamo trak z vsemi rešitvami...
+%L(T^\mathcal{L}) = \{ w\ |\ za w se T^L ustavi v končnem stanju \}
+
+\subsect{Polodločljivi jeziki glede na nek jezik}
+\Def{Naj bo $\mathcal{M}$ nek jezik. Pravimo, da je $\mathcal{M}$ glede na $L$:\\
+\begin{items}
+\item Polodločljiv: če je $M=L(T^\mathcal{L})$ za nek $T^\mathcal{L}$
+\item Rekurziven: če je $M=L(T^\mathcal{L})$ za nek $T^\mathcal{L}$ in se vedno ustavi.
+\end{items}
+}
+\br
+Tu lahko začnemo odgovarjati na vprašanje kaj bi pomenilo, če bi bil nek problem rešljiv.\\
+Razredi relativne izračunljivosti:
+\begin{items}
+\item $\Sigma_1^0 \mbox{ po def. } \{ M\ |\ \mbox{M je r.e}\}$
+\item $\Sigma_{n+1}^0 \mbox{ po def. } \{ M\ |\ \mbox{M je r.e. glede na nek jezik L iz prejšnjega razreda } \Sigma_n^0\}$
+\item $\Delta_1^0 \mbox{ po def. } \{ M\ |\ \mbox{M je rekurzivnen} \}$
+\item $\Delta_{n+1}^0 \mbox{po def}. \{ M\ |\ \mbox{M je rekurziven glede na nek jezik L iz prejšnjega razreda} \Sigma_n^0\}$%menda sigma...
+\item $\Pi_n^0 \mbox{po def.} \{ M\ |\ \overline{M} \in \Sigma_n^0 \}$
+\end{items}
+
+Ugotovitve:\\%ugotovitve? rly?
+$\mathcal{M} \in \Sigma_n^0 \Longleftrightarrow M=\{ \exists x_1 \forall x_2 \exists x_3 \dots Quant x_n R(w, x_1,\dots,x_n)\}$\\ %R je odločljiva relacija
+$\mathcal{M} \in \Pi_n^0 \Longleftrightarrow M=\{ \forall x_1 \exists x_2 \forall x_3 \dots Quant x_n S(w, x_1,\dots,x_n)\}$\\ %za S nevem
+%(menda neka zveza med aritmetiko in odločljivostjo)
+%zgornji del slike razpade:
+%\Delta_1^0
+%  \Sigma_1^0
+%  \Pi_1^0
+%    \Delta_2^0
+%      \Sigma_2^0
+%      \Pi_2^0
+\fixme spet eliplsa, delitev na $\Sigma \Delta \Pi$
+
+Dobimo aritmetično hiearhijo: $\Sigma_1^0, \Delta_1^0, \Pi_1^0, \dots$
+Torej, če bi bil nek $\Sigma_n^0$ rešljiv, bi bili rešljivi tudi $\Delta_n^0$, problemi na višjih nivojih pa še vedno ne.
+
+Nekaj primerov in kam v hiearhijo spadajo:
+\begin{items}
+\item Problem ustavitve $\mathcal{K}_0 \in \Sigma_1^0$
+\item Stroji, ki ne sprejmejo nobene besede $\in \Pi_1^0$
+\item Vprašanje, ali TS razpoznava končen jezik $\in \Sigma_1^0$
+\item Vprašanje, ali je funkcija totalna $in \Pi_2^0$
+\end{items}
+%REcimo, da imamo nek nerešljiv problem... kako poenostavimo?
+%kaj je tisto ^0... če bi kvantificirali funkcije, bi delali s predikati 2. reda
+%dobimo analitično hiearhijo
+
+%lol, tukaj je čudovit pisan svet vseh možnih zadev..... ampak ni uporaben :)
+
+\chap{Prostorska in časovna zahtevnost računanja}
+%za vsak problem v spodnji polovici obstaja algoritem
+%Toda: intuitivno lahko rešimo večje naloge ali bolj zapletene naloge... če je na voljo več računskega vira
+%kako to intuicijo formalizirati?
+
+%Aksiomatski: osnovni pojmi, aksiomi, pravila izpeljevanja .... razvijemo teorijo zahtevnosti
+%Manuel Blum
+%s strogim formalnim pristopom, včasih dobimo kaj presenteljvega (izrek o vrzeli gap tehorem)
+
+%Preučujemo konkretne vire: prostor / čas (druge: green computing, vzporedno računanje - procesorji in čas, aproksimacijski algoritmi(čas, napaka), verjetnostni algoritmi(čas,verjetnost pravilne rešitve))
+
+\Def{Prostorska zahtevnost: Dan je Turingov stroj $M$, z enim vhodnim trakom, na katerem je vhodna beseda omejena z mejnikoma za začetek/konec. Vhodni trak je namenjen le branju. Imamo še k>=1 delovnih trakov, ki so neskončni v eno smer.\\
+%slika TS
+}
+\Def{Stroj M je Turingov s prostorsko omejitvijo, S(n), če za vsak vhod dolžine n obišče kvejemu S(n) celic na vsakem delovnem traku. Pravimo, da ima jezik L(M) stroja prostorsko omejitev/zahtevnost S(n)}
+%Intuitivno: za odgovarjnje, ali je neka beseda v jeziku, zadošča prostor S(|w|) na vsakem izmed trakov
+%Opombe: štejejo se le celice na delovnih trakovih: Razlog: radi bi ... 
+% Vsak trak porabi vsaj eno celico na vsakem traku, torej S(N) je vsaj 1
+% če sn počasi narašča, vzamemo max(1, |^S(n)^|)
+% nameesto k>= 1 lahko uporabimo 1 trak z večimi sledmi %ampak 
+
+\Primer{ $L= \{wcw^R | w \in (0+1)^*\}$ ima prostorsko zahtevnost $log(n)$(zaokroženo gor)
+$\exists TS M$ s prostorsko omejitvijo ... tko, da je L=L(M).
+Kakšen je M? 
+%TS
+% $ w c w^R $
+%
+% binarno število, ki ozanačuje lego v w
+% označuje lego v w^R
+% M šteje? levo-desno po vhosni besedi ... zrcalno ...
+% zakroženo gor vse: log|w|=log{ n-1 \over 2} <= logn prostora
+}
+
+\Def{Časovna zahtevnost: dan je TS M s k>=1 trakovi, na enem je vhodna beseda. Vsak je neomejen v ob smeri.
+%slika %vhod %.....
+}
+\Def{Stroj M je Turingov s časovno omejitvijo, T(n), če za vsak vhod dolžine n naredi kvečjemu T(n) korakov preden se ustavi. Pravimo, da ima jezik stroja L(M) časovno omejitev/zahtevnost T(n)}
+%Opombe: predpostavljamo, da mora bit celotna vhodna beseda prebrana.
+% čas bo T(n) = n + 1 za %%kako dobimo log čas? dunno, lol. problem modela
+% ... T(n) .... (n+1,T(n))
+\Primer{ $L=\{ w c w^R | w \in (0+1)^0 \}$
+ker obstaja TS M z časovno zahtevnostjo n+1 z L=(M).
+Kakšen je M?
+%w c wr
+%...
+%w
+
+}
+
+Nedeterministična časovna in prostorska zahtevnost.\\
+NDTS ima: 
+ prostorsko zahtenost/omejitev S(n), če za vsak vhod dolžine n obstaja izračun, ki obišče <= S(n) celic(na ?vsakem delu traku)
+ časovno zahtenost/omejitev T(n), če za vsak vhod dolžine n obstaja izračun, ki obišče <= T(n) korakov%iz tu izvira P=NP
+
+Jezik L ima deterministično prostorsko zahtevnost/omejitev, S(n), če zanj obstaja deterministični turingov stroj ki ima prostorsko omejitev S(n)
+Jezik L ima nedeterministično prostorsko zahtevnost/omejitev, S(n), če zanj obstaja nedeterministični turingov stroj ki ima prostorsko omejitev S(n)
+Jezik L ima deterministično časovno zahtevnost/omejitev, T(n), če zanj obstaja deterministični turingov stroj ki ima časovno omejitev T(n)
+Jezik L ima nedeterministično časovno zahtevnost/omejitev, T(n), če zanj obstaja nedeterministični turingov stroj ki ima časovno omejitev T(n)
+
+Razredi zahtevnosti:
+\Def{DSPACE(S(n)) po def \{ L | L ima deterministično prostorsko omejitev S(n) \} -- vsi jeziki, ki jih lahko det. razpoznavamo v S(n)}
+\Def{NSPACE(S(n)) po def \{ L | L ima nedeterministično prostorsko omejitev S(n) \} -- vsi jeziki, ki jih lahko nedet. razpoznavamo v S(n)}
+\Def{DTIME(S(n)) po def \{ L | L ima deterministično časovno omejitev S(n) \} -- vsi jeziki, ki jih lahko det. razpoznavamo v T(n)}
+\Def{NTIME(S(n)) po def \{ L | L ima nedeterministično časovno omejitev S(n) \} -- vsi jeziki, ki jih lahko nedet. razpoznavamo v T(n)}
+
+\Primer{
+$L=\{ w c w^R|... \}$\\
+$L\in DSPACE(log(n))$
+$L\in DTIME(n)$
+}
+%bomo pokazal iz kje pride podlaga O notacije
 \end{document}
