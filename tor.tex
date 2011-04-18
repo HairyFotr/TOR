@@ -1394,7 +1394,8 @@ Nekaj primerov in kam v hiearhijo spadajo:
 
 %lol, tukaj je čudovit pisan svet vseh možnih zadev..... ampak ni uporaben :)
 
-\chap{Prostorska in časovna zahtevnost računanja}
+%%@tole je CHAPTER
+\section{Prostorska in časovna zahtevnost računanja}
 %za vsak problem v spodnji polovici obstaja algoritem
 %Toda: intuitivno lahko rešimo večje naloge ali bolj zapletene naloge... če je na voljo več računskega vira
 %kako to intuicijo formalizirati?
@@ -1427,7 +1428,7 @@ Kakšen je M?
 % zakroženo gor vse: log|w|=log{ n-1 \over 2} <= logn prostora
 }
 
-\Def{Časovna zahtevnost: dan je TS M s k>=1 trakovi, na enem je vhodna beseda. Vsak je neomejen v ob smeri.
+\Def{Časovna zahtevnost: dan je TS M s k>=1 trakovi, na enem je vhodna beseda. Vsak je neomejen v obe smeri.
 %slika %vhod %.....
 }
 \Def{Stroj M je Turingov s časovno omejitvijo, T(n), če za vsak vhod dolžine n naredi kvečjemu T(n) korakov preden se ustavi. Pravimo, da ima jezik stroja L(M) časovno omejitev/zahtevnost T(n)}
@@ -1465,4 +1466,118 @@ $L\in DSPACE(log(n))$
 $L\in DTIME(n)$
 }
 %bomo pokazal iz kje pride podlaga O notacije
+%-----------------------predavanja 9-------------------------------
+\subsect{Osnovne lastnosti prostorske zahtevnosti}
+\subsubsect{Linearno stiskanje oz. krajšanje trakov}
+Tračna abeceda je končna, a poljubno velika.
+\Odmakni{Zamisel}{Več zaporednih vrednosti na traku zamenjamo z znaki neke nove abecede}
+%slika traku 011011
+%slika traku 1 2 3
+Tako lahko vedno zmanjšamo število celic za konstantni faktor.\\%...ponovil razlago S(n)
+Pri prostorski omejitvi $S(n)$, nas zanima le njen velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
+
+\Odmakni{Izrek}{Če za jezik $L$ obstaja tračni Turingov stroj, s prostorsko omejitvijo $S(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj s konstantno prostorsko omejitvijo $c>0$: $c*S(n)$}%kaj je c? hitrost svetlobe ni, lol
+%opomba: menda je kul, da je c lahko na (0,1)
+\Dokaz{Naj bo $M_1$ Turingov stroj, s prostorsko omejitvijo $S(n)$ in $L=L(M_1)$, $c\in(0,1)$.\\
+Sestavimo Turingov stroj $M_2$, ki simulira stroj $M_1$, tako da:\\
+\begin{items}
+\item V eni celici $M_2$ hrani $r$ zaporednih celic $M_1$ %r bomo kasneje
+\item Nadzorna enota stroja $M_2$ si beleži katero od r celic bi gledal $M_1$ in se primerno obnaša.
+\end{items}
+Pri simulaciji stroja $M_1$, $M_2$ obišče kvečjemu $S(n)/r$.\\%zaokroži gor
+Določimo $r$: Naj bo $r$ tak, da je ${1 \over r}={c \over 2}$, torej $r={2 \over c}$.\\
+Če je:
+\begin{items}
+\item $S(n) \geq r$, je ${S(n) \over r} = {c*S(n) \over 2} = c*S(n)$%zaokroži prva dva gor
+\item $S(n) < r$, ima $M_2$ vse shranjeno v 1 svoji celici in porabi le to celico.
+\end{items}
+Stroj $M_2$ razpoznava $L$ in ima prostorsko omejitev $c*S(n)$.
+}
+%Opomba: naj bo d>1.. velja: DSPACE(S(n)) \subseteq< DSPACE(d*S(n)).... (kar lahko na SN, lahko itak na d>1*SN)
+%velja tudi obratno (vzemi c = 1/d)
+Posledica: Velja DSPACE($S(n)$)=DSPACE($c*S(n)$) za $\forall c>0$.\\
+S spreminjanjem prostorske omejitve ne pridobimo na razpoznavni moči.
+%vprašanje: ampak to za realne računalnike itak ne velja... jup.
+Enako velja tudi za nedeterministično računanje: NSPACE($S(n)$)=NSPACE($c*S(n)$) za $\forall c>0$.\\
+\subsubsect{Odpravljanje trakov}
+Ali, ter za kakšno ceno za prostorsko zahtevnost, lahko $k$ delovnih trakov, nadomestimo z enim?
+\Odmakni{Zamisel}{$k$ trakov nadomestimo z enim $2k$-slednim trakom}%kot zgoraj pri dokazu večtračni TS = osnovni
+%slike večtračni => večsledni, enako kot tam zgoraj.
+\Odmakni{Izrek}{Če je $L$ jezik $k$-tračnega Turingovega stroja, s prostorsko omejitvijo S(n), je taka tudi omejitev eno-tračnega Turingovega stroja.}
+
+\subsect{Osnovne lastnosti časovne zahtevnosti}
+\subsubsect{gfdagfd}
+Množica stanj je omejena, a poljubno velika.
+\Odmakni{Zamisel}{Nekaj zaporednih stanj med računanjem nadomestimo z enim novim stanjem iz nove množice stanj}
+Tako lahko vedno zmanjšamo število korakov za konstantni faktor.\\
+Tudi pri časovni omejitvi $T(n)$, nas zanima le velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
+\Odmakni{Priprava}{
+\Def{Naj bo $f:\mathbb{N}\rightarrow\mathbb{N}$ funkcija, kjer velja:\\
+	$sup(f(n))_{n\rightarrow\Infty} \mbox{ po def } \lim_{n\rightarrow\Infty} (LUB\{ f(n), f(n+1), \dots \})$ %lowest upper bound e
+	$inf(f(n))_{n\rightarrow\Infty} \mbox{ po def } \lim_{n\rightarrow\Infty} (GLB\{ f(n), f(n+1), \dots \})$ %greatest lower bound
+}
+\Primer{ 
+%	Naj bo f(n) \{ 1/n, če je n sod, ... n, če je n lih \}
+% tabela
+% n   | 1  2  3 4 5 6 ....      => sup fn = inf zaradi lihih arg
+% f(n)| 1 1/2 3 ....               inf fn = 0  zaradi sodih arg.
+%	Naj bo f(n) = n/n+1
+% tabela
+% n   | 1  2  3 4 5 6 ....      => sup fn = 1
+% f(n)| 1/2 ....                   inf fn = 1 
+}
+\Odmakni{Velja}{ 
+	če f(n) konvergira, je limita enaka sup f(n) in inf f(n).%oboje kot ->inf
+}
+}
+\Odmakni{Izrek}{ 
+	Če za jezik $L$ obstaja k-tračni Turingov stroj s časovno omejitvjo T(n), potem za L obstaja k-tračni Turingov stroj, s časovno omejitvijo $c*T(n)$, za $\forall c>0$, pod pogojem, da je $k>1$ in $inf_{n\leftarrow\Infty}{T(n) \over n} = \Infty.
+}
+%Opombe: zahteva, da je inf=\Infty, pomeni, da časovna omejitev T(n) v vsakem primeru (za vsako dolžino vhoda) narašča vsaj malo hitreje od n. == za branje vhoda mora biti vsaj malo korakov na voljo za izračun.
+%Dokaz: HU QED, lol
+\Odmakni{Posledica}{ 
+	DTIME($T(n)$)=DTIME($c*T(n)$).\\
+	Torej, razred jezikov, ki jih lahko razpoznamo v času T(n), ostane enak, če ga pomnožimo z kako konstanto $c>0$ (če je inf neskončen).%inf T(n)/n=\Intry
+}
+Kaj pa če je inf končen?\\
+\Primer{ 
+	Če je $T(n)=d*n, d>1$(Torej, da imamo čas za računanje), je inf = d in ne vemo, če velja zgornja posledica.\\
+	To bi bilo čudno, saj imamo d-krat več časa.\\
+}
+\Odmakni{Izrek}{ 
+	Če za jezik obstaja k-tračni Turingov stroj s časom $d*n, d>1$, poljubna konstanta in je $k>1$, potem za L za $\forall\varepsilon>0$ obstaja k-tračni Turingov stroj, s časovno omejitvijo $(1+\varepsilon)*n$
+}
+\Odmakni{Posledica}{
+	DTIME($d*n$)=DTIME($(1+\varepsilon)*n$) za poljubni konstanti $d>1$ in $\varepsilon>0$.
+}
+Kaj če bi T(n) naraščal počasneje od $d*n$?\\
+Tedaj bi imeli inf... = 0 %kar je precej manjše od neskončno, lol
+ in za take funkcije tisti zgornji izrek ne velja.
+\br
+Tudi za NTIME velja podobno:\\
+	NTIME($T(n)$)=NTIME($c*T(n)$), za ...\\%copy paste zgoraj
+	NTIME($d*n$)= ...\\%copy paste zgoraj
+\subsubsect{gfdagfd}%vse dela tudi neodvisno od modela Turingovega stroja
+Ali in za kakšno ceno za časovno zahtevnost lahko $k>1$ delovnih trakov nadomestimo z enim samim.
+\Primer{ 
+	$L=\{ ww^R\ |\ w\in\{0,1\}^* \}$\\%menda smo že imel
+	Če je $k=2$, razpoznamo $L$ v linearnem času.\\
+	Če je $k=1$ \\% levo-desno-levo....
+	Časovna zahtevnost je reda $\Theta(n^2)$
+}
+Torej, z zmanjšanjem števila trakov na enega, se zahtevnost poveča s kvadratom.\\%SPONGEBOB!
+\Odmakni{Trditev}{To je največja možna upočasnitev pri prehodu s $k$-trakov na en trak.}
+\Odmakni{Izrek}{ 
+	Če je $L\in$DTIME($T(n)$) za $k>1$-tračnem Turingovem stroju,
+potem je $L\in$ DTIME($T(n)^2$) na eno-tračnem Turingovem stroju.
+}
+Torej $L$ zagotovo lahko rešimo v $T(n)^2$.\\
+Enako velja tudi za nedeterministične stroje.
+%note:lfloor, lceil za one zaokrožene
+\br
+Kaj pa, če se omejimo le na 2 delovna trakova (z nekega k>2-tračnega).\\
+Tudi tukaj sedaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
+\Odmakni{Izrek}{Če je $L\in$DTIME($T(n)$) na $k>2$-tračnem Turingovem stroju, potem je $L\in$DTIME($T(n)*\log T(n)$) na dvotračnem Turingovem stroju.}
+Analogno velja za nedeterministične stroje.
+
 \end{document}
