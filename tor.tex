@@ -1513,8 +1513,8 @@ Tako lahko vedno zmanjšamo število korakov za konstantni faktor.\\
 Tudi pri časovni omejitvi $T(n)$, nas zanima le velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
 \Odmakni{Priprava}{
 \Def{Naj bo $f:\mathbb{N}\rightarrow\mathbb{N}$ funkcija, kjer velja:\\
-	$sup(f(n))_{n\rightarrow\Infty} \mbox{ po def } \lim_{n\rightarrow\Infty} (LUB\{ f(n), f(n+1), \dots \})$ %lowest upper bound e
-	$inf(f(n))_{n\rightarrow\Infty} \mbox{ po def } \lim_{n\rightarrow\Infty} (GLB\{ f(n), f(n+1), \dots \})$ %greatest lower bound
+	$sup(f(n))_{n\rightarrow\infty} \mbox{ po def } lim_{n\rightarrow\infty} (LUB\{ f(n), f(n+1), \dots \})$ %lowest upper bound e
+	$inf(f(n))_{n\rightarrow\infty} \mbox{ po def } lim_{n\rightarrow\infty} (GLB\{ f(n), f(n+1), \dots \})$ %greatest lower bound
 }
 \Primer{ 
 %	Naj bo f(n) \{ 1/n, če je n sod, ... n, če je n lih \}
@@ -1527,13 +1527,13 @@ Tudi pri časovni omejitvi $T(n)$, nas zanima le velikostni razred. (Ki ga lahko
 % f(n)| 1/2 ....                   inf fn = 1 
 }
 \Odmakni{Velja}{ 
-	če f(n) konvergira, je limita enaka sup f(n) in inf f(n).%oboje kot ->inf
+	Če $f(n)$ konvergira, je limita enaka $sup_{n\rightarrow\infty} f(n)$ in $inf_{n\rightarrow\infty} f(n)$.%oboje kot ->inf
 }
 }
 \Odmakni{Izrek}{ 
-	Če za jezik $L$ obstaja k-tračni Turingov stroj s časovno omejitvjo T(n), potem za L obstaja k-tračni Turingov stroj, s časovno omejitvijo $c*T(n)$, za $\forall c>0$, pod pogojem, da je $k>1$ in $inf_{n\leftarrow\Infty}{T(n) \over n} = \Infty.
+	Če za jezik $L$ obstaja $k$-tračni Turingov stroj s časovno omejitvjo $T(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj, s časovno omejitvijo $c*T(n)$, za $\forall c>0$, pod pogojem, da je $k>1$ in $inf_{n\leftarrow\infty} {T(n) \over n} = \infty$.
 }
-%Opombe: zahteva, da je inf=\Infty, pomeni, da časovna omejitev T(n) v vsakem primeru (za vsako dolžino vhoda) narašča vsaj malo hitreje od n. == za branje vhoda mora biti vsaj malo korakov na voljo za izračun.
+%Opombe: zahteva, da je inf=\infty, pomeni, da časovna omejitev T(n) v vsakem primeru (za vsako dolžino vhoda) narašča vsaj malo hitreje od n. == za branje vhoda mora biti vsaj malo korakov na voljo za izračun.
 %Dokaz: HU QED, lol
 \Odmakni{Posledica}{ 
 	DTIME($T(n)$)=DTIME($c*T(n)$).\\
