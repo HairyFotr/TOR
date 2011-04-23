@@ -728,7 +728,7 @@ Stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to n
 %
 %
 \fixme slika\\
-Naj bo $M$ nek nedeterministični Turingov storj in naj ima njegov program v vsaki mmnožici $\delta(q,a)$ največ $r$ možnih potez, kjer je $r$ končno število.\\
+Naj bo $M$ nek nedeterministični Turingov stroj in naj ima njegov program v vsaki mmnožici $\delta(q,a)$ največ $r$ možnih potez, kjer je $r$ končno število.\\
 Stroju $M$ priredimo osnovni 3-sledni Turingov stroj $M'$, z naslednjimi lastnostmi:
 \begin{items}
 \item na prvi sledi ima abecedo stroja $M$
@@ -749,45 +749,34 @@ Natančneje stroj $M'$ deluje tako:
 }
 \Trditev{Če $M$ sprejme besedo jo sprejme tudi $M'$.}
 \Izrek{Za jezik $L$ obstaja nedeterministični Turingov stroj natanko tedaj, ko za $L$ obstaja osnovni Turingov stroj.}
-\Neurejeno
-%naj ima njegov program delta v vsaki množici delta q a kvečjemu r možnih potez(oz. elementov delta? množice)
-%Stroju M priredimo trisledni osnovni TS M'
-%na prvi sledi ima M' vhodno besedo M
-%na drugi sledi M' generira/izpisuje navodila eno za drugim. navodila so besed nad {1,2...r} v leksikografskem redu.
-%npr r=3 ... 1,2,3, 11, 12, 13, 21, 22, 23, 31, 32, 33, 111, 112, 
-%na tretji sledi simulira stroj M, kot da bi M sam izbral svoje poteze, skladno s tekočim navodilom.% ajprov?
-
-%Natančneje:
-%M' na 2. sledi sestavi novo, naslednje navodilo
-%prepiše vhodno besedo s prvega na tretji sled (prej lahko tretha sked zbrupe(tretjo sled zbriše), če je kaj ostalo od prej)
-%na tretji sledi oponaa stroj M, kot da bi ta izbiral svoje poteze po tekočem navodilu.
-
-%pri tem: 
-%če M' pride do konca navodila, in je tedaj v končnem stanju, besedo sprejmemo.
-%sicer če ne pride do konca navodila, ali pa se ustavi v nekončnem stanju, potem pojdi v (natančneje prva vrstica)
-%a to je tko k depth first? recimo no
-%kaj če se navodilo zacikla? to se da rešit... i dunno :)
-%aha, ne more se - ... ker ima končno mnogo nečesa
-%hm a se lahko nts konča, simulator pa zacikla? nas ne briga.
-%
-%Trditev: če M sprejme besedo, jo sprejme tudi M' 
-%Dokaz: 
-%izrek: za L obstaja nts, ntk za L obstaja osnovni ts.
 
 \subsect{Večdimenzionalni Turingov stroj}
-... k>=2
-premikamo se lahko v 2k smeri
-...
-...
-...
-\Primer{k=3\\
-\fixme - 3D trak s trollhands puščico na celico
-}
+Pri tem modelu je trak k-dimenzionalen ($k \geq 2$) in je v vsaki dimenziji neomejen v obe smeri.\\
+Za tridimenzionalni Turingov stroj bi to pomenilo, da je celica kocka in se po vsakem koraku stroja premaknemo v eno izmed šestih sosednjih celic.
 
-\subsubsect{Turingov stroj z več okni}
-\fixme - slika z večimi okni
+\subsect{Turingov stroj z več okni}
+Nadzorna enota hkrati lahko bere iz večih oken na istem traku.\\
+Okna so ves čas enako oddaljena med seboj.
+\br
+\begin{tikzturing}
+	\node [cell1, minimum width=2cm] {};
+
+	\node (Ai) [cell1,selected] {\color{gray}$A_i$};
+	\node [cell1, minimum width=1.7cm] {\ ...\ \ };
+	\node (Ai2) [cell1,selected] {\color{gray}$A_j$};
+	\node [cell1, minimum width=1cm] {\ ...\ \ };
+	\node (Ai3) [cell1,selected] {\color{gray}$A_k$};
+	\node [cell1, minimum width=2cm] {};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (80bp, 60bp) [draw, minimum width=2cm, minimum height=1.2cm]  {$q$};
+	\draw (ne.south) -- (80bp, 30bp) [->] to (Ai.north);
+	\draw (ne.south) -- (80bp, 30bp) [->] to (Ai2.north);
+	\draw (ne.south) -- (80bp, 30bp) [->] to (Ai3.north);
+\end{tikzturing}
 
 %-----------------------predavanja 4-------------------------------
+\Neurejeno
 %Turing se je zgledoval po človeku
 
 %drugi po funkcijah
@@ -802,76 +791,85 @@ premikamo se lahko v 2k smeri
 %Postov stroj, Algoritmi Markova
 %računanje oz. reševanje mat. problemov je pri človeku preoblikovanje množice besed v drugo (opis problema, v opis rešitve)
 \sect{Alternative Turingovemu stroju}
-\subsect{Rekurzivne funkcije}
-%(GK) Gödel, Kleene
-Definiral je funkcije: ničelna, naslednik, projekcija.
-Dodal je pravili sestavljanja, kako iz začetnih in že sestavljenih dobimo novo: kompozicija, primitivna rekurzija. %grafek vseh sestavljivih (primitivno rekurzivnih) funkcij \_/
-%godel je probal par funkcij in mu je ratal... kar je blo lepo... še lepš pa:
-Konstrukcija take funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije, to pa je tudi kandidat za formalni opis pojma algoritma.
+\subsect{Rekurzivne funkcije (Gödel, Kleene)}
+Gödel je definiral ničelno funkcijo, funkcijo naslednik in projekcijo, ter pravili za sestavljanje, kompozicijo in primitivno rekurzijo.
 \br
-Ampak... Ackermannova funkcija ni primitivno rekurzivna in narašča hitreje od vsake funkije, ki pripada primitivno rekuzivnim.
-%\[ A(m,n) { n+1, m=0 
-%          { A(m-1,1), m>0 in n=0
-%          { A(m-1,1, A(m, n-1)), m>0 in n>0\]%obstaja šeena def
-
-Kleene leta 1936 doda šeeno pravilo sestavljanja, $\mu$-operacija. %to zato, da naredi totalno, čeprov je možno parcialne
-\Def{Totalne š.t. funkcije $f:N^k\leftarrow N$, ki se dajo konstruirati iz treh začetnih funkcij s končno mnogo uporabami treh pravil sestavljanja se imenujejo rekurzivne funkcije.}
-
-Razred rekurzivnih funkcij
-...
+S pomočjo pravil za sestavljanje lahko iz začetnih funkcij sestavimo kompleksnejše:\\
+\fixme začetne in drevo ven%grafek vseh sestavljivih (primitivno rekurzivnih) funkcij \_/
+\br
+Konstrukcija funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije, tako, da je s tem tudi kandidat za formalni opis pojma algoritma.
+\br
+A ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašča hitreje od vsake funkcije, ki pripada primitivno rekuzivnim.
+\[ A(m,n) = 
+	\left\{ 
+	\begin{array}{ccl}
+	n+1&;& m=0\\
+	A(m-1,1) &;& m>0 \wedge n=0\\
+	A(m-1,A(m, n-1)) &;& m>0 \wedge n>0
+	\end{array}
+	\right.
+\]
+\br
+Kleene doda Gödelovim pravilom še pravilo sestavljanja -- minimizacijo oz $\mu$-operacijo. %to zato, da naredi totalno, čeprov je možno parcialne
+\Def{Totalne naravne funkcije $f:N^k\leftarrow N$, ki jih je moč konstruirati iz treh začetnih funkcij, s končno mnogo uporabami treh pravil sestavljanja imenujemo \textbf{rekurzivne funkcije.}}
+\br
+Začetne funkcije:
 \begin{items}
-\item $\zeta(n)=0 \forall n$ - ničelna
-\item $\sigma(n)=n+1 \forall n$ - naslednik
-\item $\pi(n_1, n_2, \dots, n_k)=n_i \forall n..$ - projekcija
+\item Ničelna funkcija: $\zeta(n)=0 \forall n$
+\item Funkcija naslednik: $\sigma(n)=n+1 \forall n$
+\item Projekcija: $\pi(n_1, n_2, \dots, n_k)=n_i \forall n..$
 \end{items}
-Pravila sestavljanja
-1. Če so dane funkcije $g:N^m \leftarrow N$ in $n_h:N^k \leftarrow N$, kjer i 1-m, potem je funkcija $f(n_1,n_2,\dots,n_k) \mbox{ po def } g(h_{1}(n_1,n_2,\dots,n_k),\dots,h_m(n_1,n_2,\dots,n_k))$ sestavljena s kompozicijo funkcij
-2. Če sta dani funkciji $g:N^k \leftarrow N$ in $h:N^{k+1}  \leftarrow n$, potem je $f$ definiriana z:
-	\[f(n_1, n_2, \dots, n_k, 0) \mbox{ po def } g(n_1, n_2, \dots, n_k)\]
-	\[f(n_1, n_2, \dots, n_k, m+1) \mbox{ po def } h(n_1, n_2, \dots, n_k, m), f(n_1, n_2, \dots, n_k, m)), za m \geq 0\]
+Pravila sestavljanja:
+\begin{items}
+\item Če so dane funkcije $g:N^m \leftarrow N$ in $n_h:N^k \leftarrow N$, kjer i 1-m, potem je funkcija $f(n_1,n_2,\dots,n_k) \PoDef g(h_{1}(n_1,n_2,\dots,n_k),\dots,h_m(n_1,n_2,\dots,n_k))$ sestavljena s kompozicijo funkcij
+\item Če sta dani funkciji $g:N^k \leftarrow N$ in $h:N^{k+1}  \leftarrow n$, potem je $f$ definiriana z:
+	\[f(n_1, n_2, \dots, n_k, 0) \PoDef g(n_1, n_2, \dots, n_k)\]
+	\[f(n_1, n_2, \dots, n_k, m+1) \PoDef h(n_1, n_2, \dots, n_k, m), f(n_1, n_2, \dots, n_k, m)), za m \geq 0\]
 sestavljeno s .... in $g$ in $h$
-3. Če je funkcija $g:N^{k+1} \leftarrow N$ taka, da za vsako $k$-terico naravnih števil $n_1, n_2, \dots, n_k$ obstaja n ..neki.. m, da je $g(n_1, n_2, \dots, n_k, m) = 0$, potem je funkcija:
-\[ f(n_1, n_2, \dots, n_k) po def \mu x g(n_1, \dots, n_k, x)\]
+\item Če je funkcija $g:N^{k+1} \leftarrow N$ taka, da za vsako $k$-terico naravnih števil $n_1, n_2, \dots, n_k$ obstaja n ..neki.. m, da je $g(n_1, n_2, \dots, n_k, m) = 0$, potem je funkcija:
+\[ f(n_1, n_2, \dots, n_k) \PoDef \mu x g(n_1, \dots, n_k, x)\]
 sestavljena z $\mu$-operacijo iz funkcije $g$.
 %Pri tem je $\mu$-operacija definirana z:
-%\[ \mu x g(n_1, \dots, n_k, x) po def je najmanjši X, pri katerem je g (n_1, \dots n_k, X) = 0\]
-
+%\[ \mu x g(n_1, \dots, n_k, x) \PoDef je najmanjši X, pri katerem je g (n_1, \dots n_k, X) = 0\]
+\end{items}
 %---
-Konstrukcija rekurzivne funkcije $f$ je končno zaporedje $f_1,f_2,\dots,f_L$, kjer je $f_L=f$ in je vsaka funkcija $f_i$ vmes, bodisi začetna, bodisi sestavljena z enim izmed treh pravil iz predhodnic v tem zaporedju %glej grafek
+Konstrukcija rekurzivne funkcije $f$ je končno zaporedje $f_1,f_2,\dots,f_L$, kjer je $f_L=f$ in je vsaka funkcija $f_i$ na poti, bodisi začetna, bodisi sestavljena z enim izmed treh pravil iz predhodnic v tem zaporedju. %glej grafek
 
 %zaeenkrat nismo našli Ackermann2, ki bi to pokvarila :)
-\Povzetek{Algoritem po Gödel-Kleenu(GK) je ravno konstrkucija rekurzivne funkcije.\\
+\Povzetek{Algoritem po Gödel-Kleenu(GK) je ravno konstrukcija rekurzivne funkcije.\\
 	Računanje po GK je izračun vrednosti funkcije tako, kot jo narekuje njena konstrukcija.\\
 	Funkcija je izračunljiva po GK, če je rekurzivna.}
 
-\subsubsect{Splošne rekurzivne funkcije}
-Herbrand je študiral, kako poljubno ŠT funkcijo definirati s sistemom enačb.
+\subsubsect{Splošne rekurzivne funkcije (Herbrand, Gödel)}
+Herbrand je rezmišljal o tem, kako poljubno naravno funkcijo definirati s sistemom enačb. Enkrat preden se je ponesrečil v gorah, je Gödelu pisal:\\
+Recimo, da je $f$ neznana funkcija, $g_1, g_2, \dots g_m$ pa znane. %mestnost?
+$f$-je in $g$-je poljubno vstavljamo kot argumente v druge, nato nekatere dobljene izraze izenačimo, potem pa če ima dobljeni sistem natanko eno rešitev za funkcijo $f$, potem je $f$ rekurzivna.
+\br
+Gödel je temu dodal dve dodatni zahtevi:\\
+Na levi strani enačb se $f$ ne sme pojaviti kot eden izmed argumentov $f$.\\%$f$ se sme na levi strani enačb pojaviti v obliki $f(g(...), ..., g_k(...)$ %Herbrand je dovoljeval f(g...f...g), kar je preveč divje
+$f$ naj bo totalna (definirana povsod na $N^k$).
+\br
+Če se $f$ da zapisati s takim sistemom, je zapisana s standardnim sistemom $\varepsilon(f)$.
+\br
+Pravila za računanje vrednosti $f(n_1, n_2, \dots, n_k)$ iz $\varepsilon(f)$:
+\begin{items}
+\item v enačbi vse pojave neke spremenljivke zamenjamo z istim naravnim številom
+\item v enačbi pojave funkcije zamenjamo z njeno vrednostjo
+\end{items}
 
-f je neznana funkcija, $g_1, g_2, \dots g_m$ pa znane %mestnost?
-f-je in g-je poljubno vstavljamo kot argumente v druge, nato pa nekatere dobljene izraze izenačimo, potem pa če ima dobljeni sistem natanko eno rešitev za funkcijo f, potem je f rekurzivna.%preden je umrl v alpah je poslal tako pismo gödlu.. katerega leta?
-Gödel je dodal dve dodatni zahtevi... f se sme na levi strani enačb sme pojaviti v obliki $f(g(...), g_k(...)$ %Herbrand je dovoljeval f(g...f...g), kar je preveč divje
-f naj bo povsod na $N^k$ definirana (totalna).
-Če se jo da zapisati s takim sistemom, je zapisana s standardnim sistemom. Tedaj je tak sistem za f z oznako $\varepsilon(f)$.
-
-Kakšna so pravila za računanje vrednosti $f(n_1, n_2, \dots, n_k)$ iz $\varepsilon(f)$. %leta 1934 je ugotovil, da
-Pravili sta samo 2.
-1. v enačbi lahko vse pokave iste spremenljivke zamenjamo z istim naravnim številom???
-2. v enačbi lahko pojave funkcije zamenjamo z njeno vrednostjo
-
-Godel trdi: funkcija f za katero obstaja $\varepsilon(f)$ , se imenjue splošno rekurzivna%it's first def'd here.
+\Def{Funkcija $f$ za katero obstaja $\varepsilon(f)$, se imenuje \textbf{splošno rekurzivna}}
 
 \Povzetek{Algoritem po Herbrant-Gödlu(HG) je $\varepsilon(f)$.\\
 	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$ z uporabo pravil 1,2.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
 	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
 
-\subsect{$\lambda$-račun}%1932,1933 Alonso Church
+\subsect{$\lambda$-račun (Alonso Church)}%1932,1933 Alonso Church
 Imamo vhodni izraz, ki opisuje neko funkcijo f in argumente $n_1, \dots, n_k$.
 
 Kako je funkcija opisana?
 Začetni $\lambda$-term
 
 Cilj: preoblikovati začetni $\lambda$-term v končni $\lambda$-term, tak, ki bo opisoval ravno vrednost $f(n_1, \dots, n_k)$
-%this shit is exclusive :D
 
 To preoblikovanje dosežemo z uporabo t.i. redukcij. Ta\\
 bodisi preimenuje spremenljivko v $\lambda$-termu, $(\alpha)$
@@ -880,7 +878,7 @@ bodisi uporabi neko funkcijo nad njenimi argumenti.$(\beta)$ %a se da $\lambda$-
 $t0->t1->...->tK$
 $f, n1, n2, ... nk$....$f(n_1, \dots, n_k)$
 
-\Def{funkcija, ki jo je možno predstaviti in računati v tem lambda računu, taka funkcija je $\lambda$-definabilna}%fo'real!
+\Def{funkcija, ki jo je možno predstaviti in računati v tem lambda računu, taka funkcija je \textbf{$\lambda$-definabilna}}%fo'real!
 
 \Povzetek{Algoritem po Churchu je $\lambda$-term.\\
 	Računanje po Churchu je preoblikovanje začetnega $\lambda$-terma v končni $\lambda$-term z redukcijami.\\
@@ -888,7 +886,7 @@ $f, n1, n2, ... nk$....$f(n_1, \dots, n_k)$
 
 %zgledovanje po jeziku (glej gor)
 
-\subsect{Postov Stroj}%1936, Post
+\subsect{Postov Stroj (Emil Post)}%1936, Post
 %podoben turingovemu
 %nadzorna enota
 %trak s celicami
@@ -910,7 +908,7 @@ Korak: prebere iz celice pod oknom znak in iz začetka vrste znak. na podlagi te
 	Računanje po Postu je izvajanje programa Postovega stroja.\\
 	Funkcija je izračunljiva po Postu, če njeno vrednost lahko izračuna Postov stroj.}
 
-\subsect{Algoritmi Markova}%194..
+\subsect{Algoritmi Markova (Andrej Markov ml.)}%194..
 Imamo abecedo $\Sigma$, končno zaporedje produkcij:
 $x_1 \leftarrow y_1$
 $x_2 \leftarrow y_2$
@@ -991,7 +989,7 @@ uredimo zaporedja po dolžini, enako dolga pa leksikografsko\\
 $\Rightarrow$ lahko govorimo o prvem, drugem, ..., o $n$-tem programu TS. Zato lahko tudi prvi, drugi, ... n-ti rekurzivni funkciji.\\
 označimo $n$-to rekurzivno funkcijo s $f_n$\\
 definirajmo ......\\
-$g(n, a_1,\dots, a_k) \mbox{ po def. } f_n(a_1, a_2, \dots, a_k)+1$, kjer $a_i\in \mathbb{N}$\\%označimo z *
+$g(n, a_1,\dots, a_k) \PoDef. f_n(a_1, a_2, \dots, a_k)+1$, kjer $a_i\in \mathbb{N}$\\%označimo z *
 funkcija je izračunljiva\\
 algoritem je ....\\
 ....\\
@@ -1011,7 +1009,7 @@ predpostavka: $g$ je rekrivna\\
 	Ali naj dodajo začetne funkcije, ali pravila za dodajanje, če gledamo Godlov model\\%HG ali GK??
 	Ne, pridemo v isto protislovje.\\
 
-	Ali je to ovrglo CT tezo?\\
+	Ali je to ovrglo Church-Turingovo tezo?\\
 	Ne. Ugotovili so, da se je treba odpovedati zahtevi, da so funkcije le totalne. Dopustiti je treba tudi sestavljene parcialne.\\
 	%pri parcialnih funkcijah f = f+1 lahko ni definirano in to je ok
 	Takrat *** ni več nujno protislovje, saj je lahko $f_m(mmmm)\uparrow$.
@@ -1041,7 +1039,7 @@ Nekatera naravna števila niso indeksi TS, zato se dogovorimo: če naravno štev
 Posledica: vsako naravno število, je indeks natanko enega Turingovega stroja.
 Obratno ne velja. Isti Turingov stroj ima več indeksov (dodajamo nepotrebne in nesmiselne ukaze, pa je.)
 \Trditev{Obstaja Turingov stroj, ki izračuna vse kar izračuna katerikoli drug Turingov stroj.}
-\Dokaz{Stroj si zamislimo v grobem in intuitivno zapišemo njegov program. Skličemo se na CT tezo, ki nam zagotovi obstoj nekega konkretnega TS (ki opravlja ta algoritem)}%
+\Dokaz{Stroj si zamislimo v grobem in intuitivno zapišemo njegov program. Skličemo se na Church-Turingovo tezo, ki nam zagotovi obstoj nekega konkretnega TS (ki opravlja ta algoritem)}%
 
 
 Ideja stroja U:
@@ -1069,7 +1067,7 @@ Program stroja U(intuitivo)
 \end{items}
 \fixme slika: trije trakovi - vhodni(<T> w), delovni(wwww|a|wwww), pomožni(<qi><qF>)
 
-To je bil intuitiven opis algoritma programa stroja U - algoritma. Po CT tezi lahko sestavimo pravi TS z vsemi podrobnostmi, ki izvaja delo opisanega stroja.
+To je bil intuitiven opis algoritma programa stroja U -- algoritma. Po Church-Turingovi tezi lahko sestavimo pravi TS z vsemi podrobnostmi, ki izvaja delo opisanega stroja.
 \[U=\langle Q_U,\Sigma_U,\Gamma_U,\delta_{U1},q_{U1},B,q_{Uf} \rangle  \]
 To je univerzalni Turingov stroj.
 %1996 je rus Yurii Rogozhin sestavil nekaj različic stroja U... 
@@ -1111,7 +1109,7 @@ V opisu naloge so vedno konkretni podatki.
 Prek kodirne funkcije $\langle\rangle$ dobi vsaka naloga $p$ neko kodo $\langle p\rangle\in\Sigma^*$, ki jo razume nek Turingov stroj.
 Naj bo $\langle \rangle :P\rightarrow \Sigma^*$. Zahtevamo, da je $\langle\rangle$ injektivna $(p \neq p' \Rightarrow \langle p \rangle \neq \langle p' \rangle$.%why... a ne bi blo kul met kr vse na isto?
 Naj bo jezik problema P definiran kot:
-\[ \mathcal{L}(P) \mbox{ po def. } \{ \langle p \rangle \in \Sigma^*\ |\ \mbox{p je pozitivna naloga problema P} \} \]
+\[ \mathcal{L}(P) \PoDef \{ \langle p \rangle \in \Sigma^*\ |\ \mbox{p je pozitivna naloga problema P} \} \]
 
 \fixme pravokotnik P s squigly črto po sredi... pozitivne/negativne naloge in pravokotnik Sig* s podmnožico L(P) in puščica iz pozitivnih v L prek kodirne funkcije <>
 
@@ -1152,7 +1150,7 @@ Sklep: K ni rekurziven jezik, zato $R_\mathcal{K}$ ni odločljiv problem.%proble
 }%konec leme
 Tudi $P_{\mathcal{K}_0}$ ni odločljiv, sicer bi bil zagotovo odločljiv tudi podproblem $P_\mathcal{K}$.
 Sklep: Obstaja odločittveni problem, za katerega ni Turingovega stroja, ki bi ga vedno rešil.%let's call Church-Turing again....
-Turingov stroj je po CT-tezi algoritem, torej za nekatere probleme ni algoritma, ki bi ga rešil.
+Turingov stroj je po Church-Turingovi tezi algoritem, torej za nekatere probleme ni algoritma, ki bi ga rešil.
 %ok... what now... kaj je praktična posledica? nekaj primerov.
 %kam tu paše dokazovanje pravilnosti? ja.
 }
@@ -1357,11 +1355,11 @@ Pojavljata se dve implementaciji:
 Tu lahko začnemo odgovarjati na vprašanje kaj bi pomenilo, če bi bil nek problem rešljiv.\\
 Razredi relativne izračunljivosti:
 \begin{items}
-\item $\Sigma_1^0 \mbox{ po def. } \{ M\ |\ \mbox{M je r.e}\}$
-\item $\Sigma_{n+1}^0 \mbox{ po def. } \{ M\ |\ \mbox{M je r.e. glede na nek jezik L iz prejšnjega razreda } \Sigma_n^0\}$
-\item $\Delta_1^0 \mbox{ po def. } \{ M\ |\ \mbox{M je rekurzivnen} \}$
-\item $\Delta_{n+1}^0 \mbox{po def}. \{ M\ |\ \mbox{M je rekurziven glede na nek jezik L iz prejšnjega razreda} \Sigma_n^0\}$%menda sigma...
-\item $\Pi_n^0 \mbox{po def.} \{ M\ |\ \overline{M} \in \Sigma_n^0 \}$
+\item $\Sigma_1^0 \PoDef \{ M\ |\ \mbox{M je r.e}\}$
+\item $\Sigma_{n+1}^0 \PoDef \{ M\ |\ \mbox{M je r.e. glede na nek jezik L iz prejšnjega razreda } \Sigma_n^0\}$
+\item $\Delta_1^0 \PoDef \{ M\ |\ \mbox{M je rekurzivnen} \}$
+\item $\Delta_{n+1}^0 \PoDef. \{ M\ |\ \mbox{M je rekurziven glede na nek jezik L iz prejšnjega razreda} \Sigma_n^0\}$%menda sigma...
+\item $\Pi_n^0 \PoDef \{ M\ |\ \overline{M} \in \Sigma_n^0 \}$
 \end{items}
 
 Ugotovitve:\\%ugotovitve? rly?
@@ -1393,8 +1391,9 @@ Nekaj primerov in kam v hiearhijo spadajo:
 
 %lol, tukaj je čudovit pisan svet vseh možnih zadev..... ampak ni uporaben :)
 
-%%@tole je CHAPTER
-\section{Prostorska in časovna zahtevnost računanja}
+%@wtf problem s č-jem v naslovu
+\chap{Zahtevnost racunanja}
+%\chap{Zahtevnost računanja}
 %za vsak problem v spodnji polovici obstaja algoritem
 %Toda: intuitivno lahko rešimo večje naloge ali bolj zapletene naloge... če je na voljo več računskega vira
 %kako to intuicijo formalizirati?
@@ -1405,10 +1404,12 @@ Nekaj primerov in kam v hiearhijo spadajo:
 
 %Preučujemo konkretne vire: prostor / čas (druge: green computing, vzporedno računanje - procesorji in čas, aproksimacijski algoritmi(čas, napaka), verjetnostni algoritmi(čas,verjetnost pravilne rešitve))
 
-\Def{Prostorska zahtevnost: Dan je Turingov stroj $M$, z enim vhodnim trakom, na katerem je vhodna beseda omejena z mejnikoma za začetek/konec. Vhodni trak je namenjen le branju. Imamo še k>=1 delovnih trakov, ki so neskončni v eno smer.\\
+\sect{Deterministična časovna in prostorska zahtevnost}
+\subsect{Prostorska zahtevnost}
+Dan je Turingov stroj $M$, z enim vhodnim trakom, na katerem je vhodna beseda omejena z mejnikoma za začetek/konec. Vhodni trak je namenjen le branju. Imamo še $k \geq 1$ delovnih trakov, ki so neskončni v eno smer.
 %slika TS
-}
-\Def{Stroj M je Turingov s prostorsko omejitvijo, S(n), če za vsak vhod dolžine n obišče kvejemu S(n) celic na vsakem delovnem traku. Pravimo, da ima jezik L(M) stroja prostorsko omejitev/zahtevnost S(n)}
+
+\Def{Turingov stroj $M$ ima prostorsko omejitev $S(n)$, če za vsak vhod dolžine $n$ obišče kvečjemu $S(n)$ celic na vsakem delovnem traku. Pravimo, da ima jezik stroja $L(M)$ prostorsko omejitev/zahtevnost $S(n)$}
 %Intuitivno: za odgovarjnje, ali je neka beseda v jeziku, zadošča prostor S(|w|) na vsakem izmed trakov
 %Opombe: štejejo se le celice na delovnih trakovih: Razlog: radi bi ... 
 % Vsak trak porabi vsaj eno celico na vsakem traku, torej S(N) je vsaj 1
@@ -1427,10 +1428,11 @@ Kakšen je M?
 % zakroženo gor vse: log|w|=log{ n-1 \over 2} <= logn prostora
 }
 
-\Def{Časovna zahtevnost: dan je TS M s k>=1 trakovi, na enem je vhodna beseda. Vsak je neomejen v obe smeri.
+\subsect{Časovna zahtevnost}
+Dan je Turingov stroj $M$ s $k \geq 1$ trakovi. Na prvem traku je vhodna beseda. Vsak trak je neomejen v obe smeri.
 %slika %vhod %.....
-}
-\Def{Stroj M je Turingov s časovno omejitvijo, T(n), če za vsak vhod dolžine n naredi kvečjemu T(n) korakov preden se ustavi. Pravimo, da ima jezik stroja L(M) časovno omejitev/zahtevnost T(n)}
+
+\Def{Turingov Stroj $M$ ima časovno omejitev $T(n)$, če za vsak vhod dolžine $n$ naredi kvečjemu $T(n)$ korakov, preden se ustavi. Pravimo, da ima jezik stroja $L(M)$ časovno omejitev/zahtevnost $T(n)$}
 %Opombe: predpostavljamo, da mora bit celotna vhodna beseda prebrana.
 % čas bo T(n) = n + 1 za %%kako dobimo log čas? dunno, lol. problem modela
 % ... T(n) .... (n+1,T(n))
@@ -1440,25 +1442,30 @@ Kakšen je M?
 %w c wr
 %...
 %w
-
 }
 
-Nedeterministična časovna in prostorska zahtevnost.\\
-NDTS ima: 
- prostorsko zahtenost/omejitev S(n), če za vsak vhod dolžine n obstaja izračun, ki obišče <= S(n) celic(na ?vsakem delu traku)
- časovno zahtenost/omejitev T(n), če za vsak vhod dolžine n obstaja izračun, ki obišče <= T(n) korakov%iz tu izvira P=NP
-
-Jezik L ima deterministično prostorsko zahtevnost/omejitev, S(n), če zanj obstaja deterministični turingov stroj ki ima prostorsko omejitev S(n)
-Jezik L ima nedeterministično prostorsko zahtevnost/omejitev, S(n), če zanj obstaja nedeterministični turingov stroj ki ima prostorsko omejitev S(n)
-Jezik L ima deterministično časovno zahtevnost/omejitev, T(n), če zanj obstaja deterministični turingov stroj ki ima časovno omejitev T(n)
-Jezik L ima nedeterministično časovno zahtevnost/omejitev, T(n), če zanj obstaja nedeterministični turingov stroj ki ima časovno omejitev T(n)
-
-Razredi zahtevnosti:
-\Def{DSPACE(S(n)) po def \{ L | L ima deterministično prostorsko omejitev S(n) \} -- vsi jeziki, ki jih lahko det. razpoznavamo v S(n)}
-\Def{NSPACE(S(n)) po def \{ L | L ima nedeterministično prostorsko omejitev S(n) \} -- vsi jeziki, ki jih lahko nedet. razpoznavamo v S(n)}
-\Def{DTIME(S(n)) po def \{ L | L ima deterministično časovno omejitev S(n) \} -- vsi jeziki, ki jih lahko det. razpoznavamo v T(n)}
-\Def{NTIME(S(n)) po def \{ L | L ima nedeterministično časovno omejitev S(n) \} -- vsi jeziki, ki jih lahko nedet. razpoznavamo v T(n)}
-
+\sect{Nedeterministična časovna in prostorska zahtevnost}
+\Def{Nedeterministični Turingov stroj ima: 
+\begin{items}
+\item Prostorsko zahtenost/omejitev $S(n)$, če za vsak vhod dolžine $n$ obstaja izračun, ki obišče kvečjemu $S(n)$ celic(na ?vsakem delu traku)
+\item Časovno zahtenost/omejitev $T(n)$, če za vsak vhod dolžine $n$ obstaja izračun, ki naredi kvečjemu $T(n)$ korakov.%iz tu nekje izvira P=NP
+\end{items}}
+Jezik L ima deterministično prostorsko zahtevnost/omejitev, S(n), če zanj obstaja deterministični turingov stroj ki ima prostorsko omejitev S(n).\\
+Jezik L ima nedeterministično prostorsko zahtevnost/omejitev, S(n), če zanj obstaja nedeterministični turingov stroj ki ima prostorsko omejitev S(n).\\
+Jezik L ima deterministično časovno zahtevnost/omejitev, T(n), če zanj obstaja deterministični turingov stroj ki ima časovno omejitev T(n).\\
+Jezik L ima nedeterministično časovno zahtevnost/omejitev, T(n), če zanj obstaja nedeterministični turingov stroj ki ima časovno omejitev T(n).
+\br
+\subsect{Razredi zahtevnosti}
+\begin{items}
+\item Jeziki, ki jih lahko deterministično razpoznamo v $S(n)$:\\
+DSPACE($S(n)$) $\PoDef \{ L\ |\ L$ ima deterministično prostorsko omejitev $S(n)$ \}
+\item Jeziki, ki jih lahko nedeterministično razpoznamo v $S(n)$:\\
+NSPACE($S(n)$) $\PoDef \{ L\ |\ L$ ima nedeterministično prostorsko omejitev $S(n)$ \}
+\item Jeziki, ki jih lahko deterministično razpoznamo v $T(n)$:\\
+DTIME($T(n)$) $\PoDef \{ L\ |\ L$ ima deterministično časovno omejitev $T(n)$ \}
+\item Jeziki, ki jih lahko nedeterministično razpoznamo v $T(n)$:\\
+NTIME($T(n)$) $\PoDef \{ L\ |\ L$ ima nedeterministično časovno omejitev $T(n)$ \}
+\end{items}
 \Primer{
 $L=\{ w c w^R|... \}$\\
 $L\in DSPACE(log(n))$
@@ -1466,7 +1473,7 @@ $L\in DTIME(n)$
 }
 %bomo pokazal iz kje pride podlaga O notacije
 %-----------------------predavanja 9-------------------------------
-\subsect{Osnovne lastnosti prostorske zahtevnosti}
+\subsect{Lastnosti prostorske zahtevnosti}
 \subsubsect{Linearno stiskanje oz. krajšanje trakov}
 Tračna abeceda je končna, a poljubno velika.
 \Ideja{Več zaporednih vrednosti na traku zamenjamo z znaki neke nove abecede}
@@ -1505,16 +1512,16 @@ Ali, ter za kakšno ceno za prostorsko zahtevnost, lahko $k$ delovnih trakov nad
 %slike večtračni => večsledni, enako kot tam zgoraj.
 \Izrek{Če je $L$ jezik $k$-tračnega Turingovega stroja, s prostorsko omejitvijo $S(n)$, je taka tudi omejitev eno-tračnega Turingovega stroja.}
 
-\subsect{Osnovne lastnosti časovne zahtevnosti}
-\subsubsect{Linearno stiskanje, oz. krajšanje trakov}
+\subsect{Lastnosti časovne zahtevnosti}
+\subsubsect{Linearno stiskanje oz. krajšanje trakov}
 Množica stanj je omejena, a poljubno velika.
 \Ideja{Nekaj zaporednih stanj med računanjem nadomestimo z enim novim stanjem iz neke nove množice stanj}
 Tako lahko vedno zmanjšamo število korakov za konstantni faktor.\\
 Tudi pri časovni omejitvi $T(n)$, nas zanima le velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
 \Odmakni{Priprava}{
 \Def{Naj bo $f:\mathbb{N}\rightarrow\mathbb{N}$ funkcija, kjer velja:\\
-	$sup(f(n))_{n\rightarrow\infty} \mbox{ po def } lim_{n\rightarrow\infty} (LUB\{ f(n), f(n+1), \dots \})$ %lowest upper bound e
-	$inf(f(n))_{n\rightarrow\infty} \mbox{ po def } lim_{n\rightarrow\infty} (GLB\{ f(n), f(n+1), \dots \})$ %greatest lower bound
+	$sup(f(n))_{n\rightarrow\infty} \PoDef lim_{n\rightarrow\infty} (LUB\{ f(n), f(n+1), \dots \})$ %lowest upper bound e
+	$inf(f(n))_{n\rightarrow\infty} \PoDef lim_{n\rightarrow\infty} (GLB\{ f(n), f(n+1), \dots \})$ %greatest lower bound
 }
 \Primer{ 
 Naj bo $f(n)={1 \over n}$, če je $n$ sod, ter $f(n)=n$, če je $n$ lih.\\%%@tisto z matrix/cases... to je ugly zapis
