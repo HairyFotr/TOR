@@ -840,7 +840,7 @@ sestavljena z $\mu$-operacijo iz funkcije $g$.
 Konstrukcija rekurzivne funkcije $f$ je končno zaporedje $f_1,f_2,\dots,f_L$, kjer je $f_L=f$ in je vsaka funkcija $f_i$ vmes, bodisi začetna, bodisi sestavljena z enim izmed treh pravil iz predhodnic v tem zaporedju %glej grafek
 
 %zaeenkrat nismo našli Ackermann2, ki bi to pokvarila :)
-\Odmakni{Povzetek}{Algoritem po Gödel-Kleenu(GK) je ravno konstrkucija rekurzivne funkcije.\\
+\Povzetek{Algoritem po Gödel-Kleenu(GK) je ravno konstrkucija rekurzivne funkcije.\\
 	Računanje po GK je izračun vrednosti funkcije tako, kot jo narekuje njena konstrukcija.\\
 	Funkcija je izračunljiva po GK, če je rekurzivna.}
 
@@ -860,7 +860,7 @@ Pravili sta samo 2.
 
 Godel trdi: funkcija f za katero obstaja $\varepsilon(f)$ , se imenjue splošno rekurzivna%it's first def'd here.
 
-\Odmakni{Povzetek}{Algoritem po Herbrant-Gödlu(HG) je $\varepsilon(f)$.\\
+\Povzetek{Algoritem po Herbrant-Gödlu(HG) je $\varepsilon(f)$.\\
 	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$ z uporabo pravil 1,2.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
 	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
 
@@ -882,7 +882,7 @@ $f, n1, n2, ... nk$....$f(n_1, \dots, n_k)$
 
 \Def{funkcija, ki jo je možno predstaviti in računati v tem lambda računu, taka funkcija je $\lambda$-definabilna}%fo'real!
 
-\Odmakni{Povzetek}{Algoritem po Churchu je $\lambda$-term.\\
+\Povzetek{Algoritem po Churchu je $\lambda$-term.\\
 	Računanje po Churchu je preoblikovanje začetnega $\lambda$-terma v končni $\lambda$-term z redukcijami.\\
 	Funkcija je izračunljiva po Churchu, če je $\lambda$-definabilna.}
 
@@ -906,7 +906,7 @@ Korak: prebere iz celice pod oknom znak in iz začetka vrste znak. na podlagi te
 %iz jezika? how? najprej: graf: opis problema pride v začetno vozlišče, nato po grafu potuje in se spreminja, dokler ne pride v končno stanje - rezultat. besedi se odreže prvi znak in glede na to se izbere pot v grafu, ali spremeni besedo, etc.. stroj to simulira.
 %zgleda končen... kaj zdj? trak je končen, vrsta, stanja, ... %i dunno lol
 
-\Odmakni{Povzetek}{Algoritem po Postu je program Postovega stroja.\\
+\Povzetek{Algoritem po Postu je program Postovega stroja.\\
 	Računanje po Postu je izvajanje programa Postovega stroja.\\
 	Funkcija je izračunljiva po Postu, če njeno vrednost lahko izračuna Postov stroj.}
 
@@ -923,7 +923,7 @@ Produkija preoblikuje besedo tako da v tej besedi nadomesti skrajno levi pojav $
 
 Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končno. V vsakem koraku se trenutna beseda preoblikuje s prvo (levo) možno produkcijo.
 
-\Odmakni{Povzetek}{Algoritem po Markovu je gramatika.\\
+\Povzetek{Algoritem po Markovu je gramatika.\\
 	Računanje po Markovu je preoblikovanje vhodne besede z dano gramatiko.\\
 	Funkcija je izračunljiva po Markovu, če njeno vrednost računa kaka gramatika}
 
@@ -969,16 +969,15 @@ izračunljiva funkcija%oblaček
 \Odmakni{Težava}{...}
 
 \subsubsect{Težave s totalnimi funkcijami}
-$f:\mathbb{N}\rightarrow\mathbb{N}$%
-\Odmakni{?}{Kako na splošno dokazati, da je neka funkcija res totalna?\\
-V najslabšem primeru, bi bilo treba preizkusiti za vsak $x\in A$, ali je funkcija pri tem $x$ definirana ( pišemo: $f(x)\uparrow$ )\\
-Če je A neskončen, ta način ni finiten.}
-\Odmakni{=>}{Pojem izračunljivosti funkcije se opira na nek algoritmično težko določljiv pojem totalnosti}
-
+%$f:\mathbb{N}\rightarrow\mathbb{N}$%
+Kako v splošnem dokazati, da je neka funkcija res totalna?\\
+V najslabšem primeru, bi bilo treba preizkusiti za vsak $x\in A$, ali je funkcija pri tem $x$ definirana.%( pišemo: $f(x)\uparrow$ )\\
+Če je A neskončen, ta način seveda ni končen.
+Pojem izračunljivosti funkcije se tako opira na nek algoritmično težko določljiv pojem totalnosti.
 %slikca dva kroga A, B... \forall x ... f(x)
-
+\br
 %%2
-Po CT tezi je izračunljiva ... rekurziva funkcija %oz. vsaka, ki jo računa TS
+Po Church-Turingovi tezi je izračunljiva ... rekurziva funkcija %oz. vsaka, ki jo računa TS
 \begin{items}
 \item moč $N^k:N$ je c (moč realnih števil)%?
 \item rekurzivnih funkcije je $\aleph_0$ (števno mnogo)
@@ -989,7 +988,7 @@ Po CT tezi je izračunljiva ... rekurziva funkcija %oz. vsaka, ki jo računa TS
 \Trditev{Obstaja izračunljiva funkcija, ki ni rekurzivna.}
 \Dokaz{Definicije funkcij so končna zaporedja.\\%(Trditev)
 uredimo zaporedja po dolžini, enako dolga pa leksikografsko\\
-$=>$ lahko govorimo o prvem, drugem, ..., o $n$-tem programu TS. Zato lahko tudi prvi, drugi, ... n-ti rekurzivni funkciji.\\
+$\Rightarrow$ lahko govorimo o prvem, drugem, ..., o $n$-tem programu TS. Zato lahko tudi prvi, drugi, ... n-ti rekurzivni funkciji.\\
 označimo $n$-to rekurzivno funkcijo s $f_n$\\
 definirajmo ......\\
 $g(n, a_1,\dots, a_k) \mbox{ po def. } f_n(a_1, a_2, \dots, a_k)+1$, kjer $a_i\in \mathbb{N}$\\%označimo z *
@@ -1017,14 +1016,14 @@ predpostavka: $g$ je rekrivna\\
 	%pri parcialnih funkcijah f = f+1 lahko ni definirano in to je ok
 	Takrat *** ni več nujno protislovje, saj je lahko $f_m(mmmm)\uparrow$.
 }
-\Odmakni{Sklep}{Funkcija je "izračunljiva" <---> f računa nek TS tam, kejr je definirana}
+\Povzetek{Funkcija je "izračunljiva" <---> f računa nek TS tam, kjer je definirana}
 %rekurzivne -> parcialne rekurzivne... so izračunljive
 %vpr: kako dobimo n-ti turingov stroj, pa da je totalen, ... obratno je nekako :)
 
 \section{Univerzalni Turingov stroj}
 %če bi lahko TS oštevilčil, bi lahko kodo stroja dal na vhod in bi TS računal s TS.
 %Ideja je prišla od Godla: un grafek... ali je sistem popoln. ko je oštevilčil stvari, je lahko imel referenco in samo-referenco
-\Odmakni{{I}deja}{Turingove stroje bi radi oštevilčili. \\
+\Ideja{Turingove stroje bi radi oštevilčili. \\
 	Če bi imel vsak Turingov stroj svoj indeks, bi nek drug Turingov stroj lahko računal z drugimi stroji oz. z njihovimi ideksi.
 	Kdaj je to koristno?}
 
@@ -1045,9 +1044,9 @@ Obratno ne velja. Isti Turingov stroj ima več indeksov (dodajamo nepotrebne in 
 \Dokaz{Stroj si zamislimo v grobem in intuitivno zapišemo njegov program. Skličemo se na CT tezo, ki nam zagotovi obstoj nekega konkretnega TS (ki opravlja ta algoritem)}%
 
 
-Zamisel stroja U:
+Ideja stroja U:
 
-\Odmakni{Tr{a}kovi}{
+\Odmakni{Trakovi}{
 Vhodni trak - vsebuje vhodno besedo sestavljeno iz dveh delov:
 \begin{items}
 \item Kodo $<T>$ poljubnega Turingovega stroja.
@@ -1137,7 +1136,7 @@ Nekaj časa nas bo zanimal jezik $\mathcal{K} \subseteq \mathcal{K}_0$, ki ga do
 $\mathcal{K}=\{ T,T\ |\ T \mbox{ se pri <T> ustavi. } \}$
 Temu jeziku pripada odločitveni problem $P_\mathcal{K}$ - \Quote{Ali se Turingov stroj ustavi nad lastno kodo?}.
 
-\Odmakni{Lema}{Problem $P_\mathcal{K}$ ni odločljiv.}
+\Lema{Problem $P_\mathcal{K}$ ni odločljiv.}
 \Dokaz{Predpostavimo, da je množica $\mathcal{K}$ rekurzivna (torej, je njen problem odločljiv). Potem gotovo obstaja Turingov stroj $R$, ki ta jezik razpoznava. $\exists TS:R_\mathcal{K}$, ki za poljuben T odgovori $R(<T,T>)$
 
 kjer je R(<T,T>)= DA, če se T ustavi nad <T> ... NE, če se ne ustavi.
@@ -1470,13 +1469,13 @@ $L\in DTIME(n)$
 \subsect{Osnovne lastnosti prostorske zahtevnosti}
 \subsubsect{Linearno stiskanje oz. krajšanje trakov}
 Tračna abeceda je končna, a poljubno velika.
-\Odmakni{Zamisel}{Več zaporednih vrednosti na traku zamenjamo z znaki neke nove abecede}
+\Ideja{Več zaporednih vrednosti na traku zamenjamo z znaki neke nove abecede}
 %slika traku 011011
 %slika traku 1 2 3
 Tako lahko vedno zmanjšamo število celic za konstantni faktor.\\%...ponovil razlago S(n)
 Pri prostorski omejitvi $S(n)$, nas zanima le njen velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
 
-\Odmakni{Izrek}{Če za jezik $L$ obstaja tračni Turingov stroj, s prostorsko omejitvijo $S(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj s konstantno prostorsko omejitvijo $c>0$: $c*S(n)$}%kaj je c? hitrost svetlobe ni, lol
+\Izrek{Če za jezik $L$ obstaja tračni Turingov stroj, s prostorsko omejitvijo $S(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj s konstantno prostorsko omejitvijo $c>0$: $c*S(n)$}%kaj je c? hitrost svetlobe ni, lol
 %opomba: menda je kul, da je c lahko na (0,1)
 \Dokaz{Naj bo $M_1$ Turingov stroj, s prostorsko omejitvijo $S(n)$ in $L=L(M_1)$, $c\in(0,1)$.\\
 Sestavimo Turingov stroj $M_2$, ki simulira stroj $M_1$, tako da:\\
@@ -1495,21 +1494,21 @@ Stroj $M_2$ razpoznava $L$ in ima prostorsko omejitev $c*S(n)$.
 }
 %Opomba: naj bo $d>1$, potem velja: DSPACE($S(n)$) \subseteq{obrnjen} DSPACE($d*S(n)$), torej kar lahko izračunamo na S(n), lahko tudi na $d*S(n)$
 %velja tudi obratno (vzemi $c = {1 \over d$)
-\Odmakni{Posledica}{ 
+\Posledica{ 
 Velja DSPACE($S(n)$)=DSPACE($c*S(n)$) za $\forall c>0$.\\
 S spreminjanjem prostorske omejitve ne pridobimo na razpoznavni moči.
 %vprašanje: ampak to za realne računalnike itak ne velja, ker so binarni... jup.
 Enako velja tudi za nedeterministično računanje: NSPACE($S(n)$)=NSPACE($c*S(n)$) za $\forall c>0$.\\
 \subsubsect{Odpravljanje trakov}
 Ali, ter za kakšno ceno za prostorsko zahtevnost, lahko $k$ delovnih trakov nadomestimo z enim samim?
-\Odmakni{Zamisel}{$k$ trakov nadomestimo z enim $2k$-slednim trakom}%kot v prejšnjem poglavju pri dokazu večtračni TS = osnovni
+\Ideja{$k$ trakov nadomestimo z enim $2k$-slednim trakom}%kot v prejšnjem poglavju pri dokazu večtračni TS = osnovni
 %slike večtračni => večsledni, enako kot tam zgoraj.
-\Odmakni{Izrek}{Če je $L$ jezik $k$-tračnega Turingovega stroja, s prostorsko omejitvijo $S(n)$, je taka tudi omejitev eno-tračnega Turingovega stroja.}
+\Izrek{Če je $L$ jezik $k$-tračnega Turingovega stroja, s prostorsko omejitvijo $S(n)$, je taka tudi omejitev eno-tračnega Turingovega stroja.}
 
 \subsect{Osnovne lastnosti časovne zahtevnosti}
 \subsubsect{Linearno stiskanje, oz. krajšanje trakov}
 Množica stanj je omejena, a poljubno velika.
-\Odmakni{Zamisel}{Nekaj zaporednih stanj med računanjem nadomestimo z enim novim stanjem iz neke nove množice stanj}
+\Ideja{Nekaj zaporednih stanj med računanjem nadomestimo z enim novim stanjem iz neke nove množice stanj}
 Tako lahko vedno zmanjšamo število korakov za konstantni faktor.\\
 Tudi pri časovni omejitvi $T(n)$, nas zanima le velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
 \Odmakni{Priprava}{
@@ -1528,25 +1527,25 @@ Naj bo $f(n)={1 \over n}$, če je $n$ sod, ter $f(n)=n$, če je $n$ lih.\\%%@tis
 % f(n)| 1/2 ....                   inf fn = 1 
 \fixme 
 }
-\Odmakni{Velja}{ 
+\Velja{ 
 	Če $f(n)$ konvergira, je limita enaka $sup_{n\rightarrow\infty} f(n)$ in $inf_{n\rightarrow\infty} f(n)$.
 }
 }
-\Odmakni{Izrek}{ 
+\Izrek{ 
 	Če za jezik $L$ obstaja $k$-tračni Turingov stroj s časovno omejitvjo $T(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj, s časovno omejitvijo $c*T(n)$, za $\forall c>0$, pod pogojem, da je $k>1$ in $inf_{n\leftarrow\infty} {T(n) \over n} = \infty$.
 }
 %Opombe: zahteva, da je $inf=\infty$, pomeni, da časovna omejitev $T(n)$ v vsakem primeru (za vsako dolžino vhoda) narašča vsaj malo hitreje od $n$. Torej, za branje vhoda mora biti vsaj malo korakov na voljo za izračun.
 %Dokaz: Glej HU, QED, lol
-\Odmakni{Posledica}{ 
+\Posledica{ 
 	DTIME($T(n)$)=DTIME($c*T(n)$).\\
 	Torej, razred jezikov, ki jih lahko razpoznamo v času $T(n)$, ostane enak, če ga pomnožimo z kako konstanto $c>0$ (če je $inf_{n\leftarrow\infty} {T(n) \over n} = \infty$).
 }
 Kaj pa če je $inf_{n\leftarrow\infty} {T(n) \over n} < \infty$?\\
 Če je $T(n)=d*n, d>1$(Torej, da imamo vsaj nekaj korakov časa za računanje), je $inf_{n\leftarrow\infty} {T(n) \over n} = d$ in ne vemo, ali velja zgornja posledica. Bilo bi čudno, če ne bi veljalo podobno, saj imamo $d$-krat več časa.
-\Odmakni{Izrek}{ 
+\Izrek{ 
 	Če za jezik $L$ obstaja $k$-tračni Turingov stroj s časom $d*n, d>1$ in je $k>1$, potem za jezik za $\forall\varepsilon>0$ obstaja $k$-tračni Turingov stroj, s časovno omejitvijo $(1+\varepsilon)*n$
 }
-\Odmakni{Posledica}{
+\Posledica{
 	DTIME($d*n$)=DTIME($(1+\varepsilon)*n$) za poljubni konstanti $d>1$ in $\varepsilon>0$.
 }
 Kaj pa če bi $T(n)$ naraščal počasneje od $d*n$?\\
@@ -1566,8 +1565,8 @@ Ali, ter za kakšno ceno za časovno zahtevnost, lahko $k>1$ delovnih trakov nad
 	Časovna zahtevnost je reda $\Theta(n^2)$
 }
 Torej, z zmanjšanjem števila trakov na enega, se zahtevnost poveča s kvadratom.\\
-\Odmakni{Trditev}{To je največja možna upočasnitev pri prehodu s $k$-trakov na en trak.}
-\Odmakni{Izrek}{ 
+\Trditev{To je največja možna upočasnitev pri prehodu s $k$-trakov na en trak.}
+\Izrek{ 
 	Če je $L\in$DTIME($T(n)$) za $k>1$-tračnem Turingovem stroju,
 potem je $L\in$ DTIME($T(n)^2$) na eno-tračnem Turingovem stroju.
 }
@@ -1577,7 +1576,7 @@ Enako velja tudi za nedeterministične stroje.
 \br
 Kaj pa, če se omejimo le na dva delovna traka (iz nekega $k>2$-tračnega stroja).\\
 Tudi tukaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
-\Odmakni{Izrek}{Če je $L\in$DTIME($T(n)$) na $k>2$-tračnem Turingovem stroju, potem je $L\in$DTIME($T(n)*\log T(n)$) na dvotračnem Turingovem stroju.}
+\Izrek{Če je $L\in$DTIME($T(n)$) na $k>2$-tračnem Turingovem stroju, potem je $L\in$DTIME($T(n)*\log T(n)$) na dvotračnem Turingovem stroju.}
 Analogno velja za nedeterministične stroje.}
 
 \end{document}

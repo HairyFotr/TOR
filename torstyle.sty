@@ -91,15 +91,21 @@
 
 %tu je treba pazit - argumenti enuma so mal posebni... glej pr{i}mer :)
 \newcommand\Odmakni[2]{
-\begin{enum}{\bf #1:}
-	\item #2
+\begin{enum}{\bf {#1}:}
+	\item {#2}
 \end{enum}}
 
 \newcommand\Def[1]{\Odmakni{Def.}{#1}}
-\newcommand\Primer[1]{\Odmakni{Pr{i}mer}{#1}}
-\newcommand\Trditev[1]{\Odmakni{Trd{i}tev}{#1}}
+\newcommand\Primer[1]{\Odmakni{Primer}{#1}}
+\newcommand\Trditev[1]{\Odmakni{Trditev}{#1}}
 \newcommand\Dokaz[1]{\Odmakni{Dokaz}{#1}}
 \newcommand\Izrek[1]{\Odmakni{Izrek}{#1}}
+\newcommand\Posledica[1]{\Odmakni{Posledica}{#1}}
+\newcommand\Velja[1]{\Odmakni{Velja}{#1}}
+\newcommand\Lema[1]{\Odmakni{Lema}{#1}}
+\newcommand\Ideja[1]{\Odmakni{Ideja}{#1}}
+\newcommand\Povzetek[1]{\Odmakni{Povzetek}{#1}}
+
 
 \newenvironment{primeri}{
 {\subsection*{Primeri:}}
