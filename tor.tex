@@ -18,20 +18,16 @@
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{calc,automata,snakes,arrows,shapes,decorations,positioning,shapes.arrows,chains,shadows}
+\usepackage{nag}
 
+%poglej torstyle.sty
 \usepackage{torstyle}
-%?this feels too much like CSS hacks :(
-%torstlye predloge:
-%Definicija \Def{}
-%Primer \Primer{}
-%Prirejen itemize \begin{items}
+
 \hypersetup{pdftitle={Teoreticne osnove racunalnistva}}
 
 \begin{document}
 \begin{titlepage}
 \begin{center}
-%looks useful
-%{\resizebox{15cm}{!}{Teoretične osnove računalništva}}\\[5pt]
 \ \\[1cm]
 {\Huge\bf Teoreti\v cne osnove ra\v cunalni\v stva}\\[1cm]
 {\huge \today}\ \\[1.55cm]
@@ -68,13 +64,15 @@ This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAl
 \tableofcontents
 \pagebreak
 
+%--------------------------------TOR1--------------------------------------
+
 \include{poglavja/Uvod}
 \include{poglavja/RegularniJeziki}
 %\include{poglavja/LinearniJeziki}
 \include{poglavja/KontekstnoNeodvisniJeziki}
 %\include{poglavja/KontekstnoOdvisniJeziki}
 
-%--------------------------------TOR2 line--------------------------------------
+%--------------------------------TOR2--------------------------------------
 
 \chap{Turingovi jeziki}
 \sect{Zgodovina}
@@ -761,11 +759,11 @@ Okna so ves čas enako oddaljena med seboj.
 \begin{tikzturing}
 	\node [cell1, minimum width=2cm] {};
 
-	\node (Ai) [cell1,selected] {\color{gray}$A_i$};
+	\node (Ai) [cell1,selected] {$A_i$};
 	\node [cell1, minimum width=1.7cm] {\ ...\ \ };
-	\node (Ai2) [cell1,selected] {\color{gray}$A_j$};
+	\node (Ai2) [cell1,selected] {$A_j$};
 	\node [cell1, minimum width=1cm] {\ ...\ \ };
-	\node (Ai3) [cell1,selected] {\color{gray}$A_k$};
+	\node (Ai3) [cell1,selected] {$A_k$};
 	\node [cell1, minimum width=2cm] {};
 
 	%?must be a better way, zadnja črta niti ni naravnost
@@ -776,7 +774,6 @@ Okna so ves čas enako oddaljena med seboj.
 \end{tikzturing}
 
 %-----------------------predavanja 4-------------------------------
-\Neurejeno
 %Turing se je zgledoval po človeku
 
 %drugi po funkcijah
@@ -791,15 +788,18 @@ Okna so ves čas enako oddaljena med seboj.
 %Postov stroj, Algoritmi Markova
 %računanje oz. reševanje mat. problemov je pri človeku preoblikovanje množice besed v drugo (opis problema, v opis rešitve)
 \sect{Alternative Turingovemu stroju}
+Alternative smo našteli že na začetku poglavja, pa na hitro povejmo še malo o tem, prek katerih metafor so različni znanstveniki prišli do svojih modelov. Turing je poskušal formalizirati kako človek rešuje problem na papir, ostali pa so se zgledovali po jeziku (npr. kako iz opisa problema dobiti opis rešitve), ali pa kar po funkcijah.
+
 \subsect{Rekurzivne funkcije (Gödel, Kleene)}
 Gödel je definiral ničelno funkcijo, funkcijo naslednik in projekcijo, ter pravili za sestavljanje, kompozicijo in primitivno rekurzijo.
 \br
-S pomočjo pravil za sestavljanje lahko iz začetnih funkcij sestavimo kompleksnejše:\\
+S pomočjo pravil za sestavljanje lahko iz začetnih funkcij sestavimo kompleksnejše:
+\br
 \fixme začetne in drevo ven%grafek vseh sestavljivih (primitivno rekurzivnih) funkcij \_/
 \br
 Konstrukcija funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije, tako, da je s tem tudi kandidat za formalni opis pojma algoritma.
 \br
-A ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašča hitreje od vsake funkcije, ki pripada primitivno rekuzivnim.
+A ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašča hitreje od vsake funkcije, ki pripada primitivno rekuzivnim:
 \[ A(m,n) = 
 	\left\{ 
 	\begin{array}{ccl}
@@ -813,6 +813,7 @@ A ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašč
 Kleene doda Gödelovim pravilom še pravilo sestavljanja -- minimizacijo oz $\mu$-operacijo. %to zato, da naredi totalno, čeprov je možno parcialne
 \Def{Totalne naravne funkcije $f:N^k\leftarrow N$, ki jih je moč konstruirati iz treh začetnih funkcij, s končno mnogo uporabami treh pravil sestavljanja imenujemo \textbf{rekurzivne funkcije.}}
 \br
+\Neurejeno
 Začetne funkcije:
 \begin{items}
 \item Ničelna funkcija: $\zeta(n)=0 \forall n$
@@ -932,13 +933,15 @@ Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končn
 %zdj pa neki za lepe sanje:
 %vsi so se matral še kj več narest
 \sect{Church-Turingova teza}
-Church je postavil domnevo: ,,algoritem'' {\bf$\Longleftrightarrow$} algoritem po Churchu ($\lambda$-račun)\\%lol, kar sm js reku je algoritem :P glej sigma pri Churchu... Gödel ga je nekoliko zavrnil, vmes turing neodvisno do podobnega
-Turing je postavil domnevo: ,,algoritem''  {\bf$\Longleftrightarrow$} algoritem po Turingu (Turingovi stroji)
+Church je postavil domnevo: \Quote{algoritem} $\Longleftrightarrow$ algoritem po Churchu ($\lambda$-račun)\\%lol, kar sm js reku je algoritem :P glej sigma pri Churchu... Gödel ga je nekoliko zavrnil, vmes turing neodvisno do podobnega
+Turing je postavil domnevo: \Quote{algoritem} $\Longleftrightarrow$ algoritem po Turingu (Turingovi stroji)
 \br
 %Kdo je imel prav? oba, lol
 %lol, trolla moje latex skille :)
-Church-Turingova teza: ,,algoritem'' {\bf$\Longleftrightarrow$} algoritem po Turingu (ali po katerem izmed ostalih ekvivalentnih modelov)%bolj točno program turing stroja in turing zato, ker je najbl cute
+Church-Turingova teza: \Quote{algoritem} $\Longleftrightarrow$ algoritem po Turingu ali po katerem izmed ostalih ekvivalentnih modelov.%bolj točno program turing stroja in turing zato, ker je najbl cute
 %-----------------------predavanja 5-------------------------------
+\begin{comment}
+%what is this I don't even... isto kot povzetki zgoraj, le za TS
 \br
 Kaj je doprinos Church-Turingove teze?
 %%1
@@ -965,12 +968,13 @@ izračunljiva funkcija%oblaček
 "izračunljiva f" <---> f izračunljiva s TS%okvir
 
 \Odmakni{Težava}{...}
+\end{comment}
 
-\subsubsect{Težave s totalnimi funkcijami}
-%$f:\mathbb{N}\rightarrow\mathbb{N}$%
-Kako v splošnem dokazati, da je neka funkcija res totalna?\\
-V najslabšem primeru, bi bilo treba preizkusiti za vsak $x\in A$, ali je funkcija pri tem $x$ definirana.%( pišemo: $f(x)\uparrow$ )\\
-Če je A neskončen, ta način seveda ni končen.
+\sect{Težave s totalnimi funkcijami}
+\[ f:\mathbb{N}^n\rightarrow\mathbb{N} \]
+Kako v splošnem dokazati, da je neka funkcija totalna?\\
+V najslabšem primeru, je treba za vsak $x\in A$ pogledati, ali je funkcija za ta $x$ definirana. %( pišemo: $f(x)\uparrow$ )\\
+Če je A neskončen, ta način seveda ni mogoč.
 Pojem izračunljivosti funkcije se tako opira na nek algoritmično težko določljiv pojem totalnosti.
 %slikca dva kroga A, B... \forall x ... f(x)
 \br
@@ -1018,7 +1022,7 @@ predpostavka: $g$ je rekrivna\\
 %rekurzivne -> parcialne rekurzivne... so izračunljive
 %vpr: kako dobimo n-ti turingov stroj, pa da je totalen, ... obratno je nekako :)
 
-\section{Univerzalni Turingov stroj}
+\sect{Univerzalni Turingov stroj}
 %če bi lahko TS oštevilčil, bi lahko kodo stroja dal na vhod in bi TS računal s TS.
 %Ideja je prišla od Godla: un grafek... ali je sistem popoln. ko je oštevilčil stvari, je lahko imel referenco in samo-referenco
 \Ideja{Turingove stroje bi radi oštevilčili. \\
