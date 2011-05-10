@@ -84,8 +84,10 @@
 }{\end{enumerate}}
 
 %morda možen način: neki: \marginpar{}
-
-%tu je treba pazit - argumenti enuma so mal posebni... glej pr{i}mer :)
+\newcommand\odmakni[2]{
+\begin{enum}{{#1}:}
+	\item {#2}
+\end{enum}}
 \newcommand\Odmakni[2]{
 \begin{enum}{\bf {#1}:}
 	\item {#2}

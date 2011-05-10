@@ -788,18 +788,16 @@ Okna so ves čas enako oddaljena med seboj.
 %Postov stroj, Algoritmi Markova
 %računanje oz. reševanje mat. problemov je pri človeku preoblikovanje množice besed v drugo (opis problema, v opis rešitve)
 \sect{Alternative Turingovemu stroju}
-Alternative smo našteli že na začetku poglavja, pa na hitro povejmo še malo o tem, prek katerih metafor so različni znanstveniki prišli do svojih modelov. Turing je poskušal formalizirati kako človek rešuje problem na papir, ostali pa so se zgledovali po jeziku (npr. kako iz opisa problema dobiti opis rešitve), ali pa kar po funkcijah.
+Alternative smo našteli že na začetku poglavja. Tu v uvodu na hitro povejmo malo o tem, prek katerih metafor so različni raziskovalci prišli do svojih modelov. Turing je poskušal formalizirati kako človek rešuje problem na papir, ostali pa so se zgledovali po jeziku (npr. kako iz opisa problema dobiti opis rešitve), ali pa kar po funkcijah.
 
 \subsect{Rekurzivne funkcije (Gödel, Kleene)}
-Gödel je definiral ničelno funkcijo, funkcijo naslednik in projekcijo, ter pravili za sestavljanje, kompozicijo in primitivno rekurzijo.
-\br
-S pomočjo pravil za sestavljanje lahko iz začetnih funkcij sestavimo kompleksnejše:
+Gödel si je zamislil, da bi iz nekaj osnovnih funkcij z nekaj pravili lahko izpeljal kompleksnejše funkcije. Definiral je: ničelno funkcijo, funkcijo naslednik in projekcijo, ter pravili za sestavljanje: kompozicijo in primitivno rekurzijo.
 \br
 \fixme začetne in drevo ven%grafek vseh sestavljivih (primitivno rekurzivnih) funkcij \_/
 \br
 Konstrukcija funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije, tako, da je s tem tudi kandidat za formalni opis pojma algoritma.
 \br
-A ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašča hitreje od vsake funkcije, ki pripada primitivno rekuzivnim:
+Kasneje se je izkazalo, da ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašča hitreje od vsake funkcije, ki pripada primitivno rekuzivnim:
 \[ A(m,n) = 
 	\left\{ 
 	\begin{array}{ccl}
@@ -809,61 +807,66 @@ A ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašč
 	\end{array}
 	\right.
 \]
+\\
+Kleene zato doda Gödelovim pravilom še eno pravilo sestavljanja -- minimizacijo oz. $\mu$-operacijo. %to zato, da naredi totalno, čeprov je možno parcialne
+\Def{Totalne naravne funkcije $f:N^k\leftarrow N$, ki jih je moč konstruirati iz treh začetnih funkcij, s končno mnogo uporabami treh pravil sestavljanja imenujemo \textbf{rekurzivne funkcije.}
 \br
-Kleene doda Gödelovim pravilom še pravilo sestavljanja -- minimizacijo oz $\mu$-operacijo. %to zato, da naredi totalno, čeprov je možno parcialne
-\Def{Totalne naravne funkcije $f:N^k\leftarrow N$, ki jih je moč konstruirati iz treh začetnih funkcij, s končno mnogo uporabami treh pravil sestavljanja imenujemo \textbf{rekurzivne funkcije.}}
+Konstrukcija rekurzivne funkcije $f$ je končno zaporedje $f_1,f_2,\dots,f_L$ in je $f_L=f$, ter je vsaka funkcija $f_i$ na poti, bodisi začetna, bodisi po pravilih sestavljena iz predhodnic v tem zaporedju.%glej grafek
 \br
-\Neurejeno
 Začetne funkcije:
 \begin{items}
-\item Ničelna funkcija: $\zeta(n)=0 \forall n$
-\item Funkcija naslednik: $\sigma(n)=n+1 \forall n$
-\item Projekcija: $\pi(n_1, n_2, \dots, n_k)=n_i \forall n..$
+\item Ničelna funkcija: $\zeta(n)=0$
+\item Naslednik: $\sigma(n)=n+1$
+\item Projekcija: $\pi^k_i (n_1, n_2, \dots, n_k)=n_i$
 \end{items}
 Pravila sestavljanja:
 \begin{items}
-\item Če so dane funkcije $g:N^m \leftarrow N$ in $n_h:N^k \leftarrow N$, kjer i 1-m, potem je funkcija $f(n_1,n_2,\dots,n_k) \PoDef g(h_{1}(n_1,n_2,\dots,n_k),\dots,h_m(n_1,n_2,\dots,n_k))$ sestavljena s kompozicijo funkcij
-\item Če sta dani funkciji $g:N^k \leftarrow N$ in $h:N^{k+1}  \leftarrow n$, potem je $f$ definiriana z:
-	\[f(n_1, n_2, \dots, n_k, 0) \PoDef g(n_1, n_2, \dots, n_k)\]
-	\[f(n_1, n_2, \dots, n_k, m+1) \PoDef h(n_1, n_2, \dots, n_k, m), f(n_1, n_2, \dots, n_k, m)), za m \geq 0\]
-sestavljeno s .... in $g$ in $h$
-\item Če je funkcija $g:N^{k+1} \leftarrow N$ taka, da za vsako $k$-terico naravnih števil $n_1, n_2, \dots, n_k$ obstaja n ..neki.. m, da je $g(n_1, n_2, \dots, n_k, m) = 0$, potem je funkcija:
-\[ f(n_1, n_2, \dots, n_k) \PoDef \mu x g(n_1, \dots, n_k, x)\]
-sestavljena z $\mu$-operacijo iz funkcije $g$.
-%Pri tem je $\mu$-operacija definirana z:
-%\[ \mu x g(n_1, \dots, n_k, x) \PoDef je najmanjši X, pri katerem je g (n_1, \dots n_k, X) = 0\]
+\item Kompozicija:
+	\[ g:\mathbb{N}^m \rightarrow \mathbb{N} \]
+	\[ h_i:\mathbb{N}^n \rightarrow \mathbb{N} \]
+	\[ f(x_1, x_2, \dots, x_n) = g(h_1(x_1, x_2, \dots, x_n), h_2(x_1, x_2, \dots, x_n), \dots, h_m(x_1, x_2, \dots, x_n)) \]
+\item Primitivna rekurzija:
+	\[ g:\mathbb{N}^n \rightarrow \mathbb{N} \]
+	\[ h:\mathbb{N}^{n+2} \rightarrow \mathbb{N} \]
+	\[ f(x_1, x_2, \dots, x_n, 0) = g(x_1, x_2, \dots, x_n) \]
+	\[ f(x_1, x_2, \dots, x_n, y+1) = h(x_1, x_2, \dots, x_n, y, f(x_1, x_2, \dots, x_n, y)) \]
+\item Minimizacija:
+	\[ g:\mathbb{N}^{n+1} \rightarrow \mathbb{N} \]
+	\[ f(x_1, x_2, \dots, x_n) = \mu_y (g(x_1, x_2, \dots, x_n, y)) = z\]
+	Pri tem je $z$ najmanjše število, za katerega velja $g(x_1, x_2, \dots, x_n, z) = 0$. Če tak $z$ ne obstaja je funkcija $f$ tam nedefinirana.
 \end{items}
-%---
-Konstrukcija rekurzivne funkcije $f$ je končno zaporedje $f_1,f_2,\dots,f_L$, kjer je $f_L=f$ in je vsaka funkcija $f_i$ na poti, bodisi začetna, bodisi sestavljena z enim izmed treh pravil iz predhodnic v tem zaporedju. %glej grafek
+}
 
 %zaeenkrat nismo našli Ackermann2, ki bi to pokvarila :)
 \Povzetek{Algoritem po Gödel-Kleenu(GK) je ravno konstrukcija rekurzivne funkcije.\\
 	Računanje po GK je izračun vrednosti funkcije tako, kot jo narekuje njena konstrukcija.\\
 	Funkcija je izračunljiva po GK, če je rekurzivna.}
 
-\subsubsect{Splošne rekurzivne funkcije (Herbrand, Gödel)}
-Herbrand je rezmišljal o tem, kako poljubno naravno funkcijo definirati s sistemom enačb. Enkrat preden se je ponesrečil v gorah, je Gödelu pisal:\\
-Recimo, da je $f$ neznana funkcija, $g_1, g_2, \dots g_m$ pa znane. %mestnost?
-$f$-je in $g$-je poljubno vstavljamo kot argumente v druge, nato nekatere dobljene izraze izenačimo, potem pa če ima dobljeni sistem natanko eno rešitev za funkcijo $f$, potem je $f$ rekurzivna.
-\br
-Gödel je temu dodal dve dodatni zahtevi:\\
-Na levi strani enačb se $f$ ne sme pojaviti kot eden izmed argumentov $f$.\\%$f$ se sme na levi strani enačb pojaviti v obliki $f(g(...), ..., g_k(...)$ %Herbrand je dovoljeval f(g...f...g), kar je preveč divje
-$f$ naj bo totalna (definirana povsod na $N^k$).
-\br
-Če se $f$ da zapisati s takim sistemom, je zapisana s standardnim sistemom $\varepsilon(f)$.
-\br
+\subsect{Splošne rekurzivne funkcije (Herbrand, Gödel)}
+Herbrand je razmišljal o tem, kako poljubno naravno funkcijo definirati s sistemom enačb.
+\odmakni{Gödelu je pisal}{
+\Quote{Recimo, da je $f$ neznana funkcija, $g_1, g_2, \dots, g_m$ pa znane. %mestnost?
+Funkcije $f$ in $g_i$ poljubno vstavljamo kot argumente v druge funkcije, nato pa nekatere dobljene izraze izenačimo. Če ima dobljeni sistem natanko eno rešitev za funkcijo $f$, potem je $f$ rekurzivna.}
+}
+Ta pa je dodal še dve dodatni zahtevi:
+\begin{items}
+\item Na levi strani enačb se funkcija $f$ ne sme pojaviti kot eden izmed argumentov $f$.%$f$ se sme na levi strani enačb pojaviti v obliki $f(g(...), ..., g_k(...)$ %Herbrand je dovoljeval f(g...f...g), kar je preveč divje
+\item Funkcija $f$ naj bo totalna.
+\end{items}
+\Def{Če se funkcijo $f$ da zapisati na zgoraj zapisani način, je \textbf{splošno rekurzivna}.\\
+Sistem označimo z $\varepsilon(f)$ in mu pravimo \textbf{standardni sistem}.
+}
 Pravila za računanje vrednosti $f(n_1, n_2, \dots, n_k)$ iz $\varepsilon(f)$:
 \begin{items}
-\item v enačbi vse pojave neke spremenljivke zamenjamo z istim naravnim številom
-\item v enačbi pojave funkcije zamenjamo z njeno vrednostjo
+\item V enačbi vse pojave neke spremenljivke zamenjamo z istim naravnim številom
+\item V enačbi pojave funkcije zamenjamo z njeno vrednostjo
 \end{items}
 
-\Def{Funkcija $f$ za katero obstaja $\varepsilon(f)$, se imenuje \textbf{splošno rekurzivna}}
-
 \Povzetek{Algoritem po Herbrant-Gödlu(HG) je $\varepsilon(f)$.\\
-	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$ z uporabo pravil 1,2.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
+	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
 	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
 
+\Neurejeno
 \subsect{$\lambda$-račun (Alonso Church)}%1932,1933 Alonso Church
 Imamo vhodni izraz, ki opisuje neko funkcijo f in argumente $n_1, \dots, n_k$.
 
@@ -1589,5 +1592,93 @@ Kaj pa, če se omejimo le na dva delovna traka (iz nekega $k>2$-tračnega stroja
 Tudi tukaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
 \Izrek{Če je $L\in$DTIME($T(n)$) na $k>2$-tračnem Turingovem stroju, potem je $L\in$DTIME($T(n)*\log T(n)$) na dvotračnem Turingovem stroju.}
 Analogno velja za nedeterministične stroje.}
+%-----------------------predavanja 10------------------------------
+%@wtf je linearno pospeševanje?
+\sect{Hiearhije}
+Po intuiciji: če imamo na voljo več prostora ali časa, naj bi bilo možno rešiti več problemov oz. prepoznati več jezikov.\\
+Toda: izrek o linearni pospešitvi in linearnem stiskanju.
+\Odmakni{?}{Kaj se zgodi z močjo reševanje/prepoznavanja, če prostor ali čas pomonožimo s neko počasi rastočo funkcijo?}
+Ali obstaja neka \Quote{super} prostorska ali časovna omejitev $f^*(n)$, da je vsak rekurziven jezik rešljiv v razredu DSPACE($f(n)$) oz. DTIME($f(n)$).\\
+Taka omejitev ne obstaja niti za prostor, niti za čas.\\
+\Posledica{Ostaja neskončna hiearhija razredov zahtevnosti}
+%slika str 50 v TOR2
+\Izrek{Naj bo $T(n)$ poljubna totalno rekurzivna časovna omejitev.\\
+Obstaja rekurziven jezik $L \notin $DTIME($T(n)$)}
+\Izrek{Naj bo $S(n)$ poljubna totalno rekurzivna prostorska omejitev.\\
+Obstaja rekurziven jezik $L \notin $DSPACE($S(n)$)}
+\Dokaz{Če je $T(n)$ totalno izračunljiva, obstaja Turingov stroj M, ki izračuna $T(n)$ za vsak $n$.\\
+Večtračne Turingove stroje lahko kodiramo z abecedo $\{0,1\}$ in lahko govorimo o $i$-tem večtračnem Turingovem stroju $M_i$\\
+Naj bo $x_i$, $i$-ta beseda v običajni ureditvi besed v $\{0,1\}^*$.\\
+$L \PoDef \{x_i\ |\ M_i \mbox{ ne sprejme } x_i \mbox{ v času največ } T(|x_i|) \mbox{ korakov }\}$
+%
+Dokažimo, da je $L$ rekurziven:\\
+Za $L$ sestavimo algoritem $\overline{M}$, ki uporabi zgoraj omenjeni $M$ za izračun $T(n)$, $n=|w|$.\\
+poišče kateri po vrsti je w, torej poišče $i$ za katerega velja $x_i=w$.\\
+sestavi kodo stroja M.\\
+simulira stroj $M_i$ nad $w$ za največ $T(n)$ korakov.\\
+$\overline{M}$ sprejme vhod $w$ $\Longleftrightarrow$ $M_i$ se je v $i$ korakih ustavil in zavrnil vhod $w$, ali pa $T(n)$ korakih še vedno računa.\\
+%
+Dokažimo, da $L \in $ DTIME($T(n)$):\\
+Predpostavimo: $L=L(M_j)$ za nek $j$ in ima $M_j$ časovno omejitev $T(n)$.\\
+Kje je $x_j$\\
+%a
+$x_j \in L(M_j) \Rightarrow x_j \notin L$ (po def.)\\
+$x_j \in L(M_j) \Rightarrow x_j \notin L(M_j)$ (po predpostavki)\\
+in\\
+$x_j \in L(M_j) \Rightarrow x_j \notin L$ (po def.)\\
+$x_j \in L(M_j) \Rightarrow x_j \in L(M_j)$ (po predpostavki)
+\br
+Torej ne obstaja tak Turingov stroj, ki bi sprejel jezik $L$ s časovno omejitvijo $T(n)$.
+}
+%koliko denarja moramo dodati, da bo več muske, lol
+\subsect{Hiearhija razredov DSPACE}
+\Odmakni{?}{Kako \Quote{gosta} je hiearhija DSPACE}
+Za koliko moramo povečati prostorsko omejitev $S(n)$, da dobimo nov, večji razred?\\
+Pomembne so \Quote{lepe} funkcije, s katerimi opisujemo prostorsko omejitev. Če je $S(n)$ \Quote{lepa}, je dovolj, da neka nova funkcija $S(n)'$ narašča le \Quote{neznatno hitreje} od $S(n)$, pa že velja, da je DSPACE($S(n)$) drugačen od DSPACE($S(n)'$).\\%"kul"
+\Def{Funkcija je \Quote{lepa}, če je popolnoma prostorsko predstavljiva(konstruktibilna), torej kadar obstaja Turingov stroj s prostorsko omejitvijo $S(n)$, tak, da za vsako dolžino $n \in \mathbb{N}$ obstaja vhod $w$, $|w|=n$, pri katerem $M$ uporabi natanko $S(n)$ celic.\\
+Množica prostorsko predstavljivih funkcij je bogata, torej vsebuje običajne funkcije: $\log n, n, 2^n, \dots$.
+\br
+Funkcija je popolnoma prostorsko predstavljiva, kadar obstaja Turingov stroj s prostorsko omejitvijo $S(n)$, tak da za vsako dolžino $n \in \mathbb{N}$ vsi vhodi $w$, $|w|=n$, porabijo natanko $S(n)$ celic pri izvajanju na $M$.
+\br
+Vsaka prostorsko predstavljiva funkcija $S(n)>n$, je hkrati popolnoma prostorsko predstavljiva.
+}
+\Def{Funkcija raste \Quote{neznatno hitreje}, če velja $inf ({ S(n) \over S(n)' }) = 0$}
+\Izrek{Če sta $S_1(n) \geq \log_2 n$, $S_2(n) \geq \log_2 n$ in $inf { S_1(n) \over S_2(n) = 0}$ in je $S_2(n)$ popolnoma prostorsko predstavljiva, potem obstaja jezik $L \in DSPACE(S_2(n)) \wedge L \notin DSPACE(S_1(n))$.\\
+Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote{precej gosta}}%"lol" ... also dokaz tega je težak, je pa v stari skripti
+
+\subsect{Hiearhija razredov DTIME}
+\Odmakni{?}{Kako \Quote{gosta} je hiearhija DTIME}
+Izkaže se, da je nekoliko redkejša.
+\Def{Funkcija je časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, obstaja vhod $w$, $|w|=n$, pri katerem $M$ naredi natanko $T(n)$ korakov.\\
+Funkcija je popolnoma časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, za vse vhode $w$, $|w|=n$ velja, da pri njih $M$ naredi natanko $T(n)$ korakov.\\
+}
+\Izrek{Če je $T_2(n)$ popolnoma časovno predstavljiva in je $inf {T_1(n) \log(T_1(n)) \over T_2(n)} = 0$, potem obstaja jezik $L$, za katerega velja: 
+\[ L \in DTIME(T_2(n)) \wedge L \notin DTIME(T_1(n)) \]
+}
+\Primer{
+$T_1(n)=2^n$\\
+$T_2(n)=n^2 2^n$\\
+$inf ({ T_1(n) \log T_1(n) \over T_2(n) }) = inf({1 \over n}) = 0$
+\br
+DTIME($2^n$) $\subset$ DTIME($n^2 2^n$)
+}
+\Primer{
+$T_1(n)=2^n$\\
+$T_2(n)=n 2^n$\\
+$inf ({ T_1(n) \log T_1(n) \over T_2(n) }) = 1$
+\br
+V resnici DTIME($2^n$) $\subset$ DTIME($n^2 2^n$) velja, ampak s tem izrekom tega ni moč dokazati. (Da pa se dokazati z lemo o pomiku)
+}
+\subsect{Hiearhija razredov NSPACE in NTIME}
+\Lema{Lema o pomiku.\\
+Naj bodo $S_1(n)$, $S_2(n)$ in $f(n)$ popolnoma prostorsko predstavljive %p.p.p. ... lol, samo energijo hranim, ni standardno
+in $S_2(n) \geq n$, ter $f(n) \geq n$.
+\br
+Če NSPACE($S_1(n)$) $\subset$ NSPACE($S_2(n)$),\\
+Potem NSPACE($S_1(f(n))$) $\subset$ NSPACE($S_2(f(n))$).
+\br
+Lema analogno velja tudi za časovno zahtevnost in za deterministične razrede.
+%dn dokaži primer zgoraj.
+}
 
 \end{document}
