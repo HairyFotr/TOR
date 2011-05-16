@@ -33,8 +33,8 @@
 {\huge \today}\ \\[1.55cm]
 %{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več samo to :P
 \begin{tikzpicture}[scale=1.35, very thick, circ/.style={thin}]%?tole ful upočasni pdflatex%, decorate, decoration={snake, amplitude=0.75pt}}]
-	\draw [rounded corners=10pt] (-5.4cm,-5.4cm) rectangle (5.4cm,5.4cm);
-	\node at (4.5cm,4.7cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
+	\draw [rounded corners=10pt] (-5.4cm,-5.4cm) rectangle (5.4cm,4.0cm);
+	\node at (4.5cm,3.3cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
 
 	%\draw[circ] (0cm,0cm) circle (5cm);
 	%\node at (0,4cm) {\large\bf \nameref{chap:Turingovi jeziki}};
@@ -866,44 +866,36 @@ Pravila za računanje vrednosti $f(n_1, n_2, \dots, n_k)$ iz $\varepsilon(f)$:
 	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
 	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
 
-\Neurejeno
 \subsect{$\lambda$-račun (Alonso Church)}%1932,1933 Alonso Church
-Imamo vhodni izraz, ki opisuje neko funkcijo f in argumente $n_1, \dots, n_k$.
+Pri $\lambda$-računu imamo začetni izraz oz. začetni $\lambda$-term, ki opisuje neko funkcijo $f$ in njene argumente $n_1, \dots, n_k$. Cilj računanja je preoblikovati začetni $\lambda$-term v tak končni $\lambda$-term, ki bo opisoval ravno vrednost funkcije $f(n_1, n_2, \dots, n_k)$.
+\br
+Preoblikovanje dosežemo z uporabo redukcij:
+\begin{items}
+\item $\alpha$-redukcija preimenuje spremenljivko v $\lambda$-termu,
+\item $\beta$-redukcija uporabi neko funkcijo nad njenimi argumenti. %a se da $\lambda$-term makro, ki bo pogledal nazaj in se pravilno sklonil? :D
+\end{items}
+$t_0 \rightarrow t_1 \rightarrow \dots \rightarrow t_k = f(n_1, n_2, \dots, n_k)$
 
-Kako je funkcija opisana?
-Začetni $\lambda$-term
-
-Cilj: preoblikovati začetni $\lambda$-term v končni $\lambda$-term, tak, ki bo opisoval ravno vrednost $f(n_1, \dots, n_k)$
-
-To preoblikovanje dosežemo z uporabo t.i. redukcij. Ta\\
-bodisi preimenuje spremenljivko v $\lambda$-termu, $(\alpha)$
-bodisi uporabi neko funkcijo nad njenimi argumenti.$(\beta)$ %a se da $\lambda$-term makro, ki bo pogledal nazaj in se pravilno sklonil? :D
-
-$t0->t1->...->tK$
-$f, n1, n2, ... nk$....$f(n_1, \dots, n_k)$
-
-\Def{funkcija, ki jo je možno predstaviti in računati v tem lambda računu, taka funkcija je \textbf{$\lambda$-definabilna}}%fo'real!
+\Def{funkcija, ki jo je moč predstaviti in računati v $lambda$-računu, je \textbf{$\lambda$-definabilna}}%fo'real!
 
 \Povzetek{Algoritem po Churchu je $\lambda$-term.\\
 	Računanje po Churchu je preoblikovanje začetnega $\lambda$-terma v končni $\lambda$-term z redukcijami.\\
 	Funkcija je izračunljiva po Churchu, če je $\lambda$-definabilna.}
 
 %zgledovanje po jeziku (glej gor)
-
 \subsect{Postov Stroj (Emil Post)}%1936, Post
 %podoben turingovemu
 %nadzorna enota
 %trak s celicami
 %okno
 %+vrsta z znaki povezana v nadz enoto in iz nadzorne grejo lahko na konec vrste
-
-Model je podoben Turingovemu stroju, z naslenjimi spremembami:
+Model je podoben Turingovemu stroju, z naslednjimi spremembami:
 \begin{items}
-\item s traku le bere znake
-\item Uporablja vrsto znakov
+\item Stroj s traku lahko le bere znake
+\item Uporablja posebno vrsto znakov
 \end{items}
-
-Korak: prebere iz celice pod oknom znak in iz začetka vrste znak. na podlagi teh dveh znakov in stanja bo premaknil okno, nov znak dal na konec vrste in prešel v novo stanje.
+\fixme - slika
+\odmakni{Korak stroja}{Iz celice pod oknom in iz začetka vrste prebere po en znak. Na podlagi teh dveh znakov in stanja premakne okno, nov znak da na konec vrste in preide v novo stanje.}
 
 %iz jezika? how? najprej: graf: opis problema pride v začetno vozlišče, nato po grafu potuje in se spreminja, dokler ne pride v končno stanje - rezultat. besedi se odreže prvi znak in glede na to se izbere pot v grafu, ali spremeni besedo, etc.. stroj to simulira.
 %zgleda končen... kaj zdj? trak je končen, vrsta, stanja, ... %i dunno lol
@@ -913,24 +905,23 @@ Korak: prebere iz celice pod oknom znak in iz začetka vrste znak. na podlagi te
 	Funkcija je izračunljiva po Postu, če njeno vrednost lahko izračuna Postov stroj.}
 
 \subsect{Algoritmi Markova (Andrej Markov ml.)}%194..
-Imamo abecedo $\Sigma$, končno zaporedje produkcij:
-$x_1 \leftarrow y_1$
-$x_2 \leftarrow y_2$
-...
-$x_n \leftarrow y_n$
-$x,y \in \Sigma^*$%string v string
-
-Produkija preoblikuje besedo tako da v tej besedi nadomesti skrajno levi pojav $x_i$ z $y_i$ %slikca beseda prej potem... x1->y1
+Imamo abecedo $\Sigma$, ter končno zaporedje produkcij:\\
+\[ x_1 \rightarrow y_1 \]
+\[ x_2 \rightarrow y_2 \]
+\[ \dots \]
+\[ x_n \rightarrow y_n \]
+\[ x,y \in \Sigma^* \]%string v string
+\\
+Produkcija preoblikuje besedo tako, da v besedi nadomesti skrajno levi pojav $x_i$ z $y_i$. %slikca beseda prej potem... x1->y1
 %samo leva izpeljava, WTF?
-
-Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končno. V vsakem koraku se trenutna beseda preoblikuje s prvo (levo) možno produkcijo.
+Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končno. V vsakem koraku se trenutna beseda preoblikuje s najbolj levo možno produkcijo.
 
 \Povzetek{Algoritem po Markovu je gramatika.\\
 	Računanje po Markovu je preoblikovanje vhodne besede z dano gramatiko.\\
 	Funkcija je izračunljiva po Markovu, če njeno vrednost računa kaka gramatika}
-
+\Neurejeno
 %poudarki: kaj imajo skupnega?
-%razumno zmogljivi - končo različnih ukazov, vsak ukaz se izvede v končno korakih / času, v enem koraku se opravi končno veliko dela, učinek ukaza je predvidljiv(tudi nedeterminističnem... mjbi kvantni ne).
+%razumno zmogljivi - končno različnih ukazov, vsak ukaz se izvede v končno korakih / času, v enem koraku se opravi končno veliko dela, učinek ukaza je predvidljiv(tudi nedeterminističnem... mjbi kvantni ne).
 %potencialno neskončen spomin brez omejitev dostopa
 
 %zdj pa neki za lepe sanje:
@@ -1671,7 +1662,7 @@ V resnici DTIME($2^n$) $\subset$ DTIME($n^2 2^n$) velja, ampak s tem izrekom teg
 }
 \subsect{Hiearhija razredov NSPACE in NTIME}
 \Lema{Lema o pomiku.\\
-Naj bodo $S_1(n)$, $S_2(n)$ in $f(n)$ popolnoma prostorsko predstavljive %p.p.p. ... lol, samo energijo hranim, ni standardno
+Naj bodo $S_1(n)$, $S_2(n)$ in $f(n)$ popolnoma prostorsko predstavljive %p.p.p. ... lol, samo energijo hranim, ni standardno p.p.p. pisat
 in $S_2(n) \geq n$, ter $f(n) \geq n$.
 \br
 Če NSPACE($S_1(n)$) $\subset$ NSPACE($S_2(n)$),\\
@@ -1679,6 +1670,110 @@ Potem NSPACE($S_1(f(n))$) $\subset$ NSPACE($S_2(f(n))$).
 \br
 Lema analogno velja tudi za časovno zahtevnost in za deterministične razrede.
 %dn dokaži primer zgoraj.
+}
+%-----------------------predavanja 11------------------------------
+\sect{Relacija med prostorsko in časovno zahtevnostjo}
+\Odmakni{?}{Kakšna je relacija med različnimi vrstami zahtevnosti}
+Kakšen je odnos med determinističnim časom in prostorom?
+\Izrek{DTIME($f(n)$) $\subseteq$ DSPACE($f(n)$),\\
+Torej, kar lahko rešimo v času $O(f(n))$, lahko rešimo tudi na prostoru največ $O(f(n))$.}
+\Izrek{$L \in$ DSPACE($f(n)$) $\wedge f(n) \geq \log_2 n \Rightarrow \exists c(L):L \in$ DTIME($c^{f(n)}$),\\
+Torej, kar lahko rešimo na prostoru $O(f(n))$, lahko rešimo tudi v času največ $O(c^{f(n)})$.}
+Kakšen je odnos med determinističnim in nedeterminističnim časom?
+\Izrek{$L \in$ NTIME($f(n)$) $\Rightarrow \exists c(L):L \in$ DTIME($c^{f(n)}$),\\
+Torej, kar lahko rešimo v nedeterministično v času $O(f(n))$, lahko rešimo tudi deterministično na prostoru največ $O(c^{f(n)})$.}
+%lahko si zapišemo: to nas lahko velik košta.
+Največ koliko prostora pa nas stane simulacija nedeternimizna?%savitchev izrek
+\Izrek{NSPACE($f(n)$) $\subseteq$ DSPACE($f(n)^2$), če $f(n) \geq \log_2 \wedge f(n)$ je popolnoma prostorsko predstavljiva.\\
+Torej, kar lahko rešimo na nedeterminističen način na prostoru $O(f(n))$, lahko na deterministični način na prostoru največ $O(f(n)^2)$.}
+\Dokaz{%@nimaš a),b... označeno
+\odmakni{a)}{Trivialno.}
+\odmakni{b)}{
+Naj ima Turingov stroj $M_1$:\\
+$s$ stanj, $t$ tračnih simbolov, in prostorsko omejitev $f(n)$\\
+Največ $(n+2) s f(n) t^{f(n)}$ trenutnih opisov.\\
+ker je $f(n)\geq \log_2(n), \exists c: \forall n \geq 1 : c^{f(n)} \geq$ št. opisov.
+\br
+Konstanto $c$ dobimo tako, da logaritmiramo:\\
+	$f(n)\log c \geq \log (n+2) + \log s + \log f(n) + f(n) \log t$\\
+	$\log c \geq {\log (n+2) + \log s + \log f(n)\over f(n)} + \log t $\\
+	Ker je $f(n) \geq \log_2 n$, prvi trije členi monotono padajo, zato lahko zamemo za $c$:\\
+	$\log c \geq {\log 3 + \log s + \log f(1)\over f(1)} + \log t $
+\br
+Sestavimo Turingov stroj $M_2$ s tremi trakovi.\\
+Na prvih dveh bo simuliral stroj $M_1$\\
+Na tretjem šteje TO pri simulaciji; od 1. do kvečjemu $c^{f(n)}$%notsure
+\br
+Stroj $M_2$ sprejme vhod, če simulirani $M_1$ sprejme vhod.\\
+Stroj $M_2$ zavrne vhod, če simulirani $M_1$ zavrne vhod ali pa števec TO $= c^{f(n)}$.
+}
+\odmakni{c)}{
+Naj ima nedeterministični Turingov stroj $M_1$:\\
+$k$ trakov, $s$ stanj in $t$ tračnih sibolov.\\
+stroj $M_1$ ima največ $s ( f(n) +1 )^k t^{k f(n)}$ trenutnih opisov po $f(n)$ korakih.
+$\exists d:d^{f(n)} \geq$ št. opisov., za $\forall n \geq 1$\\
+Za $d$ lahko vzamemo $d=s(t+1)^{3k}$
+\br
+Sestavimo Turingov stroj $M_2$, ki:\\
+Sestavi seznam vseh TO, ki bi jih lahko dosegel $M_1$ v $f(n)$ korakih.\\
+V seznamu je največ $d^{f(n)}$ trenutnih opisov.\\
+$M_2$ jih gotovo lahko zapiše v času, ki je kvadrat dolžine vseh trenutnih opisov.\\%od dolžine spodaj puščica 1[stanje]+k(f(n)+1)[vsebine k trakov]
+Za vse to porabi največ $c^{f(n)}$\\
+Stroj $M_2$ sprejme vhod natanko takrat, kadar med izpisanimi trenutnimi opisi obstaja nek končni trenutni opis.
+}
+}
+\subsect{Izrek o vrzeli}
+%bomo videli zakaj so lepe funkcije res potrebne in zakaj se dogajajo čudne stvari, če se ne, lol
+Hiearhiji DSPACE in DTIME sta precej \Quote{gosti} in že majhno povečanje virov omogoči reševanje novih problemov.\\%to zagotavljata 2 izreka pri hiearhijah
+Izreka s katerima smo to dokazovali, sta zahtevala, da so funkcije časovno oz. prostorsko predstavljive, tu pa bomo pokazali, da se začno dogajati čudne stvari, če tega ne upoštevamo.
+\br
+Priprava na izrek:\\
+Izberemo poljubno totalno izračunljivo funkcijo $g(n)$, ki raste vsaj linearno.\\
+Izberemo poljubno totalno izračunljivo funkcijo $S(n)$.\\
+Dobimo: $S(n) \leq g(S(n))$ za $\forall n$. Torej $g(S(n))$ narašča hitreje od $S(n)$\\
+DSPACE($S(n)$) $\subseteq$ DSPACE($g(S(n))$)\\
+Ampak predvidevamo, da velja le $\subset$(ne $\subseteq$), saj $g(n)$ narašča dovolj hitro, da bo gotovo $inf {S(n) \over g(S(n))} = 0$, kar zahteva tudi to, da je $g(S(n))$ prostorsko predstavljiva.
+\odmakni{Toda}{
+Izrek zahteva tudi, da je g(S(n)) prostorsko predstavljiva, mi pa tega nismo zahtevali v (neki)\\%??
+To nam izniči pričakovanje da velja $\subset$ in ne $\subseteq$. Lahko se zgodi, da povečanje (celo bistveno) prostorske omejiteve iz $S(n)$ na $g(S(n))$.\\
+Vrzel med $S(n)$ in $g(S(n))$ nam ne omogoči nam rešiti nobenega novega problema.%slika!
+%torej za čudne funkcije ni nič več muske, tut za precej več denarja.
+}
+\Primer{
+$g(n)=2^n$
+$S(n)=n^2$
+}
+\Izrek{\odmakni{(Borodan)}{
+Za $\forall$ totalno izračunljive funkcije $g(n)$, kjer $g(n) \geq n$ za $\forall n$,\\
+$\exists$ totalno izračunljiva funkcija $S(n)$: DSPACE($S(n)$) = DSPACE($g(S(n)$)}
+}
+%to je bil bad news.. now for the good news
+\subsect{Izrek o uniji}
+DSPACE($p(n)$), kjer je $p(n)=n,n^2,n^3,\dots$ so različni razredi, vsebovani v DSPACE($n^i$) $\subset$ DSPACE($n^{i+1}$).\\
+DSPACE($n^i$) $\subset$ DSPACE($n^{i+1}$)
+Podobno velja tudi za DTIME, NSPACE in NTIME.
+\br
+Ali $ \exists S(n) $ : DSPACE($S(n)$) vsebuje vse DSPACE($p(n)$)\\
+Ali $ \exists S(n) $ : DSPACE($S(n)$) = $\bigcup$ DSPACE($p(n)$)
+\br
+\odmakni{Kakšen bi moral biti $S(n)$}{
+Skoraj povsod narašča hitreje od vsakega polinoma\\
+Naraščati mora dovolj počasi, da ne bi zajeli nadpolinomskih funkcij. ($n^{\log n} = \dots = 2^{c \log^2 n}$)
+}
+\Izrek{Naj bo $\mathcal{F}=\{f_i(n)\ |\ i \in \mathbb{N} $ in je $f_i$ izračunljiva $ \}$ Turingova množica.\\
+Tedaj obstaja izračunljiva funkcija $S(n)$, da je:\\
+DSPACE($S(n)$) = $\bigcup_{i \geq 1}$ DSPACE($f_i(n)$)
+}
+\Odmakni{Uporaba}{
+$f_i(n)=n^i$\\
+Obstaja $S(n)$, da je DSPACE($f(n)$ = $\bigcup_{i \geq 1}$ DSPACE($n^i$)
+}
+Izrek o uniji velja tudi za DTIME, NSPACE in NTIME.
+\Posledica{
+$P \PoDef \bigcup_{i \geq 1}$ DTIME($n^i$)\\
+$NP \PoDef \bigcup_{i \geq 1}$ NTIME($n^i$)\\
+$PSPACE \PoDef \bigcup_{i \geq 1}$ DSPACE($n^i$)\\
+$NPSPACE \PoDef \bigcup_{i \geq 1}$ NSPACE($n^i$)\\
 }
 
 \end{document}
