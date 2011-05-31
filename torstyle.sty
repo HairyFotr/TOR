@@ -1,5 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \usepackage[margin=1in]{geometry}
+\usepackage{xifthen}
 \usepackage{enumerate}
 \usepackage{verbatim}
 \usepackage{hyperref}
@@ -104,8 +105,36 @@
 \newcommand\Ideja[1]{\Odmakni{Ideja}{#1}}
 \newcommand\Povzetek[1]{\Odmakni{Povzetek}{#1}}
 
-\def\PoDef{\overset{def}{=}}
+\newcommand\overdef[1]{\overset{def}{#1}}
+\def\PoDef{\overdef{=}}
+\def\PoDefArrow{\overdef{\Rightarrow}}
 
+\def\PNP{P $\overset{?}{=}$ NP }
+\def\PniNP{P $\subsetneq$ NP }
+
+\newcommand\CClass[2]{%
+\ifthenelse{\isempty{#2}}%
+{\mbox{#1}}%
+{\mbox{#1(}{#2}\mbox{)}}%
+}
+%%
+\newcommand\DTIME[1]{\CClass{DTIME}{#1}}
+\newcommand\NTIME[1]{\CClass{NTIME}{#1}}
+\newcommand\DSPACE[1]{\CClass{DSPACE}{#1}}
+\newcommand\NSPACE[1]{\CClass{NSPACE}{#1}}
+\newcommand\Po[1]{\CClass{P}{#1}}
+\newcommand\NP[1]{\CClass{NP}{#1}}
+\newcommand\PSPACE[1]{\CClass{PSPACE}{#1}}
+\newcommand\NPSPACE[1]{\CClass{NPSPACE}{#1}}
+
+\newcommand\prevedba[1]{$\overset{#1}{\leq}$}
+\newcommand\mprevedba[1]{\overset{#1}{\leq}}
+
+%yeah, I suck...
+\def\|{\ | \ }
+\def\Inf{\displaystyle\inf}
+\def\Sup{\displaystyle\sup}
+\def\Lim{\displaystyle\lim}
 
 \newenvironment{primeri}{
 {\subsection*{Primeri:}}

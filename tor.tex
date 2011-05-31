@@ -18,7 +18,7 @@
 \usepackage[x11names, rgb]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{calc,automata,snakes,arrows,shapes,decorations,positioning,shapes.arrows,chains,shadows}
-\usepackage{nag}
+%\usepackage{nag}
 
 %poglej torstyle.sty
 \usepackage{torstyle}
@@ -866,7 +866,7 @@ Pravila za računanje vrednosti $f(n_1, n_2, \dots, n_k)$ iz $\varepsilon(f)$:
 	Računanje po HG je izračun vrednosti funkcije $f(n_1,\dots,n_k)$ iz $\varepsilon(f)$.\\%izr. je, sta rekla... oz je samo Gödel reku... oh, snap :D
 	Funkcija je izračunljiva po HG, če je splošno rekurzivna.}
 
-\subsect{$\lambda$-račun (Alonso Church)}%1932,1933 Alonso Church
+\subsect{Netipizirani $\lambda$-račun (Alonso Church)}%1932,1933 Alonso Church
 Pri $\lambda$-računu imamo začetni izraz oz. začetni $\lambda$-term, ki opisuje neko funkcijo $f$ in njene argumente $n_1, \dots, n_k$. Cilj računanja je preoblikovati začetni $\lambda$-term v tak končni $\lambda$-term, ki bo opisoval ravno vrednost funkcije $f(n_1, n_2, \dots, n_k)$.
 \br
 Preoblikovanje dosežemo z uporabo redukcij:
@@ -877,6 +877,10 @@ Preoblikovanje dosežemo z uporabo redukcij:
 $t_0 \rightarrow t_1 \rightarrow \dots \rightarrow t_k = f(n_1, n_2, \dots, n_k)$
 
 \Def{funkcija, ki jo je moč predstaviti in računati v $lambda$-računu, je \textbf{$\lambda$-definabilna}}%fo'real!
+\begin{comment}
+$(\lambda x . x) 3$ 
+$(\lambda x . x x) (\lambda x . x x)$ se zacikla
+\end{comment}
 
 \Povzetek{Algoritem po Churchu je $\lambda$-term.\\
 	Računanje po Churchu je preoblikovanje začetnega $\lambda$-terma v končni $\lambda$-term z redukcijami.\\
@@ -1455,19 +1459,19 @@ Jezik L ima nedeterministično časovno zahtevnost/omejitev, T(n), če zanj obst
 \br
 \subsect{Razredi zahtevnosti}
 \begin{items}
-\item Jeziki, ki jih lahko deterministično razpoznamo v $S(n)$:\\
-DSPACE($S(n)$) $\PoDef \{ L\ |\ L$ ima deterministično prostorsko omejitev $S(n)$ \}
-\item Jeziki, ki jih lahko nedeterministično razpoznamo v $S(n)$:\\
-NSPACE($S(n)$) $\PoDef \{ L\ |\ L$ ima nedeterministično prostorsko omejitev $S(n)$ \}
-\item Jeziki, ki jih lahko deterministično razpoznamo v $T(n)$:\\
-DTIME($T(n)$) $\PoDef \{ L\ |\ L$ ima deterministično časovno omejitev $T(n)$ \}
-\item Jeziki, ki jih lahko nedeterministično razpoznamo v $T(n)$:\\
-NTIME($T(n)$) $\PoDef \{ L\ |\ L$ ima nedeterministično časovno omejitev $T(n)$ \}
+\item Jeziki, ki jih lahko deterministično razpoznamo v $S(n)$:
+\[ \DSPACE{S(n)} \PoDef \{ L \| L \mbox{ ima deterministično prostorsko omejitev } S(n) \} \]
+\item Jeziki, ki jih lahko nedeterministično razpoznamo v $S(n)$:
+\[ \NSPACE{S(n)} \PoDef \{ L \| L \mbox{ ima nedeterministično prostorsko omejitev } S(n) \} \]
+\item Jeziki, ki jih lahko deterministično razpoznamo v $T(n)$:
+\[ \DTIME{T(n)} \PoDef \{ L \| L \mbox{ ima deterministično časovno omejitev } T(n) \} \]
+\item Jeziki, ki jih lahko nedeterministično razpoznamo v $T(n)$:
+\[ \NTIME{T(n)} \PoDef \{ L \| L \mbox{ ima nedeterministično časovno omejitev } T(n) \} \]
 \end{items}
 \Primer{
-$L=\{ w c w^R|... \}$\\
-$L\in DSPACE(log(n))$
-$L\in DTIME(n)$
+$L=\{ w c w^R \| ... \}$\\
+$L\in \DSPACE{log(n)}$
+$L\in \DTIME{n}$
 }
 %bomo pokazal iz kje pride podlaga O notacije
 %-----------------------predavanja 9-------------------------------
@@ -1480,10 +1484,10 @@ Tračna abeceda je končna, a poljubno velika.
 Tako lahko vedno zmanjšamo število celic za konstantni faktor.\\%...ponovil razlago S(n)
 Pri prostorski omejitvi $S(n)$, nas zanima le njen velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
 
-\Izrek{Če za jezik $L$ obstaja tračni Turingov stroj, s prostorsko omejitvijo $S(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj s konstantno prostorsko omejitvijo $c>0$: $c*S(n)$}%kaj je c? hitrost svetlobe ni, lol
+\Izrek{Če za jezik $L$ obstaja tračni Turingov stroj, s prostorsko omejitvijo $S(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj s konstantno prostorsko omejitvijo $c>0$: $c\cdot S(n)$}%kaj je c? hitrost svetlobe ni, lol
 %opomba: menda je kul, da je c lahko na (0,1)
 \Dokaz{Naj bo $M_1$ Turingov stroj, s prostorsko omejitvijo $S(n)$ in $L=L(M_1)$, $c\in(0,1)$.\\
-Sestavimo Turingov stroj $M_2$, ki simulira stroj $M_1$, tako da:\\
+Sestavimo Turingov stroj $M_2$, ki simulira stroj $M_1$, tako da:
 \begin{items}
 \item V eni celici $M_2$ hrani $r$ zaporednih celic $M_1$ %r bomo kasneje
 \item Nadzorna enota stroja $M_2$ si beleži katero od r celic bi gledal $M_1$ in se primerno obnaša.
@@ -1492,18 +1496,20 @@ Pri simulaciji stroja $M_1$, $M_2$ obišče kvečjemu $\lceil {S(n) \over r} \rc
 Določimo $r$: Naj bo $r$ tak, da je ${1 \over r}={c \over 2}$, torej $r={2 \over c}$.\\
 Če je:
 \begin{items}
-\item $S(n) \geq r$, je $\lceil {S(n) \over r}\rceil = \lceil {c*S(n) \over 2}\rceil = c*S(n)$
+\item $S(n) \geq r$, je $\lceil {S(n) \over r}\rceil = \lceil {c \cdot S(n) \over 2}\rceil = c\cdot S(n)$
 \item $S(n) < r$, ima $M_2$ vse shranjeno v eni svoji celici in uporabi le to celico.
 \end{items}
-Stroj $M_2$ razpoznava $L$ in ima prostorsko omejitev $c*S(n)$.
+Stroj $M_2$ razpoznava $L$ in ima prostorsko omejitev $c \cdot S(n)$.
 }
 %Opomba: naj bo $d>1$, potem velja: DSPACE($S(n)$) \subseteq{obrnjen} DSPACE($d*S(n)$), torej kar lahko izračunamo na S(n), lahko tudi na $d*S(n)$
 %velja tudi obratno (vzemi $c = {1 \over d$)
-\Posledica{ 
-Velja DSPACE($S(n)$)=DSPACE($c*S(n)$) za $\forall c>0$.\\
-S spreminjanjem prostorske omejitve ne pridobimo na razpoznavni moči.
-%vprašanje: ampak to za realne računalnike itak ne velja, ker so binarni... jup.
-Enako velja tudi za nedeterministično računanje: NSPACE($S(n)$)=NSPACE($c*S(n)$) za $\forall c>0$.\\
+\Posledica{S spreminjanjem prostorske omejitve ne pridobimo na razpoznavni moči.
+\[ \DSPACE{S(n)} = \DSPACE{c \cdot S(n)},\ \forall c>0 \]%vprašanje: ampak to za realne računalnike itak ne velja, ker so binarni...? jup.
+
+Enako velja tudi za nedeterministično računanje:
+\[ \NSPACE{S(n)} = \NSPACE{c \cdot S(n)},\ \forall c>0 \]
+}
+
 \subsubsect{Odpravljanje trakov}
 Ali, ter za kakšno ceno za prostorsko zahtevnost, lahko $k$ delovnih trakov nadomestimo z enim samim?
 \Ideja{$k$ trakov nadomestimo z enim $2k$-slednim trakom}%kot v prejšnjem poglavju pri dokazu večtračni TS = osnovni
@@ -1516,10 +1522,9 @@ Množica stanj je omejena, a poljubno velika.
 \Ideja{Nekaj zaporednih stanj med računanjem nadomestimo z enim novim stanjem iz neke nove množice stanj}
 Tako lahko vedno zmanjšamo število korakov za konstantni faktor.\\
 Tudi pri časovni omejitvi $T(n)$, nas zanima le velikostni razred. (Ki ga lahko opišemo z notacijo z O, $\Theta$ in $\Omega$.)
-\Odmakni{Priprava}{
 \Def{Naj bo $f:\mathbb{N}\rightarrow\mathbb{N}$ funkcija, kjer velja:\\
-	$sup(f(n))_{n\rightarrow\infty} \PoDef lim_{n\rightarrow\infty} (LUB\{ f(n), f(n+1), \dots \})$ %lowest upper bound e
-	$inf(f(n))_{n\rightarrow\infty} \PoDef lim_{n\rightarrow\infty} (GLB\{ f(n), f(n+1), \dots \})$ %greatest lower bound
+	\[ \Sup_{n\to\infty} (f(n)) \PoDef \Lim_{n\to\infty} (\mbox{LowestUpperBound}\{ f(n), f(n+1), \dots \}) \] %lowest upper bound e
+	\[ \Inf_{n\to\infty}(f(n)) \PoDef \Lim_{n\to\infty} (\mbox{GreatestLowerBound}\{ f(n), f(n+1), \dots \}) \] %greatest lower bound
 }
 \Primer{ 
 Naj bo $f(n)={1 \over n}$, če je $n$ sod, ter $f(n)=n$, če je $n$ lih.\\%%@tisto z matrix/cases... to je ugly zapis
@@ -1532,34 +1537,32 @@ Naj bo $f(n)={1 \over n}$, če je $n$ sod, ter $f(n)=n$, če je $n$ lih.\\%%@tis
 % f(n)| 1/2 ....                   inf fn = 1 
 \fixme 
 }
-\Velja{ 
-	Če $f(n)$ konvergira, je limita enaka $sup_{n\rightarrow\infty} f(n)$ in $inf_{n\rightarrow\infty} f(n)$.
-}
-}
+\Velja{
+	Če $f(n)$ konvergira, je limita enaka $\Sup_{n\to\infty} f(n)$ in $\Inf_{n\to\infty} f(n)$.
+}\ \\
 \Izrek{ 
-	Če za jezik $L$ obstaja $k$-tračni Turingov stroj s časovno omejitvjo $T(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj, s časovno omejitvijo $c*T(n)$, za $\forall c>0$, pod pogojem, da je $k>1$ in $inf_{n\leftarrow\infty} {T(n) \over n} = \infty$.
+	Če za jezik $L$ obstaja $k$-tračni Turingov stroj s časovno omejitvjo $T(n)$, potem za $L$ obstaja $k$-tračni Turingov stroj, s časovno omejitvijo $c\cdot T(n)$, za $\forall c>0$, pod pogojem, da je $k>1$ in $\Inf_{n\to\infty} {T(n) \over n} = \infty$.
 }
 %Opombe: zahteva, da je $inf=\infty$, pomeni, da časovna omejitev $T(n)$ v vsakem primeru (za vsako dolžino vhoda) narašča vsaj malo hitreje od $n$. Torej, za branje vhoda mora biti vsaj malo korakov na voljo za izračun.
 %Dokaz: Glej HU, QED, lol
-\Posledica{ 
-	DTIME($T(n)$)=DTIME($c*T(n)$).\\
-	Torej, razred jezikov, ki jih lahko razpoznamo v času $T(n)$, ostane enak, če ga pomnožimo z kako konstanto $c>0$ (če je $inf_{n\leftarrow\infty} {T(n) \over n} = \infty$).
+\Posledica{Razred jezikov, ki jih lahko razpoznamo v času $T(n)$, ostane enak, če ga pomnožimo z kako konstanto $c>0$ (če je $\Inf_{n\to\infty} {T(n) \over n} = \infty$).
+\[ \DTIME{T(n)} = \DTIME{c \cdot T(n)} \]
 }
-Kaj pa če je $inf_{n\leftarrow\infty} {T(n) \over n} < \infty$?\\
-Če je $T(n)=d*n, d>1$(Torej, da imamo vsaj nekaj korakov časa za računanje), je $inf_{n\leftarrow\infty} {T(n) \over n} = d$ in ne vemo, ali velja zgornja posledica. Bilo bi čudno, če ne bi veljalo podobno, saj imamo $d$-krat več časa.
+Kaj pa če je $\Inf_{n\to\infty} {T(n) \over n} < \infty$?\\
+Če je $T(n)=d\cdot n, d>1$(Torej, da imamo vsaj nekaj korakov časa za računanje), je $\Inf_{n\to\infty} {T(n) \over n} = d$ in ne vemo, ali velja zgornja posledica. Bilo bi čudno, če ne bi veljalo podobno, saj imamo $d$-krat več časa.
 \Izrek{ 
-	Če za jezik $L$ obstaja $k$-tračni Turingov stroj s časom $d*n, d>1$ in je $k>1$, potem za jezik za $\forall\varepsilon>0$ obstaja $k$-tračni Turingov stroj, s časovno omejitvijo $(1+\varepsilon)*n$
+	Če za jezik $L$ obstaja $k$-tračni Turingov stroj s časom $d\cdot n, d>1$ in je $k>1$, potem za jezik za $\forall\varepsilon>0$ obstaja $k$-tračni Turingov stroj, s časovno omejitvijo $(1+\varepsilon)\cdot n$
 }
 \Posledica{
-	DTIME($d*n$)=DTIME($(1+\varepsilon)*n$) za poljubni konstanti $d>1$ in $\varepsilon>0$.
+	$\DTIME{d\cdot n} = \DTIME{(1+\varepsilon) \cdot n}$ za poljubni konstanti $d>1$ in $\varepsilon>0$.
 }
-Kaj pa če bi $T(n)$ naraščal počasneje od $d*n$?\\
-Tedaj bi imeli $inf_{n\leftarrow\infty} {T(n) \over n} = 0$ %kar je precej manjše od neskončno, lol
+Kaj pa če bi $T(n)$ naraščal počasneje od $d \cdot n$?\\
+Tedaj bi imeli $\Inf_{n\to\infty} {T(n) \over n} = 0$ %kar je precej manjše od neskončno, lol
  in bi za take funkcije tisti zgornji izrek ne veljal.% I call that pulling an Andy :P
 \br
-Tudi za NTIME velja podobno:\\
-	NTIME($T(n)$) = NTIME($c*T(n)$), za $c>0$\\%morda še nek copy paste nekaj od zgoraj pri DTIME
-	NTIME($d*n$) = DTIME($(1+\varepsilon)*n$) za poljubni konstanti $d>1$ in $\varepsilon>0$
+Tudi za NTIME velja podobno:
+	\[ \NTIME{T(n)} = \NTIME{c\cdot T(n)},\ c>0 \]%morda še nek copy paste nekaj od zgoraj pri DTIME
+	\[ \NTIME{d \cdot n} = \DTIME{(1+\varepsilon)\cdot n},\mbox{ za poljubni konstanti $d>1$ in $\varepsilon>0$} \]
 \subsubsect{Odpravljanje trakov}
 %vse dela tudi neodvisno od modela Turingovega stroja
 Ali, ter za kakšno ceno za časovno zahtevnost, lahko $k>1$ delovnih trakov nadomestimo z enim samim?
@@ -1571,9 +1574,8 @@ Ali, ter za kakšno ceno za časovno zahtevnost, lahko $k>1$ delovnih trakov nad
 }
 Torej, z zmanjšanjem števila trakov na enega, se zahtevnost poveča s kvadratom.\\
 \Trditev{To je največja možna upočasnitev pri prehodu s $k$-trakov na en trak.}
-\Izrek{ 
-	Če je $L\in$DTIME($T(n)$) za $k>1$-tračnem Turingovem stroju,
-potem je $L\in$ DTIME($T(n)^2$) na eno-tračnem Turingovem stroju.
+\Izrek{Če je $L\in\DTIME{T(n)}$ na $k>1$-tračnem Turingovem stroju,
+potem je $L\in\DTIME{T(n)^2}$ na eno-tračnem Turingovem stroju.
 }
 Torej $L$ zagotovo lahko rešimo v $T(n)^2$.\\
 Enako velja tudi za nedeterministične stroje.
@@ -1581,7 +1583,7 @@ Enako velja tudi za nedeterministične stroje.
 \br
 Kaj pa, če se omejimo le na dva delovna traka (iz nekega $k>2$-tračnega stroja).\\
 Tudi tukaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
-\Izrek{Če je $L\in$DTIME($T(n)$) na $k>2$-tračnem Turingovem stroju, potem je $L\in$DTIME($T(n)*\log T(n)$) na dvotračnem Turingovem stroju.}
+\Izrek{Če je $L\in\DTIME{T(n)}$ na $k>2$-tračnem Turingovem stroju, potem je $L\in\DTIME{T(n)} \cdot \log T(n)$ na dvotračnem Turingovem stroju.\br
 Analogno velja za nedeterministične stroje.}
 %-----------------------predavanja 10------------------------------
 %@wtf je linearno pospeševanje?
@@ -1594,9 +1596,9 @@ Taka omejitev ne obstaja niti za prostor, niti za čas.\\
 \Posledica{Ostaja neskončna hiearhija razredov zahtevnosti}
 %slika str 50 v TOR2
 \Izrek{Naj bo $T(n)$ poljubna totalno rekurzivna časovna omejitev.\\
-Obstaja rekurziven jezik $L \notin $DTIME($T(n)$)}
+Obstaja rekurziven jezik $L \notin \DTIME{T(n)}$}
 \Izrek{Naj bo $S(n)$ poljubna totalno rekurzivna prostorska omejitev.\\
-Obstaja rekurziven jezik $L \notin $DSPACE($S(n)$)}
+Obstaja rekurziven jezik $L \notin \DSPACE{S(n)}$}
 \Dokaz{Če je $T(n)$ totalno izračunljiva, obstaja Turingov stroj M, ki izračuna $T(n)$ za vsak $n$.\\
 Večtračne Turingove stroje lahko kodiramo z abecedo $\{0,1\}$ in lahko govorimo o $i$-tem večtračnem Turingovem stroju $M_i$\\
 Naj bo $x_i$, $i$-ta beseda v običajni ureditvi besed v $\{0,1\}^*$.\\
@@ -1609,9 +1611,9 @@ sestavi kodo stroja M.\\
 simulira stroj $M_i$ nad $w$ za največ $T(n)$ korakov.\\
 $\overline{M}$ sprejme vhod $w$ $\Longleftrightarrow$ $M_i$ se je v $i$ korakih ustavil in zavrnil vhod $w$, ali pa $T(n)$ korakih še vedno računa.\\
 %
-Dokažimo, da $L \in $ DTIME($T(n)$):\\
-Predpostavimo: $L=L(M_j)$ za nek $j$ in ima $M_j$ časovno omejitev $T(n)$.\\
-Kje je $x_j$\\
+Dokažimo, da $L \in \DTIME{T(n)}$:\\
+Predpostavimo: $L = L(M_j)$ za nek $j$ in ima $M_j$ časovno omejitev $T(n)$.\\
+Kje je $x_j$:\\
 %a
 $x_j \in L(M_j) \Rightarrow x_j \notin L$ (po def.)\\
 $x_j \in L(M_j) \Rightarrow x_j \notin L(M_j)$ (po predpostavki)\\
@@ -1619,13 +1621,13 @@ in\\
 $x_j \in L(M_j) \Rightarrow x_j \notin L$ (po def.)\\
 $x_j \in L(M_j) \Rightarrow x_j \in L(M_j)$ (po predpostavki)
 \br
-Torej ne obstaja tak Turingov stroj, ki bi sprejel jezik $L$ s časovno omejitvijo $T(n)$.
+Torej smo v protislovju in ne obstaja tak stroj, ki bi sprejel jezik $L$ s časovno omejitvijo $T(n)$.
 }
 %koliko denarja moramo dodati, da bo več muske, lol
 \subsect{Hiearhija razredov DSPACE}
 \Odmakni{?}{Kako \Quote{gosta} je hiearhija DSPACE}
 Za koliko moramo povečati prostorsko omejitev $S(n)$, da dobimo nov, večji razred?\\
-Pomembne so \Quote{lepe} funkcije, s katerimi opisujemo prostorsko omejitev. Če je $S(n)$ \Quote{lepa}, je dovolj, da neka nova funkcija $S(n)'$ narašča le \Quote{neznatno hitreje} od $S(n)$, pa že velja, da je DSPACE($S(n)$) drugačen od DSPACE($S(n)'$).\\%"kul"
+Pomembne so \Quote{lepe} funkcije, s katerimi opisujemo prostorsko omejitev. Če je $S(n)$ \Quote{lepa}, je dovolj, da neka nova funkcija $S(n)'$ narašča le \Quote{neznatno hitreje} od $S(n)$, pa že velja, da je \DSPACE{S(n)} drugačen od DSPACE($S(n)'$).\\%"kul"
 \Def{Funkcija je \Quote{lepa}, če je popolnoma prostorsko predstavljiva(konstruktibilna), torej kadar obstaja Turingov stroj s prostorsko omejitvijo $S(n)$, tak, da za vsako dolžino $n \in \mathbb{N}$ obstaja vhod $w$, $|w|=n$, pri katerem $M$ uporabi natanko $S(n)$ celic.\\
 Množica prostorsko predstavljivih funkcij je bogata, torej vsebuje običajne funkcije: $\log n, n, 2^n, \dots$.
 \br
@@ -1633,9 +1635,9 @@ Funkcija je popolnoma prostorsko predstavljiva, kadar obstaja Turingov stroj s p
 \br
 Vsaka prostorsko predstavljiva funkcija $S(n)>n$, je hkrati popolnoma prostorsko predstavljiva.
 }
-\Def{Funkcija raste \Quote{neznatno hitreje}, če velja $inf ({ S(n) \over S(n)' }) = 0$}
-\Izrek{Če sta $S_1(n) \geq \log_2 n$, $S_2(n) \geq \log_2 n$ in $inf { S_1(n) \over S_2(n) = 0}$ in je $S_2(n)$ popolnoma prostorsko predstavljiva, potem obstaja jezik $L \in DSPACE(S_2(n)) \wedge L \notin DSPACE(S_1(n))$.\\
-Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote{precej gosta}}%"lol" ... also dokaz tega je težak, je pa v stari skripti
+\Def{Funkcija raste \Quote{neznatno hitreje}, če velja $\inf ({ S(n) \over S(n)' }) = 0$}
+\Izrek{Če sta $S_1(n) \geq \log_2 n$, $S_2(n) \geq \log_2 n$ in $\inf { S_1(n) \over S_2(n) = 0}$ in je $S_2(n)$ popolnoma prostorsko predstavljiva, potem obstaja jezik $L\in\DSPACE{S_2(n)} \wedge L \notin \DSPACE{S_1(n)}$.\\
+Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote{precej gosta}}%"lol" ... also dokaz tega je precej težak, je pa v stari skripti
 
 \subsect{Hiearhija razredov DTIME}
 \Odmakni{?}{Kako \Quote{gosta} je hiearhija DTIME}
@@ -1643,30 +1645,30 @@ Izkaže se, da je nekoliko redkejša.
 \Def{Funkcija je časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, obstaja vhod $w$, $|w|=n$, pri katerem $M$ naredi natanko $T(n)$ korakov.\\
 Funkcija je popolnoma časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, za vse vhode $w$, $|w|=n$ velja, da pri njih $M$ naredi natanko $T(n)$ korakov.\\
 }
-\Izrek{Če je $T_2(n)$ popolnoma časovno predstavljiva in je $inf {T_1(n) \log(T_1(n)) \over T_2(n)} = 0$, potem obstaja jezik $L$, za katerega velja: 
-\[ L \in DTIME(T_2(n)) \wedge L \notin DTIME(T_1(n)) \]
+\Izrek{Če je $T_2(n)$ popolnoma časovno predstavljiva in je $\inf {T_1(n) \log(T_1(n)) \over T_2(n)} = 0$, potem obstaja jezik $L$, za katerega velja: 
+\[ L \in \DTIME{T_2(n)} \wedge L \notin \DTIME{T_1(n)} \]
 }
 \Primer{
 $T_1(n)=2^n$\\
 $T_2(n)=n^2 2^n$\\
-$inf ({ T_1(n) \log T_1(n) \over T_2(n) }) = inf({1 \over n}) = 0$
+$\inf ({ T_1(n) \log T_1(n) \over T_2(n) }) = inf({1 \over n}) = 0$
 \br
-DTIME($2^n$) $\subset$ DTIME($n^2 2^n$)
+$\DTIME{2^n} \subset \DTIME{n^2 2^n}$
 }
 \Primer{
 $T_1(n)=2^n$\\
 $T_2(n)=n 2^n$\\
-$inf ({ T_1(n) \log T_1(n) \over T_2(n) }) = 1$
+$\inf ({ T_1(n) \log T_1(n) \over T_2(n) }) = 1$
 \br
-V resnici DTIME($2^n$) $\subset$ DTIME($n^2 2^n$) velja, ampak s tem izrekom tega ni moč dokazati. (Da pa se dokazati z lemo o pomiku)
+V resnici $\DTIME{2^n} \subset \DTIME{n^2 2^n}$ velja, ampak s tem izrekom tega ni moč dokazati. (Da pa se dokazati z lemo o pomiku)
 }
 \subsect{Hiearhija razredov NSPACE in NTIME}
 \Lema{Lema o pomiku.\\
 Naj bodo $S_1(n)$, $S_2(n)$ in $f(n)$ popolnoma prostorsko predstavljive %p.p.p. ... lol, samo energijo hranim, ni standardno p.p.p. pisat
 in $S_2(n) \geq n$, ter $f(n) \geq n$.
 \br
-Če NSPACE($S_1(n)$) $\subset$ NSPACE($S_2(n)$),\\
-Potem NSPACE($S_1(f(n))$) $\subset$ NSPACE($S_2(f(n))$).
+Če $\NSPACE{S_1(n)} \subset \NSPACE{S_2(n)}$,\\
+Potem $\NSPACE{S_1(f(n))} \subset \NSPACE{S_2(f(n))}$.
 \br
 Lema analogno velja tudi za časovno zahtevnost in za deterministične razrede.
 %dn dokaži primer zgoraj.
@@ -1675,18 +1677,17 @@ Lema analogno velja tudi za časovno zahtevnost in za deterministične razrede.
 \sect{Relacija med prostorsko in časovno zahtevnostjo}
 \Odmakni{?}{Kakšna je relacija med različnimi vrstami zahtevnosti}
 Kakšen je odnos med determinističnim časom in prostorom?
-\Izrek{DTIME($f(n)$) $\subseteq$ DSPACE($f(n)$),\\
+\Izrek{$\DTIME{f(n)} \subseteq \DSPACE{f(n)}$,\\
 Torej, kar lahko rešimo v času $O(f(n))$, lahko rešimo tudi na prostoru največ $O(f(n))$.}
-\Izrek{$L \in$ DSPACE($f(n)$) $\wedge f(n) \geq \log_2 n \Rightarrow \exists c(L):L \in$ DTIME($c^{f(n)}$),\\
+\Izrek{$L \in \DSPACE{f(n)} \wedge f(n) \geq \log_2 n \Rightarrow \exists c(L):L \in \DTIME{c^{f(n)}}$.\\
 Torej, kar lahko rešimo na prostoru $O(f(n))$, lahko rešimo tudi v času največ $O(c^{f(n)})$.}
 Kakšen je odnos med determinističnim in nedeterminističnim časom?
-\Izrek{$L \in$ NTIME($f(n)$) $\Rightarrow \exists c(L):L \in$ DTIME($c^{f(n)}$),\\
+\Izrek{$L \in \NTIME{f(n)} \Rightarrow \exists c(L):L \in \DTIME{c^{f(n)}}$,\\
 Torej, kar lahko rešimo v nedeterministično v času $O(f(n))$, lahko rešimo tudi deterministično na prostoru največ $O(c^{f(n)})$.}
 %lahko si zapišemo: to nas lahko velik košta.
 Največ koliko prostora pa nas stane simulacija nedeternimizna?%savitchev izrek
-\Izrek{NSPACE($f(n)$) $\subseteq$ DSPACE($f(n)^2$), če $f(n) \geq \log_2 \wedge f(n)$ je popolnoma prostorsko predstavljiva.\\
-Torej, kar lahko rešimo na nedeterminističen način na prostoru $O(f(n))$, lahko na deterministični način na prostoru največ $O(f(n)^2)$.}
-\Dokaz{%@nimaš a),b... označeno
+\Izrek{\odmakni{(Savitch)}{$\NSPACE{f(n)} \subseteq \DSPACE{f(n)^2}$, če je $f(n) \geq \log_2 \wedge f(n)$ popolnoma prostorsko predstavljiva. Torej, kar lahko rešimo na nedeterminističen način na prostoru $O(f(n))$, lahko na deterministični način na prostoru največ $O(f(n)^2)$.}}
+\Dokaz{%@nimaš a),b... označeno.. bummer
 \odmakni{a)}{Trivialno.}
 \odmakni{b)}{
 Naj ima Turingov stroj $M_1$:\\
@@ -1731,11 +1732,11 @@ Priprava na izrek:\\
 Izberemo poljubno totalno izračunljivo funkcijo $g(n)$, ki raste vsaj linearno.\\
 Izberemo poljubno totalno izračunljivo funkcijo $S(n)$.\\
 Dobimo: $S(n) \leq g(S(n))$ za $\forall n$. Torej $g(S(n))$ narašča hitreje od $S(n)$\\
-DSPACE($S(n)$) $\subseteq$ DSPACE($g(S(n))$)\\
-Ampak predvidevamo, da velja le $\subset$(ne $\subseteq$), saj $g(n)$ narašča dovolj hitro, da bo gotovo $inf {S(n) \over g(S(n))} = 0$, kar zahteva tudi to, da je $g(S(n))$ prostorsko predstavljiva.
+$\DSPACE{S(n)} \subseteq \DSPACE{g(S(n))}$\\
+Ampak predvidevamo, da velja le $\subset$ (in ne $\subseteq$), saj $g(n)$ narašča dovolj hitro, da bo gotovo $\inf {S(n) \over g(S(n))} = 0$, kar zahteva tudi to, da je $g(S(n))$ prostorsko predstavljiva.
 \odmakni{Toda}{
-Izrek zahteva tudi, da je g(S(n)) prostorsko predstavljiva, mi pa tega nismo zahtevali v (neki)\\%??
-To nam izniči pričakovanje da velja $\subset$ in ne $\subseteq$. Lahko se zgodi, da povečanje (celo bistveno) prostorske omejiteve iz $S(n)$ na $g(S(n))$.\\
+Izrek zahteva tudi, da je $g(S(n))$ prostorsko predstavljiva, mi pa tega nismo zahtevali v (neki)\\%??
+To nam izniči pričakovanje da velja $\subset$ in ne $\subseteq$. Lahko se zgodi, da povečanje (celo bistveno) prostorske omejiteve iz $S(n)$ na $g(S(n))$ ne pomaga.\\
 Vrzel med $S(n)$ in $g(S(n))$ nam ne omogoči nam rešiti nobenega novega problema.%slika!
 %torej za čudne funkcije ni nič več muske, tut za precej več denarja.
 }
@@ -1745,35 +1746,221 @@ $S(n)=n^2$
 }
 \Izrek{\odmakni{(Borodan)}{
 Za $\forall$ totalno izračunljive funkcije $g(n)$, kjer $g(n) \geq n$ za $\forall n$,\\
-$\exists$ totalno izračunljiva funkcija $S(n)$: DSPACE($S(n)$) = DSPACE($g(S(n)$)}
-}
+$\exists$ totalno izračunljiva funkcija $S(n): \DSPACE{S(n)} = \DSPACE{(S(n)}$\fixme%wat?Ds=Ds
+}}
 %to je bil bad news.. now for the good news
 \subsect{Izrek o uniji}
-DSPACE($p(n)$), kjer je $p(n)=n,n^2,n^3,\dots$ so različni razredi, vsebovani v DSPACE($n^i$) $\subset$ DSPACE($n^{i+1}$).\\
-DSPACE($n^i$) $\subset$ DSPACE($n^{i+1}$)
+$\DSPACE{p(n)}$, kjer je $p(n)=n, n^2, n^3, \dots$, so različni razredi, vsebovani v $\DSPACE{n^i} \subset \DSPACE{n^{i+1}}$.\\
+$\DSPACE{n^i} \subset \DSPACE{n^{i+1}}$
 Podobno velja tudi za DTIME, NSPACE in NTIME.
 \br
-Ali $ \exists S(n) $ : DSPACE($S(n)$) vsebuje vse DSPACE($p(n)$)\\
-Ali $ \exists S(n) $ : DSPACE($S(n)$) = $\bigcup$ DSPACE($p(n)$)
+Ali $ \exists S(n): \DSPACE{S(n)}$, ki vsebuje vse $\DSPACE{p(n)}$\\
+Ali $ \exists S(n): \DSPACE{S(n)} = \bigcup \DSPACE{p(n)}$
 \br
 \odmakni{Kakšen bi moral biti $S(n)$}{
 Skoraj povsod narašča hitreje od vsakega polinoma\\
 Naraščati mora dovolj počasi, da ne bi zajeli nadpolinomskih funkcij. ($n^{\log n} = \dots = 2^{c \log^2 n}$)
 }
-\Izrek{Naj bo $\mathcal{F}=\{f_i(n)\ |\ i \in \mathbb{N} $ in je $f_i$ izračunljiva $ \}$ Turingova množica.\\
-Tedaj obstaja izračunljiva funkcija $S(n)$, da je:\\
-DSPACE($S(n)$) = $\bigcup_{i \geq 1}$ DSPACE($f_i(n)$)
+\Izrek{Naj bo $\mathcal{F}=\{f_i(n) \| i \in \mathbb{N} $ in je $f_i$ izračunljiva $ \}$ Turingova množica.\\
+Tedaj obstaja izračunljiva funkcija $S(n)$, da je:
+\[ \DSPACE{S(n)} = \bigcup_{i \geq 1} \DSPACE{f_i(n)} \]
 }
 \Odmakni{Uporaba}{
 $f_i(n)=n^i$\\
-Obstaja $S(n)$, da je DSPACE($f(n)$ = $\bigcup_{i \geq 1}$ DSPACE($n^i$)
+Obstaja $S(n)$, da je:
+\[ \DSPACE{f(n)} = \bigcup_{i \geq 1} \DSPACE{n^i} \]
 }
 Izrek o uniji velja tudi za DTIME, NSPACE in NTIME.
-\Posledica{
-$P \PoDef \bigcup_{i \geq 1}$ DTIME($n^i$)\\
-$NP \PoDef \bigcup_{i \geq 1}$ NTIME($n^i$)\\
-$PSPACE \PoDef \bigcup_{i \geq 1}$ DSPACE($n^i$)\\
-$NPSPACE \PoDef \bigcup_{i \geq 1}$ NSPACE($n^i$)\\
+\Posledica{\ \\
+\begin{minipage}{6cm}
+$\Po{} \PoDef \bigcup_{i \geq 1} \DTIME{n^i}$\\
+$\NP{} \PoDef \bigcup_{i \geq 1} \NTIME{n^i}$\\
+\end{minipage}
+\begin{minipage}{6cm}
+$\PSPACE{}  \PoDef \bigcup_{i \geq 1} \DSPACE{n^i}$\\
+$\NPSPACE{} \PoDef \bigcup_{i \geq 1} \NSPACE{n^i}$\\
+\end{minipage}
 }
+%-----------------------predavanja 12------------------------------
+V kakšni relaciji pa so ti razredi zahtevnosti?\\
+\Trditev{P $\subseteq$ NP $\subseteq$ PSPACE = NSPACE.}
+\Dokaz{\odmakni{PSPACE = NSPACE}{
+\Odmakni{($\Rightarrow$)}{PSPACE $\subseteq$ NSPACE -- Trivialno}
+\Odmakni{($\Leftarrow$)}{PSPACE $\subseteq$ NSPACE\\
+NSPACE $\PoDef \bigcup_{i \geq 1} \NSPACE{n^i} \overset{Savitch}{\subseteq} \bigcup_{i \geq 1} \DSPACE{n^{2i}} \subseteq$ PSPACE
+}}
+\odmakni{NP $\subseteq$ PSPACE}{
+$L \in $ NP $ \PoDefArrow \exists k : L \in \NTIME{n^k} \overset{izrek}{\Rightarrow} L \in \NSPACE{n^k} \overset{Savitch}{\Rightarrow}$\\$\overset{Savitch}{\Rightarrow} L \in \DSPACE{n^{2k}} \PoDefArrow L \in$ PSPACE
+}
+}
+%Komentar
+Če je prostor polinomsko omejen, nedeterminizem ne poveča moči (PSPACE = NSPACE).\\
+Pri času pa odgovor na to vprašanje ni znan, vprašanje pa poznamo kot \PNP.
+%
+\Trditev{$\DSPACE{\log n} \subseteq$ P}
+\Dokaz{$L \in \DSPACE{\log n} \overset{izrek}{\Rightarrow} \exists c_L : L \in \DTIME{c_L^{\log n}} \overset{(\log n = k_L \log_{c_L} n)}{\Longrightarrow} L \in \DTIME{c_L^{k_L \log_{c_L} n}} = \DTIME{n^{k_L}} \PoDefArrow L \in$ ?}
+\Trditev{ DSPACE($\log n$) $\subsetneq$ PSPACE}
+\Dokaz{Funkciji $\log n$ in $n$ sta obe prostorsko predstavljivi in $\Inf_{n\to\infty} {\log n \over n } = 0$.\\
+Zato po izreku: DSPACE($\log n$) $\subsetneq$ DSPACE($n$) $\subsetneq$ PSPACE}
+\Posledica{
+Vsaj eno od naslednjih vsebovanj($\subseteq$) mora biti strogo(torej: $\subsetneq$):\\
+DSPACE($\log n$) $\subseteq$ P $\subseteq$ NP $\subseteq$ PSPACE = NSPACE.
+}
+Vprašanje \PNP:\fixme\\
+Zakaj nas zanima?
+...
+gotovo zmoremo deterministično rešiti v eksponentnem času...
+...
+Če je $L \in$ NP$\Rightarrow \exists k: L \in $NTIME($n^k$) $\Rightarrow \exists : c_L : L \in $DTIME($c_L^{n^k}$). ... V praksi to ni zanimivo.
+Ali vsaj enega takega problema res ne moremo rešiti v polinomskem času?
+Ali ... res ni močnejši od determinističnega polinomsko omejenega Turingovega stroja.
+\br
+Ali konstrukcija problema v NP res ni težja od preverjanja rešitve?
+\br
+Strategija reševanja \PNP:\\
+Domnevamo \PniNP in skušamo dokazati.\\
+Poišči najtežje probleme v NP in poskusi za enega izmed njih dokazati, da ni v P.\\
+\fixme slika P v NP \\
+Nek problem iz NP je med najtežjimi, kadar znamo vsak drug problem iz NP rešiti s prevedbo na tega.\\
+Torej, kadar lahko reševanje prvega problema nadomestimo z reševanjem drugega problema.\\
+Splošno o prevedbah:\\
+\Def{Jezik $L$ je \textbf{R-prevedljiv} na jezik $L_0$, kadar obstaja deterministični Turingov stroj $M$ z lastnostjo $R$, ki za vsak vhod $x$ vrne izhod $M(x)$.
+da velja $x \in L \Leftrightarrow M(x) \in L_0$.\\
+\fixme slika %(L x)==M,R==>(M(x) L_0)
+S pomočjo $M$ vprašanje $x \in^{?} L$ nadomestimo z vprašanjem $M(x) \in^{?} L_0$
+}
+\Def{Jezik $L_0$ pravimo, da je \textbf{C-težak} glede na prevedbo ($\overset{R}{\leq}$), če za vsak $L \in \mathcal{C} : L \overset{R}{\leq} L_0$\\
+\fixme slika\\%mathcal C krog, črtkane puščice do L_0 v krogu
+Jezik $L_0$ ni nujno v $\mathcal{C}$, razen v določenih primerih.}
+\Def{Jezik $L_0$ pravimo, da je \textbf{C-poln} glede na prevedbo ($\overset{R}{\leq}$), če je $L_0 \in \mathcal{C}$ in hkrati C-težak.}
+\br
+Vprašanje \PNP in prevedbe:\\
+Za reševanje vprašanja \PNP vzamemo:\\
+$\mathcal{C}$ = NP\\
+$\mathcal{R}$ = polinomsko časovno omejen deterministični Turingov stroj (oz. logaritemsko prostorsko omejen stroj)\\
+\br
+\prevedba{R} -- Polinomska časovna prevedba \prevedba{p}\\
+(Logaritemska prostorska prevedba \prevedba{\log})
+\Def{Jezik $L$ je polinomsko prevedljiv na jezik $L_0$ ($L \mprevedba{p} L_0$), če obstaja polinomsko časovno omejen Turingov stroj $M$, ki za vsak vhod $x$ vrne izhod $M(x)$, za katerega je $x \in L \Leftrightarrow M(x) \in L_0$
+Opomba: Stroj $M$ vprašanje $x \in^? L$ nadomesti z vprašanjem $p(x) \in L_0$ v polinomsko omejenem času.}
+%slika L prevedba L_0 .... x \in L polinomski čas M(x) ,\in L0
+Zakaj smo izbrali ravno tako lastnost $R$?
+\odmakni{Zato ker omogoča da}{
+besedo $M(x)$ sestavimo v polinomskem času $p(|x|)$ (časovna omejitev stroja $M$)\\
+zato je $|M(x)| \leq p(|x|)$ % dolžina transformiranega problema je kvečjemu polinomsko večja
+}
+\Lema{Naj bo jezik $L \mprevedba{p} L_0$\\%menda ful važno, also dokaz za DN
+\odmakni{Tedaj velja}{
+Če je $L_0 \in$ P $\Rightarrow L \in$ P
+Če je $L_0 \in$ NP $\Rightarrow L \in$ NP
+}}
+Kaj pa druga možnost, torej \prevedba{\log}.\\
+\Def{\textbf{Pretvornik} z logaritemsko prostorsko omejitvijo je deterministični Turingov stroj, ki:\\%transducer
+ima en vhodni trak\\
+ima en izhodni trak\\
+ima en delovni trak\\
+in se vedno ustavi.
+}
+\fixme slika stroja\\
+Jezik $L$ je logaritemsko prostorsko prevedljiv na $L_0$ ($L \mprevedba{\log} L_0$), če obstaja logaritemsko omejen pretvornik $M$, ki za vsak vhod $x$ vrne izhod $M(x)$, tak da je $x \in L \Leftrightarrow M(x) \in L_0$.\\
 
+\Lema{Naj bo jezik $L \mprevedba{\log} L_0$.\\
+\odmakni{Tedaj velja}{
+$L_0 \in$ P $\Rightarrow L \in$ P
+}}
+%kazal neko knjigo garry in johnson? menda bi moral poznat.
+\sect{Dokazovanje NP-polnosti}
+\Trditev{Kompozitum dveh polinomsko zahtevnih prevedb je polinomsko zahtevna prevedba.\\
+Prevedba je torej tranzitivna:
+\[ L \mprevedba{p} L_0 \wedge L_0 \mprevedba{p} L_1 \Rightarrow L \mprevedba{p} L_1 \]
+\fixme slika tranzitivnost
+}%enako za log. space.
+To odpira možnosti za dokazovanje NP-polnosti in težkosti, jezika $L_1$ tako, da nanj prevedemo nek NP-poln/težak problem $L_0$.\\
+\fixme slika %NP krog ... več puščic v L0, L0->L1 in slika L_0 je zunaj NP kroga L_0->L_1
+%če je L_0 NP poln in hkrati L_0 preved{p}i L_1 in L_1 in NP => L_1 je np poln ... prva slika 
+%če je L_0 NP težek in hkrati L_0 preved{p}i L_1 in L_1 in NP => L_1 je np težek ... np težek ni nujno v NP, lahko je težji
+%naslednjič pokažemo prvi znan NP-poln problem.
+%-----------------------predavanja 13------------------------------
+\fixme slika\\%NP, notr NPC(np-complete)... vse NP in lažje se prevede (lol, pušcice) na NPC. Ne ve se kje je NPC meja.
+%tole je v 70' mučilo nekatere, lol
+Kako dokažemo NP-polnost prvega NP-polnega problema (torej, če noben drug ni znan) in ali taki problemi sploh obstajajo?\\
+%S.Cook(1972) in Leonid Levin (1973)(iskanje..)
+\subsect{Problem izpolnjivosti Boolovih izrazov}%oz. Boolovih
+\Def{\textbf{Boolove oz. logične izraze} sestavljajo:
+\begin{items}
+\item Spremenljivke -- $x_1,x_2,\dots,x_n$
+\item Operatorji -- $\vee, \wedge, \not, \dots$
+\end{items}
+Boolov izraz je \textbf{izpolnjiv}, če lahko vrednosti spremenljivk priredimo tako, da izraz lahko dobi vrednost 1.
+Možnih prireditev je $2^m$, kjer je $m$ število spremenljivk, ki nastopajo v izrazu.
+}
+\Primer{$x\wedge\overline{x}$ je primer neizpolnjivega izraza.}
+\Izrek{Problem izpolnjivosti je NP-poln odločitveni problem. Problemu pripada jezik $L_{SAT}$, ki vsebuje kode vseh izpolnjivih Boolovih izrazov.
+\[ L_{SAT} = \{ w\in{0,1}^* \| w \mbox{ je koda izpolnjivega izraza}\}\]%besede w so "kratke" v primerjavi z dolžino E
+\fixme slika\\%problem izpolnjivosti - dve škatli.. izpolnjivi E | neizpolnjivi .... iz E v w v krogu Lsat, šeen krog okrog
+}
+\Trditev{$L_{SAT} \in $ NP}
+\Dokaz{$w \in L_{SAT} \Rightarrow \exists$ nedeterministični Turingov stroj $T$, tak:
+\begin{items}
+\item v vhodni besedi poišče spremenljivke
+\item ugane rešitev (priredi vrednosti)
+\item preveri rešitev v polinomskem času
+\end{items}
+%zdj pride "tatežji del" :P
+\Trditev{$L_{SAT}$ je NP-težek}
+\Dokaz{Dokazati moramo: 
+	\[ \forall L, L \in \NP{}: L \mprevedba{\log} L_{SAT} \]
+Raje govorimo o Turingovih strojih:
+	\[ \forall T, L(T) \in \NP{}: L(T)\mprevedba{\log} L_{SAT} \]
+Sedaj gledamo nedeterministične Turingove stroje:
+	\[ \forall \mbox{polinomsko časovno omejen nedeterministični stroj } T: L(T)\mprevedba{\log} L_{SAT} \]
+Po definiciji \prevedba{\log}:
+	\[ \forall \mbox{polinomsko časovno omejen nedeterministični stroj } T: \exists \mbox{logaritemsko prostorsko omejen nedeterministični stroj } M: x \in L(T) \Leftrightarrow M(x) \in L_{SAT} \]
+%this is maybe not right
+\odmakni{Cook}{
+$\exists$ polinomsko omejen izračun:\\
+$\#\beta_0, \#\beta_1, \dots, \#\beta_Z $\\
+v katerem nedeterministični stroj $T$ sprejme $x$.
+\br
+Šele na podagi tega .. izračuna ....
+...
+..
+
+Za vsak poly... obstaja log ... obstaja poly izračun
+$\forall T \exists M \exists$ polinomsko omejen izračun v katerem nedeterministični stroj $T$ sprejme $x$. $\Leftrightarrow \exists$ prireditev vrednosti spremenljvikam Boolovega izraza $M(x)$, da ima ta vrednost 1.
+\br
+Kako na podlagi trenutnih opisov izračuna sestavimo Boolov izraz, ki bo izpolnjiv natanko tedaj, ko je izračun sprejemajoč.%(tak, da opisuje stroj, ki sprejema x).
+}
+}
+%zdj je neki še težjega, ampak bomo šli po točkah
+}
+\begin{enum}{1.}
+\item Izračun nedeterminističnega Turingovega stroja $T$ pri vhodu $x$ je zaporedje trenutnih opisov $\#\beta_0, \#\beta_1, \dots \#\beta_Z $\\
+Pišemo $n = |x|$, ker je $T$ polinomsko omejen, $z \leq p(n)$ za nek polinom. %da ne bo opisov preveč
+\item Poenoti se zapis izračunov (zato, da bo splošna in enostavnejša obravnava izračunov)\\
+Izračun stroja $T$ nad vhodom $x$ tako opisuje neka beseda $\#\beta_0, \#\beta_1, \dots, \#\beta_{p(n)}$, ki je dolga točno $(p(n) + 1)^2$ simbolov.
+%\item Če znake označujemo od 0 dalje, je zadnji označen z (p(n)+1)-1
+\item Uvedemo množico Boolovih spremenljivk $c_{i,s}$, kjer je $i\in{0..p{n}}$, $s\in\Gamma \cup \{\#\}$%%{0..p{n}} je dolg izračun
+\item iz spremenljivk $c_{i,s}$ bomo sestavili ... izraz $M(x)$ z lastnostjo:
+$M(x)$ je resničen pri neki prireditvi vredosti spremenljivk $c_{i,s}$.%puščica dol
+Ko spremenljivke $c_{i,s}$ z vrednostjo 1 opisujejo ravno izračun v katerem $T$, sprejme $x$.
+\item Izraz $M(x)$ so konjunkcija štirih logičnih izrazov $M(x) = A \wedge B \wedge C \wedge D$, kjer:
+\begin{items}
+\item $A$ -- spremenljivke $c_{i,s}$ z vrednostjo 1 opisuje besedo $\#\beta_0, \#\beta_1, \dots \#\beta_{p(n)}$
+\item $B$ -- $\beta_0$ opisuje začetno stanje $q_0$ in vhodno besedo $x$ stroja $T$
+\item $C$ -- $\beta_{p(n)}$ opisuje neko končno stanje stroja $T$
+\item $D$ -- $\forall \beta_i$ sledi iz $\beta_{i-1}$ z eno potezo stroja $T$
+\end{items}
+\item $A = \dots$\\
+$B = \dots$\\
+$C = \dots$\\
+$D = \dots$\\
+%(poglej v literaturi, če te zanima)
+\item Trditev: Izračun $\#\beta_0, \#\beta_1, \dots \#\beta_{p(n)}$ sprejme $x$ $\Leftrightarrow$ $M(x)$ je izpolnjiv.
+\item Dokazati je treba, da pretovrnik $M$ za konstrukcijo izraza $M(x)$ potrebuje kvečjemu $O(\log |x|)$ prostora.
+\end{enum}
+
+%hopcroft ullman, introduction to ... menda je verzija 79 bl hardcore
+%garry johnsons?
+%naprej ... kaj je P, NP, višji kompleksnosti razredi, etc.
 \end{document}
