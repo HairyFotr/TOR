@@ -279,12 +279,12 @@ Pri vprašanju ali je neka beseda v jeziku, Turingove jezike ločimo na:
     Tabela prehajanja stanj:\\
 	\begin{center}
     \begin{tabular}{ c | c c c c c}
-	& 0 & 1 & B & X & Y\\ \hline
-	$x_0$& $\langle q_1,X,D\rangle$ & -- & -- & $\langle q_3,Y,D\rangle$ & --\\
-	$x_1$& $\langle q_1,0,D\rangle$ & $\langle q_2,Y,L\rangle$ & -- & $\langle q_1,Y,D\rangle$ & --\\
-	$x_2$& $\langle q_2,0,D\rangle$ & -- & $\langle q_0,X,D\rangle$ & $\langle q_2,Y,L\rangle$ & --\\
-	$x_3$& -- & -- & -- & $\langle q_3,Y,D\rangle$ & $\langle q_4,B,D\rangle$\\
-	$x_4$& -- & -- & -- & -- & --\\
+	& 0 & 1 & X & Y & B\\ \hline
+	$q_0$& $\langle q_1,X,D\rangle$ & -- & -- & $\langle q_3,Y,D\rangle$ & --\\
+	$q_1$& $\langle q_1,0,D\rangle$ & $\langle q_2,Y,L\rangle$ & -- & $\langle q_1,Y,D\rangle$ & --\\
+	$q_2$& $\langle q_2,0,D\rangle$ & -- & $\langle q_0,X,D\rangle$ & $\langle q_2,Y,L\rangle$ & --\\
+	$q_3$& -- & -- & -- & $\langle q_3,Y,D\rangle$ & $\langle q_4,B,D\rangle$\\
+	$q_4$& -- & -- & -- & -- & --\\
 	\end{tabular}
 	\end{center}
 	\br
