@@ -1,1 +1,1 @@
-*.pdf -diff
+*.pdf -diff -crlf -merge
