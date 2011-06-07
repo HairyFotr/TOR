@@ -82,7 +82,7 @@ Leta 1900 je Nemški matematik David Hilbert objavil seznam triindvajsetih nere�
 %?več zgodovine tu :)
 Kljub temu, da je Emil Post že leta 1944 slutil, da je problem nerešljiv, je to dokončno dokazal rus Jurij Matijaševič šele leta 1970 v svojem doktorskem delu. Med reševanjem problema pa so se matematiki že prej začeli ukvarjati s formalizacijo pojma postopka oz. algoritma. Intuitivna definicija tega se glasi nekako tako:
 \Def{Algoritem je zaporedje ukazov, s katerimi se v končnem številu korakov opravi neka naloga.}
-Pri tem pa ostaja še kar nekaj odprtih vprašanj, npr.:
+Pri tem pa ostaja še kar nekaj vprašanj, npr.:
 \begin{items}
 \item Kakšni naj bodo ukazi? 
 	\begin{items}
@@ -98,7 +98,7 @@ Pri tem pa ostaja še kar nekaj odprtih vprašanj, npr.:
 \item V kakšnem pomnilniku so ukazi shranjeni?
 	\begin{items}%?verjetno ista vprašanja kot pri št. ukazov?
 	\item Končnem - ali s končnim zaporedjem ukazov res lahko mogoče rešimo vsako nalogo?
-	\item Neskončnem - \fixme%?
+	\item Neskončnem - ali je to praktično uporaben model pomnilnika?
 	\end{items}
 \end{items}
 Nekateri zgodnji poskusi formalizacije pojma algoritma so:%? zgodovinsko zaporedje, letnice, imena modelov, moar info
@@ -896,9 +896,34 @@ $(\lambda x . x x) (\lambda x . x x)$ se zacikla
 Model je podoben Turingovemu stroju, z naslednjimi spremembami:
 \begin{items}
 \item Stroj s traku lahko le bere znake
-\item Uporablja posebno vrsto znakov
+\item Uporablja posebno vrsto za znake
 \end{items}
-\fixme - slika
+\begin{tikzturing}
+	\node [on chain=trak] {Trak};
+	\foreach \x in {1,2,...,5} {
+		\node [cell] {$A_{\x}$};
+	}
+	\node      [cell]           {\ ...\ \ };
+	\node (Ai) [cell, selected] {$A_i$};
+	\node      [cell]           {\ ...\ \ };
+	\node      [cell]           {$A_n$};
+	\node      [cell]           {\color{gray}$B$};
+	\node      [cell]           {\color{gray}$B$};
+	\node      [cell]           {\ ...\ \ };
+	\node      [cell, end]      {};
+
+	%?must be a better way, zadnja črta niti ni naravnost
+	\node (ne) at (110bp, 70bp) [head, minimum height=1.5cm, minimum width=3cm]  {Nadzorna enota};
+	\draw (ne.south) -- (110bp, 25bp) -- (137.5bp, 25bp) [->] to (Ai.north);
+	\node [below] at (Ai.south) {Čitalno okno};
+
+	\node (vrsta) at (200bp, 70bp) [head, minimum height=0.6cm, minimum width=1.2cm]  {};
+	\node (vrsta2) at (vrsta.east) [head, minimum height=0.6cm, minimum width=1.2cm]  {};
+
+	\draw (ne.east) [<-] to (vrsta.west);
+	\draw (ne.north) -- (110bp, 110bp) -- (250bp, 110bp) -- (250bp, 70bp) [->] to (vrsta2.east);
+\end{tikzturing}
+
 \odmakni{Korak stroja}{Iz celice pod oknom in iz začetka vrste prebere po en znak. Na podlagi teh dveh znakov in stanja premakne okno, nov znak da na konec vrste in preide v novo stanje.}
 
 %iz jezika? how? najprej: graf: opis problema pride v začetno vozlišče, nato po grafu potuje in se spreminja, dokler ne pride v končno stanje - rezultat. besedi se odreže prvi znak in glede na to se izbere pot v grafu, ali spremeni besedo, etc.. stroj to simulira.
@@ -912,34 +937,37 @@ Model je podoben Turingovemu stroju, z naslednjimi spremembami:
 Imamo abecedo $\Sigma$, ter končno zaporedje produkcij:\\
 \[ x_1 \rightarrow y_1 \]
 \[ x_2 \rightarrow y_2 \]
-\[ \dots \]
+\[ \ \ \ \dots \]
 \[ x_n \rightarrow y_n \]
 \[ x,y \in \Sigma^* \]%string v string
 \\
 Produkcija preoblikuje besedo tako, da v besedi nadomesti skrajno levi pojav $x_i$ z $y_i$. %slikca beseda prej potem... x1->y1
-%samo leva izpeljava, WTF?
-Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končno. V vsakem koraku se trenutna beseda preoblikuje s najbolj levo možno produkcijo.
+Algoritem je zaporedje korakov, ki postopno preoblikuje začetno besedo v končno. V vsakem koraku se trenutna beseda preoblikuje z najbolj levo možno produkcijo.
 
 \Povzetek{Algoritem po Markovu je gramatika.\\
 	Računanje po Markovu je preoblikovanje vhodne besede z dano gramatiko.\\
 	Funkcija je izračunljiva po Markovu, če njeno vrednost računa kaka gramatika}
-\Neurejeno
 %poudarki: kaj imajo skupnega?
 %razumno zmogljivi - končno različnih ukazov, vsak ukaz se izvede v končno korakih / času, v enem koraku se opravi končno veliko dela, učinek ukaza je predvidljiv(tudi nedeterminističnem... mjbi kvantni ne).
 %potencialno neskončen spomin brez omejitev dostopa
-
-%zdj pa neki za lepe sanje:
-%vsi so se matral še kj več narest
-\sect{Church-Turingova teza}
+\subsect{Povzetek modelov}
+Vsem omenjenim modelom je skupno, da so razumno zmogljivi:
+\begin{items}
+\item Končno mnogo ukazov
+\item Ukaz se izvede v končnem času
+\item Ukaz opravi končno mnogo računanja
+\item Učinek ukaza je predvidljiv%tudi pri nedeterminističnem... mogoče pri kvantnih ne
+\end{items}
+Skupno jim je tudi to, da je pomnilnik potencialno neskončen in brez omejitev dostopa.
+\subsect{Church-Turingova teza}
 Church je postavil domnevo: \Quote{algoritem} $\Longleftrightarrow$ algoritem po Churchu ($\lambda$-račun)\\%lol, kar sm js reku je algoritem :P glej sigma pri Churchu... Gödel ga je nekoliko zavrnil, vmes turing neodvisno do podobnega
 Turing je postavil domnevo: \Quote{algoritem} $\Longleftrightarrow$ algoritem po Turingu (Turingovi stroji)
 \br
-%Kdo je imel prav? oba, lol
-%lol, trolla moje latex skille :)
-Church-Turingova teza: \Quote{algoritem} $\Longleftrightarrow$ algoritem po Turingu ali po katerem izmed ostalih ekvivalentnih modelov.%bolj točno program turing stroja in turing zato, ker je najbl cute
+\textbf{Church-Turingova teza} pravi, da je \Quote{algoritem} opis postopka reševanja nekega problema na Turingovem stroju, ali na kateremkoli izmed ekvivalentnih modelov.%bolj točno program turing stroja in turing zato, ker je najbl cute
 %-----------------------predavanja 5-------------------------------
+\begin{neurejeno}
 \begin{comment}
-%what is this I don't even... isto kot povzetki zgoraj, le za TS
+%mislm, da smo vglavnem ponavljali
 \br
 Kaj je doprinos Church-Turingove teze?
 %%1
@@ -1090,41 +1118,38 @@ Vsaka celica je neposredno dosegljiva prek naslova
 Program naj bo na traku, ne v glavi
 %von neumann itak
 %trak ->pomilnik, celica pom lokacija, nadz enota CPE
+\end{neurejeno}
 
 %-----------------------predavanja 6-------------------------------
 \sect{Reševanje računskih problemov}%ne osebnih, lol
-Vrste računskih problemov lahko delimo na:
+Računske probleme lahko delimo na:
 \begin{items}
-\item Odločitvene - odgovorijo na dano vprašanje z DA ali NE %decision yes/no... ali ima graf Hamiltonov cikel, ali je št prašzevilo
-\item Iskalne - sprašujejo po elementu množice, ki ima neko lastnost
-\item Preštevalne - dajo število elementov v množici, ki imajo neko lastnost
-\item Naštevalne - generirajo vse elemente v množici, ki imajo neko lastnost
+\item \textbf{Odločitvene} -- sprašujejo po odgovoru z DA ali NE %decision yes/no... ali ima graf Hamiltonov cikel, ali je št praštevilo
+\item \textbf{Iskalne} -- sprašujejo po elementih množice, ki imajo neko lastnost
+\item \textbf{Preštevalne} -- sprašujejo po številu elementov množice, ki imajo neko lastnost
+\item \textbf{Naštevalne} -- zahtevajo generiranje vseh elementov množice, ki imajo neko lastnost
 \end{items}
 Odločitevni problemi so najenostavnejši, zato se jim bomo tu bolj posvetili.
 
 \subsect{Jezik odločitvenih problemov}
 Problemu priredimo formalen jezik (množico besed nad neko abecedo).
 \br
-S $P$ označujemo odločitveni problem (npr. $P$=\Quote{Ali je število $n$ praštevilo?}).\\
-Ko v problem $P$ vstavimo namesto $n$ nek konkretni podatek dobimo nalogo $p$. (npr. \Quote{Ali je 19871 praštevilo?}. Vsaka naloga ima odgovor DA ali NE, rečemo tudi, da je naloga pozitivna ali negativna.
-V opisu naloge so vedno konkretni podatki.
-Prek kodirne funkcije $\langle\rangle$ dobi vsaka naloga $p$ neko kodo $\langle p\rangle\in\Sigma^*$, ki jo razume nek Turingov stroj.
-Naj bo $\langle \rangle :P\rightarrow \Sigma^*$. Zahtevamo, da je $\langle\rangle$ injektivna $(p \neq p' \Rightarrow \langle p \rangle \neq \langle p' \rangle$.%why... a ne bi blo kul met kr vse na isto?
-Naj bo jezik problema P definiran kot:
-\[ \mathcal{L}(P) \PoDef \{ \langle p \rangle \in \Sigma^*\ |\ \mbox{p je pozitivna naloga problema P} \} \]
-
-\fixme pravokotnik P s squigly črto po sredi... pozitivne/negativne naloge in pravokotnik Sig* s podmnožico L(P) in puščica iz pozitivnih v L prek kodirne funkcije <>
-
-Torej naloga $p\in P$ je pozitivna, $\Leftrightarrow \langle p \rangle \in \mathcal{L}(P)$.
-Računanje odgovora na nalogo p lahko zamenjamo z ugotavljanjem, ali je beseda $\langle p \rangle$v jeziku $\mathcal{L}(P)$.
-%ne vemo a je na pozitivna al negativna... lažje je videt na drugi stran, če se presika v L(P)
-
-\Def{Naj bo $P$ odločitveni problem. Pravimo, da je:
-P je odločljiv, kadar je jezik problema $\mathcal{L}(P)$ rekurziven.
-P je neodločljiv, kadar jezik problema $\mathcal{L}(P)$ ni rekurziven
-P je poldločljiv, kadar je jezik problema $\mathcal{L}(P)$ Turingov(rekurzivno prešteven).%odločljivi, ampak se včasih ne ustavi
-}
+Odločitveni problem ozačujemo s $P$ (npr. $P=$ \Quote{Ali je število $n$ praštevilo?}). Ko v problem vstavimo namesto $n$ nek konkretni podatek dobimo nalogo, ki jo označimo s $p$. (npr. $p=$ \Quote{Ali je 19871 praštevilo?}). Vsaka odločitvena naloga je pozitivna ali negativna (ima odgovor DA ali NE).
+Prek kodirne funkcije $\koda{}$ dobi vsaka naloga $p$ svojo kodo $\koda{p}\in\Sigma^*$, ki jo razume nek Turingov stroj.\\
+Če definiramo kodirno funkcijo kot $\koda{} : P \rightarrow \Sigma^*$ in zahtevamo, da je injektivna ($(p \neq p' \Rightarrow \koda{p} \neq \koda{p'}$), potem lahko jezik problema $P$ definiramo kot:
+\[ L(P) \PoDef \{ \koda{p}\in\Sigma^* \| p \mbox{ je pozitivna naloga problema } P \} \]
+\fixme slika -- preslikava pozitivnih nalog prek kodirne funkcije v L(P)%pravokotnik P s squigly črto po sredi... pozitivne/negativne naloge in pravokotnik Sigma* s podmnožico L(P) in puščica iz pozitivnih v L prek kodirne funkcije <>
+\br
+Naloga $p \in P$ je torej pozitivna, če je koda naloge v jeziku problema. Računanje odgovora na nalogo $p$ tako lahko zamenjamo z ugotavljanjem, ali je beseda $\koda{p}$ v jeziku $L(P)$.
+\br
+Pravimo, da je problem $P$:
+\begin{items}
+\item \textbf{Odločljiv}, če je njegov jezik $L(P)$ rekurziven.
+\item \textbf{Neodločljiv}, če njegov jezik $L(P)$ ni rekurziven.
+\item \textbf{Poldločljiv}, če je njegov jezik $L(P)$ Turingov (rekurzivno prešteven).%odločljivi, ampak se včasih ne ustavi
+\end{items}
 %problem smo prenesli na področje jezikov..
+\begin{neurejeno}
 \subsect{Neodločljivi problemi}
 %Turing 1936
 Težave delajo stroji, ki se ne ustavijo.
@@ -1387,15 +1412,15 @@ Nekaj primerov in kam v hiearhijo spadajo:
 \item Vprašanje, ali TS razpoznava končen jezik $\in \Sigma_1^0$
 \item Vprašanje, ali je funkcija totalna $in \Pi_2^0$
 \end{items}
-%REcimo, da imamo nek nerešljiv problem... kako poenostavimo?
+%Recimo, da imamo nek nerešljiv problem... kako poenostavimo?
 %kaj je tisto ^0... če bi kvantificirali funkcije, bi delali s predikati 2. reda
 %dobimo analitično hiearhijo
 
 %lol, tukaj je čudovit pisan svet vseh možnih zadev..... ampak ni uporaben :)
 
-%@wtf problem s č-jem v naslovu
-\chap{Zahtevnost racunanja}
+%@wtf, problem s č-jem v naslovu pri label v \chap
 %\chap{Zahtevnost računanja}
+\chapter{Zahtevnost računanja}
 %za vsak problem v spodnji polovici obstaja algoritem
 %Toda: intuitivno lahko rešimo večje naloge ali bolj zapletene naloge... če je na voljo več računskega vira
 %kako to intuicijo formalizirati?
@@ -1637,7 +1662,7 @@ Vsaka prostorsko predstavljiva funkcija $S(n)>n$, je hkrati popolnoma prostorsko
 }
 \Def{Funkcija raste \Quote{neznatno hitreje}, če velja $\inf ({ S(n) \over S(n)' }) = 0$}
 \Izrek{Če sta $S_1(n) \geq \log_2 n$, $S_2(n) \geq \log_2 n$ in $\inf { S_1(n) \over S_2(n) = 0}$ in je $S_2(n)$ popolnoma prostorsko predstavljiva, potem obstaja jezik $L\in\DSPACE{S_2(n)} \wedge L \notin \DSPACE{S_1(n)}$.\\
-Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote{precej gosta}}%"lol" ... also dokaz tega je precej težak, je pa v stari skripti
+Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote{precej gosta}}%"lol" ... also dokaz tega je precej težek, je pa v stari skripti
 
 \subsect{Hiearhija razredov DTIME}
 \Odmakni{?}{Kako \Quote{gosta} je hiearhija DTIME}
@@ -1829,10 +1854,10 @@ da velja $x \in L \Leftrightarrow M(x) \in L_0$.\\
 \fixme slika %(L x)==M,R==>(M(x) L_0)
 S pomočjo $M$ vprašanje $x \in^{?} L$ nadomestimo z vprašanjem $M(x) \in^{?} L_0$
 }
-\Def{Jezik $L_0$ pravimo, da je \textbf{C-težak} glede na prevedbo ($\overset{R}{\leq}$), če za vsak $L \in \mathcal{C} : L \overset{R}{\leq} L_0$\\
+\Def{Jezik $L_0$ pravimo, da je \textbf{C-težek} glede na prevedbo ($\overset{R}{\leq}$), če za vsak $L \in \mathcal{C} : L \overset{R}{\leq} L_0$\\
 \fixme slika\\%mathcal C krog, črtkane puščice do L_0 v krogu
 Jezik $L_0$ ni nujno v $\mathcal{C}$, razen v določenih primerih.}
-\Def{Jezik $L_0$ pravimo, da je \textbf{C-poln} glede na prevedbo ($\overset{R}{\leq}$), če je $L_0 \in \mathcal{C}$ in hkrati C-težak.}
+\Def{Jezik $L_0$ pravimo, da je \textbf{C-poln} glede na prevedbo ($\overset{R}{\leq}$), če je $L_0 \in \mathcal{C}$ in hkrati C-težek.}
 \br
 Vprašanje \PNP in prevedbe:\\
 Za reševanje vprašanja \PNP vzamemo:\\
@@ -1875,7 +1900,7 @@ Prevedba je torej tranzitivna:
 \[ L \mprevedba{p} L_0 \wedge L_0 \mprevedba{p} L_1 \Rightarrow L \mprevedba{p} L_1 \]
 \fixme slika tranzitivnost
 }%enako za log. space.
-To odpira možnosti za dokazovanje NP-polnosti in težkosti, jezika $L_1$ tako, da nanj prevedemo nek NP-poln/težak problem $L_0$.\\
+To odpira možnosti za dokazovanje NP-polnosti in težkosti, jezika $L_1$ tako, da nanj prevedemo nek NP-poln/težek problem $L_0$.\\
 \fixme slika %NP krog ... več puščic v L0, L0->L1 in slika L_0 je zunaj NP kroga L_0->L_1
 %če je L_0 NP poln in hkrati L_0 preved{p}i L_1 in L_1 in NP => L_1 je np poln ... prva slika 
 %če je L_0 NP težek in hkrati L_0 preved{p}i L_1 in L_1 in NP => L_1 je np težek ... np težek ni nujno v NP, lahko je težji
@@ -1963,4 +1988,5 @@ $D = \dots$\\
 %hopcroft ullman, introduction to ... menda je verzija 79 bl hardcore
 %garry johnsons?
 %naprej ... kaj je P, NP, višji kompleksnosti razredi, etc.
+\end{neurejeno}
 \end{document}

@@ -44,15 +44,24 @@
 \begin{tikzpicture}}{\end{tikzpicture}}
 
 %neurejeni del zapiskov
-\def\Neurejeno{
-\pagebreak
-{\Huge od tu naprej je neurejeni del zapiskov.. halp!\\}
-\color{gray}}
+%\def\Neurejeno{
+%\pagebreak
+%{\Huge Neurejeni del zapiskov.. halp!\\}
+%\color{gray}}
+\newenvironment{neurejeno}{%
+\newpage
+{\Huge Neurejen del zapiskov... halp!\\}
+\color{gray}
+}
+{\color{black}
+\newpage
+}
 
 %ker sem len za pisat, oz. na predavanjih je treba bit hiter :)
 %subsection + hint pagebreak + label
 \newcommand\chap[1]{%
-\chapter{#1}\label{chap:#1}}
+\chapter{#1}\label{chap:#1}
+}
 \def\sect{
 \pagebreak[3]\section
 }
@@ -130,7 +139,8 @@
 \newcommand\prevedba[1]{$\overset{#1}{\leq}$}
 \newcommand\mprevedba[1]{\overset{#1}{\leq}}
 
-%yeah, I suck...
+%lazystuff
+\newcommand\koda[1]{\langle\,{#1}\,\rangle}
 \def\|{\ | \ }
 \def\Inf{\displaystyle\inf}
 \def\Sup{\displaystyle\sup}
