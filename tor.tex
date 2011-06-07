@@ -370,7 +370,7 @@ V tem odseku bomo spoznali nekaj razširitev Turingovega stroja in pokazali da s
 \end{tikzpicture}
 \end{center}}
 \subsect{Nadzorna enota kot pomnilnik}
-Vsako stanje stroja, je sestavljeno iz dveh delov -- stanja avtomata, ter shrambe za tračne znake. Novo množico stanj zapišemo kot $Q=K\times\Gamma$, kjer je $K$ stara množica stanj in $\Gamma$ tračna abeceda.
+Vsako stanje stroja je sestavljeno iz dveh delov -- stanja avtomata in shrambe za tračne znake. Novo množico stanj zapišemo kot $Q=K\times\Gamma$, kjer je $K$ stara množica stanj in $\Gamma$ tračna abeceda.
 \Primer{Sestavi Turingov stroj za razpoznavanje besed, pri katerih se prvi znak ne ponovi:\\
 	Stroj $M=\langle Q,\Sigma,\Gamma,\delta,q_0,B,F \rangle$ zapišemo kot:
 	\begin{items}
@@ -561,7 +561,7 @@ Stroj $M'$ deluje tako:
 }
 
 \subsect{Večtračni Turingov stroj}
-Večtračni Turingov stroj ima $k>1$ trakov, ki so neomejeni v obe strani. Poleg tega ima vsak trak svoje okno, ki se lahko neodvisno od ostalih premika ob vsakem koraku. Spet imamo na začetku vhodno besedo na prvem traku in je okno prvega traku na prvem znaku vhodne besede, na ostali trakovi pa so prazni.
+Večtračni Turingov stroj ima $k>1$ trakov, ki so neomejeni v obe smeri. Vsak trak ima svoje okno, ki se lahko na vsakem koraku premakne neodvisno od ostalih. Na prvem traku imamo na začetku ponovno vhodno besedo, okno prvega traku pa na prvem znaku vhodne besede. Ostali trakovi so prazni.
 
 \begin{center}
 \begin{tikzturing}[cell11/.style={cell1,fill=white}, cell22/.style={cell2,fill=white}]
@@ -597,7 +597,7 @@ Večtračni Turingov stroj ima $k>1$ trakov, ki so neomejeni v obe strani. Poleg
 
 \Def{Korak stroja $\delta$ opišemo kot:
 	\[\delta = Q \times \Gamma^k \rightarrow Q\times(\Gamma\times\{ L,D,- \})^k \]
-	Torej, na vsakem koraku dobimo iz trenutnega stanje, ter tračnega simbola vsakega traku, neko novo stanje, ter za vsak trak neodvisno nov simbol in premik.}
+        Na vsakem koraku torej iz trenutnega stanja in tračnega simbola na vsakem traku dobimo neko novo stanje ter za vsak trak neodvisno nov simbol in premik.}
 
 \Trditev{Večtračni Turingov stroj je enako močen kot osnovni model.}
 \Dokaz{
