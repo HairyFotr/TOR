@@ -1059,7 +1059,7 @@ predpostavka: $g$ je rekrivna\\
 Kako poljuben Turingov stroj zakodirati z abecedo $\{0,1\}$?
 Zadošča da zakodiramo program $\delta$ Turingovega stroja.%kj več je waste of time... sj verjamete :)
 Naj bo $T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle$ poljuben stroj.%bomo samo delta, ostale se da razbrat ven
-Če je $\delta(q_1,a_j)=\langle q_k, a_l, S_m \rangle$ ukaz programa $\delta$, ga zakodiramo kot:
+Če je $\delta(q_i,a_j)=\langle q_k, a_l, S_m \rangle$ ukaz programa $\delta$, ga zakodiramo kot:
 	\[ K=0^i 1 0^j 1 0^k 1 0^l 1 0^m\]
 Ko zakodiramo vseh R ukaov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ iz katerih bomo sestavili kodo Turingovega stroja:
 	\[ <T> = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
