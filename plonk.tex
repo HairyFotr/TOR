@@ -66,5 +66,20 @@ funkcije ki smo jih naredili med vajami:
 
 \end{itemize}
 
+\subsection*{Riceov izrek}
+
+Če je jezikovna lastnost turingovega stroja trivialna, potem je turingov stroj rekurziven.\\
+primer:\\
+$M_e$ je turingov stroj ki opisuje jezik $L_e = \lbrace <M> | L(M) \neq \emptyset \rbrace $
+Temu turingovem stroju pripada jezikovna lastnost $ L(M) \neq \emptyset $. 
+Jezikovna lastnost je trivialna če velja za bodisi vse turingove stroje, ali pa za nobenega.\\
+
+Za dokaz z Riceovim izrekom potrebujemo najti dva turingova stroja, enega ki vsebuje to lastnost, drugega ki je ne vsebuje.
+\begin{itemize}
+\item $L(M_1) = \Sigma^*$ - ta stroj ima lastnost $ L(M) \neq \emptyset $
+\item $L(M_2) = \emptyset $ - ta stroj nima lastnosti $ L(M) \neq \emptyset $
+\end{itemize}
+ker taka dva stroja obstajata, vidimo da \textbf{lastnost ni trivialna} torej $M_e$ ni rekurziven
+
 \end{multicols}
 \end{document}
