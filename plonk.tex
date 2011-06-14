@@ -22,14 +22,20 @@ Ko zakodiramo vseh R ukaov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ 
 	\[ <T> = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
 
 \subsection*{Prevedbe - Seznam jezikov}
-$L_d = \lbrace w_i \ | \ w_i \not\in L(M_i) \rbrace \ \ \not\in TJ $ \\
-$L_{\overline{d}} = \lbrace w \ | \ w_i \in L(M_i) \rbrace \ \ \in TJ $ \\
-$L_u = \lbrace <M,w> \ | \ w \in L(M) \rbrace \ \ \in TJ $ \\
-$L_{\overline{u}} = \lbrace <M,w> \ | \ w \not\in L(M) \rbrace \ \ \not\in TJ $ \\
-$L_h = \lbrace <M> \ | \ M \ \text{vstavi na vseh vhodih} \rbrace \ \ \not\in TJ $ \\
-$L_e = \lbrace <M> \ | \ L(M) = \emptyset \rbrace \ \ \not\in TJ $ \\
-$L_{ne} = \lbrace <M> \ | \ L(M) \neq \emptyset \rbrace \ \ \in TJ $ \\
-$L_{eq} = \lbrace <M_1,M_2> \ | \ L(M_1) = L(M_2) \rbrace \ \ \not\in TJ $ \\
+\begin{itemize}
+
+\item $L_d = \lbrace w_i \ | \ w_i \not\in L(M_i) \rbrace \ \ \not\in TJ $ 
+\item $L_{\overline{d}} = \lbrace w \ | \ w_i \in L(M_i) \rbrace \ \ \in TJ $ 
+\item $L_u = \lbrace <M,w> \ | \ w \in L(M) \rbrace \ \ \in TJ $ 
+\item $L_{\overline{u}} = \lbrace <M,w> \ | \ w \not\in L(M) \rbrace \ \ \not\in TJ $ 
+\item $L_h = \lbrace <M> \ | \ M \ \text{vstavi na vseh vhodih} \rbrace \ \ \not\in TJ $ 
+\item $L_e = \lbrace <M> \ | \ L(M) = \emptyset \rbrace \ \ \not\in TJ $ 
+\item $L_{ne} = \lbrace <M> \ | \ L(M) \neq \emptyset \rbrace \ \ \in TJ $ 
+\item $L_{eq} = \lbrace <M_1,M_2> \ | \ L(M_1) = L(M_2) \rbrace \ \ \not\in TJ $ 
+\item $L_{|eq|} = \lbrace <M_1,M_2> \ | \ |L(M_1)| = |L(M_2)| \rbrace \ \ \not\in TJ $ 
+\item $L_{ \overline{ |eq|}} = \lbrace <M_1,M_2> \ | \ |L(M_1)| \neq |L(M_2)| \rbrace \ \ \not\in TJ $ 
+
+\end{itemize}
 
 \subsection*{Rekurzivne funkcije}
 \begin{enumerate}
