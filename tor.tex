@@ -1700,7 +1700,7 @@ Lema analogno velja tudi za časovno zahtevnost in za deterministične razrede.
 }
 %-----------------------predavanja 11------------------------------
 \sect{Relacija med prostorsko in časovno zahtevnostjo}
-\Odmakni{?}{Kakšna je relacija med različnimi vrstami zahtevnosti}
+\Odmakni{?}{Kakšna je relacija med razredi različnih vrst zahtevnosti}
 Kakšen je odnos med determinističnim časom in prostorom?
 \Izrek{$\DTIME{f(n)} \subseteq \DSPACE{f(n)}$,\\
 Torej, kar lahko rešimo v času $O(f(n))$, lahko rešimo tudi na prostoru največ $O(f(n))$.}
@@ -1708,10 +1708,11 @@ Torej, kar lahko rešimo v času $O(f(n))$, lahko rešimo tudi na prostoru najve
 Torej, kar lahko rešimo na prostoru $O(f(n))$, lahko rešimo tudi v času največ $O(c^{f(n)})$.}
 Kakšen je odnos med determinističnim in nedeterminističnim časom?
 \Izrek{$L \in \NTIME{f(n)} \Rightarrow \exists c(L):L \in \DTIME{c^{f(n)}}$,\\
-Torej, kar lahko rešimo v nedeterministično v času $O(f(n))$, lahko rešimo tudi deterministično na prostoru največ $O(c^{f(n)})$.}
+Torej, kar lahko rešimo nedeterministično v času $O(f(n))$, lahko tudi deterministično rešimo največ v času $O(c^{f(n)})$.}
 %lahko si zapišemo: to nas lahko velik košta.
 Največ koliko prostora pa nas stane simulacija nedeternimizna?%savitchev izrek
-\Izrek{\odmakni{(Savitch)}{$\NSPACE{f(n)} \subseteq \DSPACE{f(n)^2}$, če je $f(n) \geq \log_2 \wedge f(n)$ popolnoma prostorsko predstavljiva. Torej, kar lahko rešimo na nedeterminističen način na prostoru $O(f(n))$, lahko na deterministični način na prostoru največ $O(f(n)^2)$.}}
+\Izrek{\odmakni{(Savitch)}{$\NSPACE{f(n)} \subseteq \DSPACE{f(n)^2}$, če je $f(n) \geq \log_2 \wedge f(n)$ popolnoma prostorsko predstavljiva.\\
+Torej, kar lahko rešimo na nedeterminističen način na prostoru $O(f(n))$, lahko na determinističen način rešimo na prostoru največ $O(f(n)^2)$.}}
 \Dokaz{%@nimaš a),b... označeno.. bummer
 \odmakni{a)}{Trivialno.}
 \odmakni{b)}{
