@@ -1612,13 +1612,13 @@ Tudi tukaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
 Analogno velja za nedeterministične stroje.}
 %-----------------------predavanja 10------------------------------
 %@wtf je linearno pospeševanje?
-\sect{Hiearhije}
-Po intuiciji: če imamo na voljo več prostora ali časa, naj bi bilo možno rešiti več problemov oz. prepoznati več jezikov.\\
+\sect{Hirearhije}
+Po intuiciji: če bi imeli na voljo več prostora ali časa, bi nam to omogočalo rešiti več problemov oz. prepoznati več jezikov.\\
 Toda: izrek o linearni pospešitvi in linearnem stiskanju.
-\Odmakni{?}{Kaj se zgodi z močjo reševanje/prepoznavanja, če prostor ali čas pomonožimo s neko počasi rastočo funkcijo?}
-Ali obstaja neka \Quote{super} prostorska ali časovna omejitev $f^*(n)$, da je vsak rekurziven jezik rešljiv v razredu DSPACE($f(n)$) oz. DTIME($f(n)$).\\
-Taka omejitev ne obstaja niti za prostor, niti za čas.\\
-\Posledica{Ostaja neskončna hiearhija razredov zahtevnosti}
+\Odmakni{?}{Kaj se zgodi z močjo reševanja/prepoznavanja, če prostor ali čas pomonožimo z neko (zelo) počasi rastočo funkcijo? Ali je možno, da nam to še vedno ne bi omogočilo rešiti večjega števila problemov?}
+Ali obstaja neka \Quote{super} prostorska ali časovna omejitev $f^*(n)$, da je vsak rekurziven jezik rešljiv v razredu DSPACE($f(n)$) oz. DTIME($f(n)$)?\\
+Taka omejitev ne obstaja niti za prostor, niti za čas. Za vsako prostorsko ali časovno omejitev obstaja jezik, ki za razpoznavanje zahteva več kot toliko prostora ali časa.\\
+\Posledica{Obstaja neskončna hiearhija razredov zahtevnosti}
 %slika str 50 v TOR2
 \Izrek{Naj bo $T(n)$ poljubna totalno rekurzivna časovna omejitev.\\
 Obstaja rekurziven jezik $L \notin \DTIME{T(n)}$}
