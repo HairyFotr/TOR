@@ -671,7 +671,7 @@ $2k$-sledni stroj $M'$
 \end{center}
 \br
 
-Stroj $M'$ torej hrani trenutni položaj na trakovih s dodatno sledjo, ki ima v ustrezni celici zapisan simbol $X$.
+Stroj $M'$ torej hrani trenutni položaj na trakovih z dodatno sledjo, ki ima v ustrezni celici zapisan simbol $X$.
 \br
 Poleg tega pa pri $M'$ potrebujemo še drugačno nadzorno enoto, ki hrani:
 \begin{items}
@@ -795,7 +795,7 @@ Gödel si je zamislil, da bi iz nekaj osnovnih funkcij z nekaj pravili lahko izp
 \br
 \fixme začetne in drevo ven%grafek vseh sestavljivih (primitivno rekurzivnih) funkcij \_/
 \br
-Konstrukcija funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije, tako, da je s tem tudi kandidat za formalni opis pojma algoritma.
+Konstrukcija funkcije opisuje tudi mehanični postopek za izračun vrednosti funkcije tako, da je s tem tudi kandidat za formalni opis pojma algoritma.
 \br
 Kasneje se je izkazalo, da ta pravila ne zadostujejo, saj obstaja npr. Ackermannova funkcija, ki narašča hitreje od vsake funkcije, ki pripada primitivno rekuzivnim:
 \[ A(m,n) = 
@@ -809,7 +809,7 @@ Kasneje se je izkazalo, da ta pravila ne zadostujejo, saj obstaja npr. Ackermann
 \]
 \\
 Kleene zato doda Gödelovim pravilom še eno pravilo sestavljanja -- minimizacijo oz. $\mu$-operacijo. %to zato, da naredi totalno, čeprov je možno parcialne
-\Def{Totalne naravne funkcije $f:N^k\leftarrow N$, ki jih je moč konstruirati iz treh začetnih funkcij, s končno mnogo uporabami treh pravil sestavljanja imenujemo \textbf{rekurzivne funkcije.}
+\Def{Totalne naravne funkcije $f:N^k\rightarrow N$, ki jih je moč konstruirati iz treh začetnih funkcij, s končno mnogo uporabami treh pravil sestavljanja imenujemo \textbf{rekurzivne funkcije.}
 \br
 Konstrukcija rekurzivne funkcije $f$ je končno zaporedje $f_1,f_2,\dots,f_L$ in je $f_L=f$, ter je vsaka funkcija $f_i$ na poti, bodisi začetna, bodisi po pravilih sestavljena iz predhodnic v tem zaporedju.%glej grafek
 \br
@@ -1542,7 +1542,7 @@ Ali, ter za kakšno ceno za prostorsko zahtevnost, lahko $k$ delovnih trakov nad
 \Izrek{Če je $L$ jezik $k$-tračnega Turingovega stroja, s prostorsko omejitvijo $S(n)$, je taka tudi omejitev eno-tračnega Turingovega stroja.}
 
 \subsect{Lastnosti časovne zahtevnosti}
-\subsubsect{Linearno stiskanje oz. krajšanje trakov}
+\subsubsect{Linearna pospešitev}
 Množica stanj je omejena, a poljubno velika.
 \Ideja{Nekaj zaporednih stanj med računanjem nadomestimo z enim novim stanjem iz neke nove množice stanj}
 Tako lahko vedno zmanjšamo število korakov za konstantni faktor.\\
@@ -1570,7 +1570,7 @@ Naj bo $f(n)={1 \over n}$, če je $n$ sod, ter $f(n)=n$, če je $n$ lih.\\%%@tis
 }
 %Opombe: zahteva, da je $inf=\infty$, pomeni, da časovna omejitev $T(n)$ v vsakem primeru (za vsako dolžino vhoda) narašča vsaj malo hitreje od $n$. Torej, za branje vhoda mora biti vsaj malo korakov na voljo za izračun.
 %Dokaz: Glej HU, QED, lol
-\Posledica{Razred jezikov, ki jih lahko razpoznamo v času $T(n)$, ostane enak, če ga pomnožimo z kako konstanto $c>0$ (če je $\Inf_{n\to\infty} {T(n) \over n} = \infty$).
+\Posledica{Razred jezikov, ki jih lahko razpoznamo v času $T(n)$, ostane enak, če ga pomnožimo s poljubno konstanto $c>0$ (če je $\Inf_{n\to\infty} {T(n) \over n} = \infty$).
 \[ \DTIME{T(n)} = \DTIME{c \cdot T(n)} \]
 }
 Kaj pa če je $\Inf_{n\to\infty} {T(n) \over n} < \infty$?\\
