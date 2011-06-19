@@ -1599,16 +1599,16 @@ Ali lahko $k>1$ delovnih trakov nadomestimo z enim samim? Kako bi to vplivalo na
 }
 Zmanjšanje števila trakov na enega časovno zahtevnost poveča s kvadratom.\\
 \Trditev{To je največja možna upočasnitev pri prehodu s $k$-trakov na en trak.}
-\Izrek{Če je $L\in\DTIME{T(n)}$ na $k>1$-tračnem Turingovem stroju,
-potem je $L\in\DTIME{T(n)^2}$ na eno-tračnem Turingovem stroju.
+\Izrek{Če je $L\in\DTIME{T(n)}$ na k-tračnem ($k>1$) Turingovem stroju,
+potem je $L\in\DTIME{T(n)^2}$ na enotračnem Turingovem stroju.
 }
 Torej $L$ zagotovo lahko rešimo v $T(n)^2$.\\
 Enako velja tudi za nedeterministične stroje.
 %note:lfloor, lceil za one zaokrožene
 \br
-Kaj pa, če se omejimo le na dva delovna traka (iz nekega $k>2$-tračnega stroja).\\
+Kaj pa zmanjšanje k-tračnega ($k>2$) stroja na dva delovna trakova?\\
 Tudi tukaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
-\Izrek{Če je $L\in\DTIME{T(n)}$ na $k>2$-tračnem Turingovem stroju, potem je $L\in\DTIME{T(n)} \cdot \log T(n)$ na dvotračnem Turingovem stroju.\br
+\Izrek{Če je $L\in\DTIME{T(n)}$ na k-tračnem ($k>2$) Turingovem stroju, potem je $L\in\DTIME{T(n)} \cdot \log T(n)$ na dvotračnem Turingovem stroju.\br
 Analogno velja za nedeterministične stroje.}
 %-----------------------predavanja 10------------------------------
 %@wtf je linearno pospeševanje?
