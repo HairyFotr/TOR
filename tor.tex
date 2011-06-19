@@ -1590,14 +1590,14 @@ Tudi za NTIME velja podobno:
 	\[ \NTIME{d \cdot n} = \DTIME{(1+\varepsilon)\cdot n},\mbox{ za poljubni konstanti $d>1$ in $\varepsilon>0$} \]
 \subsubsect{Odpravljanje trakov}
 %vse dela tudi neodvisno od modela Turingovega stroja
-Ali, ter za kakšno ceno za časovno zahtevnost, lahko $k>1$ delovnih trakov nadomestimo z enim samim?
+Ali lahko $k>1$ delovnih trakov nadomestimo z enim samim? Kako bi to vplivalo na časovno zahtevnost?
 \Primer{
 	$L=\{ ww^R\ |\ w\in\{0,1\}^* \}$\\%menda smo že imel na začetku poglavja
 	Če je $k=2$, razpoznamo $L$ v linearnem času.\\
 	Če je $k=1$ \\% levo-desno-levo....
 	Časovna zahtevnost je reda $\Theta(n^2)$
 }
-Torej, z zmanjšanjem števila trakov na enega, se zahtevnost poveča s kvadratom.\\
+Zmanjšanje števila trakov na enega časovno zahtevnost poveča s kvadratom.\\
 \Trditev{To je največja možna upočasnitev pri prehodu s $k$-trakov na en trak.}
 \Izrek{Če je $L\in\DTIME{T(n)}$ na $k>1$-tračnem Turingovem stroju,
 potem je $L\in\DTIME{T(n)^2}$ na eno-tračnem Turingovem stroju.
