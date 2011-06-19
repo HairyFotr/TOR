@@ -1666,9 +1666,9 @@ Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote
 
 \subsect{Hiearhija razredov DTIME}
 \Odmakni{?}{Kako \Quote{gosta} je hiearhija DTIME}
-Izkaže se, da je nekoliko redkejša.
-\Def{Funkcija je časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, obstaja vhod $w$, $|w|=n$, pri katerem $M$ naredi natanko $T(n)$ korakov.\\
-Funkcija je popolnoma časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, za vse vhode $w$, $|w|=n$ velja, da pri njih $M$ naredi natanko $T(n)$ korakov.\\
+Izkaže se, da je nekoliko redkejša od prostorske.
+\Def{Funkcija $T(n)$ je časovno predstavljiva, če obstaja Turingov stroj $M$ s časovno omejitvijo $T(n)$ in to tak, da za vsako dolžino $n \in \mathbb{N}$, obstaja vhod $w$, $|w|=n$, pri katerem $M$ naredi natanko $T(n)$ korakov.}
+\Def{Funkcija $T(n)$ je popolnoma časovno predstavljiva, če obstaja Turingov stroj $M$ s časovno omejitvijo $T(n)$ in to tak, da za vsako dolžino $n \in \mathbb{N}$, za vse vhode $w$, $|w|=n$ velja, da $M$ naredi natanko $T(n)$ korakov.\\
 }
 \Izrek{Če je $T_2(n)$ popolnoma časovno predstavljiva in je $\inf {T_1(n) \log(T_1(n)) \over T_2(n)} = 0$, potem obstaja jezik $L$, za katerega velja: 
 \[ L \in \DTIME{T_2(n)} \wedge L \notin \DTIME{T_1(n)} \]
