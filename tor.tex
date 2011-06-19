@@ -1612,13 +1612,13 @@ Tudi tukaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
 Analogno velja za nedeterministične stroje.}
 %-----------------------predavanja 10------------------------------
 %@wtf je linearno pospeševanje?
-\sect{Hiearhije}
-Po intuiciji: če imamo na voljo več prostora ali časa, naj bi bilo možno rešiti več problemov oz. prepoznati več jezikov.\\
+\sect{Hirearhije}
+Po intuiciji: če bi imeli na voljo več prostora ali časa, bi nam to omogočalo rešiti več problemov oz. prepoznati več jezikov.\\
 Toda: izrek o linearni pospešitvi in linearnem stiskanju.
-\Odmakni{?}{Kaj se zgodi z močjo reševanje/prepoznavanja, če prostor ali čas pomonožimo s neko počasi rastočo funkcijo?}
-Ali obstaja neka \Quote{super} prostorska ali časovna omejitev $f^*(n)$, da je vsak rekurziven jezik rešljiv v razredu DSPACE($f(n)$) oz. DTIME($f(n)$).\\
-Taka omejitev ne obstaja niti za prostor, niti za čas.\\
-\Posledica{Ostaja neskončna hiearhija razredov zahtevnosti}
+\Odmakni{?}{Kaj se zgodi z močjo reševanja/prepoznavanja, če prostor ali čas pomonožimo z neko (zelo) počasi rastočo funkcijo? Ali je možno, da nam to še vedno ne bi omogočilo rešiti večjega števila problemov?}
+Ali obstaja neka \Quote{super} prostorska ali časovna omejitev $f^*(n)$, da je vsak rekurziven jezik rešljiv v razredu DSPACE($f(n)$) oz. DTIME($f(n)$)?\\
+Taka omejitev ne obstaja niti za prostor, niti za čas. Za vsako prostorsko ali časovno omejitev obstaja jezik, ki za razpoznavanje zahteva več kot toliko prostora ali časa.\\
+\Posledica{Obstaja neskončna hiearhija razredov zahtevnosti}
 %slika str 50 v TOR2
 \Izrek{Naj bo $T(n)$ poljubna totalno rekurzivna časovna omejitev.\\
 Obstaja rekurziven jezik $L \notin \DTIME{T(n)}$}
@@ -1653,22 +1653,22 @@ Torej smo v protislovju in ne obstaja tak stroj, ki bi sprejel jezik $L$ s časo
 \Odmakni{?}{Kako \Quote{gosta} je hiearhija DSPACE}
 Za koliko moramo povečati prostorsko omejitev $S(n)$, da dobimo nov, večji razred?\\
 Pomembne so \Quote{lepe} funkcije, s katerimi opisujemo prostorsko omejitev. Če je $S(n)$ \Quote{lepa}, je dovolj, da neka nova funkcija $S(n)'$ narašča le \Quote{neznatno hitreje} od $S(n)$, pa že velja, da je \DSPACE{S(n)} drugačen od DSPACE($S(n)'$).\\%"kul"
-\Def{Funkcija je \Quote{lepa}, če je popolnoma prostorsko predstavljiva(konstruktibilna), torej kadar obstaja Turingov stroj s prostorsko omejitvijo $S(n)$, tak, da za vsako dolžino $n \in \mathbb{N}$ obstaja vhod $w$, $|w|=n$, pri katerem $M$ uporabi natanko $S(n)$ celic.\\
-Množica prostorsko predstavljivih funkcij je bogata, torej vsebuje običajne funkcije: $\log n, n, 2^n, \dots$.
-\br
-Funkcija je popolnoma prostorsko predstavljiva, kadar obstaja Turingov stroj s prostorsko omejitvijo $S(n)$, tak da za vsako dolžino $n \in \mathbb{N}$ vsi vhodi $w$, $|w|=n$, porabijo natanko $S(n)$ celic pri izvajanju na $M$.
+\Def{Funkcija je prostorsko predstavljiva (konstruktibilna), kadar obstaja Turingov stroj $M$ s prostorsko omejitvijo $S(n)$, tak da za vsako dolžino $n \in \mathbb{N}$ obstaja vhod $w$, $|w|=n$, pri katerem $M$ porabi natanko $S(n)$ celic.\\
+Množica prostorsko predstavljivih funkcij je bogata in vsebuje: $\log n, n, 2^n, n! \dots$}
+\Def{Funkcija je popolnoma prostorsko predstavljiva, kadar obstaja Turingov stroj $M$ s prostorsko omejitvijo $S(n)$, tak da za vsako dolžino $n \in \mathbb{N}$ pri vseh vhodih $w$, $|w|=n$, $M$ porabi natanko $S(n)$ celic.
 \br
 Vsaka prostorsko predstavljiva funkcija $S(n)>n$, je hkrati popolnoma prostorsko predstavljiva.
 }
-\Def{Funkcija raste \Quote{neznatno hitreje}, če velja $\inf ({ S(n) \over S(n)' }) = 0$}
+\Def{Funkcija je \Quote{lepa}, če je popolnoma prostorsko predstavljiva.}
+\Def{Funkcija raste \Quote{neznatno hitreje}, če velja $\inf ({ S(n) \over S(n)' }) = 0$.}
 \Izrek{Če sta $S_1(n) \geq \log_2 n$, $S_2(n) \geq \log_2 n$ in $\inf { S_1(n) \over S_2(n) = 0}$ in je $S_2(n)$ popolnoma prostorsko predstavljiva, potem obstaja jezik $L\in\DSPACE{S_2(n)} \wedge L \notin \DSPACE{S_1(n)}$.\\
-Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote{precej gosta}}%"lol" ... also dokaz tega je precej težek, je pa v stari skripti
+Torej obstaja neskončna hiearhija razredov prostorske zahtevnosti, ki je \Quote{precej gosta} (infimum).}%"lol" ... also dokaz tega je precej težek, je pa v stari skripti
 
 \subsect{Hiearhija razredov DTIME}
 \Odmakni{?}{Kako \Quote{gosta} je hiearhija DTIME}
-Izkaže se, da je nekoliko redkejša.
-\Def{Funkcija je časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, obstaja vhod $w$, $|w|=n$, pri katerem $M$ naredi natanko $T(n)$ korakov.\\
-Funkcija je popolnoma časovno predstavljiva, če obstaja Turingov stroj z omejitvijo $T(n)$, da za vsako dolžino $n \in \mathbb{N}$, za vse vhode $w$, $|w|=n$ velja, da pri njih $M$ naredi natanko $T(n)$ korakov.\\
+Izkaže se, da je nekoliko redkejša od prostorske.
+\Def{Funkcija $T(n)$ je časovno predstavljiva, če obstaja Turingov stroj $M$ s časovno omejitvijo $T(n)$ in to tak, da za vsako dolžino $n \in \mathbb{N}$, obstaja vhod $w$, $|w|=n$, pri katerem $M$ naredi natanko $T(n)$ korakov.}
+\Def{Funkcija $T(n)$ je popolnoma časovno predstavljiva, če obstaja Turingov stroj $M$ s časovno omejitvijo $T(n)$ in to tak, da za vsako dolžino $n \in \mathbb{N}$, za vse vhode $w$, $|w|=n$ velja, da $M$ naredi natanko $T(n)$ korakov.\\
 }
 \Izrek{Če je $T_2(n)$ popolnoma časovno predstavljiva in je $\inf {T_1(n) \log(T_1(n)) \over T_2(n)} = 0$, potem obstaja jezik $L$, za katerega velja: 
 \[ L \in \DTIME{T_2(n)} \wedge L \notin \DTIME{T_1(n)} \]
@@ -1700,7 +1700,7 @@ Lema analogno velja tudi za časovno zahtevnost in za deterministične razrede.
 }
 %-----------------------predavanja 11------------------------------
 \sect{Relacija med prostorsko in časovno zahtevnostjo}
-\Odmakni{?}{Kakšna je relacija med različnimi vrstami zahtevnosti}
+\Odmakni{?}{Kakšna je relacija med razredi različnih vrst zahtevnosti}
 Kakšen je odnos med determinističnim časom in prostorom?
 \Izrek{$\DTIME{f(n)} \subseteq \DSPACE{f(n)}$,\\
 Torej, kar lahko rešimo v času $O(f(n))$, lahko rešimo tudi na prostoru največ $O(f(n))$.}
@@ -1708,10 +1708,11 @@ Torej, kar lahko rešimo v času $O(f(n))$, lahko rešimo tudi na prostoru najve
 Torej, kar lahko rešimo na prostoru $O(f(n))$, lahko rešimo tudi v času največ $O(c^{f(n)})$.}
 Kakšen je odnos med determinističnim in nedeterminističnim časom?
 \Izrek{$L \in \NTIME{f(n)} \Rightarrow \exists c(L):L \in \DTIME{c^{f(n)}}$,\\
-Torej, kar lahko rešimo v nedeterministično v času $O(f(n))$, lahko rešimo tudi deterministično na prostoru največ $O(c^{f(n)})$.}
+Torej, kar lahko rešimo nedeterministično v času $O(f(n))$, lahko tudi deterministično rešimo največ v času $O(c^{f(n)})$.}
 %lahko si zapišemo: to nas lahko velik košta.
 Največ koliko prostora pa nas stane simulacija nedeternimizna?%savitchev izrek
-\Izrek{\odmakni{(Savitch)}{$\NSPACE{f(n)} \subseteq \DSPACE{f(n)^2}$, če je $f(n) \geq \log_2 \wedge f(n)$ popolnoma prostorsko predstavljiva. Torej, kar lahko rešimo na nedeterminističen način na prostoru $O(f(n))$, lahko na deterministični način na prostoru največ $O(f(n)^2)$.}}
+\Izrek{\odmakni{(Savitch)}{$\NSPACE{f(n)} \subseteq \DSPACE{f(n)^2}$, če je $f(n) \geq \log_2 \wedge f(n)$ popolnoma prostorsko predstavljiva.\\
+Torej, kar lahko rešimo na nedeterminističen način na prostoru $O(f(n))$, lahko na determinističen način rešimo na prostoru največ $O(f(n)^2)$.}}
 \Dokaz{%@nimaš a),b... označeno.. bummer
 \odmakni{a)}{Trivialno.}
 \odmakni{b)}{
@@ -1769,9 +1770,9 @@ Vrzel med $S(n)$ in $g(S(n))$ nam ne omogoči nam rešiti nobenega novega proble
 $g(n)=2^n$
 $S(n)=n^2$
 }
-\Izrek{\odmakni{(Borodan)}{
-Za $\forall$ totalno izračunljive funkcije $g(n)$, kjer $g(n) \geq n$ za $\forall n$,\\
-$\exists$ totalno izračunljiva funkcija $S(n): \DSPACE{S(n)} = \DSPACE{(S(n)}$\fixme%wat?Ds=Ds
+\Izrek{\odmakni{(Borodin)}{
+Za $\forall$ totalno izračunljivo funkcijo $g(n)$, kjer $g(n) \geq n$ za $\forall n$,\\
+$\exists$ totalno izračunljiva funkcija $S(n): \DSPACE{S(n)} = \DSPACE{g(S(n)}$.
 }}
 %to je bil bad news.. now for the good news
 \subsect{Izrek o uniji}
