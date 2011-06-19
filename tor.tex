@@ -1590,25 +1590,25 @@ Tudi za NTIME velja podobno:
 	\[ \NTIME{d \cdot n} = \DTIME{(1+\varepsilon)\cdot n},\mbox{ za poljubni konstanti $d>1$ in $\varepsilon>0$} \]
 \subsubsect{Odpravljanje trakov}
 %vse dela tudi neodvisno od modela Turingovega stroja
-Ali, ter za kakšno ceno za časovno zahtevnost, lahko $k>1$ delovnih trakov nadomestimo z enim samim?
+Ali lahko $k>1$ delovnih trakov nadomestimo z enim samim? Kako bi to vplivalo na časovno zahtevnost?
 \Primer{
 	$L=\{ ww^R\ |\ w\in\{0,1\}^* \}$\\%menda smo že imel na začetku poglavja
 	Če je $k=2$, razpoznamo $L$ v linearnem času.\\
 	Če je $k=1$ \\% levo-desno-levo....
 	Časovna zahtevnost je reda $\Theta(n^2)$
 }
-Torej, z zmanjšanjem števila trakov na enega, se zahtevnost poveča s kvadratom.\\
+Zmanjšanje števila trakov na enega časovno zahtevnost poveča s kvadratom.\\
 \Trditev{To je največja možna upočasnitev pri prehodu s $k$-trakov na en trak.}
-\Izrek{Če je $L\in\DTIME{T(n)}$ na $k>1$-tračnem Turingovem stroju,
-potem je $L\in\DTIME{T(n)^2}$ na eno-tračnem Turingovem stroju.
+\Izrek{Če je $L\in\DTIME{T(n)}$ na k-tračnem ($k>1$) Turingovem stroju,
+potem je $L\in\DTIME{T(n)^2}$ na enotračnem Turingovem stroju.
 }
 Torej $L$ zagotovo lahko rešimo v $T(n)^2$.\\
 Enako velja tudi za nedeterministične stroje.
 %note:lfloor, lceil za one zaokrožene
 \br
-Kaj pa, če se omejimo le na dva delovna traka (iz nekega $k>2$-tračnega stroja).\\
+Kaj pa zmanjšanje k-tračnega ($k>2$) stroja na dva delovna trakova?\\
 Tudi tukaj lahko pride do upočasnitve, a le za faktor $\log T(n)$.\\
-\Izrek{Če je $L\in\DTIME{T(n)}$ na $k>2$-tračnem Turingovem stroju, potem je $L\in\DTIME{T(n)} \cdot \log T(n)$ na dvotračnem Turingovem stroju.\br
+\Izrek{Če je $L\in\DTIME{T(n)}$ na k-tračnem ($k>2$) Turingovem stroju, potem je $L\in\DTIME{T(n)} \cdot \log T(n)$ na dvotračnem Turingovem stroju.\br
 Analogno velja za nedeterministične stroje.}
 %-----------------------predavanja 10------------------------------
 %@wtf je linearno pospeševanje?
