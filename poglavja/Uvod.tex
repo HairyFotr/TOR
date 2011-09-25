@@ -1,5 +1,5 @@
 \chap{Uvod}
-\sect{Matematične osnove}
+%\sect{Matematične osnove}
 %\newpage
 %\sect{Notacija}
 %\begin{itemize}
@@ -14,9 +14,9 @@
 %\begin{items}
 %\item Razred - razred je množica elementov, ki ga lahko podamo z naštevanjem elementov ali z opisom lastnosti (opisni ali konceptualni razredi)
 %\end{items}
-\subsect{Teorija množic}
-\subsect{Dokazovanje}
-\subsubsection{Dokaz s konstrukcijo}
+
+\sect{Osnove dokazovanja}
+\subsect{Dokaz s konstrukcijo}
 Dokaz obstoja nekega matematičnega objekta je to, da nam ga uspe sestaviti.
 
 \begin{primeri}
@@ -61,7 +61,7 @@ Dokaz obstoja nekega matematičnega objekta je to, da nam ga uspe sestaviti.
 	\end{items}
 \end{primeri}
 	
-\subsubsection{Dokaz z indukcijo}
+\subsect{Dokaz z indukcijo}
 Če je množica induktivni razred%\footnote{Glej slovarček na koncu.}
 , lahko z matematično indukcijo dokazujemo neko lastnost članov množice. Induktivni razred $I$ sestavlja:
 \begin{items}
@@ -77,7 +77,7 @@ Dokaz obstoja nekega matematičnega objekta je to, da nam ga uspe sestaviti.
 \item Hilbertove krivulje \fixme
 \end{primeri}
 
-\subsubsection{Dokaz s protislovjem}
+\subsect{Dokaz s protislovjem}
 Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to vodi v protislovje.
 
 \begin{primeri}
@@ -112,12 +112,12 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 \sect{Osnove teorije jezikov}
 \subsect{Uporabljene oznake}
 \begin{items}
-\item $a$ - znak ali simbol (niz dolžine 1)
+\item $a$ - znak ali simbol
 \item $\Sigma$ - abeceda (končna neprazna množica znakov)
-\item $w$ - niz ali beseda (poljubno končno zaporedje znakov $w_1w_2 \ldots w_n$)
+\item $w$ - niz ali beseda (poljubno končno zaporedje znakov, $w=a_1a_2 \ldots a_n$)
 \item $|w|$ - dolžina niza
 \item $\varepsilon$ - prazen niz, $|w|=0$
-\item $\Sigma^*$ - vsi možni nizi abecede
+\item $\Sigma^*$ - vsi nizi nad abecededo
 \end{items}
 
 \subsect{Operacije nad jeziki}
@@ -127,7 +127,7 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	x  &= b_1 b_2 \dots b_m\\
 	wx &= a_1 a_2 \dots a_n b_1 b_2 \dots b_m
 	\end{align*}
-\subsubsect{Stik}
+\subsubsect{Stik množic}
 	\begin{align*} 
 	A & = \{ w_1 ,\ w_2 ,\ \dots ,\ w_n \} \\ 
 	B & = \{ x_1 ,\ x_2 ,\ \dots ,\ x_m \} \\ 
@@ -144,6 +144,6 @@ Vzamemo nasprotno trditev, od tiste, ki jo želimo preveriti in pokažemo, da to
 	\end{align*} 		
 \subsubsect{Obrat}
 	\begin{align*}
-	w  &= a_1 a_2 \dots a_{n-1} a_n\\
+	\ w\  &= a_1 a_2 \dots a_{n-1} a_n\\
 	w^R  &= a_n a_{n-1} \dots a_2 a_1\\
 	\end{align*}
