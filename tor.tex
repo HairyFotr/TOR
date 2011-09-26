@@ -105,8 +105,8 @@ Nekateri zgodnji poskusi formalizacije pojma algoritma so:%? zgodovinsko zapored
 \begin{items}
     \item Rekurzivne funkcije (Kurt Gödel, Stephen Kleene) 
     \item Splošne rekurzivne funkcije (Jacques Herbrand, Kurt Gödel)
-    \item Algoritmi Markova (Andrey Markov, ml.), %sin Markova http://en.wikipedia.org/wiki/Andrey_Markov_(Soviet_mathematician)
-    \item Produkcijski sistem (Emil Post), %? je to http://en.wikipedia.org/wiki/Tag_system? 1943?
+    \item Algoritmi Markova (Andrey Markov, ml.) %sin Markova http://en.wikipedia.org/wiki/Andrey_Markov_(Soviet_mathematician)
+    \item Produkcijski sistem (Emil Post) %? je to http://en.wikipedia.org/wiki/Tag_system? 1943?
     \item Lambda račun (Alonso Church, 1936)
     \item Turingov stroj (Alan Turing, 1936)
 \end{items}
@@ -997,9 +997,9 @@ izračunljiva funkcija%oblaček
 
 \begin{neurejeno}
 \sect{Težave s totalnimi funkcijami}
-Kako v splošnem dokazati, da je neka funkcija $f:\mathbb{N}^n\rightarrow\mathbb{N}$ totalna?\\
+Kako bi v splošnem dokazali, da je neka funkcija $f:\mathbb{N}^n\rightarrow\mathbb{N}$ totalna?\\
 V najslabšem primeru, je treba za vsak $x\in A$ pogledati, ali je funkcija za ta $x$ definirana ( pišemo: $f(x)\uparrow$ )\\
-Če je množica A neskončna, ta način seveda ni mogoč.
+Če je množica A neskončna, potem tudi ta način seveda ni končen.
 Pojem izračunljivosti funkcije se tako opira na algoritmično težko določljiv pojem totalnosti.
 \br
 \todo slika %slikca dva kroga A, B... \forall x ... f(x)
@@ -1052,50 +1052,48 @@ predpostavka: $g$ je rekrivna\\
 %če bi lahko TS oštevilčil, bi lahko kodo stroja dal na vhod in bi TS računal s TS.
 %Ideja je prišla od Godla: un grafek... ali je sistem popoln. ko je oštevilčil stvari, je lahko imel referenco in samo-referenco
 \Ideja{Turingove stroje bi radi oštevilčili. \\
-	Če bi imel vsak Turingov stroj svoj indeks, bi nek drug Turingov stroj lahko računal z drugimi stroji oz. z njihovimi ideksi.
-	Kdaj je to koristno?}
+	Če bi imel vsak Turingov stroj svoj indeks, bi nek drug Turingov stroj lahko računal z drugimi stroji oz. z njihovimi ideksi.}
 
 \subsubsect{Kodiranje Turingovih strojev}
-Kako poljuben Turingov stroj zakodirati z abecedo $\{0,1\}$?
-Zadošča da zakodiramo program $\delta$ Turingovega stroja.%kj več je waste of time... sj verjamete :)
-Naj bo $T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle$ poljuben stroj.%bomo samo delta, ostale se da razbrat ven
-Če je $\delta(q_i,a_j)=\langle q_k, a_l, S_m \rangle$ ukaz programa $\delta$, ga zakodiramo kot:
+Kako poljuben Turingov stroj zakodirati z abecedo $\{0,1\}$?\\
+Naj bo $T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle$ poljuben Turingov stroj, kjer je $\delta(q_i,a_j)=\langle q_k, a_l, S_m \rangle$.%bomo samo delta, ostale se da razbrat ven
+\br
+%Dovolj je, da zakodiramo program $\delta$ Turingovega stroja.\\%kj več je waste of time... sj verjamete :)
+Zadostuje, da zakodiramo posamezne ukaze programa $\delta$:
 	\[ K=0^i 1 0^j 1 0^k 1 0^l 1 0^m\]
-Ko zakodiramo vseh R ukaov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ iz katerih bomo sestavili kodo Turingovega stroja:
-	\[ <T> = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
-Na $<T>$ lahko gledamo kot da je dvojiški zapis nekega naravnega števila in to je indeks Turingovega stroja $T$.
-
-Nekatera naravna števila niso indeksi TS, zato se dogovorimo: če naravno število nima oblike *, rečemo, da je indeks praznega Turingovega stroja (njegova $\delta$ je povsod nedefnirana -- takoj se ustavi in ne sprejme nobene besede)
-Posledica: vsako naravno število, je indeks natanko enega Turingovega stroja.
-Obratno ne velja. Isti Turingov stroj ima več indeksov (dodajamo nepotrebne in nesmiselne ukaze, pa je.)
+Ko zakodiramo vseh $r$ ukazov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ iz katerih bomo sestavili kodo Turingovega stroja:
+	\[ \langle T \rangle = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
+Na $\langle T \rangle$ lahko gledamo kot da je dvojiški zapis nekega naravnega števila in indeks Turingovega stroja $T$.
+\br
+Nekatera naravna števila niso indeksi Turingovega stroja, zato se dogovorimo: če naravno število nima oblike $\langle T \rangle$, rečemo, da je indeks praznega Turingovega stroja -- njegova $\delta$ je povsod nedefnirana, torej se takoj ustavi in ne sprejme nobene besede.
+\Posledica{Vsako naravno število, je indeks natanko enega Turingovega stroja.
+Obratno pa ne velja, saj ima isti Turingov stroj lahko več indeksov (npr. če stroju dodajamo nepotrebne ukaze).}
 \Trditev{Obstaja Turingov stroj, ki izračuna vse kar izračuna katerikoli drug Turingov stroj.}
-\Dokaz{Stroj si zamislimo v grobem in intuitivno zapišemo njegov program. Skličemo se na Church-Turingovo tezo, ki nam zagotovi obstoj nekega konkretnega TS (ki opravlja ta algoritem)}%
+\Dokaz{Stroj si zamislimo v grobem in intuitivno zapišemo njegov program. Skličemo se na Church-Turingovo tezo, ki nam zagotovi obstoj nekega konkretnega TS (ki opravlja ta algoritem)}
 
-
-Ideja stroja U:
-
+\subsubsect{Ideja za univerzalni Turingov stroj}
 \Odmakni{Trakovi}{
-Vhodni trak - vsebuje vhodno besedo sestavljeno iz dveh delov:
+\textbf{Vhodni trak} -- vsebuje vhodno besedo sestavljeno iz dveh delov:
 \begin{items}
-\item Kodo $<T>$ poljubnega Turingovega stroja.
+\item Kodo $\langle T \rangle$ poljubnega Turingovega stroja.
 \item Poljubno besedo $w \in \Sigma^*$
 \end{items}
-Delovni trak - sprva prazen. Stroj U .......
-Pomožni trak - sprva prazen. Stroj U ga bo uporabljal za zapis tekočega stanja stroja T in za primerjanje tega stanja s končnim stanjem stroja T.
+\textbf{Delovni trak} -- sprva prazen. Stroj U .......\\
+\textbf{Pomožni trak} -- sprva prazen. Stroj U ga bo uporabljal za zapis tekočega stanja stroja T in za primerjanje tega stanja s končnim stanjem stroja T.
 }
-
-Program stroja U(intuitivo)
+\ \\
+Program stroja deluje nekako tako:
 \begin{items}
-\item Preveri, ali je vhod oblike $<T,\ w>$, kjer je T koda nekega Turingovega stroja. Če ni, se U ustavi (tudi T bi se)
-\item Iz $<T>$ preberi kodo končnega stanja $<q_F>$, stroja T. in napisi $<q_1, q_f>$ na tretji trak.
+\item Preveri, ali je vhod oblike $\langle T,\ w \rangle$, kjer je T koda nekega Turingovega stroja. Če ni, se U ustavi (tudi T bi se)
+\item Iz $\langle T \rangle$ preberi kodo končnega stanja $\langle q_F \rangle$, stroja T. in napisi $\langle q_1, q_f \rangle$ na tretji trak.
 \item Prepiši $w$ na delovni trak in postavi okno na začetek 
-\item Denimo, da je na pomožnem traku nek par $<q_i, q_f>$ in da je v delovnem oknu znak $a$. Če je $q_i=q_f$, se stroj ustavi (tudi T bi se)
-\item Na prvem traku poišči v <T> kodo ukaza, ki se začne z $\delta(q_i, a)=\dots$
+\item Denimo, da je na pomožnem traku nek par $\langle q_i, q_f \rangle$ in da je v delovnem oknu znak $a$. Če je $q_i=q_f$, se stroj ustavi (tudi T bi se)
+\item Na prvem traku poišči v $\langle T \rangle$ kodo ukaza, ki se začne z $\delta(q_i, a)=\dots$
 \item Če je ne najdemo se U ustavi (tak T bi se ustavil)
 \item Denimo, da najdena koda opisuje ukaz $\delta(q_i, a)=\langle q_, b, S \rangle$ ... na drugi trak zapiši b v ... premik v smeri S
-\item Na pomožni trak namesto $<q_i,q_f>$ vpiši $<q_j,q_f>$, goto 4
+\item Na pomožni trak namesto $\langle q_i,q_f \rangle$ vpiši $\langle q_j,q_f \rangle$, goto 4
 \end{items}
-\fixme slika: trije trakovi - vhodni(<T> w), delovni(wwww|a|wwww), pomožni(<qi><qF>)
+\fixme slika: trije trakovi% - vhodni(<T> w), delovni(wwww|a|wwww), pomožni(<qi><qF>)
 
 To je bil intuitiven opis algoritma programa stroja U -- algoritma. Po Church-Turingovi tezi lahko sestavimo pravi TS z vsemi podrobnostmi, ki izvaja delo opisanega stroja.
 \[U=\langle Q_U,\Sigma_U,\Gamma_U,\delta_{U1},q_{U1},B,q_{Uf} \rangle  \]
@@ -1109,8 +1107,9 @@ To je univerzalni Turingov stroj.
 %   4     6 (ta ima le 22 ukazov)
 %   3     9
 %   2    18
-%kaj je wolfram tu s cellularnimi počel?
-%v knjigi (5,2), kasneje (3,2)
+%%
+%kaj je wolfram tu s celularnimi počel?
+%v svoji knjigi (5,2), kasneje (3,2)
 
 \subsect{Pravi stroji, ki so univerzalni}
 Naredimo nekaj sprememb:
@@ -1139,11 +1138,12 @@ Prek kodirne funkcije $\koda{}$ dobi vsaka naloga $p$ svojo kodo $\koda{p}\in\Si
 Če definiramo kodirno funkcijo kot $\koda{} : P \rightarrow \Sigma^*$ in zahtevamo, da je injektivna ($(p \neq p' \Rightarrow \koda{p} \neq \koda{p'}$), potem lahko jezik problema $P$ definiramo kot:
 \[ L(P) \PoDef \{ \koda{p}\in\Sigma^* \| p \mbox{ je pozitivna naloga problema } P \} \]
 
-\fixme nepopolna slika
-
 \begin{tikzpicture}[vert/.style={circle, draw,fill=black, inner sep=1pt}]
+	\node (P) at (0cm,1.5cm) {P};
+
 	\draw (0.5cm,0cm) rectangle (2cm, 3cm);
 	\draw[decorate,decoration={random steps,segment length=3pt,amplitude=2pt}] (0.5cm,1.5cm) -- (2cm,1.5cm);
+
 	\node (p) at (1.25cm, 3cm) {};
 	\node [below=2pt] at (p.south) {$+$};
 	\node (p) at (1.25cm, 0.55cm) {};
@@ -1160,7 +1160,7 @@ Prek kodirne funkcije $\koda{}$ dobi vsaka naloga $p$ svojo kodo $\koda{p}\in\Si
 
 	\node (x) [vert] at (1.45cm, 2cm) {};
 	\node (y) [vert] at (5.2cm, 1.75cm) {};
-	\draw [->] (x) to [bend right=-30] node[auto] {} (y);
+	\draw [->] (x) to [bend right=-30] node[auto] {$\langle\ \rangle$} (y);
 
 \end{tikzpicture}
 
@@ -1267,9 +1267,9 @@ Tlakovanje: Imamo končno množico tlakovcev $T=\{$\fixme križ-kraž kvadrati z
 \subsect{Dokazovanje neodločljivosti problemov}
 Neodločljivost problema lahko dokazujemo z naslednjimi metodami:
 \begin{items}
-\item Neposredno dokazovanje %potrebujemo veliko intuicije. tako smo P_K dokazal
-\item Dokazovanje s prevedbo %tako smo dokazali P_k_0
-\item Dokazovanje z Riceovim izrekom %menda najlažja
+\item \textbf{Neposredno dokazovanje} %potrebujemo veliko intuicije. tako smo P_K dokazal
+\item \textbf{Dokazovanje s prevedbo} %tako smo dokazali P_k_0
+\item \textbf{Dokazovanje z Riceovim izrekom} %menda najlažja
 \end{items}
 
 \subsubsect{Dokazovanje s prevedbo}
