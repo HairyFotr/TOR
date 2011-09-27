@@ -714,7 +714,7 @@ Stroj bo izbral tisto preslikavo, ki ga vodi k sprejetju vhodne besede. Če to n
 }
 
 \Trditev{Nedeterministični Turingov stroj zmore vse kar zmore osnovni Turingov stroj.}
-\Dokaz{Funkcija prehodov $\delta$ osnovnega TS je le poseben primer funkcije $\delta$ nedeterminističnega Turingovega stroja.}
+\Dokaz{Funkcija prehodov $\delta$ osnovnega Turingovega stroja je le poseben primer funkcije $\delta$ nedeterminističnega Turingovega stroja.}
 \Trditev{Nedeterministični Turingov stroj ni močnejši od osnovnega modela.}
 
 \Dokaz{Simulacija nedeterminističnega Turingovega stroja z osnovnim:\\
@@ -1015,18 +1015,18 @@ Po Church-Turingovi tezi je izračunljiva ... rekurziva funkcija %oz. vsaka, ki 
 \end{items}
 \Trditev{Obstaja izračunljiva funkcija, ki ni rekurzivna.}
 \Dokaz{Definicije funkcij so končna zaporedja.\\%(Trditev)
-uredimo zaporedja po dolžini, enako dolga pa leksikografsko\\
-$\Rightarrow$ lahko govorimo o prvem, drugem, ..., o $n$-tem programu TS. Zato lahko tudi prvi, drugi, ... n-ti rekurzivni funkciji.\\
-označimo $n$-to rekurzivno funkcijo s $f_n$\\
-definirajmo ......\\
+Zaporedja uredimo po dolžini, enako dolga pa leksikografsko\\
+$\Rightarrow$ lahko govorimo o prvem, drugem, ..., $n$-tem programu Turingovega stroja. Zato lahko tudi prvi, drugi, ..., $n$-ti rekurzivni funkciji.\\
+Označimo $n$-to rekurzivno funkcijo s $f_n$\\
+Definirajmo ......\\
 $g(n, a_1,\dots, a_k) \PoDef. f_n(a_1, a_2, \dots, a_k)+1$, kjer $a_i\in \mathbb{N}$\\%označimo z *
-funkcija je izračunljiva\\
-algoritem je ....\\
+Funkcija je izračunljiva\\
+Algoritem je ....\\
 ....\\
 ali je $g$ tudi rekurzivna\\
-ali obstaja program TS, ki je izračuna.\\
+ali obstaja program Turingovega stroja, ki jo izračuna.\\
 
-predpostavka: $g$ je rekrivna\\
+predpostavka: $g$ je rekurzivna\\
 	Tedaj obstaja nek naravni $m$, da je $f_m = g$.\\%nti program po vrsti. označimo z **
 	Poglejmo vrednost $g(m,m,\dots,m)$\\
 	iz (*) sledi $g(m, m, \dots, m) = f_m(m, m, \dots, m)$\\
@@ -1044,7 +1044,7 @@ predpostavka: $g$ je rekrivna\\
 	%pri parcialnih funkcijah f = f+1 lahko ni definirano in to je ok
 	Takrat *** ni več nujno protislovje, saj je lahko $f_m(mmmm)\uparrow$.
 }
-\Povzetek{Funkcija je "izračunljiva" <---> f računa nek TS tam, kjer je definirana}
+\Povzetek{Funkcija je \Quote{izračunljiva} $\Longleftrightarrow$ nek Turingov stroj računa $f$ tam, kjer je definirana}
 %rekurzivne -> parcialne rekurzivne... so izračunljive
 %vpr: kako dobimo n-ti turingov stroj, pa da je totalen, ... obratno je nekako :)
 
@@ -1063,15 +1063,14 @@ Zadostuje, da zakodiramo posamezne ukaze programa $\delta$:
 	\[ K=0^i 1 0^j 1 0^k 1 0^l 1 0^m\]
 Ko zakodiramo vseh $r$ ukazov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ iz katerih bomo sestavili kodo Turingovega stroja:
 	\[ \langle T \rangle = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
-Na $\langle T \rangle$ lahko gledamo kot da je dvojiški zapis nekega naravnega števila in indeks Turingovega stroja $T$.
-\br
-Nekatera naravna števila niso indeksi Turingovega stroja, zato se dogovorimo: če naravno število nima oblike $\langle T \rangle$, rečemo, da je indeks praznega Turingovega stroja -- njegova $\delta$ je povsod nedefnirana, torej se takoj ustavi in ne sprejme nobene besede.
+Na $\langle T \rangle$ lahko gledamo kot na dvojiški zapis nekega naravnega števila in indeks Turingovega stroja $T$. Nekatera naravna števila pa niso indeksi Turingovega stroja, zato se dogovorimo: če naravno število nima oblike $\langle T \rangle$, rečemo, da je indeks praznega Turingovega stroja -- njegova $\delta$ je povsod nedefnirana, torej se takoj ustavi in ne sprejme nobene besede.
 \Posledica{Vsako naravno število, je indeks natanko enega Turingovega stroja.
 Obratno pa ne velja, saj ima isti Turingov stroj lahko več indeksov (npr. če stroju dodajamo nepotrebne ukaze).}
-\Trditev{Obstaja Turingov stroj, ki izračuna vse kar izračuna katerikoli drug Turingov stroj.}
-\Dokaz{Stroj si zamislimo v grobem in intuitivno zapišemo njegov program. Skličemo se na Church-Turingovo tezo, ki nam zagotovi obstoj nekega konkretnega TS (ki opravlja ta algoritem)}
 
 \subsubsect{Ideja za univerzalni Turingov stroj}
+\Trditev{Obstaja Turingov stroj, ki izračuna vse kar izračuna katerikoli drug Turingov stroj.}
+\Dokaz{Stroj si bomo zamislili le v grobem in intuitivno zapisali njegov program. Tu se skličemo na Church-Turingovo tezo, ki nam zagotovi obstoj nekega konkretnega Turingovega stroja, ki opravlja to nalogo.
+
 \Odmakni{Trakovi}{
 \textbf{Vhodni trak} -- vsebuje vhodno besedo sestavljeno iz dveh delov:
 \begin{items}
@@ -1081,7 +1080,6 @@ Obratno pa ne velja, saj ima isti Turingov stroj lahko več indeksov (npr. če s
 \textbf{Delovni trak} -- sprva prazen. Stroj U .......\\
 \textbf{Pomožni trak} -- sprva prazen. Stroj U ga bo uporabljal za zapis tekočega stanja stroja T in za primerjanje tega stanja s končnim stanjem stroja T.
 }
-\ \\
 Program stroja deluje nekako tako:
 \begin{items}
 \item Preveri, ali je vhod oblike $\langle T,\ w \rangle$, kjer je T koda nekega Turingovega stroja. Če ni, se U ustavi (tudi T bi se)
@@ -1095,9 +1093,9 @@ Program stroja deluje nekako tako:
 \end{items}
 \fixme slika: trije trakovi% - vhodni(<T> w), delovni(wwww|a|wwww), pomožni(<qi><qF>)
 
-To je bil intuitiven opis algoritma programa stroja U -- algoritma. Po Church-Turingovi tezi lahko sestavimo pravi TS z vsemi podrobnostmi, ki izvaja delo opisanega stroja.
+%To je bil intuitiven opis algoritma programa stroja U -- algoritma. Po Church-Turingovi tezi lahko sestavimo pravi TS z vsemi podrobnostmi, ki izvaja delo opisanega stroja.
 \[U=\langle Q_U,\Sigma_U,\Gamma_U,\delta_{U1},q_{U1},B,q_{Uf} \rangle  \]
-To je univerzalni Turingov stroj.
+%To je univerzalni Turingov stroj.
 %1996 je rus Yurii Rogozhin sestavil nekaj različic stroja U... 
 % |Q_u|  |\Sigmau|
 %   15    2
@@ -1110,7 +1108,7 @@ To je univerzalni Turingov stroj.
 %%
 %kaj je wolfram tu s celularnimi počel?
 %v svoji knjigi (5,2), kasneje (3,2)
-
+}
 \subsect{Pravi stroji, ki so univerzalni}
 Naredimo nekaj sprememb:
 Vsaka celica je neposredno dosegljiva prek naslova
@@ -1183,21 +1181,25 @@ Ali bi lahko za poljuben par stroja in besede, $\langle T,w \rangle$, preverili,
 \Def{Problem ustavitve: $P_{\mathcal{K}_0}$ je odločitveni problem \Quote{Ali se Turingov stroj $T$ pri besedi $w$ ustavi?"}}
 \Trditev{Problem ustavitve ni odločljiv.}
 \Dokaz{Jezik problema je: $\mathcal{K}_0=\{ \langle T, w \rangle\ |\ T \mbox{ se pri w ustavi} \}$
-Nekaj časa nas bo zanimal jezik $\mathcal{K} \subseteq \mathcal{K}_0$, ki ga dobimo iz $\mathcal{K}_0$, če za $w$ vzamemeo kar kodo stroja, torej $<T>$.
-$\mathcal{K}=\{ T,T\ |\ T \mbox{ se pri <T> ustavi. } \}$
+Nekaj časa nas bo zanimal jezik $\mathcal{K} \subseteq \mathcal{K}_0$, ki ga dobimo iz $\mathcal{K}_0$, če za $w$ vzamemeo kar kodo stroja, torej $\langle T \rangle$.
+$\mathcal{K}=\{ T,T\ |\ T \mbox{ se pri } \langle T \rangle \mbox{ ustavi. } \}$
 Temu jeziku pripada odločitveni problem $P_\mathcal{K}$ - \Quote{Ali se Turingov stroj ustavi nad lastno kodo?}.
 
 \Lema{Problem $P_\mathcal{K}$ ni odločljiv.}
-\Dokaz{Predpostavimo, da je množica $\mathcal{K}$ rekurzivna (torej, je njen problem odločljiv). Potem gotovo obstaja Turingov stroj $R$, ki ta jezik razpoznava. $\exists TS:R_\mathcal{K}$, ki za poljuben T odgovori $R(<T,T>)$
+\Dokaz{Predpostavimo, da je množica $\mathcal{K}$ rekurzivna (torej, je njen problem odločljiv). Potem gotovo obstaja Turingov stroj $R$, ki ta jezik razpoznava. $\exists TS:R_\mathcal{K}$, ki za poljuben T odgovori $R(\langle T, T \langle)$,
 
-kjer je R(<T,T>)= DA, če se T ustavi nad <T> ... NE, če se ne ustavi.
+kjer je $R(\langle T,T \rangle) = \begin{cases}
+DA &; \mbox{ če se } T \mbox{ ustavi nad } \langle T \rangle \\
+NE &; \mbox{ če se ne ustavi }
+\end{cases}$
+
 %here comes the good/hard part
 Sestavimo nov Turingov stroj $N$ s pomočjo domnevnega $R_\mathcal{K}$:
-\fixme škatla N. vhod <T>,v škatli naredi <T,T>, preda kosmati (ne vemo če obstaja) škatli $R_\mathcal{K}$ z izhodi DA/NE... če DA ga vprašamo šeenkrat isto.. če ne, ne speljemo na izhod N
+\fixme škatla N. vhod $\langle T \rangle$,v škatli naredi $\langle T,T \rangle$, preda kosmati (ne vemo če obstaja) škatli $R_\mathcal{K}$ z izhodi DA/NE... če DA ga vprašamo šeenkrat isto.. če ne, ne speljemo na izhod N
 \Trditev{domnevni $R_\mathcal{K}$ napove prihodnost stroja T, N pa bo razgalil nesposobnost $R_\mathcal{K}$ pri tem napovedovanju na primeru T=N}
-\Dokaz{\fixme <N> gre v <N,N>
+\Dokaz{\fixme $\langle N \rangle$ gre v $\langle N,N \rangle$
 %R_K vrne napačen odgovor, ker se <N> ne ustavi, če naj bi se ustavil in se ustavi, če naj se ne bi ustavil. P-p-p-protislovje.
-Domnevni $R_\mathcal{K}$ ne bi rešil naloge p - \Quote{Ali se Turingov stroj $N$ pri vhodu $<N>$ ustavi?}
+Domnevni $R_\mathcal{K}$ ne bi rešil naloge p - \Quote{Ali se Turingov stroj $N$ pri vhodu $\langle N \rangle$ ustavi?}
 Sklep: K ni rekurziven jezik, zato $R_\mathcal{K}$ ni odločljiv problem.%problem, ki ni odločljiv!!
 }
 }%konec leme
@@ -1221,12 +1223,12 @@ Razpoznavanje jezikov:\\
 \Quote{Ali Turingov stroj $T$ razpoznava regularen jezik?}
 
 \subsubsect{Problemi o algoritmih in programih}
-$P$ je problem, $<P>$ opis problema.\\
-$A$ je algoritem, $<A>$ označuje program.\\
-\Quote{Ali program $<A>$ rešuje problem $<P>$?}
+$P$ je problem, $\langle P \rangle$ opis problema.\\
+$A$ je algoritem, $\langle A \rangle$ označuje program.\\
+\Quote{Ali program $\langle A \rangle$ rešuje problem $\langle P \rangle$?}
 \br
-Pravimo, da je program $<A'>$ ekvivalenten $<A>$, če da za vsak vhod enako vrednost kot $<A>$.\\
-\Quote{Ali obstaja program $<A'>$, ki je krajši in hkrati ekvivalenten $<A>$?}
+Pravimo, da je program $\langle A' \rangle$ ekvivalenten $\langle A \rangle$, če da za vsak vhod enako vrednost kot $\langle A \rangle$.\\
+\Quote{Ali obstaja program $\langle A' \rangle$, ki je krajši in hkrati ekvivalenten $\langle A \rangle$?}
 
 \subsubsect{Problemi o izračunljivih funkcijah}
 $\varphi:A\rightarrow B$ je izračunljiva funkcija.\\
@@ -1260,7 +1262,7 @@ Enakost besed: $E$ naj bo končna množica enačb nad besedami. npr. \\
 Od tu lahko izpeljemo enakost abcc=cacacbaa\\%ne vem če je prav prepisano
 \Quote{Ali iz $E$ sledi $u=v$?}
 \br
-Tlakovanje: Imamo končno množico tlakovcev $T=\{$\fixme križ-kraž kvadrati z različno pobarvanimi četrtinami $\}$. Radi bi tlakovali ravnino razdeljeno na kvadrate, tako, da se sosednja tlakovca vedno ujemata v barvi.%slikica :P
+Tlakovanje: Imamo končno množico tlakovcev $T=\{$\fixme križ-kraž kvadrati z različno pobarvanimi četrtinami $\}$. Radi bi tlakovali ravnino razdeljeno na kvadrate, tako, da se sosednja tlakovca vedno ujemata v barvi.\\%slikica :P
 \Quote{Ali lahko tlakujemo vsak poligon v $\mathbb{Z}^2$?}\\
 \Quote{Ali lahko tlakujemo pot v ravini od točke $A$ do $C$, s tem, da ne obiščemo točke $B$?}
 
