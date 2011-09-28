@@ -15,42 +15,41 @@
 \begin{multicols}{2}
 
 \subsection*{Kodiranje Turingovega stroja}
-$T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle$ \\
-Če je $\delta(q_i,a_j)=\langle q_k, a_l, S_m \rangle$ ukaz programa $\delta$, ga zakodiramo kot:
-	\[ K=0^i 1 0^j 1 0^k 1 0^l 1 0^m\]
-Ko zakodiramo vseh R ukazov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ iz katerih bomo sestavili kodo Turingovega stroja:
-	\[ <T> = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
+Imamo nek Turingov stroj: \[T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle \]
+Posamezen ukaz programa $\delta$ je: \[ \delta(q_i,a_j)=\langle q_k, a_l, S_m \rangle \]
+Ukaz zakodiramo kot: \[ K=0^i 1 0^j 1 0^k 1 0^l 1 0^m \]
+Ko zakodiramo vse ukaze, dobimo kode $K_1, K_2, \dots, K_r$,\\ iz katerih sestavimo kodo Turingovega stroja:
+	\[ \langle T \rangle = 111 K_1 11 K_2 11 \dots 11 K_r 111\]
 
-\subsection*{Prevedbe - Seznam jezikov}
+\subsection*{Prevedbe -- seznam jezikov}
 \begin{itemize}
-
 \item $L_d = \lbrace w_i \ | \ w_i \not\in L(M_i) \rbrace \ \ \not\in TJ $ 
 \item $L_{\overline{d}} = \lbrace w \ | \ w_i \in L(M_i) \rbrace \ \ \in TJ $ 
-\item $L_u = \lbrace <M,w> \ | \ w \in L(M) \rbrace \ \ \in TJ $ 
-\item $L_{\overline{u}} = \lbrace <M,w> \ | \ w \not\in L(M) \rbrace \ \ \not\in TJ $ 
-\item $L_h = \lbrace <M> \ | \ M \ \text{vstavi na vseh vhodih} \rbrace \ \ \not\in TJ $ 
-\item $L_e = \lbrace <M> \ | \ L(M) = \emptyset \rbrace \ \ \not\in TJ $ 
-\item $L_{ne} = \lbrace <M> \ | \ L(M) \neq \emptyset \rbrace \ \ \in TJ $ 
-\item $L_{eq} = \lbrace <M_1,M_2> \ | \ L(M_1) = L(M_2) \rbrace \ \ \not\in TJ $ 
-\item $L_{|eq|} = \lbrace <M_1,M_2> \ | \ |L(M_1)| = |L(M_2)| \rbrace \ \ \not\in TJ $ 
-\item $L_{ \overline{ |eq|}} = \lbrace <M_1,M_2> \ | \ |L(M_1)| \neq |L(M_2)| \rbrace \ \ \not\in TJ $ 
-
+\item $L_u = \lbrace \langle M,w \rangle \ | \ w \in L(M) \rbrace \ \ \in TJ $ 
+\item $L_{\overline{u}} = \lbrace \langle M,w \rangle \ | \ w \not\in L(M) \rbrace \ \ \not\in TJ $ 
+\item $L_h = \lbrace \langle M \rangle \ | \ M \ \text{se ustavi za vse vhode} \rbrace \ \ \not\in TJ $ 
+\item $L_e = \lbrace \langle M \rangle \ | \ L(M) = \emptyset \rbrace \ \ \not\in TJ $ 
+\item $L_{ne} = \lbrace \langle M \rangle \ | \ L(M) \neq \emptyset \rbrace \ \ \in TJ $ 
+\item $L_{eq} = \lbrace \langle M_1,M_2 \rangle \ | \ L(M_1) = L(M_2) \rbrace \ \ \not\in TJ $ 
+\item $L_{|eq|} = \lbrace \langle M_1,M_2 \rangle \ | \ |L(M_1)| = |L(M_2)| \rbrace \ \ \not\in TJ $ 
+\item $L_{ \overline{ |eq|}} = \lbrace \langle M_1,M_2 \rangle \ | \ |L(M_1)| \neq |L(M_2)| \rbrace \ \ \not\in TJ $ 
 \end{itemize}
 
 \subsection*{Riceov izrek}
 
-Če je jezikovna lastnost turingovega stroja trivialna, potem je turingov stroj rekurziven.\\
-primer:\\
-$M_e$ je turingov stroj ki opisuje jezik $L_e = \lbrace <M> | L(M) \neq \emptyset \rbrace $
-Temu turingovem stroju pripada jezikovna lastnost $ L(M) \neq \emptyset $. 
-Jezikovna lastnost je trivialna če velja za bodisi vse turingove stroje, ali pa za nobenega.\\
-
-Za dokaz z Riceovim izrekom potrebujemo najti dva turingova stroja, enega ki vsebuje to lastnost, drugega ki je ne vsebuje.
+Če je jezikovna lastnost Turingovega stroja trivialna, potem je Turingov stroj rekurziven.\\
+\ \\
+\textbf{Primer:}\\
+$M_e$ je Turingov stroj ki opisuje jezik $L_e = \lbrace \langle M \rangle | L(M) \neq \emptyset \rbrace $
+Temu turingovemu stroju pripada jezikovna lastnost $ L(M) \neq \emptyset $. 
+Jezikovna lastnost je trivialna če velja za bodisi vse Turingove stroje, ali pa za nobenega.\\
+\ \\
+Za dokaz z Riceovim izrekom poiščemo en Turingov stroj, ki vsebuje lastnost $L(M)$ in drugega ki je ne:
 \begin{itemize}
-\item $L(M_1) = \Sigma^*$ - ta stroj ima lastnost $ L(M) \neq \emptyset $
-\item $L(M_2) = \emptyset $ - ta stroj nima lastnosti $ L(M) \neq \emptyset $
+\item $L(M_1) = \Sigma^*$ -- ta stroj ima lastnost $ L(M) \neq \emptyset $
+\item $L(M_2) = \emptyset $ -- ta stroj nima lastnosti $ L(M) \neq \emptyset $
 \end{itemize}
-ker taka dva stroja obstajata, vidimo da \textbf{lastnost ni trivialna} torej $M_e$ ni rekurziven
+Če taka Turingova stroja obstajata, vidimo, da lastnost \textbf{ni} trivialna, torej $M_e$ ni rekurziven.
 
 \subsection*{Rekurzivne funkcije}
 \begin{enumerate}
@@ -67,21 +66,23 @@ ker taka dva stroja obstajata, vidimo da \textbf{lastnost ni trivialna} torej $M
 	$ f(x_1, x_2, \dots, x_n) = \mu_y (g(x_1, x_2, \dots, x_n, y)) = z $ \\
 	Pri tem je $z$ najmanjše število, za katerega velja $g(x_1, x_2, \dots, x_n, z) = 0$. Če tak $z$ ne obstaja je funkcija $f$ tam nedefinirana.
 \end{enumerate}
-funkcije ki smo jih naredili med vajami:
+\textbf{Funkcije ki smo jih definirali na vajah:}
 \begin{itemize}
 \item $P(n) = n-1$
 \item $\ominus(a,b) = a-b$
 \item $\oplus(a,b) = a+b$
 \item $\otimes(a,b) = a*b$
 \item $\oslash(a,b) = a/b$
-\item $mod(a,b) = ab$
-\item $divides(a,b) = \begin{cases} 1 \ ; & a \mod b = 0 \\ 0 \ ; & a \mod b \neq 0 \end{cases}$
-\item $IF(a,b,c) = \begin{cases} b \ ; & a \neq 0 \\ c ; & a = 0 \end{cases}$
-\item $sqrt(a) = \sqrt{a} $
+\item $\text{mod}(a,b) = ab$
+\item $\text{divides}(a,b) = \begin{cases} 1 \ ; & a \mod b = 0 \\ 0 \ ; & a \mod b \neq 0 \end{cases}$
+\item $\text{IF}(a,b,c) = \begin{cases} b \ ; & a \neq 0 \\ c\ ; & a = 0 \end{cases}$
+\item $\text{sqrt}(a) = \sqrt{a} $
 
-Primer $ \oplus (a,b) $\\
-\[ \oplus(x,0) = \pi^1_1(x) \]
-\[ \oplus(x,y+1) = N(\pi^3_3(x,y,\oplus(x,y)) \]
+\textbf{Primer:} $ \oplus (a,b) $
+\begin{align*}
+ \oplus(x,0) &= \pi^1_1(x)\\
+\oplus(x,y+1) &= N(\pi^3_3(x,y,\oplus(x,y))
+\end{align*}
 
 \end{itemize}
 
