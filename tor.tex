@@ -1054,7 +1054,7 @@ predpostavka: $g$ je rekurzivna\\
 \Ideja{Turingove stroje bi radi oštevilčili. \\
 	Če bi imel vsak Turingov stroj svoj indeks, bi nek drug Turingov stroj lahko računal z drugimi stroji oz. z njihovimi ideksi.}
 
-\subsubsect{Kodiranje Turingovih strojev}
+\subsect{Kodiranje Turingovih strojev}
 Kako poljuben Turingov stroj zakodirati z abecedo $\{0,1\}$?\\
 Naj bo $T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle$ poljuben Turingov stroj, kjer je $\delta(q_i,a_j)=\langle q_k, a_l, S_m \rangle$.%bomo samo delta, ostale se da razbrat ven
 \br
@@ -1067,7 +1067,7 @@ Na $\langle T \rangle$ lahko gledamo kot na dvojiški zapis nekega naravnega št
 \Posledica{Vsako naravno število, je indeks natanko enega Turingovega stroja.
 Obratno pa ne velja, saj ima isti Turingov stroj lahko več indeksov (npr. če stroju dodajamo nepotrebne ukaze).}
 
-\subsubsect{Ideja za univerzalni Turingov stroj}
+\subsect{Ideja za univerzalni Turingov stroj}
 \Trditev{Obstaja Turingov stroj, ki izračuna vse kar izračuna katerikoli drug Turingov stroj.}
 \Dokaz{Stroj si bomo zamislili le v grobem in intuitivno zapisali njegov program. Tu se skličemo na Church-Turingovo tezo, ki nam zagotovi obstoj nekega konkretnega Turingovega stroja, ki opravlja to nalogo.
 
@@ -1293,10 +1293,9 @@ V koraku 2 z domnevnim Turingovim strojem $R_Q$, je treba sestaviti Turingov str
 \item Za jezike - Vsaka netrivialna lastnost Turingovih jezikov je tudi neodločljiva
 \end{items}
 %kaj točno je lastnost, etc.
-\Odmakni{Podrobneje}
-{
+\Odmakni{Podrobneje}{
 Naj bo $L$ neka lastnost za funkcije in naj bo $\varphi$ poljubna izračunljiva funkcija.\\
-\[P_L eq \mbox{\Quote{Ali ima $\varphi$ lastnost $L$?}}\]\\
+\[P_L eq \mbox{\Quote{Ali ima $\varphi$ lastnost $L$?}}\]
 \Def{Funkcijska lastnost $L$ je odločljiva, če je $P_L$ odločljiv.}
 \Odmakni{?}{Kakšne smiselne lastnosti pa nas zanimajo?\\
 Samo take lastnosti L, da so neodvisne od ...(=lg,TS,...), s ....... njihove vrednosti.
@@ -1368,25 +1367,8 @@ Riceov izrek: Lastnost Turingovega jezika je odločljiva $\Longleftrightarrow$ l
 \Quote{Ali Turingov jezik $\mathcal{M}$ regularen?}
 }
 %-----------------------predavanja 8-------------------------------
-\sect{Povzetek}
-V prejšnjem poglavjo pri izračunljivosti nas je predvsem zanimalo:
-\begin{items}
-\item Kaj se da/ne da izračunati
-\item Kaj lahko izračuna določen model računanja
-\item Ni nas zanimala časovna in prostorska zatevnost računanja
-\end{items}
-
-Pri tem smo ugotovili:
-\begin{items}
-\item Obstajajo neizračunljivi(neodločljivi) problemi
-\item Za te probleme ni splošnega algoritma, ki bi se vedno ustavil
-\item Enako bi obveljalo če bi imeli neomejeno prostora/časa 
-\end{items}
-
-\fixme slika elipsa prerezana na pol -- odločljivi/neodločljivi(našteti... + načini dokazovanja). jih je neskončno mnogo
-
 \subsect{Turingov stroj s prerokom}
-Post, Kleene in drugi so se nato začeli spraševai, kaj bi pomenilo, če bi našli rešitev za enega izmed neodločljivih problemov.
+Post, Kleene in drugi so se nato začeli spraševati, kaj bi pomenilo, če bi našli rešitev za enega izmed neodločljivih problemov.
 Uvedli so Turingov stroj s prerokom, ki zna povedati ali je odgovor na odločitveni problem DA, NE, ali pa NEVEM.
 Pojavljata se dve implementaciji:
 \begin{items}
@@ -1406,7 +1388,6 @@ Pojavljata se dve implementaciji:
 \item Rekurziven: če je $M=L(T^\mathcal{L})$ za nek $T^\mathcal{L}$ in se vedno ustavi.
 \end{items}
 }
-\br
 Tu lahko začnemo odgovarjati na vprašanje kaj bi pomenilo, če bi bil nek problem rešljiv.\\
 Razredi relativne izračunljivosti:
 \begin{items}
@@ -1416,8 +1397,7 @@ Razredi relativne izračunljivosti:
 \item $\Delta_{n+1}^0 \PoDef. \{ M\ |\ \mbox{M je rekurziven glede na nek jezik L iz prejšnjega razreda} \Sigma_n^0\}$%menda sigma...
 \item $\Pi_n^0 \PoDef \{ M\ |\ \overline{M} \in \Sigma_n^0 \}$
 \end{items}
-
-Ugotovitve:\\%ugotovitve? rly?
+\Odmakni{Ugotovitve}{%ugotovitve? rly?
 $\mathcal{M} \in \Sigma_n^0 \Longleftrightarrow M=\{ \exists x_1 \forall x_2 \exists x_3 \dots Quant x_n R(w, x_1,\dots,x_n)\}$\\ %R je odločljiva relacija
 $\mathcal{M} \in \Pi_n^0 \Longleftrightarrow M=\{ \forall x_1 \exists x_2 \forall x_3 \dots Quant x_n S(w, x_1,\dots,x_n)\}$\\ %za S nevem
 %(menda neka zveza med aritmetiko in odločljivostjo)
@@ -1428,11 +1408,11 @@ $\mathcal{M} \in \Pi_n^0 \Longleftrightarrow M=\{ \forall x_1 \exists x_2 \foral
 %    \Delta_2^0
 %      \Sigma_2^0
 %      \Pi_2^0
-\fixme spet eliplsa, delitev na $\Sigma \Delta \Pi$
-
+\fixme slika %spet eliplsa, delitev na $\Sigma \Delta \Pi$
+\br
 Dobimo aritmetično hierarhijo: $\Sigma_1^0, \Delta_1^0, \Pi_1^0, \dots$
 Torej, če bi bil nek $\Sigma_n^0$ rešljiv, bi bili rešljivi tudi $\Delta_n^0$, problemi na višjih nivojih pa še vedno ne.
-
+\br
 Nekaj primerov in kam v hierarhijo spadajo:
 \begin{items}
 \item Problem ustavitve $\mathcal{K}_0 \in \Sigma_1^0$
@@ -1445,6 +1425,24 @@ Nekaj primerov in kam v hierarhijo spadajo:
 %dobimo analitično hierarhijo
 
 %lol, tukaj je čudovit pisan svet vseh možnih zadev..... ampak ni uporaben :)
+}
+
+\sect{Povzetek}
+V tem poglavju o izračunljivosti nas je predvsem zanimalo:
+\begin{items}
+\item Kaj se da/ne da izračunati
+\item Kaj lahko izračuna določen model računanja
+\item Nista nas zanimala časovna in prostorska zatevnost računanja
+\end{items}
+
+Pri tem smo ugotovili:
+\begin{items}
+\item Obstajajo neizračunljivi(neodločljivi) problemi
+\item Za te probleme ni splošnega algoritma, ki bi se vedno ustavil
+\item Enako bi obveljalo če bi imeli neomejeno prostora/časa 
+\end{items}
+
+\fixme slika %elipsa prerezana na pol -- odločljivi/neodločljivi(našteti... + načini dokazovanja). jih je neskončno mnogo
 
 %@wtf, problem s č-jem v naslovu pri label v \chap
 %\chap{Zahtevnost računanja}
