@@ -33,21 +33,35 @@
 {\huge \today}\ \\[1.55cm]
 %{\LARGE Zapiski predavanj 2010/2011}\\[15pt]%Odkar sem dodal kontekstno-odvisne in linearne, to ni več samo to :P
 \begin{tikzpicture}[scale=1.35, very thick, circ/.style={thin}]%?tole ful upočasni pdflatex%, decorate, decoration={snake, amplitude=0.75pt}}]
-	\draw [rounded corners=10pt] (-5.4cm,-5.4cm) rectangle (5.4cm,4.0cm);
+	\draw [rounded corners=10pt,fill=black!3] (-5.4cm,-5.4cm) rectangle (5.4cm,4.0cm);
 	\node at (4.5cm,3.3cm) {\Large $\mathcal{P}(\Sigma^*)$};%sva šla vprašat... ker \Sigma^* znajo že RJ opisat, samo ne vseh možnih ;)
 
 	%\draw[circ] (0cm,0cm) circle (5cm);
 	%\node at (0,4cm) {\large\bf \nameref{chap:Turingovi jeziki}};
 
-	\draw[circ] (0cm,-0.8cm) circle (4cm);
+	\draw[circ,fill=white] (0cm,-0.8cm) circle (4cm);
 	\node at (0,2cm) {\large\bf \nameref{chap:Turingovi jeziki}};
 	%\node at (0,2cm) {\large\bf \nameref{chap:Kontekstno-odvisni jeziki}};
 
-	\draw[circ] (0cm,-1.6cm) circle (3cm);
+	\draw[circ,fill=white] (0cm,-1.6cm) circle (3cm);
 	\node at (0,0cm) {\large\bf \nameref{chap:Kontekstno-neodvisni jeziki}};
 
-	\draw[circ] (0cm,-2.4cm) circle (2cm);
+	\draw[circ,fill=white] (0cm,-2.4cm) circle (2cm);
 	\node at (0,-2cm) {\large\bf \nameref{chap:Regularni jeziki}};
+
+	%turingovi jeziki
+	\node (Lu) [fill=black,inner sep=1pt,shape=circle] at (-2.6cm,1.25cm) {};
+	\node at (Lu) [below=1pt] {$L_U$};
+
+	%neturingovi jeziki
+	\node (Ld) [fill=black,inner sep=1pt,shape=circle] at (2.5cm,3.3cm) {};
+	\node at (Ld) [below=1pt] {$L_d$};
+	\node (Lh) [fill=black,inner sep=1pt,shape=circle] at (4.5cm,1.5cm) {};
+	\node at (Lh) [below=1pt] {$L_h$};
+	\node (Lnu) [fill=black,inner sep=1pt,shape=circle] at (-4.6cm,-1.75cm) {};
+	\node at (Lnu) [below=1pt] {$L_{\overline{U}}$};
+	\node (Leq) [fill=black,inner sep=1pt,shape=circle] at (-3.0cm,-4.5cm) {};
+	\node at (Leq) [below=1pt] {$L_{eq}$};
 \end{tikzpicture}
 
 \vfill
@@ -1061,7 +1075,7 @@ Naj bo $T=\langle Q,\Sigma,\Gamma,\delta,q_1,B_1,q_f \rangle$ poljuben Turingov 
 %Dovolj je, da zakodiramo program $\delta$ Turingovega stroja.\\%kj več je waste of time... sj verjamete :)
 Zadostuje, da zakodiramo posamezne ukaze programa $\delta$:
 	\[ K=0^i 1 0^j 1 0^k 1 0^l 1 0^m\]
-Ko zakodiramo vseh $r$ ukazov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$ iz katerih bomo sestavili kodo Turingovega stroja:
+Ko zakodiramo vseh $r$ ukazov programa $\delta$ dobimo kode $K_1, K_2, \dots, K_r$, iz katerih sestavimo kodo Turingovega stroja:
 	\[ \langle T \rangle = 111 K_1 11 K_2 11 \dots 11 K_r 111\]%označimo z *
 Na $\langle T \rangle$ lahko gledamo kot na dvojiški zapis nekega naravnega števila in indeks Turingovega stroja $T$. Nekatera naravna števila pa niso indeksi Turingovega stroja, zato se dogovorimo: če naravno število nima oblike $\langle T \rangle$, rečemo, da je indeks praznega Turingovega stroja -- njegova $\delta$ je povsod nedefnirana, torej se takoj ustavi in ne sprejme nobene besede.
 \Posledica{Vsako naravno število, je indeks natanko enega Turingovega stroja.
