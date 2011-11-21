@@ -1,4 +1,4 @@
-﻿\chap{Kontekstno-neodvisni jeziki}
+\chap{Kontekstno-neodvisni jeziki}
 \sect{Kontekstno-neodvisne gramatike}
 %?oznake, izpeljave, ...
 \Def{Kontekstno-neodvisna gramatika je definirana kot četvorček $G=\langle N,T,P,S \rangle$, kjer je:
@@ -11,9 +11,21 @@
 }
 
 %to je še treba nekam umestit
-\Def{Kontekstno-neodvisna gramatika je dvoumna, kadar do nekega končnega niza lahko pridemo po več različnih izpeljavah.}
+\Def{Kontekstno-neodvisna gramatika je \textbf{dvoumna}, kadar do nekega končnega niza lahko pridemo po večih različnih izpeljavah.}
 
-\Def{Kontekstno-neodvisna gramatika je deterministična, kadar za jezik, ki ga gramatika opisuje, obstaja vsaj ena gramatika, ki ni dvoumna. Ni nujno, da je taka gramatika, ki jo imamo - važno je, da taka gramatika obstaja.}
+\Def{Kontekstno-neodvisna gramatika je \textbf{deterministična}, kadar za jezik, ki ga gramatika opisuje, obstaja vsaj ena gramatika, ki ni dvoumna. Ni nujno, da je taka gramatika, ki jo imamo -- važno je le, da taka gramatika obstaja.}
+
+\subsect{Poenostavljanje gramatik}
+Kontekstno-neodvisno gramatiko poenostavimo tako, da odpravimo:
+\begin{items}
+\item $\varepsilon$-produkcije
+\item enotske produkcije
+\item nekoristne simbole 
+\end{items}
+\begin{comment}
+nedosegljivi in taki brez končnih
+simbolov v izpeljavi
+\end{comment}
 
 \subsect{Chomskyeva normalna oblika}
 \Def{Kontekstno-neodvisna gramatika je v Chomskyevi normalni obliki, kadar nima nekoristnih simbolov, ter so vse produkcije naslednjih dveh oblik:\\
@@ -48,6 +60,11 @@
 Uporabljamo tudi posplošeno relacijo $\vdash^*$, ki je ubistvu samo ena ali več-kratna uporaba relacije $\vdash$. Pove nam to, da pridemo iz enega trenutnega opisa do drugega, prek enega ali večih prehodov, pod pogojem, da vse vmesne prehode predvideva funkcija prehodov $\delta$.
 
 \subsect{Jezik skladovnega avtomata}
+\Def{Jezik skladovnega avtomata je zaporedje korakov, ki nas po vhodni besedi pripelje do končnega stanja, ali pa zaporedje korakov, ki izprazni sklad.
+\[ L(M) = L_F(M) \cup L_S(M) \]
+\[L_F(M) = \{ w\ |\ \langle q_0, w, Z_0\rangle \vdash^* \langle q_F, \varepsilon, \gamma \rangle \wedge q_F \in F \} \]
+\[ L_S(M) = \{ w\ |\ \langle q_0, w, Z_0\rangle \vdash^* \langle q, \alpha, \varepsilon \rangle \} \]
+}
 
 \sect{Dokazovanje kontekstne-neodvisnosti jezika}\label{sec:Dokazovanje KNJ}
 \subsect{Lema o napihovanju za kontekstno-neodvisne jezike}

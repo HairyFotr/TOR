@@ -42,7 +42,7 @@
 	\end{items}
 }
 %?razlaga potenčne množice bi šla lahko nekam med mat. osnove... imam še en kup stvari o teoriji množic nekje. Drugač je pa kul - epsilon-closure je že napol opisan :)
-$2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ vse možne kombinacije stanj. Recimo da se nahajamo v stanju A, potem nas funkcija prehodov $ \delta $ pripelje v vsa mozna stanja do katerih pridemo iz $A$ z določenim znakom abecede in z vsemi $ \varepsilon $ prehodi, naprimer $ \{ A_1,A2, \ldots , A_n \}$. Tukaj je množica stanj $ \{ A_1,A2, \ldots , A_n \} $ element potenčne množice $P(Q)$
+$2^Q=P(Q)$ je potenčna množica stanj avtomata, kar pomeni da so v $2^Q$ vse možne kombinacije stanj. Recimo da se nahajamo v nekem stanju $q_i$, potem nas funkcija prehodov $ \delta $ pripelje v vsa možna stanja do katerih pridemo iz $q_i$ po določenih znakih abecede ali po $ \varepsilon $-prehodih. Dobimo neko množico stanj $ \{ q_{i1}, q_{i2}, \ldots , q_{in} \} \in 2^Q $
 
 \subsect{Nedeterministični končni avtomati}
 \Def{NKA je definiran kot peterka $M = \langle Q, \Sigma, \delta, q_0, F \rangle$, kjer je:
@@ -54,8 +54,8 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	\item $ F $ - množica končnih stanj
 	\end{items}		
 }
-\Def{Funkcija $\varepsilon$-closure($q$) nam pove, do katerih stanj lahko pridemo iz stanja $q$ po $\varepsilon$ prehodih.
-	\[ \varepsilon\mbox{-closure}(q) = \{ q_k\ |\ \exists q_1, q_2, \dots q_n \in Q,\ q=q_1 \wedge q_i \in \delta(q_{i-1}, \varepsilon) \} \]
+\Def{Funkcija $\varepsilon$-closure($q$) pove, do katerih stanj lahko pridemo iz stanja $q$ po $\varepsilon$ prehodih.
+	\[ \varepsilon\mbox{-closure}(q) = \{ q_k\ |\ \exists\ q_1, q_2, \dots q_n \in Q,\ q=q_1 \wedge q_i \in \delta(q_{i-1}, \varepsilon) \} \]
 }
 \Def{Posplošena funkcija prehodov $\hat\delta$ nam pove, do katerih stanj pridemo po nekem nizu.		\[ \hat\delta(q, \varepsilon) = \varepsilon\mbox{-closure}(q) \]
 	\[ \hat\delta(q, a) = \delta(q, a) \]
@@ -84,7 +84,7 @@ $2^Q=P(Q)$ je tu potenčna množica stanj avtomata. To pomeni da je so v $2^Q$ v
 	L=\{ w\ |\ \hat\delta(q_0, w) \in F \}
 	\end{equation*}
 }
-Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja mogoče priti do nekega končnega stanja.
+Definicije želijo povedati, da so v jeziku točno tisti nizi, po katerih je iz začetnega stanja avtomata mogoče priti do nekega končnega stanja.
 
 \sect{Levo in desno-linearne gramatike}\label{sec:LLGDLG}
 Posebnost linearnih gramatik je v tem, da imajo na desni strani produkcij največ en vmesni simbol, ampak ta model je že nekoliko močnejši od regularnih jezikov (glej \ref{sec:LG}), če pa se omejimo le na tiste produkcije, ki imajo ta edini vmesni simbol vedno na skrajno levi strani, ali pa vedno na skrajni desni strani niza, dobimo model, ki opisuje regularne jezike.
@@ -125,7 +125,7 @@ Pri tem je abeceda $\Sigma = N \cup T$ in $N\cap T = \emptyset$.
 
 \sect{Jezik regularnih jezikov}
 %?tu bi pasal dokazi :)
-\Def{Jezik ki ga opisuje poljubni regularni izraz, končni avtomat, levo ali desno-linearna gramatika, je regularni jezik.}
+\Def{Jezik, ki ga lahko opiše nek regularni izraz, končni avtomat, levo ali desno-linearna gramatika, je regularni jezik.}
 Regularni jeziki ne vsebujejo informacije o prejšnjih znakih vhodnega niza in se z njimi ne da opisati poljubnega jezika. (za postopke dokazovanja regularnosti glej \ref{sec:Dokazovanje RJ}).
 \begin{primeri}
 	%\item $\Sigma^* $ je regularni izraz %?wrong... jezik je nujno strogi subset \sigma*... ker ni dovolj močnega modela za opis vseh možnih nizov
@@ -176,10 +176,12 @@ Regularni izrazi, regularne gramatike in končni avtomati so enako močni modeli
 	\node (DLG)  at (300bp,0bp) {DLG};
 	\node (LLG)  at (375bp,0bp) {LLG};
 
-	\draw [bend left,->]  (DKA) to node[auto] {\ref{KA-RI}} (RI);
-	\draw [bend right,->]  (DLG) to node[auto] {\ref{DLG-eNKA}} (eNKA);
-	\draw [->]  (DKA) to node[auto] {} (NKA);
-	\draw [->]  (NKA) to node[auto] {} (eNKA);
+	\draw [bend left,->] (DKA) to node[auto] {\ref{KA-RI}} (RI);
+	\draw [bend right,->] (DLG) to node[auto] {\ref{DLG-eNKA}} (eNKA);
+	\draw [bend right=10,->] (DKA) to node[auto,above] {po def.} (NKA);
+	\draw [bend right=10,->] (NKA) to node[auto,below] {\ref{NKA-DKA}} (DKA);
+	\draw [bend right=10,->] (NKA) to node[auto,above] {po def.} (eNKA);
+	\draw [bend right=10,->] (eNKA) to node[auto,below] {\ref{eNKA-NKA}} (NKA);
 	\draw [->]  (RI) to node[auto] {\ref{RI-eNKA}} (eNKA);
 \end{tikzpicture}
 \end{center}
@@ -304,6 +306,10 @@ Iz grafa eliminiramo eno stanje in zapišemo regularni izraz:
 \[ (0+1(01^*0)^*1)^* \]
 Možna pa je še ena rešitev, če eliminiramo drugo stanje.%napiši jo :P
 \end{primeri}
+
+\subsect{Nedeter. končni avtomat z $\varepsilon$-prehodi $\rightarrow$ Nedeter. končni avtomat}\label{eNKA-NKA}
+$\varepsilon$-NKA pretvorimo v NKA tako, da odstranimo $\varepsilon$-povezave, ter ugotovimo, katere povezave moramo
+dodati da dobimo spet isti jezik.\fixme
 
 \subsect{Desno-linearna gramatika $\rightarrow$ Nedeterministični končni avtomat z $\varepsilon$-prehodi}\label{DLG-eNKA}
 Vhodno stanje avtomata je začetni simbol gramatike, nato pa stanja označujemo glede na končne in vmesne simbole, ki jih moramo še porabiti. Produkcije predstavljajo $\varepsilon$ prehode v avtomatu, preostali prehodi avtomata pa so črke, ki jih generiramo.
